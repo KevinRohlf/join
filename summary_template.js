@@ -4,7 +4,7 @@ function htmlTemplateSummary() {
             <div class="header">
                 <h1>Summary</h1>
                 <div class="blue-line"></div>
-                <h2>Everything in a nutshell</h2>
+                <h2>Everything in a nutshell!</h2>
             </div>
             <div class="main-container">
                 <div>
