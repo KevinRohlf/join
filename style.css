@@ -166,3 +166,16 @@ body {
     color: #2A3647;
     margin-left: 60px;
 }
+
+
+/*Testweise drinne*/
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 30vw;
+}
+
+.flex {
+    display: flex;
+}

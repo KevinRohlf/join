@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add Task</title>
+    <script src="./js/add_task.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
+
+<body style="background-color: #F5F5F5;">
+    <form class="flex" onsubmit="addTask(); return false">
+        <div class="flex-column">
+            <span>Title</span>
+            <input required id="title" type="text">
+            <span>Description</span>
+            <textarea required id="description">
+
+            </textarea>
+            <span>category</span>
+            <select required id="category">
+                <option value disabled selected hidden>Select task category</option>
+                <option value="Software-Development">Software Development</option>
+                <option value="Design">UX/UI Design</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sales">Sales</option>
+            </select>
+            <span>Assigned to</span>
+            <select required id="contact_selection">
+                <option value disabled selected hidden>Select contacts to assign</option>
+                <option value="placeholder">placeholder</option>
+                <option value="placeholder">placeholder</option>
+                <option value="placeholder">placeholder</option>
+                <option value="placeholder">placeholder</option>
+            </select>
+        </div>
+        <div class="flex-column">
+            <span>Due Date</span>
+            <input required type="date">
+            <span>Prio</span>
+            <input required type="text">
+            <span>Subtasks</span>
+            <input required type="text">
+            <button>Clear</button>
+            <button>Create Task</button>
+        </div>
+
+
+
+    </form>
+
+
 </body>
+
 </html>
