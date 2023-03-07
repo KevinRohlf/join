@@ -14,7 +14,7 @@
     <form class="flex" onsubmit="addTask(); return false">
         <div class="flex-column">
             <span>Title</span>
-            <input required id="title" type="text">
+            <input required placeholder="Enter a title" id="title" type="text">
             <span>Description</span>
             <textarea required id="description">
 
@@ -40,7 +40,11 @@
             <span>Due Date</span>
             <input required type="date">
             <span>Prio</span>
-            <input required type="text">
+            <div class="flex">
+                <button>Urgent</button>
+                <button>Medium</button>
+                <button>Low</button>
+            </div>
             <span>Subtasks</span>
             <input required type="text">
             <button>Clear</button>

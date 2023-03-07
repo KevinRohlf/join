@@ -171,13 +171,12 @@ body {
     margin-left: 60px;
 }
 
-
+/* --------------- add_task --------------- */
 /*Testweise drinne*/
 .flex-column {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 30vw;
 }
 
 .flex {
