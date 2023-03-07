@@ -25,23 +25,32 @@ function addTask(title, description, category, contact_selection, date) {
         'subtasks': subtasks
     }
     tasks.push(newTask);
-    console.log(newTask);
+    console.log(tasks);
     clearForm();
 }
 
 function setprio(i) {
+    let btns = ['urgent', 'medium', 'low']
+    let selectedBtn = btns.indexOf(i)
+    btns.splice(selectedBtn, 1)
+    document.getElementById(i).classList.add('btn-on-focus');
+    btns.forEach(e => {
+        document.getElementById(e).classList.remove('btn-on-focus');
+    });
     prio = '';
     prio = i;
 }
 
 function clearForm() {
-    title.value = '';
-    description.value = '';
-    category.value = '';
-    contact_selection.value = '';
-    date.value = '';
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('category').value = '';
+    document.getElementById('contact_selection').value = '';
+    document.getElementById('date').value = '';
+    document.getElementById('subtasks').innerHTML = '';
     prio = '';
     subtasks = [];
+
 }
 
 function addSubtask() {
@@ -55,5 +64,4 @@ function addSubtask() {
     }
 
     subTask.value = '';
-
 }

@@ -19,9 +19,7 @@
                 <span>Title</span>
                 <input required placeholder="Enter a title" id="title" type="text">
                 <span>Description</span>
-                <textarea required id="description">
-
-            </textarea>
+                <textarea required placeholder="Enter a Description" id="description"></textarea>
                 <span>category</span>
                 <select required id="category">
                     <option value disabled selected hidden>Select task category</option>
@@ -44,13 +42,13 @@
                 <input required id="date" type="date">
                 <span>Prio</span>
                 <div class="flex gap-10">
-                    <button type="button" onclick="setprio('Urgent')">
+                    <button id="urgent" type="button" onclick="setprio('urgent')">
                         Urgent <img src="./assets/img/prio-urgent.svg">
                     </button>
-                    <button type="button" onclick="setprio('Medium')">
+                    <button id="medium" type="button" onclick="setprio('medium')">
                         Medium <img src="./assets/img/prio-medium.svg">
                     </button>
-                    <button type="button" onclick="setprio('Low')">
+                    <button id="low" type="button" onclick="setprio('low')">
                         Low <img src="./assets/img/prio-low.svg">
                     </button>
                 </div>
@@ -62,9 +60,7 @@
                             d="M9.00113 9.00017L9.00178 16.4149M1.58641 9.00082L9.00113 9.00017L1.58641 9.00082ZM16.4159 8.99953L9.00043 8.99946L16.4159 8.99953ZM9.00043 8.99946L9.00049 1.58545L9.00043 8.99946Z"
                             stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-
                 </div>
-
                 <div id="subtasks">
 
                 </div>
