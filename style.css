@@ -113,7 +113,7 @@ body {
 }
 
 .urgent img {
-    padding-left: 70px
+    padding: 0 20px 0 70px;
 }
 
 .urgent h1 {
@@ -140,6 +140,10 @@ body {
     height: 150px;
 }
 
+.todo svg {
+    padding-right: 20px;
+}
+
 .todo:hover svg circle {
     fill: white;
 }
@@ -156,7 +160,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 20px;
 }
 
 #greeting {
