@@ -1,9 +1,3 @@
-let prio;
-let subtasks = [];
-
-
-
-
 function readForm() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
@@ -31,9 +25,11 @@ function addTask(title, description, category, contact_selection, date) {
 
 function setprio(i) {
     let btns = ['urgent', 'medium', 'low']
-    let selectedBtn = btns.indexOf(i)
-    btns.splice(selectedBtn, 1)
-    document.getElementById(i).classList.add('btn-on-focus');
+    if (i) {
+        let selectedBtn = btns.indexOf(i)
+        btns.splice(selectedBtn, 1)
+        document.getElementById(i).classList.add('btn-on-focus');
+    }
     btns.forEach(e => {
         document.getElementById(e).classList.remove('btn-on-focus');
     });
@@ -50,18 +46,23 @@ function clearForm() {
     document.getElementById('subtasks').innerHTML = '';
     prio = '';
     subtasks = [];
+    setprio();
 
 }
 
 function addSubtask() {
     let subTask = document.getElementById('subtask');
     let content = document.getElementById('subtasks');
-    subtasks.push(subTask.value);
+
     content.innerHTML = '';
+    if (subTask.value.length < 2) {
+        content.innerHTML += `<div style="color: red;">length to small</div>`;
+    } else {
+        subtasks.push(subTask.value);
+        subTask.value = '';
+    }
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         content.innerHTML += `<div>${subtask}</div>`;
     }
-
-    subTask.value = '';
 }

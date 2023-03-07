@@ -58,7 +58,7 @@
                         </div>
                         <span>Subtasks</span>
                         <div class="subtasks">
-                            <input id="subtask" type="text">
+                            <input id="subtask" minlength="2" type="text" onkeydown="return event.key != 'Enter';">
                             <svg onclick="addSubtask()" width="18" height="18" viewBox="0 0 18 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
