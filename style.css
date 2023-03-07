@@ -192,11 +192,13 @@ body {
 
 .left-side {
     border-right: 1px solid #D1D1D1;
-    padding: 40px;
+    padding-right: 40px;
+    width: 25vw;
 }
 
 .right-side {
-    padding: 40px;
+    padding-left: 40px;
+    width: 25vw;
 }
 
 .border-radius-10 {
@@ -212,12 +214,32 @@ body {
 }
 
 .subtasks svg {
-    transform: scale(0.7);
+    transform: scale(1);
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 5px;
+    top: 30%;
+}
+
+.btns {
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .btn-on-focus {
     border: 1px solid black;
+}
+
+.content-add-task {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-add-task input,select,textarea {
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    height: 40px; 
 }
