@@ -210,14 +210,15 @@ body {
 }
 
 .subtasks input {
-    width: 100%;
+    width: calc(100% - 12px);
 }
 
 .subtasks svg {
     transform: scale(1);
     position: absolute;
-    right: 5px;
+    right: 10px;
     top: 30%;
+    cursor: pointer;
 }
 
 .btns {
@@ -225,8 +226,50 @@ body {
     gap: 10px;
 }
 
+.btns button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    min-width: 70px;
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #2A3647;
+    color: #2A3647;
+    font-weight: 800;
+}
+.btns svg {
+    transform: scale(0.7);
+}
+
+.btn-bg-blue {
+    background-color: #2A3647 !important;
+    color: white !important;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: calc(100% / 3);
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #D1D1D1;
+}
+
+#urgent img,
+#medium img,
+#low img {
+    transform: scale(0.8);
+}
+
 .btn-on-focus {
-    border: 1px solid black;
+    background-color: #D1D1D1 !important;
 }
 
 .content-add-task {
@@ -238,11 +281,50 @@ body {
     align-items: center;
 }
 
+.content-add-task h1 {
+    font-size: 61px;
+}
+
 .content-add-task input,select,textarea {
     border-radius: 5px;
     border: 1px solid #D1D1D1;
     height: 40px; 
     padding: 0px 5px 0px 5px;
+    font-family: unset;
+}
+
+.content-add-task textarea {
+    padding-top: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    background: url(./assets/img/calender.svg);
+    width: 56px;
+    height: 56px;    
+    transform: scale(0.7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#subtasks {
+    list-style-type: none;
+    padding: unset;
+    margin: unset;
+}
+
+#subtasks li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+}
+
+#subtasks li input {
+    margin: unset;
+    height: 30px;
 }
 
 /* --------------- Menu --------------- */

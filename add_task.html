@@ -24,7 +24,7 @@
                         <input required placeholder="Enter a title" id="title" type="text">
                         <span>Description</span>
                         <textarea required placeholder="Enter a Description" id="description"></textarea>
-                        <span>category</span>
+                        <span>Category</span>
                         <select required id="category">
                             <option value disabled selected hidden>Select task category</option>
                             <option value="Software-Development">Software Development</option>
@@ -46,13 +46,13 @@
                         <input required id="date" type="date">
                         <span>Prio</span>
                         <div class="flex gap-10">
-                            <button id="urgent" type="button" onclick="setprio('urgent')">
+                            <button class="btn" id="urgent" type="button" onclick="setprio('urgent')">
                                 Urgent <img src="./assets/img/prio-urgent.svg">
                             </button>
-                            <button id="medium" type="button" onclick="setprio('medium')">
+                            <button class="btn" id="medium" type="button" onclick="setprio('medium')">
                                 Medium <img src="./assets/img/prio-medium.svg">
                             </button>
-                            <button id="low" type="button" onclick="setprio('low')">
+                            <button class="btn" id="low" type="button" onclick="setprio('low')">
                                 Low <img src="./assets/img/prio-low.svg">
                             </button>
                         </div>
@@ -66,16 +66,29 @@
                                     stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
-                        <div id="subtasks">
-
-                        </div>
+                        <ul id="subtasks">
+                        </ul>
 
                     </div>
                 </div>
 
                 <div class="flex btns">
-                    <button type="button" onclick="clearForm()">Clear</button>
-                    <button>Create Task</button>
+                    <button type="button" onclick="clearForm()">
+                        Clear
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.50106 6.50008L11.7441 11.7431M1.25806 11.7431L6.50106 6.50008L1.25806 11.7431ZM11.7441 1.25708L6.50006 6.50008L11.7441 1.25708ZM6.50006 6.50008L1.25806 1.25708L6.50006 6.50008Z"
+                                stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="btn-bg-blue">
+                        Create Task
+                        <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 7.5L7 13.5L17 1.5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </button>
                 </div>
 
 

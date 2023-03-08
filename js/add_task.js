@@ -53,7 +53,6 @@ function clearForm() {
 function addSubtask() {
     let subTask = document.getElementById('subtask');
     let content = document.getElementById('subtasks');
-
     content.innerHTML = '';
     if (subTask.value.length < 2) {
         content.innerHTML += `<div style="color: red;">length to small</div>`;
@@ -61,8 +60,13 @@ function addSubtask() {
         subtasks.push(subTask.value);
         subTask.value = '';
     }
+    renderSubTasks();
+}
+
+function renderSubTasks() {
+    let content = document.getElementById('subtasks');
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        content.innerHTML += `<div>${subtask}</div>`;
+        content.innerHTML += `<li><input id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"> ${subtask}</li>`;
     }
 }
