@@ -1,0 +1,160 @@
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex {
+    display: flex;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
+.left-side {
+    border-right: 2px solid #D1D1D1;
+    padding-right: 40px;
+    width: 25vw;
+}
+
+.right-side {
+    padding-left: 40px;
+    width: 25vw;
+}
+
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+.subtasks {
+    position: relative;
+}
+
+.subtasks input {
+    width: calc(100% - 12px);
+}
+
+.subtasks svg {
+    transform: scale(1);
+    position: absolute;
+    right: 25px;
+    top: 30%;
+    cursor: pointer;
+}
+
+.btns {
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btns button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    min-width: 70px;
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #2A3647;
+    color: #2A3647;
+    font-weight: 800;
+}
+.btns svg {
+    transform: scale(0.7);
+}
+
+.btn-bg-blue {
+    background-color: #2A3647 !important;
+    color: white !important;
+}
+
+.prio-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: calc(100% / 3);
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #D1D1D1;
+}
+
+#urgent img,
+#medium img,
+#low img {
+    transform: scale(0.8);
+}
+
+.btn-on-focus {
+    background-color: #D1D1D1 !important;
+}
+
+.content-add-task {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-add-task span {
+    font-weight: bold;
+}
+
+.content-add-task h1 {
+    font-size: 61px;
+}
+
+.content-add-task input,select,textarea {
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    height: 40px; 
+    padding: 0px 5px 0px 5px;
+    font-family: unset;
+}
+
+.content-add-task textarea {
+    padding-top: 10px;
+    height: 10vh;
+    resize: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    background: url(./assets/img/calender.svg);
+    margin-top: 10px;
+    width: 56px;
+    height: 56px;    
+    transform: scale(0.7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#subtasks {
+    list-style-type: none;
+    padding: unset;
+    margin: unset;
+}
+
+#subtasks li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+}
+
+#subtasks li input {
+    margin: unset;
+    height: 30px;
+}
