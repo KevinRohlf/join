@@ -8,10 +8,17 @@ body {
 
 
 /* --------------- Summary --------------- */
-.summary {
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 100vh;
     background-color: #F5F5F5;
-    padding-left: 120px;
+}
+
+.header-headline {
+    display: none;
+    margin-top: 30px;
 }
 
 .header {
@@ -25,7 +32,7 @@ body {
     font-size: 60px;
 }
 
-.blue-line {
+.blue-line-vertical {
     width: 3px;
     height: 60px;
     background-color: #29ABE2;
@@ -34,8 +41,16 @@ body {
 
 .header h2 {
     font-weight: 400;
-    font-size: 27px;
+    font-size: 24px;
     color: #2A3647;
+}
+
+.blue-line-horizontal {
+    display: none;
+    width: 90px;
+    height: 3px;
+    background-color: #29ABE2;
+    margin-top: 10px;
 }
 
 .main-container {
@@ -117,7 +132,7 @@ body {
 }
 
 .urgent h1 {
-    font-size: 47px;
+    font-size: 48px;
     font-weight: 600;
     margin: 10px 0 0 0;
 }
@@ -162,23 +177,436 @@ body {
     align-items: center;
 }
 
-#greeting {
+.greeting-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-size: 47px;
-    font-weight: 500;
-    color: #2A3647;
-    margin-left: 60px;
+    padding-left: 60px;
 }
+
+.greeting-time {
+    font-size: 36px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.greeting-name {
+    font-size: 47px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+
+@media only screen and (max-width: 1500px) {
+    .greeting-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        padding-left: 0;
+        background-color: #F5F5F5;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h1 {
+        font-size: 48px;
+        margin: 20px 0 0 0;
+    }
+
+    .blue-line-vertical {
+        display: none;
+    }
+
+    .blue-line-horizontal {
+        display: block;
+        width: 90px;
+        height: 3px;
+        background-color: #29ABE2;
+        margin: 0;
+    }
+
+    .task-container,
+    .todo-container {
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .task {
+        width: 110px;
+        height: 110px;
+    }
+
+    .task h1,
+    .todo h1 {
+        font-size: 48px;
+        margin-top: 10px;
+    }
+    
+    .task p,
+    .urgent p,
+    .urgent-date p,
+    .todo p {
+        font-size: 14px;
+    }
+
+    .urgency {
+        width: 360px;
+        height: 110px;
+        margin-bottom: 15px;
+    }
+
+    .urgent img {
+        width: 40px;
+        height: 40px;
+        padding: 0 20px 0 35px;
+    }
+
+    .grey-line {
+        margin: 0 25px;
+    }
+
+    .urgent-date h2 {
+        font-size: 16px;
+    }
+
+    .urgent p,
+    .urgent-date p {
+        font-size: 14px;
+    }
+
+    .todo {
+        width: 172.5px;
+        height: 110px;
+    }
+
+    .todo svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header-headline {
+        display: block;
+    }
+}
+
 
 /* --------------- add_task --------------- */
 /*Testweise drinne*/
 .flex-column {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
 .flex {
     display: flex;
 }
+
+.gap-20 {
+    gap: 20px;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
+.left-side {
+    border-right: 1px solid #D1D1D1;
+    padding-right: 40px;
+    width: 25vw;
+}
+
+.right-side {
+    padding-left: 40px;
+    width: 25vw;
+}
+
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+.subtasks {
+    position: relative;
+}
+
+.subtasks input {
+    width: calc(100% - 12px);
+}
+
+.subtasks svg {
+    transform: scale(1);
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    cursor: pointer;
+}
+
+.btns {
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btns button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    min-width: 70px;
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #2A3647;
+    color: #2A3647;
+    font-weight: 800;
+}
+.btns svg {
+    transform: scale(0.7);
+}
+
+.btn-bg-blue {
+    background-color: #2A3647 !important;
+    color: white !important;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: calc(100% / 3);
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #D1D1D1;
+}
+
+#urgent img,
+#medium img,
+#low img {
+    transform: scale(0.8);
+}
+
+.btn-on-focus {
+    background-color: #D1D1D1 !important;
+}
+
+.content-add-task {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-add-task h1 {
+    font-size: 61px;
+}
+
+.content-add-task input,select,textarea {
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    height: 40px; 
+    padding: 0px 5px 0px 5px;
+    font-family: unset;
+}
+
+.content-add-task textarea {
+    padding-top: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    background: url(./assets/img/calender.svg);
+    width: 56px;
+    height: 56px;    
+    transform: scale(0.7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#subtasks {
+    list-style-type: none;
+    padding: unset;
+    margin: unset;
+}
+
+#subtasks li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+}
+
+#subtasks li input {
+    margin: unset;
+    height: 30px;
+}
+
+/* --------------- Menu --------------- */
+
+.menu-content {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.menu-header {
+    width: 100%;
+    height: 89px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+}
+
+.menu-header>p {
+    margin-left: 64px;
+}
+
+.menu-header>div {
+    margin-right: 64px;
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical-menu {
+    background-color: #2A3647;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-container {
+    margin-top: 64px;
+}
+
+.main-menu {
+    background-color: #2A3647;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.sidemenu-top {
+    margin-top: 128px;
+}
+
+.legalnotice-menu {
+    margin-bottom: 128px;
+}
+
+.sidemenu-top>div,
+.legalnotice-menu {
+    padding: 16px 0;
+    width: 100%;
+    transition: all 175ms ease-in-out;
+}
+
+.sidemenu-top>div:hover {
+    background: #091931;
+    transition: all 175ms ease-in-out;
+}
+
+.legalnotice-menu:hover {
+    background: #091931;
+    transition: all 175ms ease-in-out;
+}
+
+.sidemenu-top>div>p,
+.legalnotice-menu>p {
+    margin-left: 16px;
+}
+
+.board-text {
+    margin-right: 24px;
+}
+
+.contacts-text {
+    margin-right: 8px;
+}
+
+.help-icon {
+    margin-right: 32px;
+}
+
+.user-icon {
+    border-radius: 50%;
+    border: 3px solid #2A3647;
+}
+
+.d-none {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .menu-content {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .vertical-menu {
+        width: 100%;
+        height: auto;
+        display: flex;
+    }
+
+    .sidemenu-top {
+        display: flex;
+        margin-top: 0px;
+    }
+
+    .sidemenu-top>div {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidemenu-top>div>p {
+        margin: 8px 0 0 0;
+    }
+    
+    #mobile-logo {
+        width: 32px;
+        height: 39px;
+        margin-left: 32px;
+    }
+
+    .menu-header>div {
+        margin-right: 32px;
+    }
+
+    #greeting-container {
+        text-align: center;
+    }
+  }
