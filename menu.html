@@ -8,44 +8,52 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./fonts.css">
+    <script src="./js/menu.js"></script>
 </head>
 
 <body>
     <div class="menu-content">
         <div class="vertical-menu flex-column">
             <div class="main-menu">
-                <div class="logo-container flex-center">
+                <div id="logo" class="logo-container flex-center" href="#">
                     <img src="./assets/img/logo.png">
                 </div>
                 <div class="sidemenu-top">
-                    <div class="flex-center">
+                    <div class="flex-center" href="#">
                         <img class="summary-icon" src="./assets/img/summary_icon.png">
                         <p>Summary</p>
                     </div>
-                    <div class="flex-center">
+                    <div class="flex-center" href="#">
                         <img class="board-icon" src="./assets/img/board_icon.png">
                         <p class="board-text">Board</p>
                     </div>
-                    <div class="flex-center">
+                    <div class="flex-center" href="#">
                         <img class="addtask-icon" src="./assets/img/add_task_icon.png">
                         <p>Add Task</p>
                     </div>
-                    <div class="flex-center">
+                    <div class="flex-center" href="#">
                         <img class="contacts-icon" src="./assets/img/contacts_icon.png">
                         <p class="contacts-text">Contacts</p>
                     </div>
                 </div>
             </div>
-            <div class="legalnotice-menu flex-center">
+            <div id="legalnotice" class="legalnotice-menu flex-center" href="#">
                 <img src="./assets/img/legal_notice_icon.png">
                 <p>Legal notice</p>
             </div>
         </div>
 
+
+
+        <div class="d-none" id="greeting-container"></div>
+
+
+
         <div class="menu-header flex-align-center">
-            <p>Kanban Project Management Tool</p>
+            <p id="headline">Kanban Project Management Tool</p>
+            <img id="mobile-logo" class="d-none" src="./assets/img/mobile-logo.png">
             <div class="flex-align-center">
-                <img class="help-icon" src="./assets/img/help_icon.png">
+                <img id="help-icon" class="help-icon" src="./assets/img/help_icon.png" href="#">
                 <img class="user-icon" src="./assets/img/user.png">
             </div>
         </div>
