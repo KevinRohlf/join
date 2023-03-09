@@ -1,6 +1,7 @@
 function summary() {
     date();
     greeting();
+    mobileGreeting();
 }
 
 
@@ -24,3 +25,18 @@ function greeting() {
 
     document.getElementById('greeting').innerHTML = greet;
 }
+
+
+function mobileGreeting() {
+    if (window.innerWidth <= 1500) {
+        setTimeout(mobileGreetingDisappears, 3000);
+    } else {
+        document.getElementById('greeting-container').classList.remove('d-none');
+    }
+}
+  
+
+function mobileGreetingDisappears() {
+    document.getElementById('greeting-container').classList.add('d-none');
+}
+  

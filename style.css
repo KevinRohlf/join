@@ -8,10 +8,17 @@ body {
 
 
 /* --------------- Summary --------------- */
-.summary {
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 100vh;
     background-color: #F5F5F5;
-    padding-left: 120px;
+}
+
+.header-headline {
+    display: none;
+    margin-top: 30px;
 }
 
 .header {
@@ -25,7 +32,7 @@ body {
     font-size: 60px;
 }
 
-.blue-line {
+.blue-line-vertical {
     width: 3px;
     height: 60px;
     background-color: #29ABE2;
@@ -34,8 +41,16 @@ body {
 
 .header h2 {
     font-weight: 400;
-    font-size: 27px;
+    font-size: 24px;
     color: #2A3647;
+}
+
+.blue-line-horizontal {
+    display: none;
+    width: 90px;
+    height: 3px;
+    background-color: #29ABE2;
+    margin-top: 10px;
 }
 
 .main-container {
@@ -117,7 +132,7 @@ body {
 }
 
 .urgent h1 {
-    font-size: 47px;
+    font-size: 48px;
     font-weight: 600;
     margin: 10px 0 0 0;
 }
@@ -162,14 +177,128 @@ body {
     align-items: center;
 }
 
-#greeting {
+.greeting-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-size: 47px;
-    font-weight: 500;
-    color: #2A3647;
-    margin-left: 60px;
+    padding-left: 60px;
 }
+
+.greeting-time {
+    font-size: 36px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.greeting-name {
+    font-size: 47px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+
+@media only screen and (max-width: 1500px) {
+    .greeting-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        padding-left: 0;
+        background-color: #F5F5F5;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h1 {
+        font-size: 48px;
+        margin: 20px 0 0 0;
+    }
+
+    .blue-line-vertical {
+        display: none;
+    }
+
+    .blue-line-horizontal {
+        display: block;
+        width: 90px;
+        height: 3px;
+        background-color: #29ABE2;
+        margin: 0;
+    }
+
+    .task-container,
+    .todo-container {
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .task {
+        width: 110px;
+        height: 110px;
+    }
+
+    .task h1,
+    .todo h1 {
+        font-size: 48px;
+        margin-top: 10px;
+    }
+    
+    .task p,
+    .urgent p,
+    .urgent-date p,
+    .todo p {
+        font-size: 14px;
+    }
+
+    .urgency {
+        width: 360px;
+        height: 110px;
+        margin-bottom: 15px;
+    }
+
+    .urgent img {
+        width: 40px;
+        height: 40px;
+        padding: 0 20px 0 35px;
+    }
+
+    .grey-line {
+        margin: 0 25px;
+    }
+
+    .urgent-date h2 {
+        font-size: 16px;
+    }
+
+    .urgent p,
+    .urgent-date p {
+        font-size: 14px;
+    }
+
+    .todo {
+        width: 172.5px;
+        height: 110px;
+    }
+
+    .todo svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header-headline {
+        display: block;
+    }
+}
+
 
 /* --------------- add_task --------------- */
 /*Testweise drinne*/
