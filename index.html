@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="fonts.css" />
+    <script src="./js/index.js"></script>
+
+    <title>Page 1</title>
+  </head>
+  <body onload="fullscreenToCorner()">
+    <div id="capa-1-container">
+      <div id="notAJoinUser">
+        Not a Join user?
+        <button id="loginSignUp">
+          <div id="insideButton">Sign Up</div>
+        </button>
+      </div>
+      <img id="capa-1" src="assets/img/Capa 1.svg" />
+      <div id="login">
+        <div id="loginHeadline">Log in</div>
+        <img src="assets/img/line.svg" />
+        <div id="emailPassword">
+          <div id="inputBox">
+            <div id="input" required>
+              Email<img src="assets/img/postcard.svg" />
+            </div>
+          </div>
+          <div id="inputBox">
+            <div id="input" required>
+              Password<img src="assets/img/lock.svg" />
+            </div>
+          </div>
+        </div>
+        <div id="remember">
+          <div id="rememberMe">
+            <input type="checkbox">
+            <label for="rememberCheckbox">Remember me</label>
+          </div>
+          <a href="">Forgot my password</a>
+        </div>
+        <div id="MemberOrGuest">
+          <button id="memberLogin">Log in</button>
+          <button id="guestLogin">Guest Log in</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

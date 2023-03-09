@@ -1,0 +1,316 @@
+body {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+}
+
+#capa-1-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 0px;
+  gap: 35px;
+  width: 652px;
+  height: 513px;
+  background: #ffffff;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+  opacity: 0;
+  transition: 1s;
+}
+
+#login.einblenden {
+  opacity: 1;
+}
+
+#loginHeadline {
+  font-family: Inter;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+#inputBox {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 13px 21px;
+  gap: 10px;
+  width: 422px;
+  height: 51px;
+  background: #ffffff;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+#input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 380px;
+  height: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #d1d1d1;
+}
+
+#emailPassword {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 29px;
+  width: 422px;
+  height: 171px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+#remember {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 35px;
+  width: 335px;
+  height: 19px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+#remember a {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #29abe2;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  text-decoration: none;
+}
+
+#rememberMe {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #000000;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+#MemberOrGuest {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 35px;
+  width: 341px;
+  height: 51px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+}
+
+#memberLogin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0px;
+  gap: 10px;
+  width: 145px;
+  height: 51px;
+  background: #2a3647;
+  border-radius: 8px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+#memberLogin:hover {
+  cursor: pointer;
+  background: #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+#memberLogin:active {
+  background: #091931;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+#guestLogin {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  gap: 10px;
+  width: 161px;
+  height: 51px;
+  border: 1px solid #2a3647;
+  border-radius: 8px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #2a3647;
+  background-color: #ffffff;
+}
+
+#guestLogin:hover {
+  border: 2px solid #29abe2;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 8px;
+}
+
+#guestLogin:active {
+  border: 1px solid #091931;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 8px;
+}
+
+#notAJoinUser {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  position: absolute;
+  width: 300px;
+  right: 7.92%;
+  top: 6.54%;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  opacity: 0;
+  transition: 1s;
+}
+
+#notAJoinUser.einblenden {
+  opacity: 1;
+}
+
+#loginSignUp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  gap: 10px;
+  width: 91px;
+  height: 51px;
+  background: #2a3647;
+  border-radius: 8px;
+  border-width: 0px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+#loginSignUp:hover {
+  cursor: pointer;
+  background: #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+#loginSignUp:active {
+  background: #091931;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+#insideButton {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  color: #ffffff;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* style Capa 1 */
+#capa-1 {
+  position: fixed;
+  height: 32.62%;
+  width: 19.03%;
+  z-index: 1;
+}
+
+/* Definition der Animation */
+@keyframes center-to-corner {
+  0% {
+    /* Startzustand von capa-1, in voller Größe */
+    height: 32.62%;
+    width: 19.03%;
+    left: 40.49%;
+    right: 40.49%;
+    top: 33.69%;
+    bottom: 33.68%;
+  }
+  100% {
+    /* Endzustand von capa-1, in der linken oberen Ecke */
+    height: 11.91%;
+    width: 6.95%;
+    left: 5.35%;
+    right: 87.71%;
+    top: 7.81%;
+    bottom: 80.28%;
+  }
+}
+
+/* Animation von capa-1 */
+#capa-1.animation {
+  animation: center-to-corner 1s ease-in-out forwards;
+}
