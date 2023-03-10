@@ -1,0 +1,23 @@
+.text-justify {
+    text-align: justify;
+}
+
+.help-h1 {
+    font-weight: 700;
+    font-size: 61px;
+}
+
+.help-h2 {
+    font-weight: 700;
+    font-size: 27px;
+}
+
+.text-ordered>div {
+    display: flex;
+}
+
+.list-item {
+    margin: 0 24px 0 0;
+}
+
+
