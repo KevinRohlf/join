@@ -6,12 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add Task</title>
+    <script src="./js/template.js"></script>
     <script src="./js/database.js"></script>
     <script src="./js/add_task.js"></script>
     <link rel="stylesheet" href="add_task.css">
+    <link rel="stylesheet" href="template.css">
 </head>
 
-<body style="background-color: #F5F5F5;">
+<body onload="includeHTML();">
+    <div class="header" w3-include-html="./templates/topmenu.html">
+    </div>
+    <div class="sidemenu" w3-include-html="./templates/sidemenu.html">
+    </div>
     <div class="content-add-task">
         <div>
             <div>
