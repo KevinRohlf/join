@@ -108,6 +108,18 @@ body {
     color: white;
 }
 
+.task:hover {
+    transform: scale(1.059);
+}
+
+.urgency:hover {
+    transform: scale(1.017, 1.067);
+}
+
+.todo:hover {
+    transform: scale(1.037, 1.067);
+}
+
 .task:hover p,
 .urgency:hover p,
 .todo:hover p {
