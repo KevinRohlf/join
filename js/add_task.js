@@ -25,13 +25,16 @@ function addTask(title, description, category, contact_selection, date) {
 
 function setprio(i) {
     let btns = ['urgent', 'medium', 'low']
+    let btnColor = ['#FF3D00', '#FFA800', '#7AE229']
     if (i) {
         let selectedBtn = btns.indexOf(i)
         btns.splice(selectedBtn, 1)
         document.getElementById(i).classList.add('btn-on-focus');
+        document.getElementById(i).style = `background-color: ${btnColor[selectedBtn]};`;
     }
     btns.forEach(e => {
         document.getElementById(e).classList.remove('btn-on-focus');
+        document.getElementById(e).style = ``;
     });
     prio = '';
     prio = i;
