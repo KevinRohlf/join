@@ -54,3 +54,4 @@ window.onresize = function () {
 function showLogoutBtn() {
   document.getElementById('logout-btn').classList.remove('d-none')
 }
+
