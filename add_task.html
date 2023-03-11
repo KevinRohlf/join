@@ -10,10 +10,11 @@
     <script src="./js/database.js"></script>
     <script src="./js/add_task.js"></script>
     <link rel="stylesheet" href="add_task.css">
+    <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="template.css">
 </head>
 
-<body onload="includeHTML();">
+<body onload="includeHTML(); init()">
     <div class="header" w3-include-html="./templates/topmenu.html">
     </div>
     <div class="sidemenu" w3-include-html="./templates/sidemenu.html">
@@ -31,12 +32,13 @@
                         <span>Description</span>
                         <textarea required placeholder="Enter a Description" id="description"></textarea>
                         <span>Category</span>
-                        <select required id="category">
-                            <option value disabled selected hidden>Select task category</option>
-                            <option value="Software-Development">Software Development</option>
-                            <option value="Design">UX/UI Design</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Sales">Sales</option>
+                        <div id="newCategoryInput" class="d-none">
+                           <input type="text" id="newCategory" >
+                           <div></div>
+                           <button type="button" onclick="addNewCategory()">+</button>
+                        </div>
+                        
+                        <select required id="category" onchange="showNewCategoryInput()">
                         </select>
                         <span>Assigned to</span>
                         <select required id="contact_selection">
