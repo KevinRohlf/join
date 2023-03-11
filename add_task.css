@@ -118,12 +118,14 @@ body {
 }
 
 .content-add-task {
-    width: 100%;
-    height: 100vh;
+    width: calc(100% - 300px);
+    height: calc(100vh - 89px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 89px;
+    margin-left: 300px;
 }
 
 .content-add-task span {
@@ -185,10 +187,55 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     top: 0;
     left: 0;
     right: 0;
+    z-index: 2;
 }
 
 .sidemenu {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 2;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .sidemenu {
+        top: unset;
+        bottom: 0;
+    }
+
+    .header {
+        margin-left: unset;
+    }
+
+    .mobile-flex-column {
+        flex-direction: column;
+    }
+
+    .content-add-task {
+        margin-left: unset;
+        padding-top: 200px;
+        width: 100%;
+        
+    }
+
+    .left-side {
+        border-right: unset;
+        width: 90vw;
+        padding: unset;
+        margin-bottom: 20px;
+    }
+
+    .right-side {
+        width: 90vw;
+        padding: unset;
+    }
+
+    #subtasks {
+        min-height: 100px;
+    }
+
+    .btns {
+        margin-bottom: 100px;
+    }
 }
