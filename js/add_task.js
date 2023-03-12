@@ -1,3 +1,7 @@
+function init() {
+    renderCategorys();
+}
+
 function readForm() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
@@ -25,13 +29,16 @@ function addTask(title, description, category, contact_selection, date) {
 
 function setprio(i) {
     let btns = ['urgent', 'medium', 'low']
+    let btnColor = ['#FF3D00', '#FFA800', '#7AE229']
     if (i) {
         let selectedBtn = btns.indexOf(i)
         btns.splice(selectedBtn, 1)
         document.getElementById(i).classList.add('btn-on-focus');
+        document.getElementById(i).style = `background-color: ${btnColor[selectedBtn]};`;
     }
     btns.forEach(e => {
         document.getElementById(e).classList.remove('btn-on-focus');
+        document.getElementById(e).style = ``;
     });
     prio = '';
     prio = i;
@@ -63,10 +70,43 @@ function addSubtask() {
     renderSubTasks();
 }
 
+function showNewCategoryInput() {
+    let content = document.getElementById('category');
+    if (content.value == 'New Category') {
+        document.getElementById('newCategoryInput').classList.remove('d-none');
+        content.classList.add('d-none');
+    }
+}
+
+function addNewCategory() {
+    let content = document.getElementById('newCategory').value;
+    categorys.push(content);
+    document.getElementById('newCategoryInput').classList.add('d-none');
+    document.getElementById('category').classList.remove('d-none');
+    renderCategorys();
+}
+
 function renderSubTasks() {
     let content = document.getElementById('subtasks');
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         content.innerHTML += `<li><input id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"> ${subtask}</li>`;
+    }
+}
+
+function renderCategorys() {
+    let content = document.getElementById('category');
+    content.innerHTML = '';
+    for (let i = 0; i < categorys.length; i++) {
+        let category = categorys[i];
+        if (category == 'New Category') {
+            content.innerHTML += `<option value="${category}">${category}</option>`
+        }
+        if (category == 'Select task category') {
+            content.innerHTML += `<option value disabled selected hidden>${category}</option>`
+        } 
+        if(category != 'New Category' && category != 'Select task category') {
+            content.innerHTML += `<option value="${category}">${category}</option>`
+        }
     }
 }
