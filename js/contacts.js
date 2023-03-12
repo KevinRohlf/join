@@ -2,7 +2,7 @@ const btn = document.getElementById("contact-btn");
 const overlay = document.getElementById('add-contact-overlay');
 const addContact = document.getElementById('add-contact');
 
-function addContactOpen() {
+function addContactOpen(event) {
 overlay.style.display = 'flex';
 addContact.style = 'animation:slide-in .5s ease;';
 btn.disabled = true;
@@ -17,4 +17,9 @@ setTimeout(() => {
 	btn.disabled = false;
 	btn.style.backgroundColor = '#2A3647';
 }, 400);
+}
+
+
+function doNotClose(event) {
+    event.stopPropagation();
 }

@@ -30,12 +30,12 @@
             </div>
             <div></div>
             <div>
-                <button onclick="addContactOpen()" id="contact-btn" class="contact-btn">New contact<img
-                        src="./assets/img/new-contact-icon.svg"></button>
+                <button onclick="addContactOpen()" onclick="doNotClose(event)" id="contact-btn" class="contact-btn">New
+                    contact<img src="./assets/img/new-contact-icon.svg"></button>
             </div>
         </section>
-        <section id="add-contact-overlay" class="add-contact-overlay">
-            <div id="add-contact" class="add-contact">
+        <section onclick="addContactClose()" id="add-contact-overlay" class="add-contact-overlay">
+            <div onclick="doNotClose(event)" id="add-contact" class="add-contact">
                 <div class="contact-header">
                     <img src="./assets/img/logo.svg">
                     <h1>Add contact</h1>
