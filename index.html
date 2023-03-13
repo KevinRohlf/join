@@ -11,40 +11,54 @@
 
     <title>Page 1</title>
   </head>
-  <body onload="fullscreenToCorner()">
-    <div id="capa-1-container">
-      <div id="notAJoinUser">
+  <body onload="initial()">
+    <div class="capaOneContainer" id="capaOneContainer">
+    </div>
+    <img class="capaOneWhite" id="capaOneWhite" src="assets/img/CapaOneWhite.svg" />
+    <img class="capaOne" id="capaOne" src="assets/img/CapaOne.svg" />
+    <div class="pageOneContainer">
+      <div class="notAJoinUser" id="notAJoinUser">
         Not a Join user?
-        <button id="loginSignUp">
-          <div id="insideButton">Sign Up</div>
+        <button class="loginSignUp">
+          <div class="loginSignUpButton">Sign Up</div>
         </button>
       </div>
-      <img id="capa-1" src="assets/img/Capa 1.svg" />
-      <div id="login">
-        <div id="loginHeadline">Log in</div>
+      <div class="login" id="login">
+        <div class="loginHeadline">Log in</div>
         <img src="assets/img/line.svg" />
-        <div id="emailPassword">
-          <div id="inputBox">
-            <div id="input" required>
-              Email<img src="assets/img/postcard.svg" />
-            </div>
+        <form class="emailPassword">
+          <div class="inputBox">
+            <input
+              type="email"
+              class="email"
+              id="email"
+              placeholder="Email"
+              required
+              minlength="5"
+            /><img src="assets/img/postcard.svg" />
           </div>
-          <div id="inputBox">
-            <div id="input" required>
-              Password<img src="assets/img/lock.svg" />
-            </div>
+          <div class="inputBox">
+            <input
+              type="password"
+              class="password"
+              onkeyup="changePWSymbol()"
+              id="password"
+              placeholder="Password"
+              required
+              minlength="10"
+            /><img class="pwSymbol" id="pwSymbol" onclick="visibilityPW()" src="assets/img/lock.svg" />
           </div>
-        </div>
-        <div id="remember">
-          <div id="rememberMe">
-            <input type="checkbox">
-            <label for="rememberCheckbox">Remember me</label>
+        </form>
+        <div class="remember">
+          <div class="rememberMe">
+            <input type="checkbox" class="rememberMeCheckbox" id="rememberMeCheckbox" />
+            <label for="rememberMeCheckbox" class="rememberMeCheckboxLabel">Remember me</label>
           </div>
           <a href="">Forgot my password</a>
         </div>
-        <div id="MemberOrGuest">
-          <button id="memberLogin">Log in</button>
-          <button id="guestLogin">Guest Log in</button>
+        <div class="MemberOrGuest">
+          <button class="memberLogin">Log in</button>
+          <button class="guestLogin">Guest Log in</button>
         </div>
       </div>
     </div>

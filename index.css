@@ -4,15 +4,114 @@ body {
   margin: 0;
 }
 
-#capa-1-container {
+.pageOneContainer {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100%;
+  margin: 0;
+  z-index: 1;
 }
 
-#login {
+/*Login-Page*/
+
+.capaOneContainer {
+  position: absolute;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+  opacity: 1;
+  transition: opacity 1s;
+  z-index: 2;
+}
+
+.capaOneContainer.ausblenden {
+  opacity: 0;
+}
+
+.capaOne {
+  position: fixed;
+  height: 32.62%;
+  width: 19.03%;
+  z-index: 3;
+}
+
+.capaOneWhite {
+  position: fixed;
+  height: 32.62%;
+  width: 19.03%;
+  z-index: 3;
+}
+
+@keyframes center-to-corner {
+  0% {
+    height: 32.62%;
+    width: 19.03%;
+    left: 40.49%;
+    right: 40.49%;
+    top: 33.69%;
+    bottom: 33.68%;
+  }
+  100% {
+    height: 11.91%;
+    width: 6.95%;
+    left: 5.35%;
+    right: 87.71%;
+    top: 7.81%;
+    bottom: 80.28%;
+  }
+}
+
+.animation {
+  animation: center-to-corner 1s ease-in-out forwards;
+}
+
+.loginSignUp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  gap: 10px;
+  width: 91px;
+  height: 51px;
+  background: #2a3647;
+  border-radius: 8px;
+  border-width: 0px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.loginSignUp:hover {
+  cursor: pointer;
+  background: #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.loginSignUp:active {
+  background: #091931;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.loginSignUpButton {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  color: #ffffff;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.login {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,15 +122,9 @@ body {
   background: #ffffff;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
   border-radius: 30px;
-  opacity: 0;
-  transition: 1s;
 }
 
-#login.einblenden {
-  opacity: 1;
-}
-
-#loginHeadline {
+.loginHeadline {
   font-family: Inter;
   font-size: 61px;
   font-weight: 700;
@@ -40,7 +133,7 @@ body {
   text-align: center;
 }
 
-#inputBox {
+.inputBox {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -57,7 +150,7 @@ body {
   flex-grow: 0;
 }
 
-#input {
+.email {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -72,9 +165,30 @@ body {
   font-size: 21px;
   line-height: 120%;
   color: #d1d1d1;
+  border-width: 0;
+  outline: none;
 }
 
-#emailPassword {
+.password {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 380px;
+  height: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #d1d1d1;
+  border-width: 0;
+  outline: none;
+}
+
+.emailPassword {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -87,7 +201,11 @@ body {
   flex-grow: 0;
 }
 
-#remember {
+.cursorPointer {
+  cursor: pointer;
+}
+
+.remember {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -101,32 +219,61 @@ body {
   flex-grow: 0;
 }
 
-#remember a {
+.remember a {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
   color: #29abe2;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
   text-decoration: none;
 }
 
-#rememberMe {
+.rememberMe {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 146px;
+  height: 19px;
+}
+
+.rememberMeCheckbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-image: url(assets/img/checkbox.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+.rememberMeCheckbox:checked {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-image: url(assets/img/checkboxOnClick.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+.rememberMeCheckbox:hover {
+  cursor: pointer;
+}
+
+.rememberMeCheckboxLabel {
+  width: 110px;
+  height: 19px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
   color: #000000;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 
-#MemberOrGuest {
+.MemberOrGuest {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -140,7 +287,7 @@ body {
   flex-grow: 0;
 }
 
-#memberLogin {
+.memberLogin {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -162,26 +309,26 @@ body {
   color: #ffffff;
 }
 
-#memberLogin:hover {
+.memberLogin:hover {
   cursor: pointer;
   background: #29abe2;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
 
-#memberLogin:active {
+.memberLogin:active {
   background: #091931;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
 
-#guestLogin {
+.guestLogin {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 4px 16px;
+  padding: 4px 0px;
   gap: 10px;
   width: 161px;
   height: 51px;
@@ -199,19 +346,20 @@ body {
   background-color: #ffffff;
 }
 
-#guestLogin:hover {
+.guestLogin:hover {
+  cursor: pointer;
   border: 2px solid #29abe2;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 8px;
 }
 
-#guestLogin:active {
+.guestLogin:active {
   border: 1px solid #091931;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 8px;
 }
 
-#notAJoinUser {
+.notAJoinUser {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -230,87 +378,36 @@ body {
   flex: none;
   order: 0;
   flex-grow: 0;
-  opacity: 0;
-  transition: 1s;
 }
 
-#notAJoinUser.einblenden {
-  opacity: 1;
-}
+/*Sign-Up-Page*/
 
-#loginSignUp {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 16px;
-  gap: 10px;
-  width: 91px;
-  height: 51px;
-  background: #2a3647;
-  border-radius: 8px;
-  border-width: 0px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-}
 
-#loginSignUp:hover {
-  cursor: pointer;
-  background: #29abe2;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-}
 
-#loginSignUp:active {
-  background: #091931;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-}
+/*Responsivemode*/
 
-#insideButton {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 120%;
-  color: #ffffff;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-}
+@media only screen and (max-width: 600px) {
+  .capaOneContainer {
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: #2a3647;
+    opacity: 1;
+    transition: opacity 1s;
+    z-index: 2;
+  }
 
-/* style Capa 1 */
-#capa-1 {
-  position: fixed;
-  height: 32.62%;
-  width: 19.03%;
-  z-index: 1;
-}
-
-/* Definition der Animation */
-@keyframes center-to-corner {
-  0% {
-    /* Startzustand von capa-1, in voller Größe */
+  .capaOneWhite {
+    position: fixed;
     height: 32.62%;
     width: 19.03%;
-    left: 40.49%;
-    right: 40.49%;
-    top: 33.69%;
-    bottom: 33.68%;
+    z-index: 4;
+    opacity: 1;
+    transition: opacity 1s;
   }
-  100% {
-    /* Endzustand von capa-1, in der linken oberen Ecke */
-    height: 11.91%;
-    width: 6.95%;
-    left: 5.35%;
-    right: 87.71%;
-    top: 7.81%;
-    bottom: 80.28%;
-  }
-}
 
-/* Animation von capa-1 */
-#capa-1.animation {
-  animation: center-to-corner 1s ease-in-out forwards;
+  .ausblenden {
+    opacity: 0;
+  }
 }
