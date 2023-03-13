@@ -16,6 +16,7 @@ main {
 .content-section {
     height: 100vh;
     width: calc(100% - 300px);
+    background-color: #F5F5F5;
 }
 
 .content-container {

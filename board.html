@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" href="board.css">
+    <link rel="stylesheet" href="fonts.css">
+    <script src="./js/template.js"></script>
+    <script src="./js/board.js"></script>
+
+    <title>Board</title>
+</head>
+
+
+<body onload="init()">
+    <main>
+        <section w3-include-html="templates/sidemenu.html"></section>
+        <section class="content-section">
+            <section w3-include-html="templates/topmenu.html"></section>
+            <section class="content-container">
+                <div class="board-header">
+                    <div>
+                        <p class="board-headline">Board</p>
+                    </div>
+                    <div class="add-task-container">
+                        <input class="add-task-input" placeholder="Find task">
+                        <p>Add task +</p>
+                    </div>
+                </div>
+                <div class="board-container">
+                    <div>
+                        <div class="board-headlines">
+                            <p>To do</p>
+                            <div>
+                                <img src="./assets/img/plus-icon.svg">
+                                <img src="./assets/img/plus-sign-vertical.svg">
+                            </div>
+                        </div>
+                        <div id="to-do-container"></div>
+                    </div>
+                    <div>
+                        <div class="board-headlines">
+                            <p>In progress</p>
+                            <div>
+                                <img src="./assets/img/plus-icon.svg">
+                                <img src="./assets/img/plus-sign-vertical.svg">
+                            </div>
+                        </div>
+                        <div id="in-progress-container"></div>
+                    </div>
+                    <div>
+                        <div class="board-headlines">
+                            <p>Awaiting Feedback</p>
+                            <div>
+                                <img src="./assets/img/plus-icon.svg">
+                                <img src="./assets/img/plus-sign-vertical.svg">
+                            </div>
+                        </div>
+                        <div id="awaiting-feedback-container"></div>
+                    </div>
+                    <div>
+                        <div class="board-headlines">
+                            <p>Done</p>
+                            <div>
+                                <img src="./assets/img/plus-icon.svg">
+                                <img src="./assets/img/plus-sign-vertical.svg">
+                            </div>
+                        </div>
+                        <div id="done-container"></div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>
