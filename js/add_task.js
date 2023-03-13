@@ -25,6 +25,14 @@ function addTask(title, description, category, contact_selection, date) {
     tasks.push(newTask);
     console.log(tasks);
     clearForm();
+    document.getElementById('taskAdded').classList.remove('d-none');
+    document.getElementById('taskAdded').style = 'animation: comeIn 1s ease;';
+    setTimeout(() => {
+        document.getElementById('taskAdded').style = 'animation: comeOut 1s ease;';
+    }, 2000);
+    setTimeout(() => {
+        document.getElementById('taskAdded').classList.add('d-none');
+    }, 2500);
 }
 
 function setprio(i) {
@@ -81,9 +89,14 @@ function showNewCategoryInput() {
 function addNewCategory() {
     let content = document.getElementById('newCategory').value;
     categorys.push(content);
-    document.getElementById('newCategoryInput').classList.add('d-none');
-    document.getElementById('category').classList.remove('d-none');
+    closeNewCategoryInput();
     renderCategorys();
+}
+
+function closeNewCategoryInput() {
+    document.getElementById('newCategoryInput').classList.add('d-none');
+    renderCategorys();
+    document.getElementById('category').classList.remove('d-none');
 }
 
 function renderSubTasks() {
