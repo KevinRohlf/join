@@ -95,10 +95,12 @@ function renderTasks() {
 function renderAllTasks(element, content, i) {
     content.innerHTML +=
         /*html*/ `
+        <div id="${i}" class="board-content" draggable="true" ondragstart="dragstart_handler(event)">
             <div>${element.category}</div>
             <div>${element.title}</div>
             <div>${element.description}</div>
             <div id="contact-selection-${element.task_status}_${i}"></div>
+        </div>
         `
 }
 
@@ -112,6 +114,39 @@ function renderContactSelection(element, i) {
         `
     });
 }
+
+
+function dragstart_handler(ev) {
+    // Add the target element's id to the data transfer object
+    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.effectAllowed = "move";
+}
+function dragover_handler(ev) {
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = "move";
+}
+function drop_handler(ev) {
+    // console.log(window)
+    ev.preventDefault();
+    // Get the id of the target and add the moved element to the target's DOM
+  /*  if (!ev.target.getAttribute("ondrop")) {
+        console.log("Test")
+        return false;
+    }*/
+    const data = ev.dataTransfer.getData("text");
+    document.getElementById('in-progress-container').appendChild(document.getElementById(data));
+}
+
+/*
+window.addEventListener('mouseover', (event) => {
+    console.log(event)
+})
+*/
+
+
+
+
+
 
 
 

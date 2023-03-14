@@ -60,6 +60,14 @@
     justify-content: space-between;
 }
 
+.board-container>div {
+    max-width: 250px;
+}
+
+.board-container>div:hover {
+    cursor: pointer;
+}
+
 .board-headlines {
     display: flex;
     align-items: center;
@@ -88,5 +96,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.board-content {
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    padding: 16px;
+    margin: 32px 0;
 }
 
