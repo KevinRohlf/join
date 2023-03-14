@@ -12,8 +12,7 @@
     <title>Page 1</title>
   </head>
   <body onload="initial()">
-    <div class="capaOneContainer" id="capaOneContainer">
-    </div>
+    <div class="capaOneContainer" id="capaOneContainer"></div>
     <img class="capaOneWhite" id="capaOneWhite" src="assets/img/CapaOneWhite.svg" />
     <img class="capaOne" id="capaOne" src="assets/img/CapaOne.svg" />
     <div class="pageOneContainer">
@@ -46,12 +45,21 @@
               placeholder="Password"
               required
               minlength="10"
-            /><img class="pwSymbol" id="pwSymbol" onclick="visibilityPW()" src="assets/img/lock.svg" />
+            /><img
+              class="pwSymbol"
+              id="pwSymbol"
+              onclick="visibilityPW()"
+              src="assets/img/lock.svg"
+            />
           </div>
         </form>
         <div class="remember">
           <div class="rememberMe">
-            <input type="checkbox" class="rememberMeCheckbox" id="rememberMeCheckbox" />
+            <input
+              type="checkbox"
+              class="rememberMeCheckbox"
+              id="rememberMeCheckbox"
+            />
             <label for="rememberMeCheckbox" class="rememberMeCheckboxLabel">Remember me</label>
           </div>
           <a href="">Forgot my password</a>

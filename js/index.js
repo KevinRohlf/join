@@ -19,9 +19,14 @@ function changePWSymbol() {
   if (pwInputField.value == "") {
     pwSymbol.src = "assets/img/lock.svg";
     pwSymbol.classList.remove("cursorPointer");
+    pwInputField.type = "password";
     inputPW = false;
-  } else {
+  } else if (pwInputField.type = "password") {
     pwSymbol.src = "assets/img/crossedEye.svg";
+    pwSymbol.classList.add("cursorPointer");
+    inputPW = true;
+  } else {
+    pwSymbol.src = "assets/img/eye.svg";
     pwSymbol.classList.add("cursorPointer");
     inputPW = true;
   }
