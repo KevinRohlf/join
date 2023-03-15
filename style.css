@@ -1,5 +1,7 @@
 html {
-    font-family: 'Inter', sans-serif; 
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 body {
@@ -40,7 +42,6 @@ body {
 }
 
 .header h2 {
-    font-weight: 400;
     font-size: 24px;
     color: #2A3647;
 }
@@ -95,7 +96,6 @@ body {
 .urgent p,
 .urgent-date p,
 .todo p {
-    font-size: 20px;
     color: #2A3647;
     margin-top: 0;
     text-align: center;
@@ -199,12 +199,11 @@ body {
 
 .greeting-time {
     font-size: 36px;
-    font-weight: 400;
     color: #2A3647;
 }
 
 .greeting-name {
-    font-size: 47px;
+    font-size: 48px;
     font-weight: 700;
     color: #29ABE2;
 }
@@ -314,10 +313,65 @@ body {
     display: flex;
 }
 
-.contacts-field {
-    width: 450px;
+.contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 450px;
     height: 100vh;
     box-shadow: 0px 0px 4px 0px rgb(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    height: 80px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.initial-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 40px 0 25px;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    border: 2px solid transparent;
+}
+
+.contact:hover {
+    background-color: #F5F5F5;
+}
+
+.contact:hover > .initial-circle {
+    border: 2px solid white;
+}
+
+.contact:focus {
+    color: white;
+    background-color: #2A3647;
+}
+
+.contact:focus > .initial-circle {
+    border: 2px solid white;
+}
+
+.contact p {
+    margin: 0 0 5px 0;
+}
+
+.contact a,
+.single-contact-contact a {
+    font-size: 16px;
+    color: #007CEE;
+    text-decoration: none;
 }
 
 .contacts-details {
@@ -337,7 +391,6 @@ body {
     border: none;
     border-radius: 10px;
     padding: 10px;
-    font-size: 20px;
     font-weight: 700;
     color: #FFFFFF;
     background-color: #2A3647;
@@ -353,7 +406,7 @@ body {
     background-color: #29ABE2;
 }
 
-.add-contact-overlay {
+.contact-overlay {
     display: none;
     justify-content: center;
     align-items: center;
@@ -362,16 +415,16 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 2;
 }
 
-.add-contact { 
+.contact-container { 
     display: flex;
     width: 1000px;
     height: 500px;
     border-radius: 30px;
     background-color: #FFFFFF;
     box-shadow: 0px 0px 4px 0px rgb(0, 0, 0, 0.1);
-    z-index: 99;
     position: relative;
 }
 
@@ -399,7 +452,6 @@ body {
 }
 
 .contact-header h2 {
-    font-weight: 400;
     font-size: 24px;
     margin: 10px 0 0 0;
 }
@@ -467,6 +519,7 @@ body {
 
 .submit-container {
     display: flex;
+    justify-content: center;
 }
 
 .submit-btn {
@@ -495,6 +548,14 @@ body {
     background-color: #2A3647;
 }
 
+.save {
+    width: 110px;
+    border: none;
+    color: white;
+    background-color: #2A3647;
+}
+
+
 .submit-btn svg {
     padding-left: 10px;
 }
@@ -511,6 +572,74 @@ body {
 
 .create:hover {
     background-color: #29ABE2;
+}
+
+.single-contact-overlay {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 200px;
+    bottom: 200px;
+    left: 450px;
+    right: 0;
+    z-index: 1;
+}
+
+.show-contact { 
+    display: flex;
+    width: 1000px;
+    height: 400px;
+    margin-left: 50px;
+}
+
+.single-contact-name {
+    display: flex;
+}
+
+.big-circle {
+    width: 120px;
+    height: 120px;
+    border: 2px solid white;
+    font-size: 48px;
+    margin: 0 50px 0 0;
+}
+
+.single-contact-task p {
+    font-weight: 500;
+    font-size: 48px;
+    margin: 0 0 10px 0;
+}
+
+.single-contact-task a {
+    color: #29ABE2;
+    text-decoration: none;
+}
+
+.single-contact-task a img {
+    padding-right: 15px;
+}
+
+.single-contact-edit {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.single-contact-edit a {
+    font-size: 16px;
+    color: #2A3647;
+    text-decoration: none;
+    margin-left: 60px;
+}
+
+.single-contact-contact p {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 25px 0 10px 0;
+}
+
+.single-contact-contact span {
+    font-size: 16px;
 }
 
 
@@ -649,7 +778,7 @@ body {
 }
 
 .content-add-task h1 {
-    font-size: 61px;
+    font-size: 60px;
 }
 
 .content-add-task input,select,textarea {
