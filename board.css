@@ -14,8 +14,8 @@
     align-items: center;
 }
 
-.add-task-container>p {
-    padding: 18px 10px;
+.board-add-task-btn {
+    padding: 12px 10px;
     background-color: #2A3647;
     color: white;
     border: 1px solid #2A3647;
@@ -23,23 +23,47 @@
     font-weight: 700;
     font-size: 21px;
     transition: all 175ms ease-in-out;
+    display: flex;
+    align-items: center;
 }
 
-.add-task-container>p:hover {
+.board-add-task-btn:hover {
     cursor: pointer;
     background-color: aqua;
     border: 1px solid aqua;
     transition: all 175ms ease-in-out;
 }
 
-.add-task-container>input {
+.board-add-task-btn>div {
+    position: relative;
+    padding-right: 10px;
+}
+
+.board-add-task-btn>p {
     margin-right: 16px;
-    width: 251px;
-    height: 51px;
-    background: #FFFFFF;
-    border: 1px solid #A8A8A8;
-    border-radius: 10px;
-    padding: 13px 21px;
+}
+
+.add-task-container>div {
+    position: relative
+}
+
+.board-add-task-btn>div>img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.find-task-img1 {
+    position: absolute;
+    top: 11px;
+    left: 200px;
+}
+
+.find-task-img2 {
+    position: absolute;
+    top: 15px;
+    left: 215px;
 }
 
 ::placeholder {
@@ -47,9 +71,14 @@
     opacity: 1;
 }
 
-.add-task-input {
-    background-image: url(./assets/img/input-search-icon.svg);
-    background-image: no-repeat;
+.find-task-input {
+    margin-right: 16px;
+    width: 251px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #A8A8A8;
+    border-radius: 10px;
+    padding: 13px 21px;
 }
 
 .add-task-input:focus {
@@ -60,13 +89,14 @@
     margin-top: 128px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .board-container>div {
     max-width: 300px;
 }
 
-.board-container>div>a {
+a {
     text-decoration: none;
 }
 
@@ -75,6 +105,7 @@
     align-items: center;
     justify-content: space-between;
     color: #2A3647;
+    min-height: 50px;
 }
 
 .board-headlines:hover {
