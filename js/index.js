@@ -11,6 +11,8 @@ function initial() {
   }, 1225);
 }
 
+/*Password-Inputfield*/
+
 let inputPW = false;
 
 function changePWSymbol() {
@@ -21,7 +23,7 @@ function changePWSymbol() {
     pwSymbol.classList.remove("cursorPointer");
     pwInputField.type = "password";
     inputPW = false;
-  } else if (pwInputField.type = "password") {
+  } else if ((pwInputField.type = "password")) {
     pwSymbol.src = "assets/img/crossedEye.svg";
     pwSymbol.classList.add("cursorPointer");
     inputPW = true;
@@ -44,4 +46,58 @@ function visibilityPW() {
       pwSymbol.src = "assets/img/crossedEye.svg";
     }
   }
+}
+
+function changeSignUpPWSymbol() {
+  let pwInputField = document.getElementById("signUpPassword");
+  let pwSymbol = document.getElementById("pwSymbol");
+  if (pwInputField.value == "") {
+    pwSymbol.src = "assets/img/lock.svg";
+    pwSymbol.classList.remove("cursorPointer");
+    pwInputField.type = "password";
+    inputPW = false;
+  } else if ((pwInputField.type = "password")) {
+    pwSymbol.src = "assets/img/crossedEye.svg";
+    pwSymbol.classList.add("cursorPointer");
+    inputPW = true;
+  } else {
+    pwSymbol.src = "assets/img/eye.svg";
+    pwSymbol.classList.add("cursorPointer");
+    inputPW = true;
+  }
+}
+
+function visibilitySignUpPW() {
+  let pw = document.getElementById("signUpPassword");
+  let pwSymbol = document.getElementById("pwSymbol");
+  if (inputPW === true) {
+    if (pw.type === "password") {
+      pw.type = "text";
+      pwSymbol.src = "assets/img/eye.svg";
+    } else {
+      pw.type = "password";
+      pwSymbol.src = "assets/img/crossedEye.svg";
+    }
+  }
+}
+
+function renderSignUp() {
+  document.getElementById("forgottenPWContainer").style.display ="none";
+  document.getElementById("loginContainer").style.display = "none";
+  document.getElementById("notAJoinUser").style.display = "none";
+  document.getElementById("signUpContainer").style.display = "flex";
+}
+
+function renderLogIn() {
+  document.getElementById("forgottenPWContainer").style.display ="none";
+  document.getElementById("signUpContainer").style.display = "none";
+  document.getElementById("loginContainer").style.display = "flex";
+  document.getElementById("notAJoinUser").style.display = "flex";
+}
+
+function renderForgottenPW() {
+  document.getElementById("loginContainer").style.display = "none";
+  document.getElementById("notAJoinUser").style.display = "none";
+  document.getElementById("signUpContainer").style.display = "none";
+  document.getElementById("forgottenPWContainer").style.display = "flex";
 }

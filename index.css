@@ -2,6 +2,7 @@ body {
   height: 100vh;
   width: 100%;
   margin: 0;
+  background-color: #f6f7f8;
 }
 
 .pageOneContainer {
@@ -22,7 +23,7 @@ body {
   display: flex;
   height: 100vh;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #f6f7f8;
   opacity: 1;
   transition: opacity 1s;
   z-index: 2;
@@ -111,7 +112,7 @@ body {
   flex-grow: 0;
 }
 
-.login {
+.loginContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -382,7 +383,258 @@ body {
 
 /*Sign-Up-Page*/
 
+.signUpContainer {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 0px;
+  gap: 35px;
+  width: 652px;
+  height: 513px;
+  background: #ffffff;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+}
 
+.name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 380px;
+  height: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #d1d1d1;
+  border-width: 0;
+  outline: none;
+}
+
+.signUpHeadlineContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  width: 652px;
+}
+
+.signUpHeadline {
+  position: relative;
+  right: 18px;
+  font-family: Inter;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.backArrowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 150px;
+  width: 37px;
+  height: 37px;
+}
+
+.backArrow:hover {
+  cursor: pointer;
+}
+
+.signUpInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 29px;
+  width: 422px;
+  height: 200px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.signUpButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 35px;
+  width: 422px;
+  height: 51px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+}
+
+.signUp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0px;
+  gap: 10px;
+  width: 145px;
+  height: 51px;
+  background: #2a3647;
+  border-radius: 8px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.signUp:hover {
+  cursor: pointer;
+  background: #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.signUp:active {
+  background: #091931;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+/*Forgotten Password*/
+
+.forgottenPWContainer {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 0px;
+  gap: 35px;
+  width: 826px;
+  height: 462px;
+  background: #ffffff;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+}
+
+.forgottenPWHeadlineContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  width: 826px;
+}
+
+.forgottenPWHeadline {
+  position: relative;
+  right: 18px;
+  font-family: Inter;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.backforgottenPWArrowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 50px;
+  width: 37px;
+  height: 37px;
+}
+
+.backArrow:hover {
+  cursor: pointer;
+}
+
+.forgottenPWContent {
+  width: 656px;
+  height: 50px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  text-align: center;
+  color: #000000;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 1;
+}
+
+.forgottenPWInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 29px;
+  width: 422px;
+  height: 51px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.sendEmailContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 35px;
+  width: 422px;
+  height: 51px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+}
+
+.sendEmail {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0px;
+  gap: 10px;
+  width: 264px;
+  height: 51px;
+  background: #2a3647;
+  border-radius: 8px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.sendEmail:hover {
+  cursor: pointer;
+  background: #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.sendEmail:active {
+  background: #091931;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
 
 /*Responsivemode*/
 
