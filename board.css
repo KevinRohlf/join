@@ -48,10 +48,12 @@
 }
 
 .add-task-input {
-    background-image: url('./assets/img/input-search-icon.svg');
-    background-repeat: no-repeat;
-    background-position: left top;
-    padding-left: 15px;
+    background-image: url(./assets/img/input-search-icon.svg);
+    background-image: no-repeat;
+}
+
+.add-task-input:focus {
+    outline: none;
 }
 
 .board-container {
@@ -61,11 +63,11 @@
 }
 
 .board-container>div {
-    max-width: 250px;
+    max-width: 300px;
 }
 
-.board-container>div:hover {
-    cursor: pointer;
+.board-container>div>a {
+    text-decoration: none;
 }
 
 .board-headlines {
@@ -73,7 +75,10 @@
     align-items: center;
     justify-content: space-between;
     color: #2A3647;
-    width: 250px;
+}
+
+.board-headlines:hover {
+    cursor: pointer;
 }
 
 .board-headlines>p {
@@ -91,6 +96,10 @@
     height: 30px;
 }
 
+.board-headlines>div:hover {
+    border: 2px solid #29ABE2;
+}
+
 .board-headlines>div>img {
     position: absolute;
     top: 50%;
@@ -100,8 +109,68 @@
 
 .board-content {
     background-color: #FFFFFF;
-    border-radius: 30px;
     padding: 16px;
     margin: 32px 0;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
 }
 
+.board-content:hover {
+    cursor: pointer;
+}
+
+.task-category {
+    color: white;
+    padding: 4px 25px;
+    width: fit-content;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.task-title {
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.task-description {
+    color: #A8A8A8;
+    margin-bottom: 16px;
+}
+
+.contact-selection {
+    display: flex;
+}
+
+.contact-selection>div {
+    margin: 8px -5px;
+    color: white;
+    padding: 10px;
+    border: 1px solid #FFFFFF;
+    border-radius: 50%;
+}
+
+.prio-and-contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.design {
+    background-color: #FF7A00;
+}
+
+.sales {
+    background-color: #FC71FF;
+}
+
+.backoffice {
+    background-color: #1FD7C1;
+}
+
+.marketing {
+    background-color: #0038FF;
+}
+
+.media {
+    background-color: #FFC701;
+}
