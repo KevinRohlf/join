@@ -1,3 +1,7 @@
+let prio;
+
+
+
 function init() {
     renderCategorys();
 }
@@ -14,6 +18,7 @@ function readForm() {
 
 function addTask(title, description, category, contact_selection, date) {
     let newTask = {
+        'status': toDo,
         'title': title.value,
         'description': description.value,
         'category': category.value,
