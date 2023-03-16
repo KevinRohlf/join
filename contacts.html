@@ -90,6 +90,7 @@
                 </div>
             </div>
         </section>
+
         <section onclick="editContactClose()" id="edit-contact-overlay" class="contact-overlay">
             <div onclick="doNotClose(event)" id="edit-contact" class="contact-container">
                 <div class="contact-header">
@@ -97,32 +98,10 @@
                     <h1>Edit contact</h1>
                     <div class="contact-blue-line"></div>
                 </div>
-                <div class="contact-field">
-                    <div class="contact-user-icon">
-                        <img src="./assets/img/new-user-icon.svg">
-                    </div>
-                    <div>
-                        <a onclick="editContactClose()" class="contact-close">
-                            <svg width="31" height="31" viewBox="0 0 31 31" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22.9616 7.65393L7.65388 22.9617" stroke="#2A3647" stroke-width="2"
-                                    stroke-linecap="round" />
-                                <path d="M22.8172 23.1061L7.50941 7.79832" stroke="#2A3647" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </a>
-                        <form onsubmit="editContact()">
-                            <div class="contact-form">
-                                <div id="contact-form-content"></div>
-                            </div>
-                            <div class="submit-container">
-                                <button type="submit" class="submit-btn save">Save</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <div id="contact-field-content"></div>
             </div>
         </section>
+
         <section id="single-contact-overlay" class="single-contact-overlay">
             <div id="show-contact" class="show-contact"></div>
         </section>

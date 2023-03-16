@@ -27,6 +27,12 @@ function addToContact() {
 	let name = document.getElementById('name').value;
 	let email = document.getElementById('email').value;
 	let phone = document.getElementById('phone').value;
+	
+	newContact(name, email, phone);
+}
+
+
+function newContact(name, email, phone) {
 	let initials = getInitials(name);
 	let initialColor = getColor();
 
@@ -40,15 +46,16 @@ function addToContact() {
 
 	allContacts.push(contact);
 
+	addContactClose();
 	clearInput();
 	saveAllContacts();
-	renderAllContacts();
+	loadAllContacts();
 }
 
 
 function getInitials(fullName) {
 	let names = fullName.toString().split(' '),
-			initials = names[0].substring(0, 1).toUpperCase();
+			initials = names[0].substring(0, 2).toUpperCase();
 		if (names.length > 1) {
 			initials += names[names.length - 1].substring(0, 1).toUpperCase();
 		}
@@ -57,9 +64,7 @@ function getInitials(fullName) {
 
 
 function getColor() {
-	return (
-	  "#" + Math.random().toString(16).slice(2, 8)
-	);
+	return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
   }
 
 
@@ -76,6 +81,28 @@ function saveAllContacts() {
 }
 
 
+/* delate contact */
+function delateActiveContact(i) {
+	allContacts.splice(i, 1);
+
+	editContactClose();
+	closeSingleContact();
+	saveAllContacts();
+	loadAllContacts();
+}
+
+
+/* save contact */
+function saveActiveContact(i) {
+	let name = document.getElementById('edit-name').value;
+	let email = document.getElementById('edit-email').value;
+	let phone = document.getElementById('edit-phone').value;
+	
+	newContact(name, email, phone);
+	delateActiveContact(i);
+}
+
+
 /* show single contact */
 let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
@@ -85,6 +112,7 @@ function renderSingleContact(i) {
 	contactContent.innerHTML = '';
 	singleContactOverlay.style.display = 'flex';
 	contactContent.style = 'animation:slide-in .5s ease;';
+	contactContent.innerHTML = '';
 	contactContent.innerHTML += htmlTemplateRenderSingleContact(contact, i);
 }
 
@@ -99,8 +127,9 @@ function closeSingleContact() {
 
 function editSingleContact(i) {
 	let contact = allContacts[i];
-	let formContent = document.getElementById('contact-form-content');
-	formContent.innerHTML += htmlTemplateEditSingleContact(contact);
+	let formContent = document.getElementById('contact-field-content');
+	formContent.innerHTML = '';
+	formContent.innerHTML += htmlTemplateEditSingleContact(contact, i);
 }
 
 
@@ -148,5 +177,3 @@ function editContactClose() {
 function doNotClose(event) {
     event.stopPropagation();
 }
-
-
