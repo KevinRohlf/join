@@ -29,7 +29,7 @@ function greeting() {
 
 function mobileGreeting() {
     if (window.innerWidth <= 1500) {
-        setTimeout(mobileGreetingDisappears, 3000);
+        setTimeout(mobileGreetingDisappears, 2000);
     } else {
         document.getElementById('greeting-container').classList.remove('d-none');
     }
