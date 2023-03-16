@@ -54,12 +54,15 @@ function newContact(name, email, phone) {
 
 
 function getInitials(fullName) {
-	let names = fullName.toString().split(' '),
-			initials = names[0].substring(0, 2).toUpperCase();
-		if (names.length > 1) {
-			initials += names[names.length - 1].substring(0, 1).toUpperCase();
-		}
-		return initials;
+	let names = fullName.toString().split(' ');
+	if (names.length === 1) {
+		initials = names[0].substring(0, 1).toUpperCase() 
+		+ names[0].substring(1, 2);
+	} else {
+		initials = names[0].substring(0, 1).toUpperCase() 
+		+ names[names.length - 1].substring(0, 1).toUpperCase();
+	}
+	return initials;
 }
 
 
