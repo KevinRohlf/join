@@ -554,10 +554,6 @@ body {
   height: 37px;
 }
 
-.backArrow:hover {
-  cursor: pointer;
-}
-
 .forgottenPWContent {
   width: 656px;
   height: 50px;
@@ -634,6 +630,115 @@ body {
   background: #091931;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+}
+
+/*Reset Password*/
+
+.resetPWContainer {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 0px;
+  gap: 35px;
+  width: 826px;
+  height: 537px;
+  background: #ffffff;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+}
+
+.resetPWHeadlineContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  width: 826px;
+}
+
+.resetPWHeadline {
+  position: relative;
+  right: 18px;
+  font-family: Inter;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.backresetPWArrowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 50px;
+  width: 37px;
+  height: 37px;
+}
+
+.resetPWContent {
+  width: 656px;
+  height: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  text-align: center;
+  color: #000000;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 1;
+}
+
+.resetPWInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 29px;
+  width: 422px;
+  height: 150px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.continueContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 35px;
+  width: 422px;
+  height: 51px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+}
+
+.continue {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0px;
+  gap: 10px;
+  width: 264px;
+  height: 51px;
+  background: #2a3647;
+  border-radius: 8px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #ffffff;
 }
 
 /*Responsivemode*/

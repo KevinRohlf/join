@@ -27,6 +27,7 @@
       </div>
 
       <!-- display:flex Login -->
+
       <div class="loginContainer" id="loginContainer">
         <div class="loginHeadline">Log in</div>
         <img src="assets/img/line.svg" />
@@ -172,6 +173,48 @@
         </form>
         <div class="sendEmailContainer">
           <button class="sendEmail">Send me the mail</button>
+        </div>
+      </div>
+
+      <!-- display:none Reset PW -->
+
+      <div class="resetPWContainer" id="resetPWContainer">
+        <div class="resetPWHeadlineContainer">
+          <div class="backresetPWArrowContainer">
+            <img
+              class="backArrow"
+              onclick="renderLogIn()"
+              src="assets/img/backArrowSignUp.svg"
+            />
+          </div>
+          <div class="resetPWHeadline">Reset your password</div>
+        </div>
+        <img src="assets/img/line.svg" />
+        <div class="resetPWContent">Change your account password</div>
+        <form class="resetPWInput">
+          <div class="inputBox">
+            <input
+              type="text"
+              class="email"
+              id="newPW"
+              placeholder="New Password"
+              required
+              minlength="10"
+            />
+          </div>
+          <div class="inputBox">
+            <input
+              type="text"
+              class="email"
+              id="confirmPW"
+              placeholder="Confirm Password"
+              required
+              minlength="10"
+            />
+          </div>
+        </form>
+        <div class="continueContainer">
+          <button class="continue">Continue</button>
         </div>
       </div>
     </div>

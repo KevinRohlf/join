@@ -8,7 +8,7 @@ function initial() {
   setTimeout(() => {
     let capaOneContainer = document.getElementById("capaOneContainer");
     capaOneContainer.style.zIndex = "0";
-  }, 1225);
+  }, 1000);
 }
 
 /*Password-Inputfield*/
@@ -85,12 +85,14 @@ function renderSignUp() {
   document.getElementById("forgottenPWContainer").style.display ="none";
   document.getElementById("loginContainer").style.display = "none";
   document.getElementById("notAJoinUser").style.display = "none";
+  document.getElementById("resetPWContainer").style.display = "none";
   document.getElementById("signUpContainer").style.display = "flex";
 }
 
 function renderLogIn() {
   document.getElementById("forgottenPWContainer").style.display ="none";
   document.getElementById("signUpContainer").style.display = "none";
+  document.getElementById("resetPWContainer").style.display = "none";
   document.getElementById("loginContainer").style.display = "flex";
   document.getElementById("notAJoinUser").style.display = "flex";
 }
@@ -99,5 +101,14 @@ function renderForgottenPW() {
   document.getElementById("loginContainer").style.display = "none";
   document.getElementById("notAJoinUser").style.display = "none";
   document.getElementById("signUpContainer").style.display = "none";
+  document.getElementById("resetPWContainer").style.display = "none";
   document.getElementById("forgottenPWContainer").style.display = "flex";
+}
+
+function renderResetPW() {
+  document.getElementById("loginContainer").style.display = "none";
+  document.getElementById("notAJoinUser").style.display = "none";
+  document.getElementById("signUpContainer").style.display = "none";
+  document.getElementById("forgottenPWContainer").style.display = "none";
+  document.getElementById("resetPWContainer").style.display = "flex";
 }
