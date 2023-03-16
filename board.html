@@ -28,7 +28,9 @@
                     </div>
                     <div class="add-task-container">
                         <div>
-                            <input class="find-task-input" type="text" placeholder="Find task">
+                            <input onkeyup="searchTasks()" onkeypress="return (event.charCode == 32 || event.charCode > 64 && 
+                            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" id="find-task-input"
+                                class="find-task-input" type="text" placeholder="Find task">
                             <img class="find-task-img1" src="./assets/img/find-task-input-vertical-bar.svg">
                             <img class="find-task-img2" src="./assets/img/input-search-icon.svg">
                         </div>

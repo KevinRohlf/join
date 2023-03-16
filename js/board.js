@@ -44,7 +44,7 @@ let task = [
         'title': 'Video Cut',
         'description': 'Edit the new company video',
         'category': 'Media',
-        'contactSelection': ['KR', 'PE'],
+        'contactSelection': ['KR', 'PE', 'KR', 'KR', 'KR', 'KR'],
         'date': 'xxx',
         'prio': 'Low',
         'subtasks': 'xxx'
@@ -110,13 +110,35 @@ function renderAllTasks(element, content, i) {
 
 
 function renderContactSelection(element, i) {
-    element.contactSelection.forEach(contact => {
-        document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
-        /*html*/ `
-        <div>${contact}</div>
-        `
-        randomBackgroundColor(element, i)
-    });
+    for (let k = 0; k < element.contactSelection.length; k++) {
+        if (element.contactSelection.length <= 3) {
+            document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
+            /*html*/ `
+            <div>${element.contactSelection[k]}</div>
+            `
+        } else {
+            if (k < 2) {
+                document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
+                /*html*/ `
+                <div>${element.contactSelection[k]}</div>
+                `
+            } else {
+                document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
+                /*html*/ `
+                <div>${'+' + (element.contactSelection.length - 2)}</div>
+                `
+                break
+            }
+        }
+
+    }
+    /*  element.contactSelection.forEach(contact => {
+          document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
+          `
+          <div>${contact}</div>
+          `*/
+    randomBackgroundColor(element, i)
+    //});
 }
 
 
@@ -162,6 +184,21 @@ function getPrioImage(element, i) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-urgent.svg'
         content.appendChild(img)
+    }
+}
+
+
+function searchTasks() {
+    let input = document.getElementById('find-task-input')
+    for (let i = 0; i < task.length; i++) {
+        let content = document.getElementById(`${i}`)
+        if ((task[i].title.toLowerCase().includes(input.value.toLowerCase()))) {
+            content.classList.remove('d-none')
+        } else if ((task[i].description.toLowerCase().includes(input.value.toLowerCase()))) {
+            content.classList.remove('d-none')
+        } else {
+            content.classList.add('d-none')
+        }
     }
 }
 
