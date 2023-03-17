@@ -17,14 +17,16 @@
 
 
 <body onload="init()">
-    <main>
+    <main id="main">
+        <div id="overlay" class="d-none" onclick="removeOverlay()"></div>
         <section w3-include-html="templates/sidemenu.html"></section>
-        <section class="content-section">
+        <section class="content-section" id="content-section">
             <section w3-include-html="templates/topmenu.html"></section>
             <section class="content-container">
                 <div class="board-header">
-                    <div>
+                    <div class="board-header-alignment">
                         <p class="board-headline">Board</p>
+                        <div>BUTTON</div>
                     </div>
                     <div class="add-task-container">
                         <div>

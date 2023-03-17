@@ -34,7 +34,7 @@ function includeHTML() {
   }
 }
 
-
+/*
 window.onresize = function () {
   if (window.innerWidth < 600) {
     document.getElementById('legalnotice').classList.add('d-none')
@@ -50,9 +50,24 @@ window.onresize = function () {
     document.getElementById('mobile-logo').classList.add('d-none')
   }
 }
+*/
+
+function toggleLogoutBtn() {
+  let btn = document.getElementById('mobile-topmenu-container')
+  let overlay = document.getElementById('overlay')
+  if (btn.classList.contains('d-none')) {
+    btn.classList.remove('d-none')
+    overlay.classList.remove('d-none')
+  } else {
+    btn.classList.add('d-none')
+    overlay.classList.add('d-none')
+  }
+
+}
 
 
-function showLogoutBtn() {
-  document.getElementById('logout-btn').classList.remove('d-none')
+function removeOverlay() {
+  document.getElementById('mobile-topmenu-container').classList.add('d-none')
+  document.getElementById('overlay').classList.add('d-none')
 }
 
