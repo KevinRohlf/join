@@ -1,7 +1,7 @@
 
 function init() {
   includeHTML()
-  loadTasks()
+ // test()
 }
 
 
@@ -56,10 +56,14 @@ function toggleLogoutBtn() {
   let btn = document.getElementById('mobile-topmenu-container')
   let overlay = document.getElementById('overlay')
   if (btn.classList.contains('d-none')) {
-    btn.classList.remove('d-none')
+    setTimeout(() => {
+      btn.classList.remove('d-none')
+    }, 200);
+    btn.classList.remove('slide-out')
     overlay.classList.remove('d-none')
   } else {
     btn.classList.add('d-none')
+
     overlay.classList.add('d-none')
   }
 
@@ -67,7 +71,21 @@ function toggleLogoutBtn() {
 
 
 function removeOverlay() {
-  document.getElementById('mobile-topmenu-container').classList.add('d-none')
+  setTimeout(() => {
+    document.getElementById('mobile-topmenu-container').classList.add('d-none')
+  }, 200);
   document.getElementById('overlay').classList.add('d-none')
+  document.getElementById('mobile-topmenu-container').classList.add('slide-out')
+}
+
+
+function test() {
+  console.log(document.getElementById(''))
+  let board = document.getElementById('board-btn')
+  if (window.location.pathname.includes('board')) {
+    console.log(board)
+    board.classList.add('background-color')
+  }
+  console.log(window.location.pathname)
 }
 

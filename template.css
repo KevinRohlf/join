@@ -100,26 +100,26 @@ main {
     margin-bottom: 128px;
 }
 
-.sidemenu-top>div,
+.sidemenu-top>a,
 .legalnotice-menu {
     padding: 16px 0;
     width: 100%;
     transition: all 175ms ease-in-out;
 }
 
-.sidemenu-top>div:hover {
-    background: #091931;
+.sidemenu-top>a:hover {
     cursor: pointer;
-    transition: all 175ms ease-in-out;
 }
 
 .legalnotice-menu:hover {
-    background: #091931;
     cursor: pointer;
-    transition: all 175ms ease-in-out;
 }
 
-.sidemenu-top>div>p,
+.background-color {
+    background: #091931;
+}
+
+.sidemenu-top>a>p,
 .legalnotice-menu>p {
     margin-left: 16px;
 }
@@ -185,6 +185,32 @@ a {
     text-decoration: none;
     color: white;
 }
+
+.slide-in {
+   animation: Slide-left 0.2s ease-in-out;
+}
+
+@keyframes Slide-left {
+    0% {
+        transform: translateX(100px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.slide-out {
+    animation: Slide-right 0.25s ease-in-out;
+ }
+ 
+ @keyframes Slide-right {
+     0% {
+         transform: translateX(0);
+     }
+     100% {
+         transform: translateX(300px);
+     }
+ }
 
 
 @media only screen and (max-width: 1100px) {
@@ -262,6 +288,22 @@ a {
 
     .headline-mobile-container {
         display: none;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    .flex-center {
+        flex-direction: column;
+    }
+
+    .sidemenu-top>a>p {
+        margin: 4px 0 0 0;
+    }
+
+    .sidemenu-top>a {
+        padding: 14px 0 0 0
     }
 
 }
