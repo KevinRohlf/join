@@ -5,99 +5,110 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="template.css">
-    <link rel="stylesheet" href="board.css">
+    <title>Board</title>
+    <link rel="stylesheet" href="./templates/footer.css">
+    <link rel="stylesheet" href="./templates/header.css">
+    <link rel="stylesheet" href="./test.css">
     <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="board.css">
     <script src="./js/template.js"></script>
     <script src="./js/board.js"></script>
-
-    <title>Board</title>
 </head>
 
-
 <body onload="init(), loadTasks()">
-    <main id="main">
-        <div id="overlay" class="d-none" onclick="removeOverlay()"></div>
-        <section w3-include-html="templates/sidemenu.html"></section>
-        <section class="content-section" id="content-section">
-            <section w3-include-html="templates/topmenu.html"></section>
-            <section class="content-container">
-                <div class="board-header">
-                    <div class="board-header-alignment">
-                        <p class="board-headline">Board</p>
-                        <div class="add-task-img">
-                            <img class="add-task-img-vertical" src="./assets/img/Vector 13 (2).svg">
-                            <img class="add-task-img-horizontal" src="./assets/img/Vector 14 (2).svg">
-                        </div>
-                    </div>
-                    <div class="add-task-container">
-                        <div>
-                            <input onkeyup="searchTasks()" onkeypress="return (event.charCode == 32 || event.charCode > 64 && 
-                            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" id="find-task-input"
-                                class="find-task-input" type="text" placeholder="Find task">
-                            <img class="find-task-img1" src="./assets/img/find-task-input-vertical-bar.svg">
-                            <img class="find-task-img2" src="./assets/img/input-search-icon.svg">
-                        </div>
+    <div id="overlay" class="d-none" onclick="removeOverlay()"></div>
+    <header w3-include-html="templates/header.html">
+    </header>
+    <main>
+        <div class="headline-mobile-container">
+            <p id="headline-mobile">Kanban Project Management Tool</p>
+        </div>
+        <div class="board-header">
+            <div class="board-header-alignment">
+                <p class="board-headline">Board</p>
+                <div class="add-task-img">
+                  <p class="test">+</p> 
+                   
+                </div>
+            </div>
+            <div class="add-task-container">
+                <div>
+                    <input onkeyup="searchTasks()" onkeypress="return (event.charCode == 32 || event.charCode > 64 && 
+                    event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" id="find-task-input"
+                        class="find-task-input" type="text" placeholder="Find task">
+                    <img class="find-task-img1" src="./assets/img/find-task-input-vertical-bar.svg">
+                    <img class="find-task-img2" src="./assets/img/input-search-icon.svg">
+                </div>
 
-                        <a href="./add_task.html" class="board-add-task-btn">
-                            <p>Add task</p>
-                            <div>
-                                <img src="./assets/img/add-task-plus-sign-horizontal-bar.svg">
-                                <img src="./assets/img/add-task-plus-sign-vertical-bar.svg">
-                            </div>
-                        </a>
+                <a href="./add_task.html" class="board-add-task-btn">
+                    <p>Add task</p>
+                    <div>
+                        <img src="./assets/img/add-task-plus-sign-horizontal-bar.svg">
+                        <img src="./assets/img/add-task-plus-sign-vertical-bar.svg">
                     </div>
+                </a>
+            </div>
+        </div>
+        <div class="board-container">
+            <div>
+                <a href="./add_task.html" class="board-headlines">
+                    <p>To do</p>
+                    <div>
+                        <img src="./assets/img/plus-icon.svg">
+                        <img src="./assets/img/plus-sign-vertical.svg">
+                    </div>
+                </a>
+                <div id="to-do-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
                 </div>
-                <div class="board-container">
+            </div>
+            <div>
+                <a href="./add_task.html" class="board-headlines">
+                    <p>In progress</p>
                     <div>
-                        <a href="./add_task.html" class="board-headlines">
-                            <p>To do</p>
-                            <div>
-                                <img src="./assets/img/plus-icon.svg">
-                                <img src="./assets/img/plus-sign-vertical.svg">
-                            </div>
-                        </a>
-                        <div id="to-do-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
-                        </div>
+                        <img src="./assets/img/plus-icon.svg">
+                        <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
+                </a>
+                <div id="in-progress-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></div>
+            </div>
+            <div>
+                <a href="./add_task.html" class="board-headlines">
+                    <p>Awaiting Feedback</p>
                     <div>
-                        <a href="./add_task.html" class="board-headlines">
-                            <p>In progress</p>
-                            <div>
-                                <img src="./assets/img/plus-icon.svg">
-                                <img src="./assets/img/plus-sign-vertical.svg">
-                            </div>
-                        </a>
-                        <div id="in-progress-container" ondrop="drop_handler(event)"
-                            ondragover="dragover_handler(event)"></div>
+                        <img src="./assets/img/plus-icon.svg">
+                        <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
-                    <div>
-                        <a href="./add_task.html" class="board-headlines">
-                            <p>Awaiting Feedback</p>
-                            <div>
-                                <img src="./assets/img/plus-icon.svg">
-                                <img src="./assets/img/plus-sign-vertical.svg">
-                            </div>
-                        </a>
-                        <div id="awaiting-feedback-container" ondrop="drop_handler(event)"
-                            ondragover="dragover_handler(event)"></div>
-                    </div>
-                    <div>
-                        <a href="./add_task.html" class="board-headlines">
-                            <p>Done</p>
-                            <div>
-                                <img src="./assets/img/plus-icon.svg">
-                                <img src="./assets/img/plus-sign-vertical.svg">
-                            </div>
-                        </a>
-                        <div id="done-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
-                        </div>
-                    </div>
+                </a>
+                <div id="awaiting-feedback-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
                 </div>
-            </section>
-        </section>
+            </div>
+            <div>
+                <a href="./add_task.html" class="board-headlines">
+                    <p>Done</p>
+                    <div>
+                        <img src="./assets/img/plus-icon.svg">
+                        <img src="./assets/img/plus-sign-vertical.svg">
+                    </div>
+                </a>
+                <div id="done-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+                </div>
+            </div>
+        </div>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi quia beatae tempora sit ipsa quas doloribus,
+            sequi itaque eum iusto nam asperiores enim adipisci perspiciatis odio totam perferendis, provident illum.
+        </p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi quia beatae tempora sit ipsa quas doloribus,
+            sequi itaque eum iusto nam asperiores enim adipisci perspiciatis odio totam perferendis, provident illum.
+        </p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi quia beatae tempora sit ipsa quas doloribus,
+            sequi itaque eum iusto nam asperiores enim adipisci perspiciatis odio totam perferendis, provident illum.
+        </p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi quia beatae tempora sit ipsa quas doloribus,
+            sequi itaque eum iusto nam asperiores enim adipisci perspiciatis odio totam perferendis, provident illum.
+        </p>
     </main>
+    <footer w3-include-html="templates/footer.html">
+    </footer>
 </body>
 
 </html>

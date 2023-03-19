@@ -53,7 +53,7 @@ window.onresize = function () {
 */
 
 function toggleLogoutBtn() {
-  let btn = document.getElementById('mobile-topmenu-container')
+  let btn = document.getElementById('mobile-extended-menu-container')
   let overlay = document.getElementById('overlay')
   if (btn.classList.contains('d-none')) {
     setTimeout(() => {
@@ -63,7 +63,6 @@ function toggleLogoutBtn() {
     overlay.classList.remove('d-none')
   } else {
     btn.classList.add('d-none')
-
     overlay.classList.add('d-none')
   }
 
@@ -72,10 +71,10 @@ function toggleLogoutBtn() {
 
 function removeOverlay() {
   setTimeout(() => {
-    document.getElementById('mobile-topmenu-container').classList.add('d-none')
+    document.getElementById('mobile-extended-menu-container').classList.add('d-none')
   }, 200);
   document.getElementById('overlay').classList.add('d-none')
-  document.getElementById('mobile-topmenu-container').classList.add('slide-out')
+  document.getElementById('mobile-extended-menu-container').classList.add('slide-out')
 }
 
 
