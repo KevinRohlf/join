@@ -1,28 +1,74 @@
 let allContacts = [];
+let alphabet = [];
+
 
 function loadAllContacts() {
 	let allContactsAsString = localStorage.getItem('allContacts');
-
 	if (allContactsAsString) {
 		allContacts = JSON.parse(allContactsAsString);
 	}
+	renderContacts();
+}
 
+
+function renderContacts() {
+	sortAllContacts();
+	createAlphabet();
+	renderAlphabet();
 	renderAllContacts();
 }
 
 
-function renderAllContacts() {
-	let contactsContent = document.getElementById('contacts');
-    contactsContent.innerHTML = '';
-
-    for (let i = 0; i < allContacts.length; i++) {
-		const contact = allContacts[i];
-		contactsContent.innerHTML +=  htmlTemplateRenderAllContacts(contact, i);
-    }
+// sort all contacts
+function sortAllContacts() {
+	allContacts.sort((a, b) => {
+		return a.name.localeCompare(b.name);
+	  });
 }
 
 
-/* new contact */
+// create all letters of existing contacts
+function createAlphabet() {
+	alphabet = [];
+	allContacts.forEach(function(contact) {
+		if (alphabet.indexOf(getFirstLetter(contact)) === -1) {
+			alphabet.push(getFirstLetter(contact));
+			}
+		});
+	}
+
+
+function getFirstLetter(contact) {
+	return contact["name"].charAt(0);
+}
+  
+
+// render all letters of existing contacts
+function renderAlphabet() {
+	let contactlist = document.getElementById("contacts");
+	contactlist.innerHTML = "";
+	for (let i = 0; i < alphabet.length; i++) {
+		contactlist.innerHTML += htmlTemplateRenderAlphabet(i);
+	}
+}
+
+
+// render all contacts in letter structure
+function renderAllContacts() {
+	for (let i = 0; i < allContacts.length; i++) {
+		let firstLetter = getFirstLetter(allContacts[i]);
+		for (let j = 0; j < alphabet.length; j++) {
+		  let letterOfAlphabet = alphabet[j];
+		  if (letterOfAlphabet == firstLetter) {
+				document.getElementById(`group-${firstLetter}`).innerHTML +=
+			  	htmlTemplateRenderAllContacts(allContacts[i], i);
+		  	}
+		};
+	};
+}
+
+
+// read new contact vaules
 function addToContact() {
 	let name = document.getElementById('name').value;
 	let email = document.getElementById('email').value;
@@ -32,6 +78,7 @@ function addToContact() {
 }
 
 
+// create new contact
 function newContact(name, email, phone) {
 	let initials = getInitials(name);
 	let initialColor = getColor();
@@ -41,11 +88,10 @@ function newContact(name, email, phone) {
 		'email': email,
 		'phone': phone,
 		'initials': initials,
-		'color': initialColor
+		'color': initialColor,
 	};
 
 	allContacts.push(contact);
-
 	addContactClose();
 	clearInput();
 	saveAllContacts();
@@ -53,6 +99,7 @@ function newContact(name, email, phone) {
 }
 
 
+// seperate initials of all names
 function getInitials(fullName) {
 	let names = fullName.toString().split(' ');
 	if (names.length === 1) {
@@ -68,7 +115,7 @@ function getInitials(fullName) {
 
 function getColor() {
 	return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
-  }
+}
 
 
 function clearInput() {
@@ -84,39 +131,30 @@ function saveAllContacts() {
 }
 
 
-/* delate contact */
-function delateActiveContact(i) {
-	allContacts.splice(i, 1);
-
-	editContactClose();
-	closeSingleContact();
+// save contact
+function saveActiveContact(i) {
+	let newName = document.getElementById('edit-name').value;
+	let newEmail = document.getElementById('edit-email').value;
+	let newPhone = document.getElementById('edit-phone').value;
+	allContacts[i].name = newName;
+	allContacts[i].email = newEmail;
+	allContacts[i].phone = newPhone;
 	saveAllContacts();
 	loadAllContacts();
+	closeSingleContact();
+	editContactClose();
 }
 
 
-/* save contact */
-function saveActiveContact(i) {
-	let name = document.getElementById('edit-name').value;
-	let email = document.getElementById('edit-email').value;
-	let phone = document.getElementById('edit-phone').value;
-	
-	newContact(name, email, phone);
-	delateActiveContact(i);
-}
-
-
-/* show single contact */
+// show single contact
 let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
 
 function renderSingleContact(i) {
-	let contact = allContacts[i];
-	contactContent.innerHTML = '';
 	singleContactOverlay.style.display = 'flex';
 	contactContent.style = 'animation:slide-in .5s ease;';
 	contactContent.innerHTML = '';
-	contactContent.innerHTML += htmlTemplateRenderSingleContact(contact, i);
+	contactContent.innerHTML += htmlTemplateRenderSingleContact(allContacts[i], i);
 }
 
 
@@ -129,14 +167,13 @@ function closeSingleContact() {
 
 
 function editSingleContact(i) {
-	let contact = allContacts[i];
 	let formContent = document.getElementById('contact-field-content');
 	formContent.innerHTML = '';
-	formContent.innerHTML += htmlTemplateEditSingleContact(contact, i);
+	formContent.innerHTML += htmlTemplateEditSingleContact(allContacts[i], i);
 }
 
 
-/* show & hide contact box */
+// show & hide contact box
 const btn = document.getElementById("contact-btn");
 const addContactOverlay = document.getElementById('add-contact-overlay');
 const editContactOverlay = document.getElementById('edit-contact-overlay');
@@ -147,8 +184,6 @@ const editContact = document.getElementById('edit-contact');
 function addContactOpen() {
 	addContactOverlay.style.display = 'flex';
 	addContact.style = 'animation:slide-in .5s ease;';
-	btn.disabled = true;
-	btn.style.backgroundColor = '#D1D1D1';
 }
 
 
@@ -156,8 +191,6 @@ function addContactClose() {
 	addContact.style = 'animation:slide-out .5s ease;';
 	setTimeout(() => {
 		addContactOverlay.style.display = "none";
-		btn.disabled = false;
-		btn.style.backgroundColor = '#2A3647';
 	}, 400);
 }
 

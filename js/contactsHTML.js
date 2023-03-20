@@ -1,3 +1,11 @@
+function htmlTemplateRenderAlphabet(i) {
+    return /*html*/ `
+    <div class="alphabet">&nbsp;${alphabet[i]}<div class="thin-line"></div></div>
+    <div id=group-${alphabet[i]}></div>
+    `;
+}
+
+
 function htmlTemplateRenderAllContacts(contact, i) {
     return /*html*/ `
     <div onclick="renderSingleContact(${i}); doNotClose(event)" class="contact" tabindex="0">
@@ -23,7 +31,7 @@ function htmlTemplateRenderSingleContact(contact, i) {
             <div class="single-contact-task">
                 <p>${contact['name']}</p>
                 <a href="#"><img src="./assets/img/plus-blue-icon.svg">Add Task</a>
-            </div>
+            </div> 
         </div>
         <div class="single-contact-edit">
             <p>Contact Information</p>
@@ -58,7 +66,7 @@ function htmlTemplateEditSingleContact(contact, i) {
                         stroke-linecap="round" />
                 </svg>
             </a>
-            <form onsubmit="saveActiveContact(${i})">
+            <form>
                 <div class="contact-form">
                     <div class="input-container">
                         <img src="./assets/img/name-icon.svg">
@@ -75,8 +83,7 @@ function htmlTemplateEditSingleContact(contact, i) {
                     </div>
                 </div>
                 <div class="submit-container">
-                    <button onclick="delateActiveContact(${i})" class="submit-btn cancel">Delete</button>
-                    <button type="submit" class="submit-btn save">Save</button>
+                    <button onclick="saveActiveContact(${i})" class="submit-btn save">Save</button>
                 </div>
             </form>
         </div>

@@ -8,19 +8,6 @@ body {
     margin: 0;
 }
 
-.summary-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    background-color: #F5F5F5;
-}
-
-.header-headline {
-    display: none;
-    margin-top: 30px;
-}
-
 .header {
     display: flex;
     align-items: center;
@@ -78,8 +65,8 @@ body {
 
 .task {
     justify-content: center;
-    width: 170px;
-    height: 170px;
+    width: 150px;
+    height: 150px;
     flex-direction: column;
 }
 
@@ -96,6 +83,7 @@ body {
 .todo p {
     color: #2A3647;
     margin-top: 0;
+    font-size: 16px;
     text-align: center;
 }
 
@@ -127,8 +115,8 @@ body {
 .urgency {
     display: flex;
     align-items: center;
-    width: 580px;
-    height: 150px;
+    width: 520px;
+    height: 140px;
     margin-bottom: 35px;
 }
 
@@ -138,7 +126,7 @@ body {
 }
 
 .urgent img {
-    margin: 0 20px 0 70px;
+    margin: 0 20px 0 50px;
 }
 
 .urgent h1 {
@@ -156,13 +144,13 @@ body {
     width: 1px;
     height: 100px;
     background-color: #D1D1D1;
-    margin: 0 60px;
+    margin: 0 40px;
 }
 
 .todo {
     justify-content: center;
-    width: 272.5px;
-    height: 150px;
+    width: 242.5px;
+    height: 140px;
 }
 
 .todo svg {
@@ -221,7 +209,7 @@ body {
 }
 
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 700px) {
     .header {
         flex-direction: column;
         align-items: flex-start;
@@ -296,11 +284,5 @@ body {
     .todo svg {
         width: 40px;
         height: 40px;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .header-headline {
-        display: block;
     }
 }
