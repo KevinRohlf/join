@@ -6,10 +6,10 @@ body {
 }
 
 .pageOneContainer {
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
   height: 100vh;
   width: 100%;
   margin: 0;
@@ -35,30 +35,30 @@ body {
 
 .capaOne {
   position: fixed;
-  height: 32.62%;
-  width: 19.03%;
+  height: 334px;
+  width: 274px;
   z-index: 3;
 }
 
 .capaOneWhite {
   position: fixed;
-  height: 32.62%;
-  width: 19.03%;
+  height: 334px;
+  width: 274px;
   z-index: 3;
 }
 
-@keyframes center-to-corner {
+@keyframes centerToCorner {
   0% {
-    height: 32.62%;
-    width: 19.03%;
+    height: 334px;
+    width: 274px;
     left: 40.49%;
     right: 40.49%;
     top: 33.69%;
     bottom: 33.68%;
   }
   100% {
-    height: 11.91%;
-    width: 6.95%;
+    height: 122px;
+    width: 100px;
     left: 5.35%;
     right: 87.71%;
     top: 7.81%;
@@ -67,7 +67,7 @@ body {
 }
 
 .animation {
-  animation: center-to-corner 1s ease-in-out forwards;
+  animation: centerToCorner 1s ease-in-out forwards;
 }
 
 .loginSignUp {
@@ -376,9 +376,6 @@ body {
   font-size: 21px;
   line-height: 120%;
   color: #000000;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
 /*Sign-Up-Page*/
@@ -470,9 +467,7 @@ body {
   gap: 35px;
   width: 422px;
   height: 51px;
-  flex: none;
   order: 3;
-  flex-grow: 0;
 }
 
 .signUp {
@@ -739,32 +734,4 @@ body {
   font-size: 21px;
   line-height: 120%;
   color: #ffffff;
-}
-
-/*Responsivemode*/
-
-@media only screen and (max-width: 600px) {
-  .capaOneContainer {
-    position: absolute;
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    background-color: #2a3647;
-    opacity: 1;
-    transition: opacity 1s;
-    z-index: 2;
-  }
-
-  .capaOneWhite {
-    position: fixed;
-    height: 32.62%;
-    width: 19.03%;
-    z-index: 4;
-    opacity: 1;
-    transition: opacity 1s;
-  }
-
-  .ausblenden {
-    opacity: 0;
-  }
 }
