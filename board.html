@@ -58,7 +58,9 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div class="min-height" id="to-do-container" ondrop="drop_handler('To do')" ondragover="dragover_handler(event); highlightArea('to-do-container')">
+                <div class="min-height" id="to-do-container" ondrop="drop_handler('To do')"
+                    ondragleave="removeHighlightArea('to-do-container')"
+                    ondragover="dragover_handler(event); highlightArea('to-do-container')">
                 </div>
             </div>
             <div>
@@ -69,7 +71,9 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div class="min-height" id="in-progress-container" ondrop="drop_handler('In progress')" ondragover="dragover_handler(event); highlightArea('in-progress-container')"></div>
+                <div class="min-height" id="in-progress-container" ondrop="drop_handler('In progress')"
+                    ondragleave="removeHighlightArea('in-progress-container')"
+                    ondragover="dragover_handler(event); highlightArea('in-progress-container')"></div>
             </div>
             <div>
                 <a href="./add_task.html" class="board-headlines">
@@ -79,7 +83,9 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div class="min-height" id="awaiting-feedback-container" ondrop="drop_handler('Awaiting Feedback')" ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container')">
+                <div class="min-height" id="awaiting-feedback-container" ondrop="drop_handler('Awaiting Feedback')"
+                    ondragleave="removeHighlightArea('awaiting-feedback-container')"
+                    ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container')">
                 </div>
             </div>
             <div>
@@ -90,7 +96,9 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div class="min-height" id="done-container" ondrop="drop_handler('Done')" ondragover="dragover_handler(event); highlightArea('done-container')">
+                <div class="min-height" id="done-container" ondrop="drop_handler('Done')"
+                    ondragleave="removeHighlightArea('done-container')"
+                    ondragover="dragover_handler(event); highlightArea('done-container')">
                 </div>
             </div>
         </div>

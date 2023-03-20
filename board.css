@@ -102,6 +102,10 @@
     width: 300px;
 }
 
+.board-container>div>div {
+    padding: 4px;
+}
+
 a {
     text-decoration: none;
 }

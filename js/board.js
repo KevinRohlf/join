@@ -228,6 +228,11 @@ function highlightArea(id) {
     container.classList.add('drag-area-highlight')
 }
 
+function removeHighlightArea(id) {
+    let container = document.getElementById(id)
+    container.classList.remove('drag-area-highlight')
+}
+
 
 
 /*
