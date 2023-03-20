@@ -8,6 +8,11 @@ html {
     box-sizing: border-box;
 }
 
+body {
+    background-color: #F5F5F5;
+}
+
+
 body::-webkit-scrollbar {
     display: none;
 }
@@ -17,7 +22,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-
+    z-index: 3;
 }
 
 footer {
@@ -31,8 +36,15 @@ footer {
 }
 
 main {
+  /*  position: relative;
+    top: 85px;*/
     padding: 100px 32px;
     background-color: #F5F5F5;
+  /*  overflow-x: scroll; */
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 #overlay {
@@ -43,6 +55,7 @@ main {
 }
 
 @media only screen and (min-width: 1000px) {
+
     footer {
         top: 0;
         width: 300px;

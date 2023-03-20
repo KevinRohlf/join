@@ -192,36 +192,32 @@ a {
     align-items: center;
 }
 
-.add-task-img {
+.board-create-new-task-btn {
+    position: relative;
     width: 40px;
     height: 40px;
     background: #2A3647;
     border-radius: 10px;
     padding: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.add-task-img:hover {
+.board-create-new-task-btn:hover {
     cursor: pointer;
 }
 
-.add-task-img-vertical {
-    position: relative;
-    top: 7px;
-    left: 16px;
+.board-create-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.test {
-    color: white;
-    font-size: 50px;
+.min-height {
+    min-height: 200px;
 }
 
-.add-task-img-horizontal {
-    position: relative;
-    top: -1px;
-    left: 0px;
+.drag-area-highlight {
+background-color: rgba(0, 0, 0, 0.2);
 }
 
 .design {
@@ -245,7 +241,7 @@ a {
 }
 
 @media only screen and (min-width: 1000px) {
-    .add-task-img {
+    .board-create-new-task-btn {
         display: none;
     }
 }

@@ -8,7 +8,7 @@
     <title>Board</title>
     <link rel="stylesheet" href="./templates/footer.css">
     <link rel="stylesheet" href="./templates/header.css">
-    <link rel="stylesheet" href="./test.css">
+    <link rel="stylesheet" href="./template.css">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="board.css">
     <script src="./js/template.js"></script>
@@ -26,10 +26,10 @@
         <div class="board-header">
             <div class="board-header-alignment">
                 <p class="board-headline">Board</p>
-                <div class="add-task-img">
-                  <p class="test">+</p> 
-                   
-                </div>
+                <a href="./add_task.html" class="board-create-new-task-btn">
+                    <img class="board-create-img" src="./assets/img/Vector 13 (2).svg">
+                    <img class="board-create-img" src="./assets/img/Vector 14 (2).svg">
+                </a>
             </div>
             <div class="add-task-container">
                 <div>
@@ -58,7 +58,7 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div id="to-do-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+                <div class="min-height" id="to-do-container" ondrop="drop_handler('To do')" ondragover="dragover_handler(event); highlightArea('to-do-container')">
                 </div>
             </div>
             <div>
@@ -69,7 +69,7 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div id="in-progress-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></div>
+                <div class="min-height" id="in-progress-container" ondrop="drop_handler('In progress')" ondragover="dragover_handler(event); highlightArea('in-progress-container')"></div>
             </div>
             <div>
                 <a href="./add_task.html" class="board-headlines">
@@ -79,7 +79,7 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div id="awaiting-feedback-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+                <div class="min-height" id="awaiting-feedback-container" ondrop="drop_handler('Awaiting Feedback')" ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container')">
                 </div>
             </div>
             <div>
@@ -90,7 +90,7 @@
                         <img src="./assets/img/plus-sign-vertical.svg">
                     </div>
                 </a>
-                <div id="done-container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+                <div class="min-height" id="done-container" ondrop="drop_handler('Done')" ondragover="dragover_handler(event); highlightArea('done-container')">
                 </div>
             </div>
         </div>

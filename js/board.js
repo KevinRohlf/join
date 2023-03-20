@@ -51,8 +51,13 @@ let task = [
     },
 ]
 
+let currentDraggedElement;
 
 function loadTasks() {
+    document.getElementById('to-do-container').innerHTML = ''
+    document.getElementById('in-progress-container').innerHTML = ''
+    document.getElementById('awaiting-feedback-container').innerHTML = ''
+    document.getElementById('done-container').innerHTML = ''
     renderTasks()
 }
 
@@ -94,7 +99,7 @@ function renderTasks() {
 function renderAllTasks(element, content, i) {
     content.innerHTML +=
         /*html*/ `
-        <div id="${i}" class="board-content" draggable="true" ondragstart="dragstart_handler(event)">
+        <div id="${i}" class="board-content" draggable="true" ondragstart="dragstart_handler(${i})">
             <div class="task-category">${element.category}</div>
             <div class="task-title">${element.title}</div>
             <div class="task-description">${element.description}</div>
@@ -203,6 +208,29 @@ function searchTasks() {
 }
 
 
+function dragstart_handler(id) {
+    currentDraggedElement = id
+}
+
+
+function dragover_handler(ev) {
+    ev.preventDefault();
+}
+
+
+function drop_handler(task_status) {
+    task[currentDraggedElement].task_status = task_status;
+    loadTasks()
+}
+
+function highlightArea(id) {
+    let container = document.getElementById(id)
+    container.classList.add('drag-area-highlight')
+}
+
+
+
+/*
 function dragstart_handler(ev) {
     // Add the target element's id to the data transfer object
     ev.dataTransfer.setData("text", ev.target.id);
@@ -220,9 +248,9 @@ function drop_handler(ev) {
           console.log("Test")
           return false;
       }*/
-    const data = ev.dataTransfer.getData("text");
-    document.getElementById('in-progress-container').appendChild(document.getElementById(data));
-}
+ //*   const data = ev.dataTransfer.getData("text");
+  //  document.getElementById('in-progress-container').appendChild(document.getElementById(data));
+//}
 
 /*
 window.addEventListener('mouseover', (event) => {

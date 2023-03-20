@@ -1,7 +1,7 @@
 
 function init() {
   includeHTML()
- // test()
+  // test()
 }
 
 
@@ -53,28 +53,33 @@ window.onresize = function () {
 */
 
 function toggleLogoutBtn() {
-  let btn = document.getElementById('mobile-extended-menu-container')
+  let btn = document.getElementById('header-extended-menu-container')
+  let slideContainer= document.getElementById('slide-container')
   let overlay = document.getElementById('overlay')
   if (btn.classList.contains('d-none')) {
     setTimeout(() => {
       btn.classList.remove('d-none')
     }, 200);
-    btn.classList.remove('slide-out')
+    if (window.innerWidth < 1000) {
+      slideContainer.classList.remove('slide-out')
+    }
     overlay.classList.remove('d-none')
   } else {
     btn.classList.add('d-none')
     overlay.classList.add('d-none')
   }
-
 }
 
 
 function removeOverlay() {
   setTimeout(() => {
-    document.getElementById('mobile-extended-menu-container').classList.add('d-none')
+    document.getElementById('header-extended-menu-container').classList.add('d-none')
   }, 200);
   document.getElementById('overlay').classList.add('d-none')
-  document.getElementById('mobile-extended-menu-container').classList.add('slide-out')
+  if (window.innerWidth < 1000) {
+    document.getElementById('slide-container').classList.add('slide-out')
+  }
+
 }
 
 
