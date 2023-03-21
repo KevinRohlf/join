@@ -1,27 +1,29 @@
 let prio;
+let selectedColor;
+let selectedCategory;
 
 
 
-function init() {
+function initAddTask() {
     renderCategorys();
 }
 
 function readForm() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
-    let category = document.getElementById('category');
+    
     let contact_selection = document.getElementById('contact_selection');
     let date = document.getElementById('date');
-    addTask(title, description, category, contact_selection, date);
+    addTask(title, description, contact_selection, date);
 
 }
 
-function addTask(title, description, category, contact_selection, date) {
+function addTask(title, description, contact_selection, date) {
     let newTask = {
         'status': toDo,
         'title': title.value,
         'description': description.value,
-        'category': category.value,
+        'category': selectedCategory,
         'contactSelection': contact_selection.value,
         'date': date.value,
         'prio': prio,
@@ -84,16 +86,19 @@ function addSubtask() {
 }
 
 function showNewCategoryInput() {
-    let content = document.getElementById('category');
-    if (content.value == 'New Category') {
-        document.getElementById('newCategoryInput').classList.remove('d-none');
-        content.classList.add('d-none');
-    }
+    let content = document.getElementById('categoryShow');
+    document.getElementById('newCategoryInput').classList.remove('d-none');
+    content.classList.add('d-none');
+    renderCategoryColors();
 }
 
 function addNewCategory() {
     let content = document.getElementById('newCategory').value;
-    categorys.push(content);
+    let newCategory = {
+        'name': content,
+        'color': selectedColor
+    }
+    categorys.push(newCategory);
     closeNewCategoryInput();
     renderCategorys();
 }
@@ -101,7 +106,7 @@ function addNewCategory() {
 function closeNewCategoryInput() {
     document.getElementById('newCategoryInput').classList.add('d-none');
     renderCategorys();
-    document.getElementById('category').classList.remove('d-none');
+    document.getElementById('categoryShow').classList.remove('d-none');
 }
 
 function renderSubTasks() {
@@ -117,14 +122,45 @@ function renderCategorys() {
     content.innerHTML = '';
     for (let i = 0; i < categorys.length; i++) {
         let category = categorys[i];
-        if (category == 'New Category') {
-            content.innerHTML += `<option value="${category}">${category}</option>`
-        }
-        if (category == 'Select task category') {
-            content.innerHTML += `<option value disabled selected hidden>${category}</option>`
-        } 
-        if(category != 'New Category' && category != 'Select task category') {
-            content.innerHTML += `<option value="${category}">${category}</option>`
+        if (category['name'] == 'New Category') {
+            content.innerHTML += `<div class="categorys" onclick="showNewCategoryInput()">${category['name']}</div>`
+        } else if (category['name'] != 'New Category') {
+            content.innerHTML += `<div class="categorys" onclick="selectCategory(${i})">${category['name']} <div style="background-color: ${category['color']}; width: 15px;
+            height: 15px; border-radius: 100%;"></div></div>`
         }
     }
+}
+
+function renderCategoryColors() {
+    let colors = ['#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
+    let content = document.getElementById('categoryColors');
+    content.innerHTML = '';
+    for(let i = 0; i < colors.length; i++) {
+        content.innerHTML += `<div onclick="selectColor('${colors[i]}')" style="background-color: ${colors[i]}; padding: 5px; border-radius: 100%;">`
+    }
+}
+
+function selectColor(color) {
+    selectedColor = color;
+}
+
+function selectCategory(i) {
+    selectedCategory = categorys[i]['name'];
+    document.getElementById('selectCategory').innerHTML = `${categorys[i]['name']} <div style="background-color: ${categorys[i]['color']}; width: 15px;
+    height: 15px; border-radius: 100%;"></div> `;
+    hideCategorys();
+}
+
+function showCategorys() {
+    let content = document.getElementById('category');
+    content.classList.remove('d-none')
+    document.getElementById('categoryShow').style = 'animation: dropdown 2s ease;'
+    document.getElementById('selectCategory').setAttribute('onclick','hideCategorys()');
+}
+
+function hideCategorys() {
+    let content = document.getElementById('category');
+    content.classList.add('d-none');
+    document.getElementById('categoryShow').style = 'animation: dropup 2s ease;'
+    document.getElementById('selectCategory').setAttribute('onclick','showCategorys()');
 }
