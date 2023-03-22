@@ -1,6 +1,7 @@
 let prio;
 let selectedColor;
 let selectedCategory;
+let selectedContacts = [];
 
 
 
@@ -12,7 +13,7 @@ function initAddTask() {
 function readForm() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
-    
+
     let contact_selection = document.getElementById('contact_selection');
     let date = document.getElementById('date');
     addTask(title, description, contact_selection, date);
@@ -25,7 +26,7 @@ function addTask(title, description, contact_selection, date) {
         'title': title.value,
         'description': description.value,
         'category': selectedCategory,
-        'contactSelection': contact_selection.value,
+        'contactSelection': selectedContacts,
         'date': date.value,
         'prio': prio,
         'subtasks': subtasks
@@ -136,7 +137,7 @@ function renderCategoryColors() {
     let colors = ['#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
     let content = document.getElementById('categoryColors');
     content.innerHTML = '';
-    for(let i = 0; i < colors.length; i++) {
+    for (let i = 0; i < colors.length; i++) {
         content.innerHTML += `<div class="color-circle" onclick="selectColor('${colors[i]}')" style="background-color: ${colors[i]};">`
     }
 }
@@ -157,8 +158,8 @@ function showCategorys() {
     content.classList.remove('d-none')
     document.getElementById('categoryShow').style = 'animation: dropdown 2s ease;'
     document.getElementById('arrowCategory').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
-    document.getElementById('selectCategory').setAttribute('onclick','hideCategorys()');
-    document.getElementById('arrow').setAttribute('onclick','hideCategorys()');
+    document.getElementById('selectCategory').setAttribute('onclick', 'hideCategorys()');
+    document.getElementById('arrowCategory').setAttribute('onclick', 'hideCategorys()');
 }
 
 function hideCategorys() {
@@ -166,8 +167,8 @@ function hideCategorys() {
     content.classList.add('d-none');
     document.getElementById('categoryShow').style = 'animation: dropup 2s ease;'
     document.getElementById('arrowCategory').style = 'animation: arrowDown 350ms ease;'
-    document.getElementById('selectCategory').setAttribute('onclick','showCategorys()');
-    document.getElementById('arrow').setAttribute('onclick','showCategorys()');
+    document.getElementById('selectCategory').setAttribute('onclick', 'showCategorys()');
+    document.getElementById('arrowCategory').setAttribute('onclick', 'showCategorys()');
 }
 
 function renderContacts() {
@@ -175,7 +176,7 @@ function renderContacts() {
     content.innerHTML = '';
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        content.innerHTML += `<div class="contacts">${contact['name']} <input id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div>`
+        content.innerHTML += `<label for="cb-subtask-${i}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${i})" id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
     }
 }
 
@@ -184,8 +185,8 @@ function showContacts() {
     content.classList.remove('d-none')
     document.getElementById('contactShow').style = 'animation: dropdown 2s ease;'
     document.getElementById('arrowContact').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
-    document.getElementById('selectContact').setAttribute('onclick','hideContacts()');
-    document.getElementById('arrow').setAttribute('onclick','hideContacts()');
+    document.getElementById('selectContact').setAttribute('onclick', 'hideContacts()');
+    document.getElementById('arrowContact').setAttribute('onclick', 'hideContacts()');
 }
 
 function hideContacts() {
@@ -193,6 +194,36 @@ function hideContacts() {
     content.classList.add('d-none')
     document.getElementById('contactShow').style = 'animation: dropup 2s ease;'
     document.getElementById('arrowContact').style = 'animation: arrowDown 350ms ease;'
-    document.getElementById('selectContact').setAttribute('onclick','showContacts()');
-    document.getElementById('arrow').setAttribute('onclick','showContacts()');
+    document.getElementById('selectContact').setAttribute('onclick', 'showContacts()');
+    document.getElementById('arrowContact').setAttribute('onclick', 'showContacts()');
+}
+
+function addContactToList(number) {
+    let contact = document.getElementById(`cb-subtask-${number}`);
+    selectedContacts.push(contacts[number]['contact_selection']);
+    contact.setAttribute('onclick', `removeContactFromList(${number})`);
+    console.log(selectedContacts);
+    renderSelectedContacts();
+}
+
+function removeContactFromList(number) {
+    let contact = document.getElementById(`cb-subtask-${number}`);
+    contact.setAttribute('onclick', `addContactToList(${number})`);
+    let index = selectedContacts.indexOf(contacts[number]['contact_selection']);
+    console.log(index);
+    selectedContacts.splice(index, 1)
+    renderSelectedContacts();
+}
+
+function renderSelectedContacts() {
+    let content = document.getElementById('selectContact');
+    content.innerHTML = '';
+    if (selectedContacts.length > 0) {
+        for (let i = 0; i < selectedContacts.length; i++) {
+            content.innerHTML += `<div class="circle">${selectedContacts[i]}</div>`
+        }
+    } else {
+        content.innerHTML = 'Select contacts to assign';
+    }
+
 }
