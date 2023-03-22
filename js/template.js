@@ -1,9 +1,8 @@
 
 function init() {
   includeHTML()
-  // test()
+  
 }
-
 
 
 function includeHTML() {
@@ -32,25 +31,9 @@ function includeHTML() {
       return;
     }
   }
+  manipulateFooterColor()
 }
 
-/*
-window.onresize = function () {
-  if (window.innerWidth < 600) {
-    document.getElementById('legalnotice').classList.add('d-none')
-    document.getElementById('logo').classList.add('d-none')
-    document.getElementById('headline').classList.add('d-none')
-    document.getElementById('help-icon').classList.add('d-none')
-    document.getElementById('mobile-logo').classList.remove('d-none')
-  } else {
-    document.getElementById('legalnotice').classList.remove('d-none')
-    document.getElementById('logo').classList.remove('d-none')
-    document.getElementById('headline').classList.remove('d-none')
-    document.getElementById('help-icon').classList.remove('d-none')
-    document.getElementById('mobile-logo').classList.add('d-none')
-  }
-}
-*/
 
 function toggleLogoutBtn() {
   let btn = document.getElementById('header-extended-menu-container')
@@ -83,13 +66,35 @@ function removeOverlay() {
 }
 
 
-function test() {
-  console.log(document.getElementById(''))
+function manipulateFooterColor() {
+ 
+  let summary = document.getElementById('summary-btn')
   let board = document.getElementById('board-btn')
-  if (window.location.pathname.includes('board')) {
-    console.log(board)
-    board.classList.add('background-color')
+  let addTask = document.getElementById('add-task-btn')
+  let contacts = document.getElementById('contacts-btn')
+ 
+  if (window.location.href.includes('summary')) {
+    summary.classList.add('background-color')
+  } else {
+    summary.classList.remove('background-color')
   }
-  console.log(window.location.pathname)
+
+  if (window.location.href.includes('board')) {
+    board.classList.add('background-color')
+  } else {
+    board.classList.remove('background-color')
+  }
+
+  if (window.location.href.includes('add_task')) {
+    addTask.classList.add('background-color')
+  } else {
+    addTask.classList.remove('background-color')
+  }
+
+  if (window.location.href.includes('contacts')) {
+    contacts.classList.add('background-color')
+  } else {
+    contacts.classList.remove('background-color')
+  } 
 }
 
