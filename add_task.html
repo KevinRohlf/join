@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="./templates/header.css">
     <link rel="stylesheet" href="./templates/footer.css">
+    <link rel="stylesheet" href="./template.css">
 </head>
 
 <body onload="init(); initAddTask()">
@@ -44,25 +45,27 @@
                                         <img onclick="addNewCategory()" src="./assets/img/confirm.svg">
                                     </div>
                                     <div id="categoryColors" class="flex gap-10">
-                                        
-                                    </div>  
+
+                                    </div>
                                 </div>
                             </div>
 
-                            <div id="categoryShow" class="category">
-                                <div onclick="showCategorys()" class="flex gap-10" id="selectCategory">Select task category</div>
+                            <div id="categoryShow" class="dropdown">
+                                <div onclick="showCategorys()" class="flex gap-10" id="selectCategory">Select task
+                                    category</div>
                                 <div id="category" class="flex-column d-none">
-
                                 </div>
+                                <img class="arrow" id="arrowCategory" src="./assets/img/arrow-down.svg">
                             </div>
                             <span>Assigned to</span>
-                            <select required id="contact_selection">
-                                <option value disabled selected hidden>Select contacts to assign</option>
-                                <option value="placeholder">placeholder</option>
-                                <option value="placeholder">placeholder</option>
-                                <option value="placeholder">placeholder</option>
-                                <option value="placeholder">placeholder</option>
-                            </select>
+                            <div id="contactShow" class="dropdown">
+                                <div onclick="showContacts()" class="flex gap-10" id="selectContact">
+                                    Select contacts to assign
+                                </div>
+                                <div id="contact" class="flex-column d-none">
+                                </div>
+                                <img class="arrow" id="arrowContact" src="./assets/img/arrow-down.svg">
+                            </div>
                         </div>
                         <div class="flex-column gap-20 right-side">
                             <span>Due Date</span>

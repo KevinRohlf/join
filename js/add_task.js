@@ -6,6 +6,7 @@ let selectedCategory;
 
 function initAddTask() {
     renderCategorys();
+    renderContacts();
 }
 
 function readForm() {
@@ -136,7 +137,7 @@ function renderCategoryColors() {
     let content = document.getElementById('categoryColors');
     content.innerHTML = '';
     for(let i = 0; i < colors.length; i++) {
-        content.innerHTML += `<div onclick="selectColor('${colors[i]}')" style="background-color: ${colors[i]}; padding: 5px; border-radius: 100%;">`
+        content.innerHTML += `<div class="color-circle" onclick="selectColor('${colors[i]}')" style="background-color: ${colors[i]};">`
     }
 }
 
@@ -155,12 +156,43 @@ function showCategorys() {
     let content = document.getElementById('category');
     content.classList.remove('d-none')
     document.getElementById('categoryShow').style = 'animation: dropdown 2s ease;'
+    document.getElementById('arrowCategory').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
     document.getElementById('selectCategory').setAttribute('onclick','hideCategorys()');
+    document.getElementById('arrow').setAttribute('onclick','hideCategorys()');
 }
 
 function hideCategorys() {
     let content = document.getElementById('category');
     content.classList.add('d-none');
     document.getElementById('categoryShow').style = 'animation: dropup 2s ease;'
+    document.getElementById('arrowCategory').style = 'animation: arrowDown 350ms ease;'
     document.getElementById('selectCategory').setAttribute('onclick','showCategorys()');
+    document.getElementById('arrow').setAttribute('onclick','showCategorys()');
+}
+
+function renderContacts() {
+    let content = document.getElementById('contact');
+    content.innerHTML = '';
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        content.innerHTML += `<div class="contacts">${contact['name']} <input id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div>`
+    }
+}
+
+function showContacts() {
+    let content = document.getElementById('contact');
+    content.classList.remove('d-none')
+    document.getElementById('contactShow').style = 'animation: dropdown 2s ease;'
+    document.getElementById('arrowContact').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
+    document.getElementById('selectContact').setAttribute('onclick','hideContacts()');
+    document.getElementById('arrow').setAttribute('onclick','hideContacts()');
+}
+
+function hideContacts() {
+    let content = document.getElementById('contact');
+    content.classList.add('d-none')
+    document.getElementById('contactShow').style = 'animation: dropup 2s ease;'
+    document.getElementById('arrowContact').style = 'animation: arrowDown 350ms ease;'
+    document.getElementById('selectContact').setAttribute('onclick','showContacts()');
+    document.getElementById('arrow').setAttribute('onclick','showContacts()');
 }
