@@ -50,8 +50,8 @@
     100% {
       width: 64px;
       height: 78px;
-      left: calc(50% - 64px / 2 - 144px);
-      top: calc(50% - 78.03px / 2 - 386.98px);
+      left: 64px;
+      top: 30px;
     }
   }
 
@@ -163,80 +163,181 @@
     height: 51px;
     font-size: 16px;
   }
-}
 
-/*Sign-Up-Page*/
+  /*Sign-Up-Page*/
 
-.signUpContainer {
-  flex-direction: column;
-  width: 372px;
-  height: 450px;
-}
+  .signUpContainer {
+    flex-direction: column;
+    width: 372px;
+    height: 450px;
+  }
 
-.signUpHeadlineContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: start;
-  justify-content: center;
-  width: 652px;
-  order: 0;
-}
+  .signUpHeadlineContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    width: 652px;
+    order: 0;
+  }
 
-.signUpHeadline {
-  position: relative;
-  right: 1px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 47px;
-  line-height: 120%;
-  text-align: center;
-}
+  .signUpHeadline {
+    position: relative;
+    right: 1px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 47px;
+    line-height: 120%;
+    text-align: center;
+  }
 
-.backArrowContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  right: 55px;
-  width: 16px;
-  height: 16px;
-}
+  .backArrowContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 55px;
+    width: 16px;
+    height: 16px;
+  }
 
-.backArrow {
-  width: 16px;
-  height: 16px;
-}
+  .backArrow {
+    width: 16px;
+    height: 16px;
+  }
 
-.backArrow:hover {
-  cursor: pointer;
-}
+  .backArrow:hover {
+    cursor: pointer;
+  }
 
-.signUpInput {
-  padding: 0px;
-  gap: 30px;
-  width: 327px;
-  height: 200px;
-  order: 1;
-}
+  .signUpInput {
+    padding: 0px;
+    gap: 30px;
+    width: 327px;
+    height: 200px;
+    order: 1;
+  }
 
-.name {
-  padding: 0px;
-  gap: 10px;
-  width: 255px;
-  height: 25px;
-}
+  .name {
+    padding: 0px;
+    gap: 10px;
+    width: 255px;
+    height: 25px;
+  }
 
-.signUpButtonContainer {
-  padding: 4px 0px;
-  gap: 10px;
-  width: 180px;
-  height: 51px;
-  order: 2;
-}
+  .signUpButtonContainer {
+    padding: 4px 0px;
+    gap: 10px;
+    width: 180px;
+    height: 51px;
+    order: 2;
+  }
 
-.signUp {
-  width: 180px;
-  height: 51px;
-  font-size: 16px;
+  .signUp {
+    width: 180px;
+    height: 51px;
+    font-size: 16px;
+  }
+
+  /*Forgotten Password*/
+
+  .forgottenPWContainer {
+    padding: 56px 0px;
+    width: 372px;
+    height: 502px;
+  }
+
+  .forgottenPWHeadlineContainer {
+    width: 315px;
+    height: 96px;
+  }
+
+  .forgottenPWHeadline {
+    font-size: 40px;
+    line-height: 120%;
+  }
+
+  .backforgottenPWArrowContainer {
+    right: 0px;
+    top: -20px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .forgottenPWContent {
+    width: 322px;
+    height: 75px;
+  }
+
+  .forgottenPWInput {
+    padding: 13px 21px;
+    gap: 10px;
+    width: 327px;
+    height: 41px;
+  }
+
+  .sendEmailContainer {
+    width: 180px;
+    height: 51px;
+  }
+
+  .sendEmail {
+    padding: 4px 0px;
+    gap: 10px;
+    width: 180px;
+    height: 51px;
+    font-size: 16px;
+  }
+  /*Reset Password*/
+
+  .resetPWContainer {
+    width: 372px;
+    height: 525px;
+  }
+
+  .resetPWHeadlineContainer {
+    width: 315px;
+    height: 96px;
+  }
+
+  .resetPWHeadline {
+    font-size: 40px;
+    line-height: 120%;
+    right: 15px;
+  }
+
+  .backresetPWArrowContainer {
+    top: -10px;
+    right: 0px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .resetPWContent {
+    width: 322px;
+    height: 50px;
+    padding: 13px 21px;
+    gap: 10px;
+  }
+
+  .resetPWInput {
+    padding: 13px 21px;
+    gap: 20x;
+    width: 327px;
+    height: 100px;
+  }
+
+  .continueContainer {
+    padding: 4px 0px;
+    gap: 10px;
+    width: 180px;
+    height: 51px;
+  }
+
+  .continue {
+    font-size: 16px;
+    width: 180px;
+    height: 51px;
+  }
 }
