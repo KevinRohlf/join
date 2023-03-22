@@ -50,36 +50,6 @@ let task = [
         'subtasks': 'xxx'
     },
 ]
-/*
-function init() {
-    setURL('http://f01545d7@wilhelm-teicke.developerakademie.net/smallest_backend_ever');
-    loadBackend();
-}
-
-
-async function loadBackend() {
-  
-    await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
-    backend.setItem('Test', 'Hallo')
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 let currentDraggedElement;
 
@@ -263,3 +233,87 @@ function removeHighlightArea(id) {
     container.classList.remove('drag-area-highlight')
 }
 
+
+
+/*
+function dragstart_handler(ev) {
+    // Add the target element's id to the data transfer object
+    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.effectAllowed = "move";
+}
+function dragover_handler(ev) {
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = "move";
+}
+function drop_handler(ev) {
+    // console.log(window)
+    ev.preventDefault();
+    // Get the id of the target and add the moved element to the target's DOM
+    /*  if (!ev.target.getAttribute("ondrop")) {
+          console.log("Test")
+          return false;
+      }*/
+ //*   const data = ev.dataTransfer.getData("text");
+  //  document.getElementById('in-progress-container').appendChild(document.getElementById(data));
+//}
+
+/*
+window.addEventListener('mouseover', (event) => {
+    console.log(event)
+})
+*/
+
+
+
+
+
+
+
+
+/*
+
+function renderToDo(element) {
+    
+    let content = document.getElementById('to-do-container')
+    content.innerHTML +=
+         `    
+            <div>${element.category}</div>
+            <div>${element.title}</div>
+            <div>${element.description}</div>
+            <div id="contact-selection-${element.task_status}"></div>
+        `
+}
+
+
+function renderInProgress(element) {
+    let content = document.getElementById('in-progress-container')
+    content.innerHTML +=
+        `    
+            <div>${element.category}</div>
+            <div>${element.title}</div>
+            <div>${element.description}</div>
+            <div id='contact-selection-${element.task_status}'></div>
+        `
+}
+
+
+function renderAwaitingFeedback(element) {
+    let content = document.getElementById('awaiting-feedback-container')
+    content.innerHTML +=
+        `    
+            <div>${element.category}</div>
+    
+        `
+}
+
+
+function renderDone(element) {
+    let content = document.getElementById('done-container')
+    content.innerHTML +=
+         `    
+            <div>${element.category}</div>
+    
+        `
+}
+
+*/

@@ -531,7 +531,7 @@ body {
 .forgottenPWHeadline {
   position: relative;
   right: 18px;
-  font-family: "Inter";
+  font-family: Inter;
   font-size: 61px;
   font-weight: 700;
   line-height: 73px;
@@ -653,7 +653,7 @@ body {
 .resetPWHeadline {
   position: relative;
   right: 18px;
-  font-family: "Inter";
+  font-family: Inter;
   font-size: 61px;
   font-weight: 700;
   line-height: 73px;

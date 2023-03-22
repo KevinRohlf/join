@@ -31,13 +31,12 @@
     transition: all 175ms ease-in-out;
     display: flex;
     align-items: center;
-    white-space: nowrap;
 }
 
 .board-add-task-btn:hover {
     cursor: pointer;
-    background-color: #29ABE2;
-    border: 1px solid #29ABE2;
+    background-color: aqua;
+    border: 1px solid aqua;
     transition: all 175ms ease-in-out;
 }
 
@@ -54,7 +53,7 @@
     position: relative
 }
 
-.board-add-task-btn>div>svg {
+.board-add-task-btn>div>img {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -142,16 +141,12 @@ a {
     border: 2px solid #29ABE2;
 }
 
-.board-headlines>div>svg {
+.board-headlines>div>img {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
-.board-headlines>div:hover svg>path {
-    stroke:  #29ABE2;
-  }
 
 .board-content {
     background-color: #FFFFFF;
@@ -247,10 +242,6 @@ background-color: rgba(0, 0, 0, 0.2);
 
 .media {
     background-color: #FFC701;
-}
-
-.background-color {
-    background-color: #091931;
 }
 
 @media only screen and (min-width: 1000px) {
