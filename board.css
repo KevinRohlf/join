@@ -86,6 +86,7 @@
     border: 1px solid #A8A8A8;
     border-radius: 10px;
     padding: 13px 21px;
+    font-size: 18px;
 }
 
 .add-task-input:focus {
@@ -249,10 +250,6 @@ background-color: rgba(0, 0, 0, 0.2);
     background-color: #FFC701;
 }
 
-.background-color {
-    background-color: #091931;
-}
-
 @media only screen and (min-width: 1000px) {
     .board-create-new-task-btn {
         display: none;
@@ -263,6 +260,7 @@ background-color: rgba(0, 0, 0, 0.2);
     .board-header {
         flex-direction: column;
         align-items: flex-start;
+        margin-top: 16px;
     }
 
     .board-add-task-btn {
@@ -275,14 +273,31 @@ background-color: rgba(0, 0, 0, 0.2);
 
     .board-container {
         margin-top: 16px;
+        justify-content: center;
     }
 
     .board-container::-webkit-scrollbar {
         display: none;
     }
+
+    .board-container>div {
+        margin: 0 16px;
+    }
+
+    .find-task-input {
+        height: 44px;
+    }
+
+    .find-task-img1 {
+        top: 6px;
+    }
+    
+    .find-task-img2 {
+        top: 12px;
+    }
 }
 
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 727px) {
 
     .board-headline {
         font-size: 47px;

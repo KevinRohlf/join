@@ -36,6 +36,7 @@ function includeHTML() {
 
 
 function toggleLogoutBtn() {
+  let body = document.getElementById('body')
   let btn = document.getElementById('header-extended-menu-container')
   let slideContainer= document.getElementById('slide-container')
   let overlay = document.getElementById('overlay')
@@ -47,9 +48,11 @@ function toggleLogoutBtn() {
       slideContainer.classList.remove('slide-out')
     }
     overlay.classList.remove('d-none')
+    body.classList.add('overflow-hidden')
   } else {
     btn.classList.add('d-none')
     overlay.classList.add('d-none')
+    body.classList.remove('overflow-hidden')
   }
 }
 
@@ -59,6 +62,7 @@ function removeOverlay() {
     document.getElementById('header-extended-menu-container').classList.add('d-none')
   }, 200);
   document.getElementById('overlay').classList.add('d-none')
+  document.getElementById('body').classList.remove('overflow-hidden')
   if (window.innerWidth < 1000) {
     document.getElementById('slide-container').classList.add('slide-out')
   }
@@ -72,6 +76,7 @@ function manipulateFooterColor() {
   let board = document.getElementById('board-btn')
   let addTask = document.getElementById('add-task-btn')
   let contacts = document.getElementById('contacts-btn')
+  let legalnotice = document.getElementById('legalnotice')
  
   if (window.location.href.includes('summary')) {
     summary.classList.add('background-color')
@@ -95,6 +100,12 @@ function manipulateFooterColor() {
     contacts.classList.add('background-color')
   } else {
     contacts.classList.remove('background-color')
+  } 
+
+  if (window.location.href.includes('legalnotice')) {
+    legalnotice.classList.add('background-color')
+  } else {
+    legalnotice.classList.remove('background-color')
   } 
 }
 

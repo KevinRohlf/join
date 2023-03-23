@@ -50,8 +50,8 @@ let task = [
         'subtasks': 'xxx'
     },
 ]
-/*
-function init() {
+
+function loadFromBackend() {
     setURL('http://f01545d7@wilhelm-teicke.developerakademie.net/smallest_backend_ever');
     loadBackend();
 }
@@ -63,7 +63,7 @@ async function loadBackend() {
     users = JSON.parse(backend.getItem('users')) || [];
     backend.setItem('Test', 'Hallo')
 }
-*/
+
 
 
 
@@ -255,11 +255,11 @@ function drop_handler(task_status) {
 
 function highlightArea(id) {
     let container = document.getElementById(id)
-    container.classList.add('drag-area-highlight')
+   //container.classList.add('drag-area-highlight')
 }
 
 function removeHighlightArea(id) {
     let container = document.getElementById(id)
-    container.classList.remove('drag-area-highlight')
+    //container.classList.remove('drag-area-highlight')
 }
 

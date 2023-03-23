@@ -5,76 +5,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="template.css">
-    <link rel="stylesheet" href="help.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="./templates/footer.css">
+    <link rel="stylesheet" href="./templates/header.css">
+    <link rel="stylesheet" href="./template.css">
+    <link rel="stylesheet" href="./help_legalnotice.css">
     <link rel="stylesheet" href="fonts.css">
     <script src="./js/template.js"></script>
-    <script src="./js/help.js"></script>
-
-    <title>Help</title>
 </head>
 
-
 <body onload="init()">
+    <div id="overlay" class="d-none" onclick="removeOverlay()"></div>
+    <header w3-include-html="templates/header.html">
+    </header>
     <main>
-        <section w3-include-html="templates/sidemenu.html"></section>
-        <section class="content-section">
-            <section w3-include-html="templates/topmenu.html"></section>
-            <section class="content-container">
-                <div class="arrow-icon-container"><img src="./assets/img/arrow-icon.svg" onclick="history.back()"></div>
-                <div class="help-h1">Help</div>
-                <div>
-                    <p class="help-h2 margin-16">What is Join?</p>
-                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, enim.
-                        Laudantium ad ullam animi
-                        delectus vitae voluptas doloremque, ratione odit, at ipsam debitis inventore cumque, dolorum
-                        quis sequi molestiae quas? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde
-                        quaerat facere necessitatibus cumque, quo obcaecati ut eaque consequuntur ab eius velit
-                        inventore vero, aliquam beatae officia nostrum itaque, assumenda sed!</p>
-                </div>
-                <div class="help-h2 margin-32">How to use it</div>
-                <table>
-                    <tr>
-                        <td class="help-h2 list-item">1.</td>
-                        <td class="text-justify table-padding">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
-                            minus
-                            temporibus voluptates
-                            quaerat eius ut? Expedita dignissimos explicabo autem esse, rerum, dolores nemo at
-                            debitis
-                            iure similique laudantium, placeat adipisci. Lorem ipsum dolor sit, amet consectetur
-                            adipisicing elit. Dolores rem aliquid nobis vero facere sapiente, quidem ipsa deserunt
-                            perferendis eos. Alias cum doloribus amet pariatur ex quod perspiciatis molestiae.
-                            Ipsum.</td>
-                    </tr>
-                    <tr>
-                        <td class="help-h2 list-item">2.</td>
-                        <td class="text-justify table-padding">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
-                            minus
-                            temporibus voluptates
-                            quaerat eius ut? Expedita dignissimos explicabo autem esse, rerum, dolores nemo at
-                            debitis
-                            iure similique laudantium, placeat adipisci. Lorem ipsum dolor sit, amet consectetur
-                            adipisicing elit. Dolores rem aliquid nobis vero facere sapiente, quidem ipsa deserunt
-                            perferendis eos. Alias cum doloribus amet pariatur ex quod perspiciatis molestiae.
-                            Ipsum.</td>
-                    </tr>
-                    <tr>
-                        <td class="help-h2 list-item">3.</td>
-                        <td class="text-justify table-padding">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
-                            minus
-                            temporibus voluptates
-                            quaerat eius ut? Expedita dignissimos explicabo autem esse, rerum, dolores nemo at
-                            debitis
-                            iure similique laudantium, placeat adipisci. Lorem ipsum dolor sit, amet consectetur
-                            adipisicing elit. Dolores rem aliquid nobis vero facere sapiente, quidem ipsa deserunt
-                            perferendis eos. Alias cum doloribus amet pariatur ex quod perspiciatis molestiae.
-                            Ipsum.</td>
-                    </tr>
-                </table>
-            </section>
-        </section>
+        <div class="headline-mobile-container">
+            <p id="headline-mobile">Kanban Project Management Tool</p>
+        </div>
+        <div class="arrow-icon-container"><img src="./assets/img/arrow-icon.svg" onclick="history.back()"></div>
+        <div class="help-h1">Help</div>
+        <div>
+            <p class="help-h2 margin-16">What is Join?</p>
+            <p class="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, enim.
+                Laudantium ad ullam animi
+                delectus vitae voluptas doloremque, ratione odit, at ipsam debitis inventore cumque, dolorum
+                quis sequi molestiae quas? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde
+                quaerat facere necessitatibus cumque, quo obcaecati ut eaque consequuntur ab eius velit
+                inventore vero, aliquam beatae officia nostrum itaque, assumenda sed!</p>
+        </div>
+        <div class="help-h2 margin-32">How to use it</div>
+        <table>
+            <tr>
+                <td class="help-h2 list-item">1.</td>
+                <td class="text-justify table-padding">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
+                    minus
+                    temporibus voluptates
+                    quaerat eius ut? Expedita dignissimos explicabo autem esse, rerum, dolores nemo at
+                    debitis
+                    iure similique laudantium, placeat adipisci. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Dolores rem aliquid nobis vero facere sapiente, quidem ipsa deserunt
+                    perferendis eos. Alias cum doloribus amet pariatur ex quod perspiciatis molestiae.
+                    Ipsum.</td>
+            </tr>
+            <tr>
+                <td class="help-h2 list-item">2.</td>
+                <td class="text-justify table-padding">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
+                    minus
+                    temporibus voluptates
+                    quaerat eius ut? Expedita dignissimos explicabo autem esse, rerum, dolores nemo at
+                    debitis
+                    iure similique laudantium, placeat adipisci. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Dolores rem aliquid nobis vero facere sapiente, quidem ipsa deserunt
+                    perferendis eos. Alias cum doloribus amet pariatur ex quod perspiciatis molestiae.
+                    Ipsum.</td>
+            </tr>
+            <tr>
+                <td class="help-h2 list-item">3.</td>
+                <td class="text-justify table-padding">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
+                    minus
+                    temporibus voluptates
+                    quaerat eius ut? Expedita dignissimos explicabo autem esse, rerum, dolores nemo at
+                    debitis
+                    iure similique laudantium, placeat adipisci. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Dolores rem aliquid nobis vero facere sapiente, quidem ipsa deserunt
+                    perferendis eos. Alias cum doloribus amet pariatur ex quod perspiciatis molestiae.
+                    Ipsum.</td>
+            </tr>
+        </table>
     </main>
+    <footer w3-include-html="templates/footer.html">
+    </footer>
+
 </body>
 
 </html>

@@ -16,7 +16,7 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
-
+/*
 header {
     position: fixed;
     top: 0;
@@ -24,7 +24,7 @@ header {
     width: 100%;
     z-index: 3;
 }
-
+*/
 footer {
     position: fixed;
     bottom: 0;
@@ -38,7 +38,7 @@ footer {
 main {
   /*  position: relative;
     top: 85px;*/
-    padding: 100px 32px;
+    padding: 120px 32px;
     background-color: #F5F5F5;
   /*  overflow-x: scroll; */
 }
@@ -52,6 +52,12 @@ main::-webkit-scrollbar {
     z-index: 998;
     width: 100vw;
     height: 100vh;
+    
+}
+
+.overflow-hidden {
+    overflow: hidden !important;
+    height: 100vh !important;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -60,13 +66,13 @@ main::-webkit-scrollbar {
         top: 0;
         width: 300px;
     }
-
+/*
     header {
         margin-left: 300px;
         right: 0;
         width: auto;
     }
-
+*/
     main {
         margin-left: 300px;
         height: 100vh;

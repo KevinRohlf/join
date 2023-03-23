@@ -1,3 +1,4 @@
+
 #legalnotice {
     display: none;
 }
@@ -31,24 +32,14 @@
 .footer-main-menu>a>p {
     justify-self: center;
     white-space: nowrap;
-    color: #CDCDCD;
+}
+
+.background-color {
+    background-color: #091931;
+    color: white !important;
 }
 
 @media only screen and (min-width: 1000px) {
-
-    /*
-
-    #summary-btn,
-    #board-btn,
-    #add-task-btn,
-    #contacts-btn {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 8px 0;
-    }
-*/
 
     #summary-btn,
     #board-btn,
@@ -74,6 +65,7 @@
         width: 100%;
         justify-content: center;
         align-items: center;
+        padding: 14px;
     }
 
     .legalnotice-menu {
@@ -82,7 +74,6 @@
 
     #legalnotice>p {
         margin-left: 12px;
-        color: #CDCDCD;
     }
 
     .footer {
@@ -127,3 +118,4 @@
 
 
 }
+
