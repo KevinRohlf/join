@@ -141,7 +141,8 @@ function saveActiveContact(i) {
 	allContacts[i].phone = newPhone;
 	saveAllContacts();
 	loadAllContacts();
-	closeSingleContact();
+	closeSingleContactDesktop();
+	closeSingleContactMobile();
 	editContactClose();
 }
 
@@ -149,8 +150,24 @@ function saveActiveContact(i) {
 // show single contact
 let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
+const widths = [0, 1400];
+
+//window.addEventListener('resize', function () {
+//	renderSingleContact(i);
+//  }, false);
+
+//window.addEventListener('resize', renderSingleContact.bind(null, i), false);
 
 function renderSingleContact(i) {
+if (window.innerWidth>widths[1]) {
+	renderSingleContactDesktop(i);
+	} else {
+	renderSingleContactMobile(i);
+	}
+}
+
+
+function renderSingleContactDesktop(i) {
 	singleContactOverlay.style.display = 'flex';
 	contactContent.style = 'animation:slide-in .5s ease;';
 	contactContent.innerHTML = '';
@@ -158,11 +175,31 @@ function renderSingleContact(i) {
 }
 
 
-function closeSingleContact() {
+function renderSingleContactMobile(i) {
+	contacts.style.display = 'none';
+	singleContactOverlay.style.display = 'flex';
+	contactContent.style = 'animation:none;';
+	contactContent.style.display = 'flex';
+	contactContent.innerHTML = '';
+	contactContent.innerHTML += htmlTemplateRenderSingleContact(allContacts[i], i);
+	document.getElementById('contacts-details').style.display = 'flex';
+	document.getElementById('contact-btn').style.display = 'none';
+}
+
+
+function closeSingleContactDesktop() {
 	contactContent.style = 'animation:slide-out .5s ease;';
 	setTimeout(() => {
 		singleContactOverlay.style.display = "none";
 	}, 400);
+}
+
+
+function closeSingleContactMobile() {
+	contacts.style.display = 'flex';
+	singleContactOverlay.style.display = 'none';
+	document.getElementById('contacts-details').style.display = 'none';
+	document.getElementById('contact-btn').style.display = 'flex';
 }
 
 
@@ -179,11 +216,13 @@ const addContactOverlay = document.getElementById('add-contact-overlay');
 const editContactOverlay = document.getElementById('edit-contact-overlay');
 const addContact = document.getElementById('add-contact');
 const editContact = document.getElementById('edit-contact');
+const overlay = document.getElementById('bg-overlay');
 
 
 function addContactOpen() {
 	addContactOverlay.style.display = 'flex';
 	addContact.style = 'animation:slide-in .5s ease;';
+	overlay.style.display = 'flex';
 }
 
 
@@ -191,13 +230,15 @@ function addContactClose() {
 	addContact.style = 'animation:slide-out .5s ease;';
 	setTimeout(() => {
 		addContactOverlay.style.display = "none";
-	}, 400);
+		overlay.style.display = 'none';	
+	}, 300);
 }
 
 
 function editContactOpen(i) {
 	editContactOverlay.style.display = 'flex';
 	editContact.style = 'animation:slide-in .5s ease;';
+	overlay.style.display = 'flex';
 	editSingleContact(i);
 }
 
@@ -206,7 +247,8 @@ function editContactClose() {
 	editContact.style = 'animation:slide-out .5s ease;';
 	setTimeout(() => {
 		editContactOverlay.style.display = "none";
-	}, 400);
+		overlay.style.display = 'none';	
+	}, 300);
 }
 
 

@@ -1,6 +1,6 @@
 function htmlTemplateRenderAlphabet(i) {
     return /*html*/ `
-    <div class="alphabet">&nbsp;${alphabet[i]}<div class="thin-line"></div></div>
+    <div class="alphabet">&nbsp;&nbsp;&nbsp;&nbsp;${alphabet[i]}<div class="thin-line"></div></div>
     <div id=group-${alphabet[i]}></div>
     `;
 }
@@ -9,7 +9,7 @@ function htmlTemplateRenderAlphabet(i) {
 function htmlTemplateRenderAllContacts(contact, i) {
     return /*html*/ `
     <div onclick="renderSingleContact(${i}); doNotClose(event)" class="contact" tabindex="0">
-        <div class="initial-circle" style="background-color: ${contact['color']};">
+        <div class="initial-circle small-circle" style="background-color: ${contact['color']};">
             ${contact['initials']}
         </div>
         <div>
@@ -24,6 +24,7 @@ function htmlTemplateRenderAllContacts(contact, i) {
 function htmlTemplateRenderSingleContact(contact, i) {
     return /*html*/ `
     <div>
+        <a href="#" onclick="closeSingleContactMobile()" class="mobile-back-icon"><img src="./assets/img/back-mobile-icon.svg"></a>
         <div class="single-contact-name">
             <div class="initial-circle big-circle" style="background-color: ${contact['color']};">
                 ${contact['initials']}
@@ -35,7 +36,8 @@ function htmlTemplateRenderSingleContact(contact, i) {
         </div>
         <div class="single-contact-edit">
             <p>Contact Information</p>
-            <a href="#" onclick="editContactOpen(${i})"><img src="./assets/img/pen-icon.svg">Edit Contact</a>
+            <a href="#" onclick="editContactOpen(${i})" class="pen-icon-desktop"><img src="./assets/img/pen-icon.svg">Edit Contact</a>
+            <a href="#" onclick="editContactOpen(${i})" class="pen-icon-mobile"><img src="./assets/img/pen-mobile-icon.svg"></a>
         </div>
         <div class="single-contact-contact">
             <p>Email</p>
@@ -52,7 +54,7 @@ function htmlTemplateEditSingleContact(contact, i) {
     return /*html*/ `
     <div class="contact-field">
         <div class="contact-user-icon">
-            <div class="initial-circle big-circle" style="background-color: ${contact['color']};">
+            <div class="initial-circle big-circle-edit" style="background-color: ${contact['color']};">
                 ${contact['initials']}
             </div>
         </div>

@@ -194,17 +194,25 @@ body {
 }
 
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1400px) {
     .greeting-container {
         align-items: center;
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        z-index: 99;
-        padding-left: 0;
+        top: 85px;
+        left: 300px;
+        right: 0;
+        bottom: 0;
+        z-index: 9;
         background-color: #F5F5F5;
+        padding-left: 0;
+    }
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .greeting-container {
+        left: 0;
+        bottom: 75px;
     }
 }
 
@@ -217,6 +225,7 @@ body {
 
     .header-container h1 {
         font-size: 48px;
+        padding: 10px 0;
     }
 
     .blue-line-vertical {
@@ -279,5 +288,13 @@ body {
     .todo svg {
         width: 40px;
         height: 40px;
+    }
+
+    .greeting-time {
+        font-size: 30px;
+    }
+    
+    .greeting-name {
+        font-size: 36px;
     }
 }
