@@ -2,6 +2,7 @@ let prio;
 let selectedColor;
 let selectedCategory;
 let selectedContacts = [];
+let inAnimation = false;
 
 
 
@@ -13,16 +14,14 @@ function initAddTask() {
 function readForm() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
-
-    let contact_selection = document.getElementById('contact_selection');
     let date = document.getElementById('date');
-    addTask(title, description, contact_selection, date);
+    addTask(title, description, date);
 
 }
 
-function addTask(title, description, contact_selection, date) {
+function addTask(title, description, date) {
     let newTask = {
-        'status': toDo,
+        'status': 'toDo',
         'title': title.value,
         'description': description.value,
         'category': selectedCategory,
@@ -34,14 +33,7 @@ function addTask(title, description, contact_selection, date) {
     tasks.push(newTask);
     console.log(tasks);
     clearForm();
-    document.getElementById('taskAdded').classList.remove('d-none');
-    document.getElementById('taskAdded').style = 'animation: comeIn 1s ease;';
-    setTimeout(() => {
-        document.getElementById('taskAdded').style = 'animation: comeOut 1s ease;';
-    }, 2000);
-    setTimeout(() => {
-        document.getElementById('taskAdded').classList.add('d-none');
-    }, 2500);
+    showTaskAdded();
 }
 
 function setprio(i) {
@@ -57,21 +49,22 @@ function setprio(i) {
         document.getElementById(e).classList.remove('btn-on-focus');
         document.getElementById(e).style = ``;
     });
-    prio = '';
     prio = i;
 }
 
 function clearForm() {
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
-    document.getElementById('category').value = '';
-    document.getElementById('contact_selection').value = '';
     document.getElementById('date').value = '';
     document.getElementById('subtasks').innerHTML = '';
     prio = '';
     subtasks = [];
+    selectedCategory = [];
+    selectedContacts = [];
+    renderSelectedContacts();
+    renderContacts();
+    selectCategory('reload');
     setprio();
-
 }
 
 function addSubtask() {
@@ -147,30 +140,43 @@ function selectColor(color) {
 }
 
 function selectCategory(i) {
-    selectedCategory = categorys[i]['name'];
-    document.getElementById('selectCategory').innerHTML = `${categorys[i]['name']} <div style="background-color: ${categorys[i]['color']}; width: 15px;
-    height: 15px; border-radius: 100%;"></div> `;
+    if (i == 'reload') {
+        document.getElementById('selectCategory').innerHTML = 'Select task category';
+    } else {
+        selectedCategory = categorys[i]['name'];
+        document.getElementById('selectCategory').innerHTML = `${categorys[i]['name']} <div style="background-color: ${categorys[i]['color']}; width: 15px;
+        height: 15px; border-radius: 100%;"></div> `;
+    }
     hideCategorys();
 }
 
 function showCategorys() {
-    let content = document.getElementById('category');
-    content.classList.remove('d-none')
-    document.getElementById('categoryShow').style = 'animation: dropdown 2s ease;'
-    document.getElementById('arrowCategory').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
-    document.getElementById('selectCategory').setAttribute('onclick', 'hideCategorys()');
-    document.getElementById('arrowCategory').setAttribute('onclick', 'hideCategorys()');
+    if (!inAnimation) {
+        let content = document.getElementById('category');
+        content.classList.remove('d-none')
+        document.getElementById('categoryShow').style = 'animation: dropdown 2s ease;'
+        document.getElementById('arrowCategory').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
+        document.getElementById('selectCategory').setAttribute('onclick', 'hideCategorys()');
+        document.getElementById('arrowCategory').setAttribute('onclick', 'hideCategorys()');
+    }
+
 }
 
 function hideCategorys() {
     let content = document.getElementById('category');
-    content.classList.add('d-none');
-    document.getElementById('categoryShow').style = 'animation: dropup 2s ease;'
-    document.getElementById('arrowCategory').style = 'animation: arrowDown 350ms ease;'
+    let categoryShow = document.getElementById('categoryShow')
+    inAnimation = true;
+    editEndHeight(categoryShow);
     document.getElementById('selectCategory').setAttribute('onclick', 'showCategorys()');
     document.getElementById('arrowCategory').setAttribute('onclick', 'showCategorys()');
-}
+    categoryShow.style = 'animation: dropup 500ms ease;';
+    document.getElementById('arrowCategory').style = 'animation: arrowDown 350ms ease;';
+    setTimeout(() => {
+        content.classList.add('d-none');
+        inAnimation = false;
+    }, 500);
 
+}
 function renderContacts() {
     let content = document.getElementById('contact');
     content.innerHTML = '';
@@ -181,28 +187,36 @@ function renderContacts() {
 }
 
 function showContacts() {
-    let content = document.getElementById('contact');
-    content.classList.remove('d-none')
-    document.getElementById('contactShow').style = 'animation: dropdown 2s ease;'
-    document.getElementById('arrowContact').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
-    document.getElementById('selectContact').setAttribute('onclick', 'hideContacts()');
-    document.getElementById('arrowContact').setAttribute('onclick', 'hideContacts()');
+    if (!inAnimation) {
+        let content = document.getElementById('contact');
+        content.classList.remove('d-none')
+        document.getElementById('contactShow').style = 'animation: dropdown 2s ease;'
+        document.getElementById('arrowContact').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
+        document.getElementById('selectContact').setAttribute('onclick', 'hideContacts()');
+        document.getElementById('arrowContact').setAttribute('onclick', 'hideContacts()');
+    }
+
 }
 
 function hideContacts() {
     let content = document.getElementById('contact');
-    content.classList.add('d-none')
-    document.getElementById('contactShow').style = 'animation: dropup 2s ease;'
-    document.getElementById('arrowContact').style = 'animation: arrowDown 350ms ease;'
+    let contactShow = document.getElementById('contactShow')
+    inAnimation = true;
+    editEndHeight(contactShow);
     document.getElementById('selectContact').setAttribute('onclick', 'showContacts()');
     document.getElementById('arrowContact').setAttribute('onclick', 'showContacts()');
+    contactShow.style = 'animation: dropup 500ms ease;';
+    document.getElementById('arrowContact').style = 'animation: arrowDown 350ms ease;';
+    setTimeout(() => {
+        content.classList.add('d-none');
+        inAnimation = false;
+    }, 500);
 }
 
 function addContactToList(number) {
     let contact = document.getElementById(`cb-subtask-${number}`);
     selectedContacts.push(contacts[number]['contact_selection']);
     contact.setAttribute('onclick', `removeContactFromList(${number})`);
-    console.log(selectedContacts);
     renderSelectedContacts();
 }
 
@@ -210,7 +224,6 @@ function removeContactFromList(number) {
     let contact = document.getElementById(`cb-subtask-${number}`);
     contact.setAttribute('onclick', `addContactToList(${number})`);
     let index = selectedContacts.indexOf(contacts[number]['contact_selection']);
-    console.log(index);
     selectedContacts.splice(index, 1)
     renderSelectedContacts();
 }
@@ -220,10 +233,28 @@ function renderSelectedContacts() {
     content.innerHTML = '';
     if (selectedContacts.length > 0) {
         for (let i = 0; i < selectedContacts.length; i++) {
-            content.innerHTML += `<div class="circle">${selectedContacts[i]}</div>`
+            let color = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+            console.log(color)
+            content.innerHTML += `<div class="circle" style="background-color: ${color.toUpperCase()};": >${selectedContacts[i]}</div>`
         }
     } else {
         content.innerHTML = 'Select contacts to assign';
     }
 
+}
+
+function showTaskAdded() {
+    let taskAdded = document.getElementById('taskAdded');
+    taskAdded.classList.remove('d-none');
+    taskAdded.style = 'animation: comeIn 1s ease;';
+    setTimeout(() => {
+        taskAdded.style = 'animation: comeOut 1s ease;';
+    }, 2000);
+    setTimeout(() => {
+        taskAdded.classList.add('d-none');
+    }, 2500);
+}
+
+function editEndHeight(content) {
+    document.documentElement.style.setProperty('--end-height', content.clientHeight + 'px')
 }
