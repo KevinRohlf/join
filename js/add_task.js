@@ -147,7 +147,7 @@ function selectCategory(i) {
         document.getElementById('selectCategory').innerHTML = `${categorys[i]['name']} <div style="background-color: ${categorys[i]['color']}; width: 15px;
         height: 15px; border-radius: 100%;"></div> `;
     }
-    hideCategorys();
+    dropup('category');
 }
 
 function renderContacts() {
