@@ -62,6 +62,7 @@ function removeOverlay() {
     document.getElementById('header-extended-menu-container').classList.add('d-none')
   }, 200);
   document.getElementById('overlay').classList.add('d-none')
+  document.getElementById('overlay').lastElementChild.classList.add('d-none')
   document.getElementById('body').classList.remove('overflow-hidden')
   if (window.innerWidth < 1000) {
     document.getElementById('slide-container').classList.add('slide-out')

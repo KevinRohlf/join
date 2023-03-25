@@ -50,7 +50,7 @@ let task = [
         'subtasks': 'xxx'
     },
 ]
-
+/*
 function loadFromBackend() {
     setURL('http://f01545d7@wilhelm-teicke.developerakademie.net/smallest_backend_ever');
     loadBackend();
@@ -58,12 +58,12 @@ function loadFromBackend() {
 
 
 async function loadBackend() {
-  
+
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     backend.setItem('Test', 'Hallo')
 }
-
+*/
 
 
 
@@ -129,7 +129,7 @@ function renderTasks() {
 function renderAllTasks(element, content, i) {
     content.innerHTML +=
         /*html*/ `
-        <div id="${i}" class="board-content" draggable="true" ondragstart="dragstart_handler(${i})">
+        <div id="${i}" class="board-content" draggable="true" onclick="loadCard(${i})" ondragstart="dragstart_handler(${i})"  ondragend="removeTest(${i})">
             <div class="task-category">${element.category}</div>
             <div class="task-title">${element.title}</div>
             <div class="task-description">${element.description}</div>
@@ -193,6 +193,76 @@ function renderTaskCategoryColor(i) {
 }
 
 
+function loadCard(i) {
+    let overlay = document.getElementById('overlay')
+    overlay.classList.remove('d-none')
+    renderCard(i, overlay)
+    renderCardCategoryColor()
+    renderCardContacts(i)
+}
+
+
+function renderCard(i) {
+    overlay.innerHTML =
+    /*html*/ `
+        <div id="card-container" class="d-none">${i}
+            <div>${task[i].category}</div>
+            <div>${task[i].title}</div>
+            <div>${task[i].description}</div>
+            <div>
+                <p>Due date</p>
+                <p>${task[i].date}</p>
+            </div>
+            <div>
+                <p>Priority</p>
+                <p>${task[i].prio}</p>
+            </div>
+            <div>
+                <p>Assigned to:</p>
+                <div id="contact-card-container"></div>
+            </div>
+            <div class="edit-task-container">
+                <div>
+                    <svg width="21" height="31" viewBox="0 0 21 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.94494 22.5155L7.76427 25.4404L20.4074 4.60829C20.694 4.13616 20.5435 3.52113 20.0714 3.23459L16.9618 1.34736C16.4897 1.06082 15.8746 1.21127 15.5881 1.6834L2.94494 22.5155Z" fill="white"/>
+                    <path d="M2.35987 23.4792L7.1792 26.4041L2.45058 28.6889L2.35987 23.4792Z" fill="white"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    `
+    document.getElementById('card-container').classList.remove('d-none')
+}
+
+function renderCardCategoryColor() {
+    let content = document.getElementById('card-container')
+    if (content.firstElementChild.textContent == 'Design') {
+        content.firstElementChild.classList.add('design')
+    } else if (content.firstElementChild.textContent == 'Sales') {
+        content.firstElementChild.classList.add('sales')
+    } else if (content.firstElementChild.textContent == 'Backoffice') {
+        content.firstElementChild.classList.add('backoffice')
+    } else if (content.firstElementChild.textContent == 'Marketing') {
+        content.firstElementChild.classList.add('marketing')
+    } else if (content.firstElementChild.textContent == 'Media') {
+        content.firstElementChild.classList.add('media')
+    }
+}
+
+function renderCardContacts(i) {
+    let container = document.getElementById('contact-card-container')
+    task[i].contactSelection.forEach(element => {
+        container.innerHTML +=
+       /*html*/ `
+       <div class="contact-card-content">
+         <div style="background-color:red">${element}</div>
+        <p>Name</p>
+        </div>
+       `
+    });
+}
+
+
 function randomBackgroundColor(element, i) {
     let children = document.getElementById(`contact-selection-${element.task_status}_${i}`).children
     for (let j = 0; j < children.length; j++) {
@@ -240,6 +310,8 @@ function searchTasks() {
 
 function dragstart_handler(id) {
     currentDraggedElement = id
+    // id.dataTransfer.setDragImage(image, xOffset, yOffset);
+
 }
 
 
@@ -253,13 +325,51 @@ function drop_handler(task_status) {
     loadTasks()
 }
 
+
 function highlightArea(id) {
     let container = document.getElementById(id)
-   //container.classList.add('drag-area-highlight')
+    container.classList.remove('d-none')
+    /* let originContainer = container.parentElement.parentElement.children[1].lastElementChild.id
+     console.log(id)
+     console.log(originContainer)
+     if (!originContainer == id) {
+         container.classList.remove('d-none')
+     }
+ */
 }
+
 
 function removeHighlightArea(id) {
     let container = document.getElementById(id)
-    //container.classList.remove('drag-area-highlight')
+    container.classList.add('d-none')
 }
 
+
+function highliteDragArea(id) {
+
+    let container = document.getElementById(id)
+
+    container.classList.remove('d-none')
+}
+
+
+function removeHighlightDragArea(id) {
+    let container = document.getElementById(id)
+    container.classList.add('d-none')
+
+}
+
+
+function removeTest(id) {
+    let element = document.getElementById(id)
+    //console.log(element.parentElement.parentElement.parentElement.children/*[0].lastElementChild*/)
+
+    let targetContainer = element.parentElement.parentElement.parentElement.children
+    for (let i = 0; i < targetContainer.length; i++) {
+        // console.log(targetContainer[i].lastElementChild)
+        targetContainer[i].lastElementChild.classList.add('d-none')
+    }
+
+
+    // .currentNode.nextElementSibling
+}
