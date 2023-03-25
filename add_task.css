@@ -250,8 +250,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     position: fixed;
     bottom: 200px;
-    left: 300px;
-    right: 0;
+    left: calc(300px + 40% - 127.5px );
+    
 }
 
 #taskAdded div{
@@ -263,6 +263,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    width: 255px;
 }
 
 .confirmAndCancel {
@@ -439,7 +440,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .content-add-task {
         margin-left: unset;
-        padding-top: 200px;
         width: 100%;
         
     }
@@ -460,7 +460,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         min-height: 100px;
     }
 
+    .btns button:first-child {
+        display: none;
+    }
     .btns {
-        margin-bottom: 100px;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+    }
+    
+    .btn-bg-blue {
+        padding: 10px;
+    }
+
+    .user-icon {
+        display: none;
+    }
+
+    #taskAdded {
+        left: calc(50% - 127.5px);
+        bottom: 150px;
     }
 }

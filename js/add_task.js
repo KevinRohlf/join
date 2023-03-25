@@ -9,6 +9,7 @@ let inAnimation = false;
 function initAddTask() {
     renderCategorys();
     renderContacts();
+    editCreateBtnOnMobile()
 }
 
 function readForm() {
@@ -176,8 +177,8 @@ function dropup(area) {
     inAnimation = true;
     let bigArea = area[0].toUpperCase() + area.slice(1);
     editEndHeight(areaShow);
-    document.getElementById('select' + bigArea).setAttribute('onclick', `show${bigArea}s()`);
-    document.getElementById('arrow' + bigArea).setAttribute('onclick', `show${bigArea}s()`);
+    document.getElementById('select' + bigArea).setAttribute('onclick', `dropdown('${area}')`);
+    document.getElementById('arrow' + bigArea).setAttribute('onclick', `dropdown('${area}')`);
     areaShow.style = 'animation: dropup 500ms ease;';
     document.getElementById('arrow' + bigArea).style = 'animation: arrowDown 350ms ease;';
     setTimeout(() => {
@@ -228,4 +229,27 @@ function showTaskAdded() {
 
 function editEndHeight(content) {
     document.documentElement.style.setProperty('--end-height', content.clientHeight + 'px')
+}
+
+function editCreateBtnOnMobile() {
+    setInterval(() => {
+        let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        if (width < 1000) {
+            document.getElementById('createBtn').innerHTML = `Create
+        <svg width="18" height="15" viewBox="0 0 18 15" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 7.5L7 13.5L17 1.5" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+    	`
+        } else {
+            document.getElementById('createBtn').innerHTML = `Create Task
+            <svg width="18" height="15" viewBox="0 0 18 15" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7.5L7 13.5L17 1.5" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>`
+        }
+    }, 500);
+
 }
