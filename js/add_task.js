@@ -6,11 +6,15 @@ let inAnimation = false;
 
 
 
-function initAddTask() {
+async function initAddTask() {
+    setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    await downloadFromServer();
     renderCategorys();
     renderContacts();
-    editCreateBtnOnMobile()
+    editCreateBtnOnMobile();
+
 }
+
 
 function readForm() {
     let title = document.getElementById('title');
@@ -19,7 +23,7 @@ function readForm() {
     addTask(title, description, date);
 }
 
-function addTask(title, description, date) {
+async function addTask(title, description, date) {
     let newTask = {
         'status': 'toDo',
         'title': title.value,
@@ -31,7 +35,7 @@ function addTask(title, description, date) {
         'subtasks': subtasks
     }
     tasks.push(newTask);
-    console.log(tasks);
+    await backend.setItem('users', JSON.stringify(tasks));
     clearForm();
     showTaskAdded();
 }
@@ -87,13 +91,14 @@ function showNewCategoryInput() {
     renderCategoryColors();
 }
 
-function addNewCategory() {
+async function addNewCategory() {
     let content = document.getElementById('newCategory').value;
     let newCategory = {
         'name': content,
         'color': selectedColor
     }
-    categorys.push(newCategory);
+    
+    await backend.setItem('categorys', JSON.stringify(newCategory));
     closeNewCategoryInput();
     renderCategorys();
 }
@@ -112,17 +117,17 @@ function renderSubTasks() {
     }
 }
 
-function renderCategorys() {
+async function renderCategorys() {
     let content = document.getElementById('category');
     content.innerHTML = '';
+    content.innerHTML += `<div class="categorys" onclick="showNewCategoryInput()">New Category</div>`
+    await downloadFromServer();
+    categorys = await JSON.parse(backend.getItem('categorys')) || [];
     for (let i = 0; i < categorys.length; i++) {
         let category = categorys[i];
-        if (category['name'] == 'New Category') {
-            content.innerHTML += `<div class="categorys" onclick="showNewCategoryInput()">${category['name']}</div>`
-        } else if (category['name'] != 'New Category') {
-            content.innerHTML += `<div class="categorys" onclick="selectCategory(${i})">${category['name']} <div style="background-color: ${category['color']}; width: 15px;
+        content.innerHTML += `<div class="categorys" onclick="selectCategory(${i})">${category['name']} <div style="background-color: ${category['color']}; width: 15px;
             height: 15px; border-radius: 100%;"></div></div>`
-        }
+
     }
 }
 
