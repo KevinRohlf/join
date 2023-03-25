@@ -16,7 +16,6 @@ function readForm() {
     let description = document.getElementById('description');
     let date = document.getElementById('date');
     addTask(title, description, date);
-
 }
 
 function addTask(title, description, date) {
@@ -150,33 +149,6 @@ function selectCategory(i) {
     hideCategorys();
 }
 
-function showCategorys() {
-    if (!inAnimation) {
-        let content = document.getElementById('category');
-        content.classList.remove('d-none')
-        document.getElementById('categoryShow').style = 'animation: dropdown 2s ease;'
-        document.getElementById('arrowCategory').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
-        document.getElementById('selectCategory').setAttribute('onclick', 'hideCategorys()');
-        document.getElementById('arrowCategory').setAttribute('onclick', 'hideCategorys()');
-    }
-
-}
-
-function hideCategorys() {
-    let content = document.getElementById('category');
-    let categoryShow = document.getElementById('categoryShow')
-    inAnimation = true;
-    editEndHeight(categoryShow);
-    document.getElementById('selectCategory').setAttribute('onclick', 'showCategorys()');
-    document.getElementById('arrowCategory').setAttribute('onclick', 'showCategorys()');
-    categoryShow.style = 'animation: dropup 500ms ease;';
-    document.getElementById('arrowCategory').style = 'animation: arrowDown 350ms ease;';
-    setTimeout(() => {
-        content.classList.add('d-none');
-        inAnimation = false;
-    }, 500);
-
-}
 function renderContacts() {
     let content = document.getElementById('contact');
     content.innerHTML = '';
@@ -186,27 +158,28 @@ function renderContacts() {
     }
 }
 
-function showContacts() {
+function dropdown(area) {
     if (!inAnimation) {
-        let content = document.getElementById('contact');
+        let content = document.getElementById(area);
+        let bigArea = area[0].toUpperCase() + area.slice(1);
         content.classList.remove('d-none')
-        document.getElementById('contactShow').style = 'animation: dropdown 2s ease;'
-        document.getElementById('arrowContact').style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
-        document.getElementById('selectContact').setAttribute('onclick', 'hideContacts()');
-        document.getElementById('arrowContact').setAttribute('onclick', 'hideContacts()');
+        document.getElementById(area + 'Show').style = 'animation: dropdown 2s ease;'
+        document.getElementById(`arrow${bigArea}`).style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
+        document.getElementById(`select${bigArea}`).setAttribute('onclick', `dropup('${area}')`);
+        document.getElementById(`arrow${bigArea}`).setAttribute('onclick', `dropup('${area}')`);
     }
-
 }
 
-function hideContacts() {
-    let content = document.getElementById('contact');
-    let contactShow = document.getElementById('contactShow')
+function dropup(area) {
+    let content = document.getElementById(area);
+    let areaShow = document.getElementById(area + 'Show')
     inAnimation = true;
-    editEndHeight(contactShow);
-    document.getElementById('selectContact').setAttribute('onclick', 'showContacts()');
-    document.getElementById('arrowContact').setAttribute('onclick', 'showContacts()');
-    contactShow.style = 'animation: dropup 500ms ease;';
-    document.getElementById('arrowContact').style = 'animation: arrowDown 350ms ease;';
+    let bigArea = area[0].toUpperCase() + area.slice(1);
+    editEndHeight(areaShow);
+    document.getElementById('select' + bigArea).setAttribute('onclick', `show${bigArea}s()`);
+    document.getElementById('arrow' + bigArea).setAttribute('onclick', `show${bigArea}s()`);
+    areaShow.style = 'animation: dropup 500ms ease;';
+    document.getElementById('arrow' + bigArea).style = 'animation: arrowDown 350ms ease;';
     setTimeout(() => {
         content.classList.add('d-none');
         inAnimation = false;
@@ -233,14 +206,12 @@ function renderSelectedContacts() {
     content.innerHTML = '';
     if (selectedContacts.length > 0) {
         for (let i = 0; i < selectedContacts.length; i++) {
-            let color = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-            console.log(color)
+            let color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
             content.innerHTML += `<div class="circle" style="background-color: ${color.toUpperCase()};": >${selectedContacts[i]}</div>`
         }
     } else {
         content.innerHTML = 'Select contacts to assign';
     }
-
 }
 
 function showTaskAdded() {
