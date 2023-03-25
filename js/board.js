@@ -50,20 +50,23 @@ let task = [
         'subtasks': 'xxx'
     },
 ]
-/*
+
 function loadFromBackend() {
-    setURL('http://f01545d7@wilhelm-teicke.developerakademie.net/smallest_backend_ever');
+    
     loadBackend();
 }
 
+let users = []
+
 
 async function loadBackend() {
-
+    setURL('http://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     backend.setItem('Test', 'Hallo')
+    console.log("test")
 }
-*/
+
 
 
 
