@@ -8,7 +8,6 @@ let inAnimation = false;
 
 async function initAddTask() {
     setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
-    await downloadFromServer();
     renderCategorys();
     renderContacts();
     editCreateBtnOnMobile();
@@ -35,7 +34,7 @@ async function addTask(title, description, date) {
         'subtasks': subtasks
     }
     tasks.push(newTask);
-    await backend.setItem('users', JSON.stringify(tasks));
+    await backend.setItem('tasks', JSON.stringify(tasks));
     clearForm();
     showTaskAdded();
 }
@@ -97,15 +96,14 @@ async function addNewCategory() {
         'name': content,
         'color': selectedColor
     }
-    
-    await backend.setItem('categorys', JSON.stringify(newCategory));
+    categorys.push(newCategory);
+    await backend.setItem('categorys', JSON.stringify(categorys));
     closeNewCategoryInput();
     renderCategorys();
 }
 
 function closeNewCategoryInput() {
     document.getElementById('newCategoryInput').classList.add('d-none');
-    renderCategorys();
     document.getElementById('categoryShow').classList.remove('d-none');
 }
 
@@ -122,12 +120,11 @@ async function renderCategorys() {
     content.innerHTML = '';
     content.innerHTML += `<div class="categorys" onclick="showNewCategoryInput()">New Category</div>`
     await downloadFromServer();
-    categorys = await JSON.parse(backend.getItem('categorys')) || [];
+    categorys = JSON.parse(backend.getItem('categorys')) || [];
     for (let i = 0; i < categorys.length; i++) {
         let category = categorys[i];
         content.innerHTML += `<div class="categorys" onclick="selectCategory(${i})">${category['name']} <div style="background-color: ${category['color']}; width: 15px;
             height: 15px; border-radius: 100%;"></div></div>`
-
     }
 }
 
