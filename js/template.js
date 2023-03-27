@@ -1,7 +1,7 @@
 
 function init() {
   includeHTML()
-  
+
 }
 
 
@@ -38,7 +38,7 @@ function includeHTML() {
 function toggleLogoutBtn() {
   let body = document.getElementById('body')
   let btn = document.getElementById('header-extended-menu-container')
-  let slideContainer= document.getElementById('slide-container')
+  let slideContainer = document.getElementById('slide-container')
   let overlay = document.getElementById('overlay')
   if (btn.classList.contains('d-none')) {
     setTimeout(() => {
@@ -62,23 +62,24 @@ function removeOverlay() {
     document.getElementById('header-extended-menu-container').classList.add('d-none')
   }, 200);
   document.getElementById('overlay').classList.add('d-none')
-  document.getElementById('overlay').lastElementChild.classList.add('d-none')
+  //console.log(document.getElementById('overlay'))
+  // document.getElementById('overlay').lastElementChild.classList.add('d-none')
   document.getElementById('body').classList.remove('overflow-hidden')
   if (window.innerWidth < 1000) {
     document.getElementById('slide-container').classList.add('slide-out')
+    main.classList.remove('d-none')
   }
-
 }
 
 
 function manipulateFooterColor() {
- 
+
   let summary = document.getElementById('summary-btn')
   let board = document.getElementById('board-btn')
   let addTask = document.getElementById('add-task-btn')
   let contacts = document.getElementById('contacts-btn')
   let legalnotice = document.getElementById('legalnotice')
- 
+
   if (window.location.href.includes('summary')) {
     summary.classList.add('background-color')
   } else {
@@ -101,12 +102,22 @@ function manipulateFooterColor() {
     contacts.classList.add('background-color')
   } else {
     contacts.classList.remove('background-color')
-  } 
+  }
 
   if (window.location.href.includes('legalnotice')) {
     legalnotice.classList.add('background-color')
   } else {
     legalnotice.classList.remove('background-color')
-  } 
+  }
 }
 
+
+window.onresize = function() {
+  if (window.innerWidth > 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
+    main.classList.remove('d-none')
+  }
+  if (window.innerWidth < 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
+    main.classList.add('d-none')
+  }
+
+}

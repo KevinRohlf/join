@@ -257,7 +257,7 @@ a {
     padding: 32px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
-    max-width: 550px;
+    min-width: 500px;
     z-index: 999;
 }
 
@@ -297,7 +297,7 @@ a {
 .edit-task-container>div {
     background: #2A3647;
     border-radius: 10px;
-    padding: 8px 12px;
+    padding: 6px 13px;
 }
 
 .edit-task-container>div:hover {
@@ -376,6 +376,9 @@ a {
 .Media {
     background-color: #FFC701;
 }
+#cross-svg {
+    display: flex !important;
+}
 
 @media only screen and (min-width: 1000px) {
     .board-create-new-task-btn {
@@ -421,6 +424,23 @@ a {
 
     .find-task-img2 {
         top: 12px;
+    }
+
+    #card-container {
+        width: 100%;
+        height: 80%;
+        border-radius: 0px;
+        background-color: #F5F5F5;
+        box-shadow: none;
+        min-width: auto;
+    }
+
+    #cross-svg {
+        display: none !important;
+    }
+
+    #arrow-svg {
+        display: flex !important;
     }
 }
 

@@ -69,7 +69,7 @@ async function loadBackend() {
 function loadUsersFromStorage() {
     usersFromLocal = JSON.parse(localStorage.getItem('users')) || [];
     console.log(usersFromLocal)
-    currentTasks =  usersFromLocal[0].user_1[0].tasks
+    currentTasks = usersFromLocal[0].user_1[0].tasks
     console.log(currentTasks)
     for (let k = 0; k < currentTasks.length; k++) {
         console.log(currentTasks[k])
@@ -89,7 +89,7 @@ function loadTasks() {
 
 
 function renderTasks() {
-   // for (let j = 0; i < users[p].)
+    // for (let j = 0; i < users[p].)
     let i = 0
     task.forEach(element => {
         if (element.task_status == 'To do') {
@@ -115,7 +115,7 @@ function renderTasks() {
             renderAllTasks(element, content, i)
             renderContactSelection(element, i)
         }
-       // renderTaskCategoryColor(i)
+        // renderTaskCategoryColor(i)
         i++
 
     });
@@ -191,10 +191,14 @@ function renderTaskCategoryColor(i) {
 */
 
 function loadCard(i) {
+    if (window.innerWidth < 1000) {
+        main.classList.add('d-none')
+      }
+    body.classList.add('overflow-hidden')
     let overlay = document.getElementById('overlay')
     overlay.classList.remove('d-none')
     renderCard(i, overlay)
-   // renderCardCategoryColor()
+    // renderCardCategoryColor()
     renderCardContacts(i)
     getCardPrioImg(i)
 }
@@ -205,10 +209,15 @@ function renderCard(i) {
     /*html*/ `
         <div id="card-container" class="d-none" onclick="stopPropagation(event)">
             <div class="card-close-icon-container">
-                <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
+                <svg id="cross-svg" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
                     <path d="M22.9614 7.65381L7.65367 22.9616" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                 </svg>
+                <div>   
+                    <svg id="arrow-svg" class="d-none" width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.06825 9.95833H23.2917C24.1432 9.95833 24.8334 10.6486 24.8334 11.5C24.8334 12.3514 24.1432 13.0417 23.2917 13.0417H6.06825L13.2478 20.2212C13.8498 20.8232 13.8498 21.7992 13.2478 22.4011C12.6458 23.0031 11.6698 23.0031 11.0679 22.4011L1.58096 12.9142C0.799914 12.1332 0.799913 10.8668 1.58096 10.0858L11.0679 0.59887C11.6698 -0.00309756 12.6458 -0.00309813 13.2478 0.598869C13.8498 1.20084 13.8498 2.17682 13.2478 2.77879L6.06825 9.95833Z" fill="black"/>
+                    </svg>
+                </div>
             </div>
             <div class="task-category ${task[i].category}" style="font-size: 27px;">${task[i].category}</div>
             <div class="card-title">${task[i].title}</div>
@@ -226,7 +235,7 @@ function renderCard(i) {
                 <div id="contact-card-container"></div>
             </div>
             <div class="edit-task-container">
-                <div>
+                <div onclick="loadEditTask(${i})">
                     <svg width="21" height="31" viewBox="0 0 21 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.94494 22.5155L7.76427 25.4404L20.4074 4.60829C20.694 4.13616 20.5435 3.52113 20.0714 3.23459L16.9618 1.34736C16.4897 1.06082 15.8746 1.21127 15.5881 1.6834L2.94494 22.5155Z" fill="white"/>
                     <path d="M2.35987 23.4792L7.1792 26.4041L2.45058 28.6889L2.35987 23.4792Z" fill="white"/>
@@ -245,8 +254,12 @@ function stopPropagation(event) {
 
 
 function closeCard() {
+    body.classList.remove('overflow-hidden')
     document.getElementById('card-container').classList.add('d-none')
     document.getElementById('overlay').classList.add('d-none')
+    if (window.innerWidth < 1000) {
+        main.classList.remove('d-none')
+      }
 }
 /*
 function renderCardCategoryColor() {
@@ -339,6 +352,52 @@ function searchTasks() {
         }
     }
 }
+
+
+function loadEditTask(i) {
+    renderEditTask(i)
+}
+
+
+function renderEditTask(i) {
+    let content = document.getElementById('card-container')
+    content.innerHTML = 
+    /*html*/ `
+    <div>
+        <div></div>
+        <form>
+            <div>
+                <p>Title</p>
+                <input type="text" placeholder="${task[i].title}">
+            </div>
+            <div>
+                <p>Description</p>
+                <input type="text" placeholder="${task[i].title}">
+            </div>
+            <div>
+                <p>Due Date</p>
+                <input type="text" placeholder="${task[i].title}">
+            </div>
+            <div>
+                <p>Prio</p>
+                <input type="text" placeholder="${task[i].title}">
+            </div>
+            <div>
+                <p>Assigned to</p>
+                <input type="text" placeholder="${task[i].title}">
+            </div>
+            <button>
+                <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7.5L7 13.5L17 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+    `
+}
+
+
+
 
 
 function dragstart_handler(id) {
