@@ -11,14 +11,13 @@
     <link rel="stylesheet" href="./template.css">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="board.css">
-    <script src="./js/board.js"></script>
     <script src="./mini_backend.js"></script>
-    
+    <script src="./js/board.js"></script>
     <script src="./js/template.js"></script>
-
+    <script src="./js/beispielstruktur.js"></script>
 </head>
 
-<body id="body" onload="init(), loadTasks(), loadFromBackend()">
+<body id="body" onload="init(),safeInStorage(), loadBackend()">
     <div id="overlay" class="d-none" onclick="removeOverlay()"></div>
     <header w3-include-html="templates/header.html">
     </header>

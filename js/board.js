@@ -51,37 +51,30 @@ let task = [
     },
 ]
 
-function loadFromBackend() {
-    
-    loadBackend();
-}
+let usersFromLocal = []
+let currentTasks = []
+let p = 0
 
-let users = []
 
 
 async function loadBackend() {
-    setURL('http://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    backend.setItem('Test', 'Hallo')
-    console.log("test")
+    loadUsersFromStorage()
+    loadTasks()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function loadUsersFromStorage() {
+    usersFromLocal = JSON.parse(localStorage.getItem('users')) || [];
+    console.log(usersFromLocal)
+    currentTasks =  usersFromLocal[0].user_1[0].tasks
+    console.log(currentTasks)
+    for (let k = 0; k < currentTasks.length; k++) {
+        console.log(currentTasks[k])
+    }
+}
 
 
 let currentDraggedElement;
@@ -96,6 +89,7 @@ function loadTasks() {
 
 
 function renderTasks() {
+   // for (let j = 0; i < users[p].)
     let i = 0
     task.forEach(element => {
         if (element.task_status == 'To do') {
@@ -121,7 +115,7 @@ function renderTasks() {
             renderAllTasks(element, content, i)
             renderContactSelection(element, i)
         }
-        renderTaskCategoryColor(i)
+       // renderTaskCategoryColor(i)
         i++
 
     });
@@ -133,7 +127,7 @@ function renderAllTasks(element, content, i) {
     content.innerHTML +=
         /*html*/ `
         <div id="${i}" class="board-content" draggable="true" onclick="loadCard(${i})" ondragstart="dragstart_handler(${i})"  ondragend="removeTest(${i})">
-            <div class="task-category">${element.category}</div>
+            <div class="task-category ${element.category}">${element.category}</div>
             <div class="task-title">${element.title}</div>
             <div class="task-description">${element.description}</div>
             <div class="prio-and-contact-container">
@@ -179,7 +173,7 @@ function renderContactSelection(element, i) {
     //});
 }
 
-
+/*
 function renderTaskCategoryColor(i) {
     let content = document.getElementById(`${i}`)
     if (content.firstElementChild.textContent == 'Design') {
@@ -194,34 +188,41 @@ function renderTaskCategoryColor(i) {
         content.firstElementChild.classList.add('media')
     }
 }
-
+*/
 
 function loadCard(i) {
     let overlay = document.getElementById('overlay')
     overlay.classList.remove('d-none')
     renderCard(i, overlay)
-    renderCardCategoryColor()
+   // renderCardCategoryColor()
     renderCardContacts(i)
+    getCardPrioImg(i)
 }
 
 
 function renderCard(i) {
     overlay.innerHTML =
     /*html*/ `
-        <div id="card-container" class="d-none">${i}
-            <div>${task[i].category}</div>
-            <div>${task[i].title}</div>
-            <div>${task[i].description}</div>
-            <div>
-                <p>Due date</p>
+        <div id="card-container" class="d-none" onclick="stopPropagation(event)">
+            <div class="card-close-icon-container">
+                <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
+                    <path d="M22.9614 7.65381L7.65367 22.9616" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="task-category ${task[i].category}" style="font-size: 27px;">${task[i].category}</div>
+            <div class="card-title">${task[i].title}</div>
+            <div class="card-description">${task[i].description}</div>
+            <div class="card-date-container">
+                <p>Due date:</p>
                 <p>${task[i].date}</p>
             </div>
-            <div>
-                <p>Priority</p>
-                <p>${task[i].prio}</p>
+            <div class="card-prio-container">
+                <p>Priority:</p>
+                <p class="card-prio" id="card-${task[i].prio}">${task[i].prio}</p>
             </div>
             <div>
-                <p>Assigned to:</p>
+                <p style="font-weight: 700; font-size: 21px">Assigned to:</p>
                 <div id="contact-card-container"></div>
             </div>
             <div class="edit-task-container">
@@ -237,6 +238,17 @@ function renderCard(i) {
     document.getElementById('card-container').classList.remove('d-none')
 }
 
+
+function stopPropagation(event) {
+    event.stopPropagation();
+}
+
+
+function closeCard() {
+    document.getElementById('card-container').classList.add('d-none')
+    document.getElementById('overlay').classList.add('d-none')
+}
+/*
 function renderCardCategoryColor() {
     let content = document.getElementById('card-container')
     if (content.firstElementChild.textContent == 'Design') {
@@ -251,15 +263,15 @@ function renderCardCategoryColor() {
         content.firstElementChild.classList.add('media')
     }
 }
-
+*/
 function renderCardContacts(i) {
     let container = document.getElementById('contact-card-container')
     task[i].contactSelection.forEach(element => {
         container.innerHTML +=
        /*html*/ `
        <div class="contact-card-content">
-         <div style="background-color:red">${element}</div>
-        <p>Name</p>
+            <p style="background-color:red">${element}</p>
+            <p>Name</p>
         </div>
        `
     });
@@ -291,6 +303,24 @@ function getPrioImage(element, i) {
     } else if (content.id == `Urgent_${i}`) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-urgent.svg'
+        content.appendChild(img)
+    }
+}
+
+
+function getCardPrioImg(i) {
+    let content = document.getElementById(`card-${task[i].prio}`)
+    if (content.id == `card-Low`) {
+        let img = document.createElement('img')
+        img.src = 'assets/img/prio-low copy.svg'
+        content.appendChild(img)
+    } else if (content.id == `card-Medium`) {
+        let img = document.createElement('img')
+        img.src = 'assets/img/prio-medium copy.svg'
+        content.appendChild(img)
+    } else if (content.id == `card-Urgent`) {
+        let img = document.createElement('img')
+        img.src = 'assets/img/prio-urgent copy.svg'
         content.appendChild(img)
     }
 }

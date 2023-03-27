@@ -238,6 +238,16 @@ a {
     height: 200px;
 }
 
+.card-close-icon-container {
+    margin: 0 0 -16px 0 !important;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card-close-icon-container>svg:hover {
+    cursor: pointer;
+}
+
 #card-container {
     position: absolute;
     top: 50%;
@@ -247,6 +257,12 @@ a {
     padding: 32px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
+    max-width: 550px;
+    z-index: 999;
+}
+
+#card-container>div {
+    margin-bottom: 16px;
 }
 
 .contact-card-content {
@@ -254,17 +270,28 @@ a {
     align-items: center;
 }
 
-.contact-card-content>div {
+#contact-card-container {
+    margin-top: 16px;
+}
+
+.contact-card-content>p:first-child {
     color: white;
     padding: 6px;
     border: 1px solid #FFFFFF;
     border-radius: 50%;
+    margin-right: 16px !important;
+}
+
+.contact-card-content>p {
+    margin: 8px 0;
 }
 
 .edit-task-container {
     display: flex;
     justify-content: flex-end;
-    
+    margin-bottom: 0 !important;
+    margin-top: -64px;
+
 }
 
 .edit-task-container>div {
@@ -277,23 +304,76 @@ a {
     cursor: pointer;
 }
 
-.design {
+.card-description {
+    font-size: 21px;
+}
+
+.card-title {
+    font-size: 61px;
+}
+
+.card-date-container,
+.card-prio-container {
+    display: flex;
+}
+
+.card-date-container>p,
+.card-prio-container>p {
+    margin-right: 16px;
+    font-size: 21px;
+}
+
+.card-date-container>p:first-child,
+.card-prio-container>p:first-child {
+    font-weight: 700;
+}
+
+.card-prio-container {
+    align-items: center;
+}
+
+.card-prio {
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 4px 16px;
+    color: white;
+}
+
+.card-prio>img {
+    margin-left: 16px;
+}
+
+#card-Low {
+    background-color: #7AE229;
+}
+
+#card-Medium {
+    background-color: #FFA800
+}
+
+#card-Urgent {
+    background-color: #FF3D00;
+}
+
+.Design {
     background-color: #FF7A00;
 }
 
-.sales {
+.Sales {
     background-color: #FC71FF;
 }
 
-.backoffice {
+.Backoffice {
     background-color: #1FD7C1;
 }
 
-.marketing {
+.Marketing {
     background-color: #0038FF;
 }
 
-.media {
+.Media {
     background-color: #FFC701;
 }
 

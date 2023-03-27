@@ -131,3 +131,7 @@ let users = [
         ]
     }
 ]
+
+function safeInStorage() {
+    localStorage.setItem('users', JSON.stringify(users));
+}
