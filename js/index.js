@@ -1,3 +1,37 @@
+// BACKEND //
+
+async function initRegistration() {
+  setURL(
+    "https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever"
+  );
+  await downloadFromServer();
+  users = JSON.parse(backend.getItem("users")) || [];
+}
+
+async function addUsers() {
+  let name = document.getElementById("name");
+  let email = document.getElementById("signUpEmail");
+  let password = document.getElementById("signUpPassword");
+  users.push({
+    name: name.value,
+    email: email.value,
+    password: password.value,
+  });
+  await backend.setItem("users", JSON.stringify(users));
+}
+
+function login() {
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  let user = users.find(
+    (u) => u.email == email.value && u.password == password.value
+  );
+  console.log(user);
+  if (user) {
+    console.log("User gefunden");
+  }
+}
+
 function initial() {
   document.getElementById("capaOne").classList.add("animation");
   document.getElementById("capaOneWhite").classList.add("animation");
@@ -82,7 +116,7 @@ function visibilitySignUpPW() {
 }
 
 function renderSignUp() {
-  document.getElementById("forgottenPWContainer").style.display ="none";
+  document.getElementById("forgottenPWContainer").style.display = "none";
   document.getElementById("loginContainer").style.display = "none";
   document.getElementById("notAJoinUser").style.display = "none";
   document.getElementById("resetPWContainer").style.display = "none";
@@ -90,7 +124,7 @@ function renderSignUp() {
 }
 
 function renderLogIn() {
-  document.getElementById("forgottenPWContainer").style.display ="none";
+  document.getElementById("forgottenPWContainer").style.display = "none";
   document.getElementById("signUpContainer").style.display = "none";
   document.getElementById("resetPWContainer").style.display = "none";
   document.getElementById("loginContainer").style.display = "flex";

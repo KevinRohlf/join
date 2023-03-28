@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="indexResponsive.css" />
     <link rel="stylesheet" href="fonts.css" />
     <script src="./js/index.js"></script>
+    <script src="./mini_backend.js"></script>
 
     <title>Page 1</title>
   </head>
-  <body onload="initial()">
+  <body onload="initRegistration(); initial()">
     <div class="capaOneContainer" id="capaOneContainer"></div>
     <img
       class="capaOneWhite"
@@ -20,7 +21,8 @@
     />
     <img class="capaOne" id="capaOne" src="assets/img/CapaOne.svg" />
     <div class="pageOneContainer">
-      <div class="notAJoinUser" id="notAJoinUser">Not a Join user?
+      <div class="notAJoinUser" id="notAJoinUser">
+        Not a Join user?
         <button class="loginSignUp">
           <div class="loginSignUpButton" onclick="renderSignUp()">Sign Up</div>
         </button>
@@ -39,7 +41,7 @@
               id="email"
               placeholder="Email"
               required
-              minlength="5"
+              minlength="0"
             />
             <img src="assets/img/postcard.svg" />
           </div>
@@ -51,7 +53,7 @@
               id="password"
               placeholder="Password"
               required
-              minlength="10"
+              minlength="0"
             />
             <img
               class="pwSymbol"
@@ -60,24 +62,24 @@
               src="assets/img/lock.svg"
             />
           </div>
-        </form>
-        <div class="remember">
-          <div class="rememberMe">
-            <input
-              type="checkbox"
-              class="rememberMeCheckbox"
-              id="rememberMeCheckbox"
-            />
-            <label for="rememberMeCheckbox" class="rememberMeCheckboxLabel"
-              >Remember me</label
-            >
+          <div class="remember">
+            <div class="rememberMe">
+              <input
+                type="checkbox"
+                class="rememberMeCheckbox"
+                id="rememberMeCheckbox"
+              />
+              <label for="rememberMeCheckbox" class="rememberMeCheckboxLabel"
+                >Remember me</label
+              >
+            </div>
+            <a href="#" onclick="renderForgottenPW()">Forgot my password</a>
           </div>
-          <a href="#" onclick="renderForgottenPW()">Forgot my password</a>
-        </div>
-        <div class="MemberOrGuest">
-          <button class="memberLogin">Log in</button>
-          <button class="guestLogin">Guest Log in</button>
-        </div>
+          <div class="MemberOrGuest">
+            <button class="memberLogin" onclick="login(); return false;">Log in</button>
+            <button class="guestLogin">Guest Log in</button>
+          </div>
+        </form>
       </div>
 
       <!-- display:none SignUp -->
@@ -102,7 +104,7 @@
               id="name"
               placeholder="Name"
               required
-              minlength="5"
+              minlength="0"
             />
             <img src="assets/img/figur.svg" />
           </div>
@@ -113,7 +115,7 @@
               id="signUpEmail"
               placeholder="Email"
               required
-              minlength="5"
+              minlength="0"
             />
             <img src="assets/img/postcard.svg" />
           </div>
@@ -134,10 +136,10 @@
               src="assets/img/lock.svg"
             />
           </div>
+          <div class="signUpButtonContainer">
+            <button class="signUp" onclick="addUsers(); return false;">Sign up</button>
+          </div>
         </form>
-        <div class="signUpButtonContainer">
-          <button class="signUp">Sign up</button>
-        </div>
       </div>
 
       <!-- display:none Forgotten Password -->
@@ -170,10 +172,10 @@
             />
             <img src="assets/img/postcard.svg" />
           </div>
+          <div class="sendEmailContainer">
+            <button class="sendEmail">Send me the mail</button>
+          </div>
         </form>
-        <div class="sendEmailContainer">
-          <button class="sendEmail">Send me the mail</button>
-        </div>
       </div>
 
       <!-- display:none Reset PW -->
@@ -212,10 +214,10 @@
               minlength="10"
             />
           </div>
+          <div class="continueContainer">
+            <button class="continue">Continue</button>
+          </div>
         </form>
-        <div class="continueContainer">
-          <button class="continue">Continue</button>
-        </div>
       </div>
     </div>
   </body>
