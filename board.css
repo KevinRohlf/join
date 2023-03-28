@@ -238,6 +238,46 @@ a {
     height: 200px;
 }
 
+
+#card-Low {
+    background-color: #7AE229;
+}
+
+#card-Medium {
+    background-color: #FFA800
+}
+
+#card-Urgent {
+    background-color: #FF3D00;
+}
+
+.Design {
+    background-color: #FF7A00;
+}
+
+.Sales {
+    background-color: #FC71FF;
+}
+
+.Backoffice {
+    background-color: #1FD7C1;
+}
+
+.Marketing {
+    background-color: #0038FF;
+}
+
+.Media {
+    background-color: #FFC701;
+}
+
+#cross-svg {
+    display: flex !important;
+}
+
+/*********Detailed View of Task***********/
+
+
 .card-close-icon-container {
     margin: 0 0 -16px 0 !important;
     display: flex;
@@ -345,40 +385,141 @@ a {
     margin-left: 16px;
 }
 
-#card-Low {
-    background-color: #7AE229;
+
+/*********Task Editor***********/
+
+.edit-task-form>div>input {
+    padding: 8px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
 }
 
-#card-Medium {
-    background-color: #FFA800
+form>div {
+    margin-bottom: 16px;
 }
 
-#card-Urgent {
-    background-color: #FF3D00;
+.edit-task-prio-container {
+    display: flex;
 }
 
-.Design {
-    background-color: #FF7A00;
+.edit-task-prio-container>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 8px 10px;
 }
 
-.Sales {
-    background-color: #FC71FF;
+.edit-task-prio-container>div>p {
+    margin-right: 12px;
 }
 
-.Backoffice {
-    background-color: #1FD7C1;
+textarea:focus,
+input:focus {
+    outline: none;
 }
 
-.Marketing {
-    background-color: #0038FF;
+
+.dropdown {
+    position: relative;
+    background-color: white;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    min-height: 42px;
+    overflow: hidden;
 }
 
-.Media {
-    background-color: #FFC701;
+.arrow {
+    position: absolute;
+    top: 17px;
+    right: 10px;
+    cursor: pointer;
+
 }
-#cross-svg {
-    display: flex !important;
+
+.gap-10 {
+    gap: 10px;
 }
+
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+#selectContact {
+    align-items: center;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    height: 42px;
+}
+
+.subtask-checkbox {
+    appearance: none;
+    width: 16px;
+    height: 16px !important;
+    background-image: url(assets/img/checkbox.svg);
+    background-size: cover;
+    background-position: center;
+}
+
+.subtask-checkbox:checked {
+    background-image: url(assets/img/checkboxOnClick.svg);
+}
+
+
+@keyframes dropdown {
+    0% {
+        max-height: 42px;
+    }
+
+    100% {
+        max-height: 900px;
+    }
+}
+
+@keyframes dropup {
+    0% {
+        max-height: var(--end-height);
+    }
+
+    100% {
+        max-height: 45px;
+    }
+}
+
+@keyframes arrowUp {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes arrowDown {
+    0% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+
+
 
 @media only screen and (min-width: 1000px) {
     .board-create-new-task-btn {
