@@ -1,8 +1,8 @@
 let contacts = [];
 let alphabet = [];
-setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
 
 async function init() {
+	setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
 	contacts = JSON.parse(backend.getItem('contacts')) || [];
 
