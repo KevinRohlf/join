@@ -1,4 +1,4 @@
-let task = [
+/*let task = [
     {
         'task_status': 'To do',
         'title': 'Website redesign',
@@ -50,22 +50,30 @@ let task = [
         'subtasks': 'xxx'
     },
 ]
-
+*/
 let usersFromLocal = []
+
+let tasks = []
+let categorys = []
+let contacts = []
+
 let currentTasks = []
 let p = 0
 let inAnimation = false;
+let currentDraggedElement;
 
 
 async function loadBackend() {
-    /*  setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
-      await downloadFromServer();
-      users = JSON.parse(backend.getItem('users')) || [];
-      loadUsersFromStorage()*/
+    setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    await downloadFromServer();
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    categorys = JSON.parse(backend.getItem('categorys')) || [];
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    // loadUsersFromStorage()
     loadTasks()
 }
 
-
+/*
 function loadUsersFromStorage() {
     usersFromLocal = JSON.parse(localStorage.getItem('users')) || [];
     console.log(usersFromLocal)
@@ -75,11 +83,14 @@ function loadUsersFromStorage() {
         console.log(currentTasks[k])
     }
 }
+*/
 
 
-let currentDraggedElement;
 
 function loadTasks() {
+    console.log(tasks)
+    console.log(categorys)
+    console.log(contacts)
     document.getElementById('to-do-container').innerHTML = ''
     document.getElementById('in-progress-container').innerHTML = ''
     document.getElementById('awaiting-feedback-container').innerHTML = ''
@@ -89,75 +100,114 @@ function loadTasks() {
 
 
 function renderTasks() {
-    // for (let j = 0; i < users[p].)
-    let i = 0
-    task.forEach(element => {
-        if (element.task_status == 'To do') {
+    for (let i = 0; i < tasks.length; i++) {
+        let currentTask = tasks[i]
+        if (currentTask.status == 'toDo') {
             // renderToDo(element)
             // renderContactSelection(element)
             let content = document.getElementById('to-do-container')
-            renderAllTasks(element, content, i)
-            renderContactSelection(element, i)
-        } else if (element.task_status == 'In progress') {
+            renderAllTasks(currentTask, content, i)
+            renderContactSelection(currentTask, i)
+        } else if (currentTask.status == 'inProgress') {
             // renderInProgress(element)
             // renderContactSelection(element)
             let content = document.getElementById('in-progress-container')
-            renderAllTasks(element, content, i)
-            renderContactSelection(element, i)
-        } else if (element.task_status == 'Awaiting Feedback') {
+            renderAllTasks(currentTask, content, i)
+            renderContactSelection(currentTask, i)
+        } else if (currentTask.status == 'awaitingFeedback') {
             // renderAwaitingFeedback(element)
             let content = document.getElementById('awaiting-feedback-container')
-            renderAllTasks(element, content, i)
-            renderContactSelection(element, i)
-        } else if (element.task_status == 'Done') {
+            renderAllTasks(currentTask, content, i)
+            renderContactSelection(currentTask, i)
+        } else if (currentTask.status == 'done') {
             // renderDone(element)
             let content = document.getElementById('done-container')
-            renderAllTasks(element, content, i)
-            renderContactSelection(element, i)
+            renderAllTasks(currentTask, content, i)
+            renderContactSelection(currentTask, i)
         }
         // renderTaskCategoryColor(i)
-        i++
-
-    });
+    }
+    /* let i = 0
+    task.forEach(element => {
+         if (element.task_status == 'To do') {
+             // renderToDo(element)
+             // renderContactSelection(element)
+             let content = document.getElementById('to-do-container')
+             renderAllTasks(element, content, i)
+             renderContactSelection(element, i)
+         } else if (element.task_status == 'In progress') {
+             // renderInProgress(element)
+             // renderContactSelection(element)
+             let content = document.getElementById('in-progress-container')
+             renderAllTasks(element, content, i)
+             renderContactSelection(element, i)
+         } else if (element.task_status == 'Awaiting Feedback') {
+             // renderAwaitingFeedback(element)
+             let content = document.getElementById('awaiting-feedback-container')
+             renderAllTasks(element, content, i)
+             renderContactSelection(element, i)
+         } else if (element.task_status == 'Done') {
+             // renderDone(element)
+             let content = document.getElementById('done-container')
+             renderAllTasks(element, content, i)
+             renderContactSelection(element, i)
+         }
+         // renderTaskCategoryColor(i)
+         i++
+ 
+     });*/
 }
 
 
 
-function renderAllTasks(element, content, i) {
+function renderAllTasks(currentTask, content, i) {
+
     content.innerHTML +=
         /*html*/ `
         <div id="${i}" class="board-content" draggable="true" onclick="loadCard(${i})" ondragstart="dragstart_handler(${i})"  ondragend="removeTest(${i})">
-            <div class="task-category ${element.category}">${element.category}</div>
-            <div class="task-title">${element.title}</div>
-            <div class="task-description">${element.description}</div>
+            <div class="task-category ${currentTask.category}">${currentTask.category}</div>
+            <div class="task-title">${currentTask.title}</div>
+            <div class="task-description">${currentTask.description}</div>
             <div class="prio-and-contact-container">
-                <div class="contact-selection" id="contact-selection-${element.task_status}_${i}"></div>
-                <div id="${element.prio}_${i}"></div>
+                <div class="contact-selection" id="contact-selection-${currentTask.status}_${i}"></div>
+                <div id="${currentTask.prio}_${i}"></div>
             </div>
             
         </div>
         `
-    getPrioImage(element, i)
+    getPrioImage(currentTask, i)
+    getTaskCategoryColor(currentTask, i)
 }
 
 
-function renderContactSelection(element, i) {
-    for (let k = 0; k < element.contactSelection.length; k++) {
-        if (element.contactSelection.length <= 3) {
-            document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
+function getTaskCategoryColor(currentTask, i) {
+    for (let j = 0; j < categorys.length; j++) {
+        if (categorys[j].name == currentTask.category) {
+            document.getElementById(i).firstElementChild.style = `background-color: ${categorys[j].color}`
+        }
+    }
+}
+
+
+function renderContactSelection(currentTask, i) {
+    let currentContact
+    for (let k = 0; k < currentTask.contactSelection.length; k++) {
+        currentContact = currentTask.contactSelection[k]
+        if (currentTask.contactSelection.length <= 3) {
+            document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
             /*html*/ `
-            <div>${element.contactSelection[k]}</div>
+            <div id="${currentContact}">${currentContact}</div>
             `
         } else {
             if (k < 2) {
-                document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
+                document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
                 /*html*/ `
-                <div>${element.contactSelection[k]}</div>
+                <div>${currentContact}</div>
                 `
             } else {
-                document.getElementById(`contact-selection-${element.task_status}_${i}`).innerHTML +=
+                document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
                 /*html*/ `
-                <div>${'+' + (element.contactSelection.length - 2)}</div>
+                <div>${'+' + (currentTask.contactSelection.length - 2)}</div>
                 `
                 break
             }
@@ -169,9 +219,22 @@ function renderContactSelection(element, i) {
           `
           <div>${contact}</div>
           `*/
-    randomBackgroundColor(element, i)
+    randomBackgroundColor(currentTask, i)
+    getContactColor(currentContact)
     //});
 }
+
+
+function getContactColor(currentContact) {
+    for (let j = 0; j < contacts.length; j++) {
+        console.log(contacts[j].initials)
+        console.log(currentContact)
+        if (contacts[j].initials == currentContact) {
+            document.getElementById(currentContact).style = `background-color: ${contacts[j].color}`
+        }
+    }
+}
+
 
 /*
 function renderTaskCategoryColor(i) {
@@ -291,8 +354,8 @@ function renderCardContacts(i) {
 }
 
 
-function randomBackgroundColor(element, i) {
-    let children = document.getElementById(`contact-selection-${element.task_status}_${i}`).children
+function randomBackgroundColor(currentTask, i) {
+    let children = document.getElementById(`contact-selection-${currentTask.status}_${i}`).children
     for (let j = 0; j < children.length; j++) {
         let r = Math.floor(Math.random() * 256)
         let g = Math.floor(Math.random() * 256)
@@ -303,17 +366,17 @@ function randomBackgroundColor(element, i) {
 }
 
 
-function getPrioImage(element, i) {
-    let content = document.getElementById(`${element.prio}_${i}`)
-    if (content.id == `Low_${i}`) {
+function getPrioImage(currentTask, i) {
+    let content = document.getElementById(`${currentTask.prio}_${i}`)
+    if (content.id == `low_${i}`) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-low.svg'
         content.appendChild(img)
-    } else if (content.id == `Medium_${i}`) {
+    } else if (content.id == `medium_${i}`) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-medium.svg'
         content.appendChild(img)
-    } else if (content.id == `Urgent_${i}`) {
+    } else if (content.id == `urgent_${i}`) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-urgent.svg'
         content.appendChild(img)
@@ -456,7 +519,7 @@ function renderEditTask(i) {
 
 function changePrio(i, prio) {
     task[i].prio = `${prio}`
-    highlightPrio(i) 
+    highlightPrio(i)
 }
 
 
@@ -471,9 +534,16 @@ function updateInput(i) {
     let inputTitle = document.getElementById('edit-task-title')
     let inputDescription = document.getElementById('edit-task-description')
     let inputDate = document.getElementById('edit-task-date')
-    task[i].title = inputTitle.value
-    task[i].description = inputDescription.value
-    task[i].date = inputDate.value
+    if (!inputTitle.value == '') {
+        task[i].title = inputTitle.value
+    }
+    if (!inputDescription.value == '') {
+        task[i].description = inputDescription.value
+    }
+
+    if (!inputDate.value == '') {
+        task[i].date = inputDate.value
+    }
 }
 
 
