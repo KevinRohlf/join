@@ -24,11 +24,11 @@ function login() {
   let email = document.getElementById("email");
   let password = document.getElementById("password");
   let user = users.find(
-    (u) => u.email == email.value && u.password == password.value
+    u => u.email == email.value && u.password == password.value
   );
-  console.log(user);
+  window.document.location.href = "https://gruppenarbeit-479-join.developerakademie.net/summary.html";
   if (user) {
-    console.log("User gefunden");
+    console.log(user);
   }
 }
 
@@ -49,7 +49,7 @@ function initial() {
 
 let inputPW = false;
 
-function changePWSymbol() {
+async function changePWSymbol() {
   let pwInputField = document.getElementById("password");
   let pwSymbol = document.getElementById("pwSymbol");
   if (pwInputField.value == "") {
@@ -68,7 +68,7 @@ function changePWSymbol() {
   }
 }
 
-function visibilityPW() {
+async function visibilityPW() {
   let pw = document.getElementById("password");
   let pwSymbol = document.getElementById("pwSymbol");
   if (inputPW === true) {
@@ -82,7 +82,7 @@ function visibilityPW() {
   }
 }
 
-function changeSignUpPWSymbol() {
+async function changeSignUpPWSymbol() {
   let pwInputField = document.getElementById("signUpPassword");
   let pwSymbol = document.getElementById("pwSymbol");
   if (pwInputField.value == "") {
@@ -101,7 +101,7 @@ function changeSignUpPWSymbol() {
   }
 }
 
-function visibilitySignUpPW() {
+async function visibilitySignUpPW() {
   let pw = document.getElementById("signUpPassword");
   let pwSymbol = document.getElementById("pwSymbol");
   if (inputPW === true) {
