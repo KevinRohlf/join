@@ -11,13 +11,16 @@
     <link rel="stylesheet" href="./templates/footer.css">
     <link rel="stylesheet" href="./templates/header.css">
     <link rel="stylesheet" href="./template.css">
+    <script src="./mini_backend.js"></script>
     <script src="./js/template.js"></script>
+    <script src="./js/contactsHTML.js"></script>
+
 
     <title>Join-Contacts</title>
 </head>
 
 
-<body onload="loadAllContacts(); includeHTML()">
+<body onload="init(); includeHTML()">
     <div id="overlay" class="d-none" onclick="removeOverlay()"></div>
     <header w3-include-html="templates/header.html"></header>
     <main>
@@ -26,7 +29,7 @@
         </div>
 
         <section class="contacts-container">
-            <section onclick="closeSingleContactDesktop()" id="contacts" class="contacts"></section>
+            <section onclick="closeSingleContactDesktop()" id="contacts-field" class="contacts-field"></section>
             <section id="contacts-details" class="contacts-details">
                 <div class="header-container">
                     <h1>Contacts</h1>
@@ -120,7 +123,6 @@
     <footer w3-include-html="templates/footer.html"></footer>
 
     <script src="./js/contacts.js"></script>
-    <script src="./js/contactsHTML.js"></script>
 </body>
 
 </html>

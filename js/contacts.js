@@ -1,11 +1,20 @@
-let allContacts = [];
+let contacts = [];
 let alphabet = [];
+setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+
+async function init() {
+    await downloadFromServer();
+	contacts = JSON.parse(backend.getItem('contacts')) || [];
+
+	renderContacts();
+}
+
 
 
 function loadAllContacts() {
-	let allContactsAsString = localStorage.getItem('allContacts');
-	if (allContactsAsString) {
-		allContacts = JSON.parse(allContactsAsString);
+	let contactsAsString = localStorage.getItem('contacts');
+	if (contactsAsString) {
+		contacts = JSON.parse(contactsAsString);
 	}
 	renderContacts();
 }
@@ -21,7 +30,7 @@ function renderContacts() {
 
 // sort all contacts
 function sortAllContacts() {
-	allContacts.sort((a, b) => {
+	contacts.sort((a, b) => {
 		return a.name.localeCompare(b.name);
 	  });
 }
@@ -30,7 +39,7 @@ function sortAllContacts() {
 // create all letters of existing contacts
 function createAlphabet() {
 	alphabet = [];
-	allContacts.forEach(function(contact) {
+	contacts.forEach(function(contact) {
 		if (alphabet.indexOf(getFirstLetter(contact)) === -1) {
 			alphabet.push(getFirstLetter(contact));
 			}
@@ -45,7 +54,7 @@ function getFirstLetter(contact) {
 
 // render all letters of existing contacts
 function renderAlphabet() {
-	let contactlist = document.getElementById("contacts");
+	let contactlist = document.getElementById("contacts-field");
 	contactlist.innerHTML = "";
 	for (let i = 0; i < alphabet.length; i++) {
 		contactlist.innerHTML += htmlTemplateRenderAlphabet(i);
@@ -55,13 +64,13 @@ function renderAlphabet() {
 
 // render all contacts in letter structure
 function renderAllContacts() {
-	for (let i = 0; i < allContacts.length; i++) {
-		let firstLetter = getFirstLetter(allContacts[i]);
+	for (let i = 0; i < contacts.length; i++) {
+		let firstLetter = getFirstLetter(contacts[i]);
 		for (let j = 0; j < alphabet.length; j++) {
 		  let letterOfAlphabet = alphabet[j];
 		  if (letterOfAlphabet == firstLetter) {
 				document.getElementById(`group-${firstLetter}`).innerHTML +=
-			  	htmlTemplateRenderAllContacts(allContacts[i], i);
+			  	htmlTemplateRenderAllContacts(contacts[i], i);
 		  	}
 		};
 	};
@@ -70,34 +79,39 @@ function renderAllContacts() {
 
 // read new contact vaules
 function addToContact() {
-	let name = document.getElementById('name').value;
-	let email = document.getElementById('email').value;
-	let phone = document.getElementById('phone').value;
+	let name = document.getElementById('name');
+	let email = document.getElementById('email');
+	let phone = document.getElementById('phone');
 	
 	newContact(name, email, phone);
 }
 
 
 // create new contact
-function newContact(name, email, phone) {
+async function newContact(name, email, phone) {
 	let initials = getInitials(name);
 	let initialColor = getColor();
 
-	let contact = {
-		'name': name,
-		'email': email,
-		'phone': phone,
+	let newContact = {
+        'name': name.value,
+        'email': email.value,
+        'phone': phone.value,
 		'initials': initials,
-		'color': initialColor,
-	};
+		'color': initialColor
+    }
+    contacts.push(newContact);
+    await backend.setItem('contacts', JSON.stringify(contacts));
 
-	allContacts.push(contact);
 	addContactClose();
 	clearInput();
-	saveAllContacts();
-	loadAllContacts();
+	init();
 }
 
+/*
+async function saveAllContacts(contacts) {
+	await backend.setItem('contacts', JSON.stringify(contacts));
+}
+*/
 
 // seperate initials of all names
 function getInitials(fullName) {
@@ -125,22 +139,16 @@ function clearInput() {
 }
 
 
-function saveAllContacts() {
-	let allContactsAsString = JSON.stringify(allContacts);
-    localStorage.setItem('allContacts', allContactsAsString);
-}
-
-
 // save contact
 function saveActiveContact(i) {
 	let newName = document.getElementById('edit-name').value;
 	let newEmail = document.getElementById('edit-email').value;
 	let newPhone = document.getElementById('edit-phone').value;
-	allContacts[i].name = newName;
-	allContacts[i].email = newEmail;
-	allContacts[i].phone = newPhone;
+	contacts[i].name = newName;
+	contacts[i].email = newEmail;
+	contacts[i].phone = newPhone;
 	saveAllContacts();
-	loadAllContacts();
+	init();
 	closeSingleContactDesktop();
 	closeSingleContactMobile();
 	editContactClose();
@@ -152,11 +160,17 @@ let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
 const widths = [0, 1400];
 
-//window.addEventListener('resize', function () {
-//	renderSingleContact(i);
-//  }, false);
 
-//window.addEventListener('resize', renderSingleContact.bind(null, i), false);
+
+/*
+window.addEventListener('resize', function () {
+renderSingleContact(i);
+});
+*/
+
+// window.addEventListener('resize', renderSingleContact(i));
+
+
 
 function renderSingleContact(i) {
 if (window.innerWidth>widths[1]) {
@@ -171,17 +185,17 @@ function renderSingleContactDesktop(i) {
 	singleContactOverlay.style.display = 'flex';
 	contactContent.style = 'animation:slide-in .5s ease;';
 	contactContent.innerHTML = '';
-	contactContent.innerHTML += htmlTemplateRenderSingleContact(allContacts[i], i);
+	contactContent.innerHTML += htmlTemplateRenderSingleContact(contacts[i], i);
 }
 
 
 function renderSingleContactMobile(i) {
-	contacts.style.display = 'none';
+	document.getElementById('contacts-field').style.display = 'none';
 	singleContactOverlay.style.display = 'flex';
 	contactContent.style = 'animation:none;';
 	contactContent.style.display = 'flex';
 	contactContent.innerHTML = '';
-	contactContent.innerHTML += htmlTemplateRenderSingleContact(allContacts[i], i);
+	contactContent.innerHTML += htmlTemplateRenderSingleContact(contacts[i], i);
 	document.getElementById('contacts-details').style.display = 'flex';
 	document.getElementById('contact-btn').style.display = 'none';
 }
@@ -196,7 +210,7 @@ function closeSingleContactDesktop() {
 
 
 function closeSingleContactMobile() {
-	contacts.style.display = 'flex';
+	document.getElementById('contacts-field').style.display = 'flex';
 	singleContactOverlay.style.display = 'none';
 	document.getElementById('contacts-details').style.display = 'none';
 	document.getElementById('contact-btn').style.display = 'flex';
@@ -206,7 +220,7 @@ function closeSingleContactMobile() {
 function editSingleContact(i) {
 	let formContent = document.getElementById('contact-field-content');
 	formContent.innerHTML = '';
-	formContent.innerHTML += htmlTemplateEditSingleContact(allContacts[i], i);
+	formContent.innerHTML += htmlTemplateEditSingleContact(contacts[i], i);
 }
 
 

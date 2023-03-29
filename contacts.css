@@ -44,7 +44,7 @@ body {
     margin-left: 450px;
 }
 
-.contacts {
+.contacts-field {
     position: fixed;
     left: 300px;
     top: 79px;
@@ -325,7 +325,7 @@ body {
     bottom: 0;
     left: 0;
     transition: opacity 225ms;
-  }
+}
 
 .single-contact-overlay {
     display: flex;
@@ -460,7 +460,7 @@ body {
         display: none;
     }
     
-    .contacts {
+    .contacts-field {
         width: calc(100% - 300px);
         align-items: center;
         padding: 70px 0 0 0;
@@ -570,7 +570,7 @@ body {
 
 
 @media only screen and (max-width: 1000px) {
-    .contacts {
+    .contacts-field {
         left: 0;
         width: 100%;
         min-width: 0;
@@ -638,17 +638,8 @@ body {
     .mobile-back-icon {
         top: 160px;
     }
-    
-
-    
-
-
-
-
-
 
     .single-contact-overlay {
         top: 300px;
     }
-
 }
