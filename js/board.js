@@ -5,7 +5,7 @@ let task = [
         'description': 'Modify the contents of the main website...',
         'category': 'Design',
         'contactSelection': ['WT', 'KR', 'CB', 'PE'],
-        'date': 'xxx',
+        'date': '22/02/2022',
         'prio': 'Low',
         'subtasks': 'xxx'
     },
@@ -15,7 +15,7 @@ let task = [
         'description': 'Make the product presentation to prospect buyers',
         'category': 'Sales',
         'contactSelection': ['KR', 'CB', 'PE'],
-        'date': 'xxx',
+        'date': '11/11/2011',
         'prio': 'Urgent',
         'subtasks': 'xxx'
     },
@@ -25,7 +25,7 @@ let task = [
         'description': 'Write open invoices for customer',
         'category': 'Backoffice',
         'contactSelection': ['CB', 'PE'],
-        'date': 'xxx',
+        'date': '01/01/2024',
         'prio': 'Medium',
         'subtasks': 'xxx'
     },
@@ -35,7 +35,7 @@ let task = [
         'description': 'Develope an ad campaign for brand positioning',
         'category': 'Marketing',
         'contactSelection': ['KR', 'PE'],
-        'date': 'xxx',
+        'date': '13/12/2023',
         'prio': 'Medium',
         'subtasks': 'xxx'
     },
@@ -45,7 +45,7 @@ let task = [
         'description': 'Edit the new company video',
         'category': 'Media',
         'contactSelection': ['KR', 'PE', 'KR', 'KR', 'KR', 'KR'],
-        'date': 'xxx',
+        'date': '29/03/2023',
         'prio': 'Low',
         'subtasks': 'xxx'
     },
@@ -58,10 +58,10 @@ let inAnimation = false;
 
 
 async function loadBackend() {
-  /*  setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
-    await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
-    loadUsersFromStorage()*/
+    /*  setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+      await downloadFromServer();
+      users = JSON.parse(backend.getItem('users')) || [];
+      loadUsersFromStorage()*/
     loadTasks()
 }
 
@@ -358,6 +358,7 @@ function loadEditTask(i) {
     renderEditTask(i)
     renderContacts(i);
     renderCardContacts(i)
+    highlightPrio(i)
 }
 
 
@@ -367,23 +368,28 @@ function renderEditTask(i) {
     /*html*/ `
     <div>
         <div></div>
-        <form class="edit-task-form">
+        <form class="edit-task-form"; onsubmit="return false;">
             <div>
                 <p>Title</p>
-                <input type="text" placeholder="${task[i].title}">
+                <input type="text" placeholder="${task[i].title}" id="edit-task-title">
             </div>
             <div>
                 <p>Description</p>
-                <input type="textarea" placeholder="${task[i].description}">
+                <input type="textarea" placeholder="${task[i].description}" id="edit-task-description">
             </div>
-            <div>
+            <div class="edit-task-date-container">
                 <p>Due Date</p>
-                <input type="date" placeholder="${task[i].date}">
+                <input type="text" placeholder="${task[i].date}" onfocus="(this.type='date')" onblur="(this.type='text')" id="edit-task-date">
+                <div class="edit-task-date-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.8334 2.49984H22.3335C22.6429 2.49984 22.9397 2.62275 23.1584 2.84155C23.3772 3.06034 23.5002 3.35708 23.5002 3.6665V22.3332C23.5002 22.6426 23.3772 22.9393 23.1584 23.1581C22.9397 23.3769 22.6429 23.4998 22.3335 23.4998H1.66667C1.35725 23.4998 1.0605 23.3769 0.841709 23.1581C0.622916 22.9393 0.5 22.6426 0.5 22.3332V3.6665C0.5 3.35708 0.622916 3.06034 0.841709 2.84155C1.0605 2.62275 1.35725 2.49984 1.66667 2.49984H6.16674V1.1665C6.16674 0.614219 6.61446 0.166504 7.16674 0.166504H7.50008C8.05236 0.166504 8.50007 0.614219 8.50007 1.1665V2.49984H15.5001V1.1665C15.5001 0.614219 15.9478 0.166504 16.5001 0.166504H16.8334C17.3857 0.166504 17.8334 0.614219 17.8334 1.1665V2.49984ZM2.50016 8.99984V21.4998H21.5002V8.99984H2.50016ZM5.00005 15.1665C5.00006 14.6142 5.44778 14.1665 6.00005 14.1665H9.83341C10.3857 14.1665 10.8334 14.6142 10.8334 15.1665V16.4998C10.8334 17.0521 10.3857 17.4998 9.83341 17.4998H6.00002C5.44773 17.4998 5.00001 17.0521 5.00002 16.4998L5.00005 15.1665Z" fill="black"/>
+                    </svg>
+                </div>
             </div>
             <div>
                 <p>Prio</p>
-                <div class="edit-task-prio-container">
-                    <div onload="highlightPrio()" onclick="changePrio()">
+                <div class="edit-task-prio-container" >
+                    <div id="prio-area-urgent" onclick="changePrio(${i}, 'Urgent')">
                     <p>Urgent</p>
                         <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_39163_1044)">
@@ -397,7 +403,7 @@ function renderEditTask(i) {
                             </defs>
                         </svg>
                     </div>
-                    <div onload="highlightPrio()" onclick="changePrio()">
+                    <div id="prio-area-medium" onclick="changePrio(${i}, 'Medium')">
                     <p>Medium</p>
                         <svg width="20" height="9" viewBox="0 0 20 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_39163_1051)">
@@ -412,7 +418,7 @@ function renderEditTask(i) {
                         </svg>
 
                     </div>
-                    <div onload="highlightPrio()" onclick="changePrio()">
+                    <div id="prio-area-low" onclick="changePrio(${i}, 'Low')">
                     <p>Low</p>
                         <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 9.00614C9.7654 9.00654 9.53687 8.9317 9.34802 8.79262L0.444913 2.22288C0.329075 2.13733 0.231235 2.02981 0.15698 1.90647C0.0827245 1.78313 0.033508 1.64638 0.0121402 1.50404C-0.031014 1.21655 0.0418855 0.923717 0.214802 0.689945C0.387718 0.456173 0.646486 0.300615 0.934181 0.257493C1.22188 0.21437 1.51493 0.287216 1.74888 0.460004L10 6.54248L18.2511 0.460004C18.367 0.374448 18.4985 0.312529 18.6383 0.277782C18.7781 0.243035 18.9234 0.236141 19.0658 0.257493C19.2083 0.278844 19.3451 0.328025 19.4685 0.402225C19.592 0.476425 19.6996 0.574193 19.7852 0.689945C19.8708 0.805697 19.9328 0.937168 19.9676 1.07685C20.0023 1.21653 20.0092 1.36169 19.9879 1.50404C19.9665 1.64638 19.9173 1.78313 19.843 1.90647C19.7688 2.02981 19.6709 2.13733 19.5551 2.22288L10.652 8.79262C10.4631 8.9317 10.2346 9.00654 10 9.00614Z" fill="#7AE229"/>
@@ -434,33 +440,108 @@ function renderEditTask(i) {
             </div>
             <div id="contact-card-container">
             </div>
-            <button>
+            <div class="edit-task-btn-container">
+            <button id="edit-task-btn" onclick="closeForm(${i})">
                 <p>OK</p>
                 <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.5L7 13.5L17 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
+            </div>
         </form>
     </div>
     `
 }
 
-function changePrio() {
-    
-}
 
-function highlightPrio() {
-    console.log("test")
-  /*  document.querySelector('#my_area').addEventListener('load', function(){
-        aTestFunction();
-      });
-      
-      function aTestFunction(){
-          return "called";
-      }*/
+function changePrio(i, prio) {
+    task[i].prio = `${prio}`
+    highlightPrio(i) 
 }
 
 
+function closeForm(i) {
+    updateInput(i)
+    closeCard()
+    loadTasks()
+}
+
+
+function updateInput(i) {
+    let inputTitle = document.getElementById('edit-task-title')
+    let inputDescription = document.getElementById('edit-task-description')
+    let inputDate = document.getElementById('edit-task-date')
+    task[i].title = inputTitle.value
+    task[i].description = inputDescription.value
+    task[i].date = inputDate.value
+}
+
+
+function highlightPrio(i) {
+    if (task[i].prio == 'Low') {
+        let content = document.getElementById('prio-area-low')
+        content.style = 'background-color:#7AE229'
+        let text = content.children[0]
+        let svgPath1 = content.children[1].children[0]
+        let svgPath2 = content.children[1].children[1]
+        text.style.color = '#FFFFFF'
+        svgPath1.style.fill = '#FFFFFF'
+        svgPath2.style.fill = '#FFFFFF'
+    } else {
+        let content = document.getElementById('prio-area-low')
+        content.style = 'background-color:#FFFFFF'
+        let text = content.children[0]
+        let svgPath1 = content.children[1].children[0]
+        let svgPath2 = content.children[1].children[1]
+        text.style.color = '#7AE229'
+        svgPath1.style.fill = '#7AE229'
+        svgPath2.style.fill = '#7AE229'
+    }
+    if (task[i].prio == 'Medium') {
+        let content = document.getElementById('prio-area-medium')
+        content.style = 'background-color:#FFA800'
+        let text = content.children[0]
+        let svgPath1 = content.children[1].children[0].children[0]
+        let svgPath2 = content.children[1].children[0].children[1]
+        text.style.color = '#FFFFFF'
+        svgPath1.style.fill = '#FFFFFF'
+        svgPath2.style.fill = '#FFFFFF'
+    } else {
+        let content = document.getElementById('prio-area-medium')
+        content.style = 'background-color:#FFFFFF'
+        let text = content.children[0]
+        let svgPath1 = content.children[1].children[0].children[0]
+        let svgPath2 = content.children[1].children[0].children[1]
+        text.style.color = '#FFA800'
+        svgPath1.style.fill = '#FFA800'
+        svgPath2.style.fill = '#FFA800'
+    }
+    if (task[i].prio == 'Urgent') {
+        let content = document.getElementById('prio-area-urgent')
+        content.style = 'background-color:#FF3D00'
+        let text = content.children[0]
+        let svgPath1 = content.children[1].children[0].children[0]
+        let svgPath2 = content.children[1].children[0].children[1]
+        text.style.color = '#FFFFFF'
+        svgPath1.style.fill = '#FFFFFF'
+        svgPath2.style.fill = '#FFFFFF'
+    } else {
+        let content = document.getElementById('prio-area-urgent')
+        content.style = 'background-color:#FFFFFF'
+        let text = content.children[0]
+        let svgPath1 = content.children[1].children[0].children[0]
+        let svgPath2 = content.children[1].children[0].children[1]
+        text.style.color = '#FF3D00'
+        svgPath1.style.fill = '#FF3D00'
+        svgPath2.style.fill = '#FF3D00'
+    }
+}
+/*
+function clearIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
+*/
 
 
 /*********Edit Task Dropdown Menu************/
