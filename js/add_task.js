@@ -111,7 +111,7 @@ function renderSubTasks() {
     let content = document.getElementById('subtasks');
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        content.innerHTML += `<li><input id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"> ${subtask}</li>`;
+        content.innerHTML += `<li><input id="cb-subtask-${i}" class="checkbox" type="checkbox" control-id="ControlID-12"> ${subtask}</li>`;
     }
 }
 
@@ -152,12 +152,14 @@ function selectCategory(i) {
     dropup('category');
 }
 
-function renderContacts() {
+async function renderContacts() {
     let content = document.getElementById('contact');
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
     content.innerHTML = '';
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        content.innerHTML += `<label for="cb-subtask-${i}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${i})" id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+        content.innerHTML += `<label for="cb-contacts-${i}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${i})" id="cb-contacts-${i}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
     }
 }
 
@@ -190,16 +192,16 @@ function dropup(area) {
 }
 
 function addContactToList(number) {
-    let contact = document.getElementById(`cb-subtask-${number}`);
-    selectedContacts.push(contacts[number]['contact_selection']);
+    let contact = document.getElementById(`cb-contacts-${number}`);
+    selectedContacts.push(contacts[number]['initials']);
     contact.setAttribute('onclick', `removeContactFromList(${number})`);
     renderSelectedContacts();
 }
 
 function removeContactFromList(number) {
-    let contact = document.getElementById(`cb-subtask-${number}`);
+    let contact = document.getElementById(`cb-contacts-${number}`);
     contact.setAttribute('onclick', `addContactToList(${number})`);
-    let index = selectedContacts.indexOf(contacts[number]['contact_selection']);
+    let index = selectedContacts.indexOf(contacts[number]['initials']);
     selectedContacts.splice(index, 1)
     renderSelectedContacts();
 }
@@ -209,8 +211,7 @@ function renderSelectedContacts() {
     content.innerHTML = '';
     if (selectedContacts.length > 0) {
         for (let i = 0; i < selectedContacts.length; i++) {
-            let color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-            content.innerHTML += `<div class="circle" style="background-color: ${color.toUpperCase()};": >${selectedContacts[i]}</div>`
+            content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${selectedContacts[i]}</div>`
         }
     } else {
         content.innerHTML = 'Select contacts to assign';
