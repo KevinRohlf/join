@@ -1,7 +1,5 @@
 html {
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
 }
 
 body {
@@ -83,7 +81,6 @@ body {
 .todo p {
     color: #2A3647;
     margin-top: 0;
-    font-size: 16px;
     text-align: center;
 }
 
@@ -133,11 +130,6 @@ body {
     font-size: 48px;
     font-weight: 600;
     margin: 10px 0 0 0;
-}
-
-.urgent p,
-.urgent-date p {
-    font-size: 16px;
 }
 
 .grey-line {
@@ -213,6 +205,11 @@ body {
     .greeting-container {
         left: 0;
         bottom: 75px;
+    }
+
+    .task-container,
+    .urgency {
+        margin-bottom: 20px;
     }
 }
 

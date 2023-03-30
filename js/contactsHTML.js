@@ -68,7 +68,7 @@ function htmlTemplateEditSingleContact(contact, i) {
                         stroke-linecap="round" />
                 </svg>
             </a>
-            <form>
+            <form onsubmit="saveActiveContact(${i}); return false;">
                 <div class="contact-form">
                     <div class="input-container">
                         <img src="./assets/img/name-icon.svg">
@@ -85,7 +85,7 @@ function htmlTemplateEditSingleContact(contact, i) {
                     </div>
                 </div>
                 <div class="submit-container">
-                    <button onclick="saveActiveContact(${i})" class="submit-btn save">Save</button>
+                    <button type="submit"  class="submit-btn save">Save</button>
                 </div>
             </form>
         </div>

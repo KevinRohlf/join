@@ -10,7 +10,7 @@ async function init() {
 }
 
 
-
+/*
 function loadAllContacts() {
 	let contactsAsString = localStorage.getItem('contacts');
 	if (contactsAsString) {
@@ -18,7 +18,7 @@ function loadAllContacts() {
 	}
 	renderContacts();
 }
-
+*/
 
 function renderContacts() {
 	sortAllContacts();
@@ -79,9 +79,9 @@ function renderAllContacts() {
 
 // read new contact vaules
 function addToContact() {
-	let name = document.getElementById('name');
-	let email = document.getElementById('email');
-	let phone = document.getElementById('phone');
+	let name = document.getElementById('name').value;
+	let email = document.getElementById('email').value;
+	let phone = document.getElementById('phone').value;
 	
 	newContact(name, email, phone);
 }
@@ -93,9 +93,9 @@ async function newContact(name, email, phone) {
 	let initialColor = getColor();
 
 	let newContact = {
-        'name': name.value,
-        'email': email.value,
-        'phone': phone.value,
+        'name': name,
+        'email': email,
+        'phone': phone,
 		'initials': initials,
 		'color': initialColor
     }
@@ -107,11 +107,6 @@ async function newContact(name, email, phone) {
 	init();
 }
 
-/*
-async function saveAllContacts(contacts) {
-	await backend.setItem('contacts', JSON.stringify(contacts));
-}
-*/
 
 // seperate initials of all names
 function getInitials(fullName) {
@@ -140,14 +135,15 @@ function clearInput() {
 
 
 // save contact
-function saveActiveContact(i) {
+async function saveActiveContact(i) {
 	let newName = document.getElementById('edit-name').value;
 	let newEmail = document.getElementById('edit-email').value;
 	let newPhone = document.getElementById('edit-phone').value;
 	contacts[i].name = newName;
 	contacts[i].email = newEmail;
 	contacts[i].phone = newPhone;
-	saveAllContacts();
+	await backend.setItem('contacts', JSON.stringify(contacts));
+
 	init();
 	closeSingleContactDesktop();
 	closeSingleContactMobile();

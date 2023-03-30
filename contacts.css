@@ -1,7 +1,5 @@
 html {
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
 }
 
 body {
@@ -62,7 +60,7 @@ body {
 .contact {
     display: flex;
     align-items: center;
-    height: 80px;
+    height: 70px;
     width: 320px;
     border-radius: 10px;
     cursor: pointer;
@@ -110,12 +108,12 @@ body {
 }
 
 .contact p {
+    font-size: 20px;
     margin: 0 0 5px 0;
 }
 
 .contact a,
 .single-contact-contact a {
-    font-size: 16px;
     color: #007CEE;
     text-decoration: none;
 }
@@ -382,20 +380,14 @@ body {
 }
 
 .single-contact-edit a {
-    font-size: 16px;
     color: #2A3647;
     text-decoration: none;
     margin-left: 60px;
 }
 
 .single-contact-contact p {
-    font-size: 16px;
     font-weight: 600;
     margin: 25px 0 10px 0;
-}
-
-.single-contact-contact span {
-    font-size: 16px;
 }
 
 .pen-icon-desktop {
@@ -611,6 +603,18 @@ body {
 
     .blue-line-horizontal {
         display: block;
+    }
+
+    .contact {
+        height: 60px;
+    }
+
+    .contact p {
+        font-size: 16px;
+    }
+
+    .contact a {
+        font-size: 14px;
     }
 
     .show-contact {
