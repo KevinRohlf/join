@@ -56,6 +56,8 @@ let usersFromLocal = []
 let tasks = []
 let categorys = []
 let contacts = []
+let cardOpened = false;
+
 
 let currentTasks = []
 let p = 0
@@ -176,14 +178,17 @@ function renderAllTasks(currentTask, content, i) {
         </div>
         `
     getPrioImage(currentTask, i)
-    getTaskCategoryColor(currentTask, i)
+    getTaskCategoryColor(i)
 }
 
 
-function getTaskCategoryColor(currentTask, i) {
+function getTaskCategoryColor(i) {
     for (let j = 0; j < categorys.length; j++) {
-        if (categorys[j].name == currentTask.category) {
+        if (categorys[j].name == tasks[i].category) {
             document.getElementById(i).firstElementChild.style = `background-color: ${categorys[j].color}`
+            if (cardOpened) {
+                document.getElementById('card-container').children[1].style = `background-color: ${categorys[j].color}`
+            }
         }
     }
 }
@@ -227,8 +232,6 @@ function renderContactSelection(currentTask, i) {
 
 function getContactColor(currentContact) {
     for (let j = 0; j < contacts.length; j++) {
-        console.log(contacts[j].initials)
-        console.log(currentContact)
         if (contacts[j].initials == currentContact) {
             document.getElementById(currentContact).style = `background-color: ${contacts[j].color}`
         }
@@ -254,6 +257,7 @@ function renderTaskCategoryColor(i) {
 */
 
 function loadCard(i) {
+    cardOpened = true
     if (window.innerWidth < 1000) {
         main.classList.add('d-none')
     }
@@ -264,6 +268,7 @@ function loadCard(i) {
     // renderCardCategoryColor()
     renderCardContacts(i)
     getCardPrioImg(i)
+    getTaskCategoryColor(i)
 }
 
 
@@ -282,16 +287,16 @@ function renderCard(i) {
                     </svg>
                 </div>
             </div>
-            <div class="task-category ${task[i].category}" style="font-size: 27px;">${task[i].category}</div>
-            <div class="card-title">${task[i].title}</div>
-            <div class="card-description">${task[i].description}</div>
+            <div class="task-category ${tasks[i].category}" style="font-size: 27px;">${tasks[i].category}</div>
+            <div class="card-title">${tasks[i].title}</div>
+            <div class="card-description">${tasks[i].description}</div>
             <div class="card-date-container">
                 <p>Due date:</p>
-                <p>${task[i].date}</p>
+                <p>${tasks[i].date}</p>
             </div>
             <div class="card-prio-container">
                 <p>Priority:</p>
-                <p class="card-prio" id="card-${task[i].prio}">${task[i].prio}</p>
+                <p class="card-prio" id="card-${tasks[i].prio}">${tasks[i].prio}</p>
             </div>
             <div>
                 <p style="font-weight: 700; font-size: 21px">Assigned to:</p>
@@ -316,14 +321,7 @@ function stopPropagation(event) {
 }
 
 
-function closeCard() {
-    body.classList.remove('overflow-hidden')
-    document.getElementById('card-container').classList.add('d-none')
-    document.getElementById('overlay').classList.add('d-none')
-    if (window.innerWidth < 1000) {
-        main.classList.remove('d-none')
-    }
-}
+
 /*
 function renderCardCategoryColor() {
     let content = document.getElementById('card-container')
@@ -341,18 +339,34 @@ function renderCardCategoryColor() {
 }
 */
 function renderCardContacts(i) {
+    let currentColor
+    for (let j = 0; j < contacts.length; j++) {
+        if (contacts[j].initials == currentContact) {
+           currentColor = contacts[j].color
+        }
+    }
     let container = document.getElementById('contact-card-container')
-    task[i].contactSelection.forEach(element => {
+    tasks[i].contactSelection.forEach(element => {
         container.innerHTML +=
        /*html*/ `
        <div class="contact-card-content">
-            <p style="background-color:red">${element}</p>
+            <p style="background-color:red">${element}</p> // hier current Color einfügen
             <p>Name</p>
         </div>
        `
+        getContactColor(element)
     });
-}
 
+}
+/*
+function getContactName(currentContact) {
+    for (let j = 0; j < contacts.length; j++) {
+        if (contacts[j].initials == currentContact) {
+            document.getElementById(currentContact).style = `background-color: ${contacts[j].color}`
+        }
+    }
+}
+*/
 
 function randomBackgroundColor(currentTask, i) {
     let children = document.getElementById(`contact-selection-${currentTask.status}_${i}`).children
@@ -385,16 +399,16 @@ function getPrioImage(currentTask, i) {
 
 
 function getCardPrioImg(i) {
-    let content = document.getElementById(`card-${task[i].prio}`)
-    if (content.id == `card-Low`) {
+    let content = document.getElementById(`card-${tasks[i].prio}`)
+    if (content.id == `card-low`) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-low copy.svg'
         content.appendChild(img)
-    } else if (content.id == `card-Medium`) {
+    } else if (content.id == `card-medium`) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-medium copy.svg'
         content.appendChild(img)
-    } else if (content.id == `card-Urgent`) {
+    } else if (content.id == `card-urgent`) {
         let img = document.createElement('img')
         img.src = 'assets/img/prio-urgent copy.svg'
         content.appendChild(img)
@@ -404,9 +418,9 @@ function getCardPrioImg(i) {
 
 function searchTasks() {
     let input = document.getElementById('find-task-input')
-    for (let i = 0; i < task.length; i++) {
+    for (let i = 0; i < tasks.length; i++) {
         let content = document.getElementById(`${i}`)
-        if ((task[i].title.toLowerCase().includes(input.value.toLowerCase()))) {
+        if ((tasks[i].title.toLowerCase().includes(input.value.toLowerCase()))) {
             content.classList.remove('d-none')
         } else if ((task[i].description.toLowerCase().includes(input.value.toLowerCase()))) {
             content.classList.remove('d-none')
@@ -434,15 +448,15 @@ function renderEditTask(i) {
         <form class="edit-task-form"; onsubmit="return false;">
             <div>
                 <p>Title</p>
-                <input type="text" placeholder="${task[i].title}" id="edit-task-title">
+                <input type="text" placeholder="${tasks[i].title}" id="edit-task-title">
             </div>
             <div>
                 <p>Description</p>
-                <input type="textarea" placeholder="${task[i].description}" id="edit-task-description">
+                <input type="textarea" placeholder="${tasks[i].description}" id="edit-task-description">
             </div>
             <div class="edit-task-date-container">
                 <p>Due Date</p>
-                <input type="text" placeholder="${task[i].date}" onfocus="(this.type='date')" onblur="(this.type='text')" id="edit-task-date">
+                <input type="text" placeholder="${tasks[i].date}" onfocus="(this.type='date')" onblur="(this.type='text')" id="edit-task-date">
                 <div class="edit-task-date-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.8334 2.49984H22.3335C22.6429 2.49984 22.9397 2.62275 23.1584 2.84155C23.3772 3.06034 23.5002 3.35708 23.5002 3.6665V22.3332C23.5002 22.6426 23.3772 22.9393 23.1584 23.1581C22.9397 23.3769 22.6429 23.4998 22.3335 23.4998H1.66667C1.35725 23.4998 1.0605 23.3769 0.841709 23.1581C0.622916 22.9393 0.5 22.6426 0.5 22.3332V3.6665C0.5 3.35708 0.622916 3.06034 0.841709 2.84155C1.0605 2.62275 1.35725 2.49984 1.66667 2.49984H6.16674V1.1665C6.16674 0.614219 6.61446 0.166504 7.16674 0.166504H7.50008C8.05236 0.166504 8.50007 0.614219 8.50007 1.1665V2.49984H15.5001V1.1665C15.5001 0.614219 15.9478 0.166504 16.5001 0.166504H16.8334C17.3857 0.166504 17.8334 0.614219 17.8334 1.1665V2.49984ZM2.50016 8.99984V21.4998H21.5002V8.99984H2.50016ZM5.00005 15.1665C5.00006 14.6142 5.44778 14.1665 6.00005 14.1665H9.83341C10.3857 14.1665 10.8334 14.6142 10.8334 15.1665V16.4998C10.8334 17.0521 10.3857 17.4998 9.83341 17.4998H6.00002C5.44773 17.4998 5.00001 17.0521 5.00002 16.4998L5.00005 15.1665Z" fill="black"/>
@@ -452,7 +466,7 @@ function renderEditTask(i) {
             <div>
                 <p>Prio</p>
                 <div class="edit-task-prio-container" >
-                    <div id="prio-area-urgent" onclick="changePrio(${i}, 'Urgent')">
+                    <div id="prio-area-urgent" onclick="changePrio(${i}, 'urgent')">
                     <p>Urgent</p>
                         <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_39163_1044)">
@@ -466,7 +480,7 @@ function renderEditTask(i) {
                             </defs>
                         </svg>
                     </div>
-                    <div id="prio-area-medium" onclick="changePrio(${i}, 'Medium')">
+                    <div id="prio-area-medium" onclick="changePrio(${i}, 'medium')">
                     <p>Medium</p>
                         <svg width="20" height="9" viewBox="0 0 20 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_39163_1051)">
@@ -481,7 +495,7 @@ function renderEditTask(i) {
                         </svg>
 
                     </div>
-                    <div id="prio-area-low" onclick="changePrio(${i}, 'Low')">
+                    <div id="prio-area-low" onclick="changePrio(${i}, 'low')">
                     <p>Low</p>
                         <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 9.00614C9.7654 9.00654 9.53687 8.9317 9.34802 8.79262L0.444913 2.22288C0.329075 2.13733 0.231235 2.02981 0.15698 1.90647C0.0827245 1.78313 0.033508 1.64638 0.0121402 1.50404C-0.031014 1.21655 0.0418855 0.923717 0.214802 0.689945C0.387718 0.456173 0.646486 0.300615 0.934181 0.257493C1.22188 0.21437 1.51493 0.287216 1.74888 0.460004L10 6.54248L18.2511 0.460004C18.367 0.374448 18.4985 0.312529 18.6383 0.277782C18.7781 0.243035 18.9234 0.236141 19.0658 0.257493C19.2083 0.278844 19.3451 0.328025 19.4685 0.402225C19.592 0.476425 19.6996 0.574193 19.7852 0.689945C19.8708 0.805697 19.9328 0.937168 19.9676 1.07685C20.0023 1.21653 20.0092 1.36169 19.9879 1.50404C19.9665 1.64638 19.9173 1.78313 19.843 1.90647C19.7688 2.02981 19.6709 2.13733 19.5551 2.22288L10.652 8.79262C10.4631 8.9317 10.2346 9.00654 10 9.00614Z" fill="#7AE229"/>
@@ -517,8 +531,9 @@ function renderEditTask(i) {
 }
 
 
-function changePrio(i, prio) {
-    task[i].prio = `${prio}`
+async function changePrio(i, prio) {
+    tasks[i].prio = `${prio}`
+    await backend.setItem(`tasks`, JSON.stringify(tasks));
     highlightPrio(i)
 }
 
@@ -530,25 +545,37 @@ function closeForm(i) {
 }
 
 
-function updateInput(i) {
-    let inputTitle = document.getElementById('edit-task-title')
-    let inputDescription = document.getElementById('edit-task-description')
-    let inputDate = document.getElementById('edit-task-date')
-    if (!inputTitle.value == '') {
-        task[i].title = inputTitle.value
-    }
-    if (!inputDescription.value == '') {
-        task[i].description = inputDescription.value
-    }
-
-    if (!inputDate.value == '') {
-        task[i].date = inputDate.value
+function closeCard() {
+    cardOpened = false;
+    body.classList.remove('overflow-hidden')
+    document.getElementById('card-container').classList.add('d-none')
+    document.getElementById('overlay').classList.add('d-none')
+    if (window.innerWidth < 1000) {
+        main.classList.remove('d-none')
     }
 }
 
 
+async function updateInput(i) {
+    let inputTitle = document.getElementById('edit-task-title')
+    let inputDescription = document.getElementById('edit-task-description')
+    let inputDate = document.getElementById('edit-task-date')
+    if (!inputTitle.value == '') {
+        tasks[i].title = inputTitle.value
+    }
+    if (!inputDescription.value == '') {
+        tasks[i].description = inputDescription.value
+    }
+
+    if (!inputDate.value == '') {
+        tasks[i].date = inputDate.value
+    }
+    await backend.setItem(`tasks`, JSON.stringify(tasks));
+}
+
+
 function highlightPrio(i) {
-    if (task[i].prio == 'Low') {
+    if (tasks[i].prio == 'low') {
         let content = document.getElementById('prio-area-low')
         content.style = 'background-color:#7AE229'
         let text = content.children[0]
@@ -567,7 +594,7 @@ function highlightPrio(i) {
         svgPath1.style.fill = '#7AE229'
         svgPath2.style.fill = '#7AE229'
     }
-    if (task[i].prio == 'Medium') {
+    if (tasks[i].prio == 'medium') {
         let content = document.getElementById('prio-area-medium')
         content.style = 'background-color:#FFA800'
         let text = content.children[0]
@@ -586,7 +613,7 @@ function highlightPrio(i) {
         svgPath1.style.fill = '#FFA800'
         svgPath2.style.fill = '#FFA800'
     }
-    if (task[i].prio == 'Urgent') {
+    if (tasks[i].prio == 'urgent') {
         let content = document.getElementById('prio-area-urgent')
         content.style = 'background-color:#FF3D00'
         let text = content.children[0]
@@ -648,7 +675,7 @@ function dropup(area) {
 
 
 function renderContacts(i) {
-    let contacts = task[i].contactSelection
+    let contacts = tasks[i].contactSelection
     let content = document.getElementById('contact');
     content.innerHTML = '';
     for (let j = 0; j < contacts.length; j++) {

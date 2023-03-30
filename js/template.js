@@ -113,11 +113,12 @@ function manipulateFooterColor() {
 
 
 window.onresize = function() {
-  if (window.innerWidth > 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
-    main.classList.remove('d-none')
+  if (document.getElementById('overlay').firstElementChild) {
+    if (window.innerWidth > 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
+      main.classList.remove('d-none')
+    }
+    if (window.innerWidth < 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
+      main.classList.add('d-none')
+    }
   }
-  if (window.innerWidth < 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
-    main.classList.add('d-none')
-  }
-
 }
