@@ -104,6 +104,7 @@ async function newContact(name, email, phone) {
 
 	addContactClose();
 	clearInput();
+	displayConfirm();
 	init();
 }
 
@@ -144,10 +145,35 @@ async function saveActiveContact(i) {
 	contacts[i].phone = newPhone;
 	await backend.setItem('contacts', JSON.stringify(contacts));
 
-	init();
 	closeSingleContactDesktop();
 	closeSingleContactMobile();
 	editContactClose();
+	displayConfirmUpdate();
+	init();
+}
+
+
+function displayConfirm() {
+    let contact = document.getElementById('confirm');
+
+	displayConformation(contact);
+}
+
+
+function displayConfirmUpdate() {
+    let contact = document.getElementById('confirmUpdate');
+
+	displayConformation(contact);
+}
+
+
+function displayConformation(contact) {
+    setTimeout(() => {
+        contact.classList.remove('d-none');
+    }, 1000);
+    setTimeout(() => {
+		contact.classList.add('d-none');
+    }, 4000);
 }
 
 

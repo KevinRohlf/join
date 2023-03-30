@@ -40,7 +40,14 @@
             </section>
             <section>
                 <button onclick="addContactOpen()" id="contact-btn" class="contact-btn">New
-                    contact<img src="./assets/img/new-contact-icon.svg"></button>
+                    contact<img src="./assets/img/new-contact-icon.svg">
+                </button>
+                <div id="confirm" class="confirmation d-none">
+                    Contact succesfully created
+                </div>
+                <div id="confirmUpdate" class="confirmation d-none">
+                    Contact succesfully updated
+                </div>
             </section>
             <section onclick="addContactClose()" id="add-contact-overlay" class="contact-overlay">
                 <div onclick="doNotClose(event)" id="add-contact" class="contact-container">
@@ -102,6 +109,7 @@
                     </div>
                 </div>
             </section>
+
 
             <section onclick="editContactClose()" id="edit-contact-overlay" class="contact-overlay">
                 <div onclick="doNotClose(event)" id="edit-contact" class="contact-container">
