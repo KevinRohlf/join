@@ -122,6 +122,7 @@ function htmlRenderEditTask(i) {
             </div>
             <div>
                 <p>Assigned to</p>
+              
                 <div id="contactShow" class="dropdown">
                     <div onclick="dropdown('contact')" class="flex gap-10" id="selectContact">
                         Select contacts to assign
@@ -130,6 +131,7 @@ function htmlRenderEditTask(i) {
                     </div>
                         <img class="arrow" id="arrowContact" src="./assets/img/arrow-down.svg">
                 </div>
+          
             </div>
             <div id="contact-card-container">
             </div>

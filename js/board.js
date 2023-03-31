@@ -100,17 +100,17 @@ function getTaskCategoryColor(i) {
 
 
 function renderContactSelection(currentTask, i) {
-  //  let currentContact
+    //let currentContact
     for (let k = 0; k < currentTask.contactSelection.length; k++) {
         currentContact = currentTask.contactSelection[k]
         if (currentTask.contactSelection.length <= 3) {
             showAllContacts(currentTask, i, currentContact)
+            getContactColor(currentContact)
         } else {
             showFirstTwoContacts(k, currentTask, i, currentContact)
+            getContactColor(currentContact)
         }
     }
-    randomBackgroundColor(currentTask, i)
-    getContactColor(currentContact)
 }
 
 
@@ -174,39 +174,29 @@ function stopPropagation(event) {
 
 
 function renderCardContacts(i) {
-    let currentColor
+ /*   let currentColor
     for (let j = 0; j < contacts.length; j++) {
         if (contacts[j].initials == currentContact) {
+            console.log(currentContact)
             currentColor = contacts[j].color
         }
-    }
+    }*/ 
     let container = document.getElementById('contact-card-container')
     tasks[i].contactSelection.forEach(element => {
-        container.innerHTML +=
-       /*html*/ `
-       <div class="contact-card-content">
-            <p style="background-color:red">${element}</p> // hier current Color einfügen
-            <p>Name</p>
-        </div>
+        for (let j = 0; j < contacts.length; j++) {
+            let contact = contacts[j]
+            if (element == contacts[j].initials) {
+                container.innerHTML +=
+                /*html*/ `
+                <div class="contact-card-content">
+                    <p style="background-color:${contact.color}">${contact.initials}</p> 
+                    <p>${contact.name}</p>
+                </div>
        `
-        getContactColor(element)
+            }
+        }
     });
-
 }
-
-
-function randomBackgroundColor(currentTask, i) {
-    let children = document.getElementById(`contact-selection-${currentTask.status}_${i}`).children
-    for (let j = 0; j < children.length; j++) {
-        let r = Math.floor(Math.random() * 256)
-        let g = Math.floor(Math.random() * 256)
-        let b = Math.floor(Math.random() * 256)
-        let bgColor = 'rgb(' + r + ',' + g + ',' + b + ')'
-        children[j].style.backgroundColor = bgColor
-    }
-}
-
-
 
 
 function getCardPrioImg(i) {
@@ -393,8 +383,51 @@ function taskPrioNotUrgent() {
 
 /*********Edit Task Dropdown Menu************/
 
+async function renderContacts() {
+    let content = document.getElementById('contact');
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    content.innerHTML = '';
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        content.innerHTML += `<label for="cb-contacts-${i}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${i})" id="cb-contacts-${i}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+        if (i == contacts.length - 1) {
+            let i = contacts.length
+            content.innerHTML += `<label for="cb-subtask-${i}"> <div class="contacts">Intive new contact <input onclick="inviteNewContact(${i})" id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+        }
+    }
+}
+
+
+function inviteNewContact(i) {
+    let area = 'contact'
+    console.log(i)
+    dropup(area)
+    let content = document.getElementById('contactShow')
+    content.innerHTML = 
+    /*html*/ `
+    <div class="invite-contact-container">
+        <input class="invite-contact-input" type="email" placeholder="Contact email">
+        <div>
+            <div>
+            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
+                <path d="M22.9614 7.65381L7.65367 22.9616" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            </div>
+            <div>
+            <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7.5L7 13.5L17 1.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    `
+}
+
 
 function dropdown(area) {
+    console.log(area)
     if (!inAnimation) {
         let content = document.getElementById(area);
         let bigArea = area[0].toUpperCase() + area.slice(1);
@@ -424,38 +457,23 @@ function dropup(area) {
 }
 
 
-function renderContacts(i) {
-    let contacts = tasks[i].contactSelection
-    let content = document.getElementById('contact');
-    content.innerHTML = '';
-    for (let j = 0; j < contacts.length; j++) {
-        let contact = contacts[j];
-        content.innerHTML += `<label for="cb-subtask-${j}"> <div class="contacts">${contact} <input onclick="addContactToList(${j})" id="cb-subtask-${j}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
-        if (j == contacts.length - 1) {
-            let j = contacts.length
-            content.innerHTML += `<label for="cb-subtask-${j}"> <div class="contacts">Intive new contact <input onclick="addContactToList(${j})" id="cb-subtask-${j}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
-        }
-    }
-}
-
-
 function editEndHeight(content) {
     document.documentElement.style.setProperty('--end-height', content.clientHeight + 'px')
 }
 
 
 function addContactToList(number) {
-    let contact = document.getElementById(`cb-subtask-${number}`);
-    selectedContacts.push(contacts[number]['contact_selection']);
+    let contact = document.getElementById(`cb-contacts-${number}`);
+    selectedContacts.push(contacts[number]['initials']);
     contact.setAttribute('onclick', `removeContactFromList(${number})`);
     renderSelectedContacts();
 }
 
 
 function removeContactFromList(number) {
-    let contact = document.getElementById(`cb-subtask-${number}`);
+    let contact = document.getElementById(`cb-contacts-${number}`);
     contact.setAttribute('onclick', `addContactToList(${number})`);
-    let index = selectedContacts.indexOf(contacts[number]['contact_selection']);
+    let index = selectedContacts.indexOf(contacts[number]['initials']);
     selectedContacts.splice(index, 1)
     renderSelectedContacts();
 }
@@ -466,8 +484,7 @@ function renderSelectedContacts() {
     content.innerHTML = '';
     if (selectedContacts.length > 0) {
         for (let i = 0; i < selectedContacts.length; i++) {
-            let color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-            content.innerHTML += `<div class="circle" style="background-color: ${color.toUpperCase()};": >${selectedContacts[i]}</div>`
+            content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${selectedContacts[i]}</div>`
         }
     } else {
         content.innerHTML = 'Select contacts to assign';

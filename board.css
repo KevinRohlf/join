@@ -251,26 +251,6 @@ a {
     background-color: #FF3D00;
 }
 
-.Design {
-    background-color: #FF7A00;
-}
-
-.Sales {
-    background-color: #FC71FF;
-}
-
-.Backoffice {
-    background-color: #1FD7C1;
-}
-
-.Marketing {
-    background-color: #0038FF;
-}
-
-.Media {
-    background-color: #FFC701;
-}
-
 #cross-svg {
     display: flex !important;
 }
@@ -506,6 +486,10 @@ input:focus {
     color: white;
 }
 
+#edit-task-btn:hover {
+    cursor: pointer;
+}
+
 #edit-task-btn>p {
     margin-right: 8px;
 }
@@ -551,6 +535,20 @@ input:focus {
     }
 }
 
+
+.invite-contact-input {
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 42px;
+}
+
+.invite-contact-container {
+    display: flex;
+    justify-content: space-between;
+}
 
 
 
