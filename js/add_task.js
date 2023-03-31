@@ -23,6 +23,7 @@ function readForm() {
 }
 
 async function addTask(title, description, date) {
+
     let newTask = {
         'status': 'toDo',
         'title': title.value,
@@ -33,6 +34,8 @@ async function addTask(title, description, date) {
         'prio': prio,
         'subtasks': subtasks
     }
+    await downloadFromServer();
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
     tasks.push(newTask);
     await backend.setItem('tasks', JSON.stringify(tasks));
     clearForm();
