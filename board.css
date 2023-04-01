@@ -536,6 +536,7 @@ input:focus {
 }
 
 
+
 .invite-contact-input {
     outline: none;
     border: none;
@@ -550,6 +551,25 @@ input:focus {
     justify-content: space-between;
 }
 
+.invite-contact-container>div {
+    display: flex;
+    align-items: center;
+}
+
+.invite-contact-container>div>div {
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.invite-contact-container>div>div:first-child:hover {
+    cursor: pointer;
+}
+
+.invite-contact-container>div>div:last-child:hover {
+    cursor: pointer;
+}
 
 
 

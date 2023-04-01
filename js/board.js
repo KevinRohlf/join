@@ -5,13 +5,14 @@ let categorys = []
 let contacts = []
 let cardOpened = false;
 let currentContact
+let inAnimation = false;
+let currentDraggedElement;
 
 /*
 let currentTasks = []
 let p = 0
 */
-let inAnimation = false;
-let currentDraggedElement;
+
 
 
 async function loadBackend() {
@@ -105,10 +106,10 @@ function renderContactSelection(currentTask, i) {
         currentContact = currentTask.contactSelection[k]
         if (currentTask.contactSelection.length <= 3) {
             showAllContacts(currentTask, i, currentContact)
-            getContactColor(currentContact)
+            getContactColor(currentContact, i, k)
         } else {
             showFirstTwoContacts(k, currentTask, i, currentContact)
-            getContactColor(currentContact)
+            getContactColor(currentContact, i, k)
         }
     }
 }
@@ -117,7 +118,7 @@ function renderContactSelection(currentTask, i) {
 function showAllContacts(currentTask, i, currentContact) {
     document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
     /*html*/ `
-    <div id="${currentContact}">${currentContact}</div>
+    <div id="${currentContact}_${i}">${currentContact}</div>
     `
 }
 
@@ -126,21 +127,26 @@ function showFirstTwoContacts(k, currentTask, i, currentContact) {
     if (k < 2) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div>${currentContact}</div>
+        <div id="${currentContact}_${i}">${currentContact}</div>
         `
     } else if (k == 3) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div>${'+' + (currentTask.contactSelection.length - 2)}</div>
+        <div id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
         `
     }
 }
 
 
-function getContactColor(currentContact) {
+function getContactColor(currentContact, i, k) {
+
     for (let j = 0; j < contacts.length; j++) {
-        if (contacts[j].initials == currentContact) {
-            document.getElementById(currentContact).style = `background-color: ${contacts[j].color}`
+        if (k < 2) {
+            if (contacts[j].initials == currentContact) {
+                document.getElementById(`${currentContact}_${i}`).style = `background-color: ${contacts[j].color}`
+            }
+        } else if (k == 3) {
+            document.getElementById(`remaining-contacts-number-${i}`).style = `background-color: ${contacts[j].color}`
         }
     }
 }
@@ -174,13 +180,13 @@ function stopPropagation(event) {
 
 
 function renderCardContacts(i) {
- /*   let currentColor
-    for (let j = 0; j < contacts.length; j++) {
-        if (contacts[j].initials == currentContact) {
-            console.log(currentContact)
-            currentColor = contacts[j].color
-        }
-    }*/ 
+    /*   let currentColor
+       for (let j = 0; j < contacts.length; j++) {
+           if (contacts[j].initials == currentContact) {
+               console.log(currentContact)
+               currentColor = contacts[j].color
+           }
+       }*/
     let container = document.getElementById('contact-card-container')
     tasks[i].contactSelection.forEach(element => {
         for (let j = 0; j < contacts.length; j++) {
@@ -233,6 +239,7 @@ function searchTasks() {
 
 
 function loadEditTask(i) {
+    console.log(i)
     renderEditTask(i)
     renderContacts(i);
     renderCardContacts(i)
@@ -383,17 +390,17 @@ function taskPrioNotUrgent() {
 
 /*********Edit Task Dropdown Menu************/
 
-async function renderContacts() {
+async function renderContacts(i) {
     let content = document.getElementById('contact');
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     content.innerHTML = '';
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        content.innerHTML += `<label for="cb-contacts-${i}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${i})" id="cb-contacts-${i}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
-        if (i == contacts.length - 1) {
-            let i = contacts.length
-            content.innerHTML += `<label for="cb-subtask-${i}"> <div class="contacts">Intive new contact <input onclick="inviteNewContact(${i})" id="cb-subtask-${i}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+    for (let j = 0; j < contacts.length; j++) {
+        let contact = contacts[j];
+        content.innerHTML += `<label for="cb-contacts-${j}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${j})" id="cb-contacts-${j}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+        if (j == contacts.length - 1) {
+            let j = contacts.length
+            content.innerHTML += `<label for="cb-subtask-${j}"> <div class="contacts">Intive new contact <input onclick="inviteNewContact(${i})" id="cb-subtask-${j}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
         }
     }
 }
@@ -401,28 +408,36 @@ async function renderContacts() {
 
 function inviteNewContact(i) {
     let area = 'contact'
-    console.log(i)
     dropup(area)
     let content = document.getElementById('contactShow')
-    content.innerHTML = 
+    content.innerHTML =
     /*html*/ `
     <div class="invite-contact-container">
         <input class="invite-contact-input" type="email" placeholder="Contact email">
         <div>
             <div>
-            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
-                <path d="M22.9614 7.65381L7.65367 22.9616" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+                <svg width="26" height="26" viewBox="2 2 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
+                    <path d="M22.9614 7.65381L7.65367 22.9616" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                </svg>
             </div>
             <div>
-            <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="2" height="31" viewBox="0 0 2 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 0V31" stroke="#D1D1D1"/>
+                </svg>
+            </div>
+            <div onclick="showDropDown(${i})">
+                <svg width="18" height="18" viewBox="0 -2 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.5L7 13.5L17 1.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
         </div>
     </div>
     `
+}
+
+function showDropDown(i) {
+    loadEditTask(i)
 }
 
 
@@ -441,6 +456,7 @@ function dropdown(area) {
 
 
 function dropup(area) {
+    console.log(inAnimation)
     let content = document.getElementById(area);
     let areaShow = document.getElementById(area + 'Show')
     inAnimation = true;
@@ -511,8 +527,9 @@ function dragover_handler(ev) {
 }
 
 
-function drop_handler(task_status) {
-    task[currentDraggedElement].task_status = task_status;
+async function drop_handler(status) {
+    tasks[currentDraggedElement].status = status;
+    await backend.setItem(`tasks`, JSON.stringify(tasks));
     loadTasks()
 }
 
