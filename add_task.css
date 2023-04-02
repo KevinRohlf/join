@@ -120,6 +120,7 @@ textarea:focus, input:focus{
     background-color: #2A3647;
     border: 1px solid #2A3647;
     color: white;
+    padding: 0px 5px 0px 5px;
 }
 
 .btn-bg-blue:hover {

@@ -3,6 +3,7 @@ let selectedColor;
 let selectedCategory;
 let selectedContacts = [];
 let inAnimation = false;
+let sTStatus = [];
 
 
 
@@ -32,7 +33,8 @@ async function addTask(title, description, date) {
         'contactSelection': selectedContacts,
         'date': date.value,
         'prio': prio,
-        'subtasks': subtasks
+        'subtasks': subtasks,
+        'sTStatus': sTStatus
     }
     await downloadFromServer();
     tasks = JSON.parse(backend.getItem('tasks')) || [];
@@ -81,6 +83,7 @@ function addSubtask() {
         content.innerHTML += `<div style="color: red;">length to small</div>`;
     } else {
         subtasks.push(subTask.value);
+        sTStatus.push('false');
         subTask.value = '';
     }
     renderSubTasks();
@@ -162,7 +165,7 @@ async function renderContacts() {
     content.innerHTML = '';
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        content.innerHTML += `<label for="cb-contacts-${i}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${i})" id="cb-contacts-${i}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+        content.innerHTML += `<label for="cb-contacts-${contacts[i]['ID']}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${contacts[i]['ID']})" id="cb-contacts-${contacts[i]['ID']}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
     }
 }
 
@@ -194,18 +197,24 @@ function dropup(area) {
     }, 500);
 }
 
-function addContactToList(number) {
-    let contact = document.getElementById(`cb-contacts-${number}`);
-    selectedContacts.push(contacts[number]['initials']);
-    contact.setAttribute('onclick', `removeContactFromList(${number})`);
+function addContactToList(id) {
+    let contact = document.getElementById(`cb-contacts-${id}`);
+    selectedContacts.push(id);
+    contact.setAttribute('onclick', `removeContactFromList(${id})`);
     renderSelectedContacts();
 }
 
-function removeContactFromList(number) {
-    let contact = document.getElementById(`cb-contacts-${number}`);
-    contact.setAttribute('onclick', `addContactToList(${number})`);
-    let index = selectedContacts.indexOf(contacts[number]['initials']);
-    selectedContacts.splice(index, 1)
+function removeContactFromList(id) {
+    let contact = document.getElementById(`cb-contacts-${id}`);
+    contact.setAttribute('onclick', `addContactToList(${id})`);
+    for (let i = 0; i < contacts.length; i++) {
+        let index = selectedContacts.indexOf(id);
+        if (index != -1) {
+            selectedContacts.splice(index, 1)
+        }
+    }
+
+
     renderSelectedContacts();
 }
 
@@ -213,9 +222,19 @@ function renderSelectedContacts() {
     let content = document.getElementById('selectContact');
     content.innerHTML = '';
     if (selectedContacts.length > 0) {
-        for (let i = 0; i < selectedContacts.length; i++) {
-            content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${selectedContacts[i]}</div>`
+        for (let i = 0; i < contacts.length; i++) {
+            let contact = contacts[i]['ID'];
+            for (let j = 0; j < selectedContacts.length; j++) {
+                if (contact == selectedContacts[j]) {
+                    content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${contacts[i]['initials']}</div>`
+                }
+            }
+
         }
+
+        //    for (let i = 0; i < selectedContacts.length; i++) {
+        //        content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${selectedContacts[i]}</div>`
+        //    }
     } else {
         content.innerHTML = 'Select contacts to assign';
     }
