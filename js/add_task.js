@@ -35,7 +35,7 @@ async function addTask(title, description, date) {
         'prio': prio,
         'subtasks': subtasks,
         'sTStatus': sTStatus
-    }
+    };
     await downloadFromServer();
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     tasks.push(newTask);
@@ -69,6 +69,7 @@ function clearForm() {
     subtasks = [];
     selectedCategory = [];
     selectedContacts = [];
+    sTStatus = []; 
     renderSelectedContacts();
     renderContacts();
     selectCategory('reload');
@@ -85,7 +86,7 @@ function addSubtask() {
         subtasks.push(subTask.value);
         sTStatus.push('false');
         subTask.value = '';
-    }
+    };
     renderSubTasks();
 }
 
@@ -101,7 +102,7 @@ async function addNewCategory() {
     let newCategory = {
         'name': content,
         'color': selectedColor
-    }
+    };
     categorys.push(newCategory);
     await backend.setItem('categorys', JSON.stringify(categorys));
     closeNewCategoryInput();
