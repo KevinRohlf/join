@@ -6,6 +6,10 @@ function htmlRenderAllTasks(currentTask, i) {
             <div class="task-category ${currentTask.category}">${currentTask.category}</div>
             <div class="task-title">${currentTask.title}</div>
             <div class="task-description">${currentTask.description}</div>
+            <div class="subtask-progress-bar-container">
+                <div class="subtask-progress-bar" id="subtask-progress-bar-${i}"></div>
+                <div  id="subtask-counter-${i}"></div>
+            </div>
             <div class="prio-and-contact-container">
                 <div class="contact-selection" id="contact-selection-${currentTask.status}_${i}"></div>
                 <div id="${currentTask.prio}_${i}"></div>
@@ -69,6 +73,8 @@ function htmlRenderEditTask(i) {
             <div>
                 <p>Description</p>
                 <input type="textarea" placeholder="${tasks[i].description}" id="edit-task-description">
+            </div>
+            <div id="edit-task-subtasks-container">
             </div>
             <div class="edit-task-date-container">
                 <p>Due Date</p>

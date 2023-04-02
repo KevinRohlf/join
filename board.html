@@ -69,15 +69,15 @@
                         </svg>
                     </div>
                 </a>
-                <div class="min-height" id="to-do-container" 
+                <div class="min-height" id="to-do-container"
                     ondragover="dragover_handler(event); highlightArea('to-do-container-drag-area')"
-                    ondrop="drop_handler('To do')"
-                  >
+                    ondrop="drop_handler('toDo')">
                 </div>
                 <div id="to-do-container-drag-area" class="drag-area d-none"
-                    ondrop="drop_handler('To do'); removeHighlightDragArea('to-do-container-drag-area')"
+                    ondrop="drop_handler('toDo'); removeHighlightDragArea('to-do-container-drag-area')"
                     ondragleave="removeHighlightArea('to-do-container-drag-area')"
-                    ondragover="dragover_handler(event); highlightArea('to-do-container-drag-area')"></div>
+                    ondragover="dragover_handler(event); highlightArea('to-do-container-drag-area')">
+                </div>
             </div>
             <div>
                 <a href="./add_task.html" class="board-headlines">
@@ -94,11 +94,10 @@
                 </a>
                 <div class="min-height" id="in-progress-container"
                     ondragover="dragover_handler(event); highlightArea('in-progress-container-drag-area')"
-                    ondrop="drop_handler('In progress')"
-                    >
+                    ondrop="drop_handler('inProgress')">
                 </div>
                 <div id="in-progress-container-drag-area" class="drag-area d-none"
-                    ondrop="drop_handler('In progress'); removeHighlightDragArea('in-progress-container-drag-area')"
+                    ondrop="drop_handler('inProgress'); removeHighlightDragArea('in-progress-container-drag-area')"
                     ondragleave="removeHighlightArea('in-progress-container-drag-area')"
                     ondragover="dragover_handler(event); highlightArea('in-progress-container-drag-area')"></div>
             </div>
@@ -117,11 +116,10 @@
                 </a>
                 <div class="min-height" id="awaiting-feedback-container"
                     ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container-drag-area')"
-                    ondrop="drop_handler('Awaiting Feedback')"
-                    >
+                    ondrop="drop_handler('awaitingFeedback')">
                 </div>
                 <div id="awaiting-feedback-container-drag-area" class="drag-area d-none"
-                    ondrop="drop_handler('Awaiting Feedback'); removeHighlightDragArea('awaiting-feedback-container-drag-area')"
+                    ondrop="drop_handler('awaitingFeedback'); removeHighlightDragArea('awaiting-feedback-container-drag-area')"
                     ondragleave="removeHighlightArea('awaiting-feedback-container-drag-area')"
                     ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container-drag-area')"></div>
             </div>
@@ -138,13 +136,12 @@
                         </svg>
                     </div>
                 </a>
-                <div class="min-height" id="done-container" 
+                <div class="min-height" id="done-container"
                     ondragover="dragover_handler(event); highlightArea('done-container-drag-area')"
-                    ondrop="drop_handler('Done')"
-                    >
+                    ondrop="drop_handler('done')">
                 </div>
                 <div id="done-container-drag-area" class="drag-area d-none"
-                    ondrop="drop_handler('Done'); removeHighlightDragArea('done-container-drag-area')"
+                    ondrop="drop_handler('done'); removeHighlightDragArea('done-container-drag-area')"
                     ondragleave="removeHighlightArea('done-container-drag-area')"
                     ondragover="dragover_handler(event); highlightArea('done-container-drag-area')"></div>
             </div>

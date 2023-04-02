@@ -60,6 +60,17 @@ function filterTasks() {
 function forwardTaskContent(currentTask, content, i) {
     renderAllTasks(currentTask, content, i)
     renderContactSelection(currentTask, i)
+    renderProgressBar(currentTask,i)
+}
+
+
+function renderProgressBar(currentTask,i) {
+    let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
+    progressBar.innerHTML = 
+    /*html*/`
+    <progress id="file" value="32" max="100"> 32% </progress>
+    <label for="file">xxx</label>
+    `
 }
 
 
@@ -250,6 +261,20 @@ function loadEditTask(i) {
 function renderEditTask(i) {
     let content = document.getElementById('card-container')
     content.innerHTML = htmlRenderEditTask(i)
+    let subtasks = document.getElementById('edit-task-subtasks-container')
+    if (tasks[i].subtasks.length > 0) {
+        subtasks.innerHTML = `<p>Subtasks</p>`
+    }
+    for (let j = 0; j < tasks[i].subtasks.length; j++) {
+        subtasks.innerHTML +=
+        /*html*/`
+            <div class="subtasks">${tasks[i].subtasks[j]} <input onclick="updateSubtask()" id="subtask-${j}" class="checkbox" type="checkbox"></div>
+        `
+    }
+}
+
+
+function updateSubtask() {
 
 }
 
@@ -440,8 +465,9 @@ function inviteNewContact(i) {
 }
 
 
-function checkForSelectedContacts(i) {
+function checkForSelectedContacts() {
     for (let j = 0; j < contacts.length; j++) {
+        let i = document.getElementById(`cb-contacts-${j}`).id.slice(-1)
         let contact = contacts[j];
         if (tasks[i].contactSelection.includes(contact.initials)) {
             document.getElementById(`cb-contacts-${j}`).checked = true
@@ -497,7 +523,7 @@ async function addContactToList(j, i) {
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     } else {
         let index = tasks[i].contactSelection.indexOf(contacts[j].initial)
-        tasks[i].contactSelection.splice(index,1)
+        tasks[i].contactSelection.splice(index, 1)
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     }
 
