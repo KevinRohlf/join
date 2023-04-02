@@ -1,5 +1,6 @@
 let contacts = [];
 let alphabet = [];
+let currentOpenContact;
 
 async function init() {
 	setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
@@ -9,16 +10,6 @@ async function init() {
 	renderContacts();
 }
 
-
-/*
-function loadAllContacts() {
-	let contactsAsString = localStorage.getItem('contacts');
-	if (contactsAsString) {
-		contacts = JSON.parse(contactsAsString);
-	}
-	renderContacts();
-}
-*/
 
 function renderContacts() {
 	sortAllContacts();
@@ -91,13 +82,15 @@ function addToContact() {
 async function newContact(name, email, phone) {
 	let initials = getInitials(name);
 	let initialColor = getColor();
+	let id = Date.now();
 
 	let newContact = {
         'name': name,
         'email': email,
         'phone': phone,
 		'initials': initials,
-		'color': initialColor
+		'color': initialColor,
+		'ID': id
     }
     contacts.push(newContact);
     await backend.setItem('contacts', JSON.stringify(contacts));
@@ -182,24 +175,19 @@ let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
 const widths = [0, 1400];
 
-
-
 /*
 window.addEventListener('resize', function () {
-renderSingleContact(i);
+	renderSingleContact(currentOpenContact);
 });
 */
 
-// window.addEventListener('resize', renderSingleContact(i));
-
-
-
 function renderSingleContact(i) {
-if (window.innerWidth>widths[1]) {
-	renderSingleContactDesktop(i);
-	} else {
-	renderSingleContactMobile(i);
-	}
+	currentOpenContact = i;
+	if (window.innerWidth>widths[1]) {
+		renderSingleContactDesktop(i);
+		} else {
+		renderSingleContactMobile(i);
+		}
 }
 
 
