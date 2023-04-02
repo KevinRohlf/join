@@ -124,7 +124,7 @@ function htmlRenderEditTask(i) {
                 <p>Assigned to</p>
               
                 <div id="contactShow" class="dropdown">
-                    <div onclick="dropdown('contact')" class="flex gap-10" id="selectContact">
+                    <div onclick="dropdown('contact', ${i})" class="flex gap-10" id="selectContact">
                         Select contacts to assign
                     </div>
                     <div id="contact" class="flex-column d-none">

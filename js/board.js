@@ -397,13 +397,16 @@ async function renderContacts(i) {
     content.innerHTML = '';
     for (let j = 0; j < contacts.length; j++) {
         let contact = contacts[j];
-        content.innerHTML += `<label for="cb-contacts-${j}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${j})" id="cb-contacts-${j}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+        content.innerHTML += `<label for="cb-contacts-${j}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${j},${i})" id="cb-contacts-${j}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
         if (j == contacts.length - 1) {
             let j = contacts.length
             content.innerHTML += `<label for="cb-subtask-${j}"> <div class="contacts">Intive new contact <input onclick="inviteNewContact(${i})" id="cb-subtask-${j}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
         }
+
     }
 }
+
+
 
 
 function inviteNewContact(i) {
@@ -436,13 +439,23 @@ function inviteNewContact(i) {
     `
 }
 
+
+function checkForSelectedContacts(i) {
+    for (let j = 0; j < contacts.length; j++) {
+        let contact = contacts[j];
+        if (tasks[i].contactSelection.includes(contact.initials)) {
+            document.getElementById(`cb-contacts-${j}`).checked = true
+        }
+    }
+}
+
+
 function showDropDown(i) {
     loadEditTask(i)
 }
 
 
-function dropdown(area) {
-    console.log(area)
+function dropdown(area, i) {
     if (!inAnimation) {
         let content = document.getElementById(area);
         let bigArea = area[0].toUpperCase() + area.slice(1);
@@ -451,12 +464,12 @@ function dropdown(area) {
         document.getElementById(`arrow${bigArea}`).style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
         document.getElementById(`select${bigArea}`).setAttribute('onclick', `dropup('${area}')`);
         document.getElementById(`arrow${bigArea}`).setAttribute('onclick', `dropup('${area}')`);
+        checkForSelectedContacts(i)
     }
 }
 
 
 function dropup(area) {
-    console.log(inAnimation)
     let content = document.getElementById(area);
     let areaShow = document.getElementById(area + 'Show')
     inAnimation = true;
@@ -478,14 +491,24 @@ function editEndHeight(content) {
 }
 
 
-function addContactToList(number) {
+async function addContactToList(j, i) {
+    if (document.getElementById(`cb-contacts-${j}`).checked) {
+        tasks[i].contactSelection.push(contacts[j].initials)
+        await backend.setItem(`tasks`, JSON.stringify(tasks));
+    } else {
+        let index = tasks[i].contactSelection.indexOf(contacts[j].initial)
+        tasks[i].contactSelection.splice(index,1)
+        await backend.setItem(`tasks`, JSON.stringify(tasks));
+    }
+
+    /*
     let contact = document.getElementById(`cb-contacts-${number}`);
     selectedContacts.push(contacts[number]['initials']);
     contact.setAttribute('onclick', `removeContactFromList(${number})`);
-    renderSelectedContacts();
+    renderSelectedContacts();*/
 }
 
-
+/*
 function removeContactFromList(number) {
     let contact = document.getElementById(`cb-contacts-${number}`);
     contact.setAttribute('onclick', `addContactToList(${number})`);
@@ -506,7 +529,7 @@ function renderSelectedContacts() {
         content.innerHTML = 'Select contacts to assign';
     }
 }
-
+*/
 
 
 
@@ -517,8 +540,6 @@ function renderSelectedContacts() {
 
 function dragstart_handler(id) {
     currentDraggedElement = id
-    // id.dataTransfer.setDragImage(image, xOffset, yOffset);
-
 }
 
 
@@ -537,6 +558,11 @@ async function drop_handler(status) {
 function highlightArea(id) {
     let container = document.getElementById(id)
     container.classList.remove('d-none')
+    let toDoContainer = document.getElementById('to-do-container')
+    if (toDoContainer.innerHTML.length == 0) {
+        toDoContainer.classList.remove('min-height')
+    }
+    console.log(toDoContainer.innerHTML.length)
     /* let originContainer = container.parentElement.parentElement.children[1].lastElementChild.id
      console.log(id)
      console.log(originContainer)
@@ -554,9 +580,7 @@ function removeHighlightArea(id) {
 
 
 function highliteDragArea(id) {
-
     let container = document.getElementById(id)
-
     container.classList.remove('d-none')
 }
 
