@@ -188,12 +188,17 @@ a {
     display: flex;
 }
 
-.contact-selection>div {
+.circle {
     margin: 8px -5px;
     color: white;
     padding: 10px;
     border: 1px solid #FFFFFF;
-    border-radius: 50%;
+    border-radius: 100%;
+    height: 38px;
+    width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .prio-and-contact-container {
@@ -295,10 +300,6 @@ a {
 }
 
 .contact-card-content>p:first-child {
-    color: white;
-    padding: 6px;
-    border: 1px solid #FFFFFF;
-    border-radius: 50%;
     margin-right: 16px !important;
 }
 
@@ -369,15 +370,31 @@ a {
 /*********Task Editor***********/
 
 .edit-task-form>div>input {
-    padding: 12px;
+    height: 51px;
+    padding: 6px;
     background: #FFFFFF;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     width: 100%;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    background: url(./assets/img/calender2.svg);
+    background-repeat: no-repeat;
+    width: 56px;
+    height: 51px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+}
+
 form>div {
     margin-bottom: 16px;
+}
+
+form>div>p {
+    margin-bottom: 4px;
 }
 
 .edit-task-prio-container {
@@ -389,10 +406,22 @@ form>div {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 8px 0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     padding: 8px 10px;
+}
+
+#edit-task-date-icon {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    top: 34.5px;
+}
+
+#edit-task-date-icon>svg {
+    margin-right: 26.5px;
 }
 
 .edit-task-prio-container>div:hover {
@@ -466,10 +495,7 @@ input:focus {
     position: relative;
 }
 
-.edit-task-date-icon {
-    position: absolute;
-    top: 0px;
-}
+
 
 .edit-task-btn-container {
     display: flex;
@@ -582,9 +608,10 @@ input:focus {
 
 .subtask-progress-bar {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
+
+
 
 
 

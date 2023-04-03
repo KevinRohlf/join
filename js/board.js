@@ -65,12 +65,21 @@ function forwardTaskContent(currentTask, content, i) {
 
 
 function renderProgressBar(currentTask, i) {
-    let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
-    progressBar.innerHTML =
+    if (tasks[i].subtasks.length > 0) {
+        let totalSubtasks = tasks[i].subtasks.length
+        let completedSubtasks = 0
+        /*  for (let k = 0; k < tasks[i].sTStatus.length; k++) {
+              if (tasks[i].sTStatus == true) {
+                  completedSubtasks++
+              }
+          } */
+        let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
+        progressBar.innerHTML =
     /*html*/`
-    <progress id="file" value="32" max="100"> 32% </progress>
-    <label for="file">xxx</label>
+    <progress id="file" value="${completedSubtasks}" max="${totalSubtasks}"> 32% </progress>
+    <label for="file" id="progress-count-${i}">${completedSubtasks}/${totalSubtasks}</label>
     `
+    }
 }
 
 
@@ -133,7 +142,7 @@ function renderContactSelection(currentTask, i) {
 function showAllContacts(currentTask, i, currentContact, j) {
     document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
     /*html*/ `
-    <div id="${contacts[j].ID}_${i}">${currentContact}</div>
+    <div class="circle" id="${contacts[j].ID}_${i}">${currentContact}</div>
     `
 }
 
@@ -202,7 +211,7 @@ function renderCardContacts(i) {
                 container.innerHTML +=
                 /*html*/ `
                 <div class="contact-card-content">
-                    <p style="background-color:${contact.color}">${contact.initials}</p> 
+                    <p class="circle" style="background-color:${contact.color}">${contact.initials}</p> 
                     <p>${contact.name}</p>
                 </div>
                 `
@@ -266,13 +275,10 @@ function renderEditTask(i) {
             <div class="subtasks">${tasks[i].subtasks[j]} <input onclick="updateSubtask(${j},${i})" id="subtask-${j}" class="checkbox" type="checkbox"></div>
         `
     }
-    checkForCompletedSubtasks(i)
-    renderProgressBar(i)
-}
+    if (tasks[i].subtasks.length > 0) {
+        checkForCompletedSubtasks(i)
 
-
-function renderProgressBar(i) {
-    
+    }
 }
 
 
@@ -285,7 +291,7 @@ function checkForCompletedSubtasks(i) {
 }
 
 
-async function updateSubtask(j,i) {
+async function updateSubtask(j, i) {
     let checked = document.getElementById(`subtask-${j}`).checked
     if (checked) {
         tasks[i].sTStatus[j] = true;
@@ -482,9 +488,9 @@ function inviteNewContact(i) {
 
 function checkForSelectedContacts(i) {
     for (let j = 0; j < contacts.length; j++) {
-      let container = document.getElementById('contact-card-container')
-      let i = container.className.slice(0,1)
-      let contact = contacts[j];
+        let container = document.getElementById('contact-card-container')
+        let i = container.className.slice(0, 1)
+        let contact = contacts[j];
         if (tasks[i].contactSelection.includes(contact.ID)) {
             document.getElementById(`cb-contacts-${j}`).checked = true
         }
@@ -646,4 +652,13 @@ function removeTest(id) {
 
 
     // .currentNode.nextElementSibling
+}
+
+function hideIcon() {
+    let content = document.getElementById('edit-task-date-icon')
+    if (!content.classList.contains('d-none')) {
+        content.classList.add('d-none')
+    } else if (content.classList.contains('d-none')) {
+        content.classList.remove('d-none')
+    } 
 }
