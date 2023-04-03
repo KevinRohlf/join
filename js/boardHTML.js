@@ -139,7 +139,7 @@ function htmlRenderEditTask(i) {
                 </div>
           
             </div>
-            <div id="contact-card-container">
+            <div id="contact-card-container" class="${i}">
             </div>
             <div class="edit-task-btn-container">
             <button id="edit-task-btn" onclick="closeForm(${i})">

@@ -60,13 +60,13 @@ function filterTasks() {
 function forwardTaskContent(currentTask, content, i) {
     renderAllTasks(currentTask, content, i)
     renderContactSelection(currentTask, i)
-    renderProgressBar(currentTask,i)
+    renderProgressBar(currentTask, i)
 }
 
 
-function renderProgressBar(currentTask,i) {
+function renderProgressBar(currentTask, i) {
     let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
-    progressBar.innerHTML = 
+    progressBar.innerHTML =
     /*html*/`
     <progress id="file" value="32" max="100"> 32% </progress>
     <label for="file">xxx</label>
@@ -114,22 +114,26 @@ function getTaskCategoryColor(i) {
 function renderContactSelection(currentTask, i) {
     //let currentContact
     for (let k = 0; k < currentTask.contactSelection.length; k++) {
-        currentContact = currentTask.contactSelection[k]
-        if (currentTask.contactSelection.length <= 3) {
-            showAllContacts(currentTask, i, currentContact)
-            getContactColor(currentContact, i, k)
-        } else {
-            showFirstTwoContacts(k, currentTask, i, currentContact)
-            getContactColor(currentContact, i, k)
+        for (let j = 0; j < contacts.length; j++) {
+            if (currentTask.contactSelection[k] == contacts[j].ID) {
+                currentContact = contacts[j].initials
+                if (currentTask.contactSelection.length <= 3) {
+                    showAllContacts(currentTask, i, currentContact, j)
+                    getContactColor(i, k, j)
+                } else {
+                    showFirstTwoContacts(k, currentTask, i, currentContact, j)
+                    getContactColor(i, k, j)
+                }
+            }
         }
     }
 }
 
 
-function showAllContacts(currentTask, i, currentContact) {
+function showAllContacts(currentTask, i, currentContact, j) {
     document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
     /*html*/ `
-    <div id="${currentContact}_${i}">${currentContact}</div>
+    <div id="${contacts[j].ID}_${i}">${currentContact}</div>
     `
 }
 
@@ -138,7 +142,7 @@ function showFirstTwoContacts(k, currentTask, i, currentContact) {
     if (k < 2) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div id="${currentContact}_${i}">${currentContact}</div>
+        <div id="${contacts[j].ID}_${i}">${currentContact}</div>
         `
     } else if (k == 3) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
@@ -149,15 +153,14 @@ function showFirstTwoContacts(k, currentTask, i, currentContact) {
 }
 
 
-function getContactColor(currentContact, i, k) {
-
-    for (let j = 0; j < contacts.length; j++) {
-        if (k < 2) {
-            if (contacts[j].initials == currentContact) {
-                document.getElementById(`${currentContact}_${i}`).style = `background-color: ${contacts[j].color}`
+function getContactColor(i, k, j) {
+    for (let l = 0; l < contacts.length; l++) {
+        if (k < 3) {
+            if (contacts[l].ID == tasks[i].contactSelection[k]) {
+                document.getElementById(`${contacts[j].ID}_${i}`).style = `background-color: ${contacts[l].color}`
             }
         } else if (k == 3) {
-            document.getElementById(`remaining-contacts-number-${i}`).style = `background-color: ${contacts[j].color}`
+            document.getElementById(`remaining-contacts-number-${i}`).style = `background-color: ${contacts[l].color}`
         }
     }
 }
@@ -191,25 +194,18 @@ function stopPropagation(event) {
 
 
 function renderCardContacts(i) {
-    /*   let currentColor
-       for (let j = 0; j < contacts.length; j++) {
-           if (contacts[j].initials == currentContact) {
-               console.log(currentContact)
-               currentColor = contacts[j].color
-           }
-       }*/
     let container = document.getElementById('contact-card-container')
     tasks[i].contactSelection.forEach(element => {
         for (let j = 0; j < contacts.length; j++) {
             let contact = contacts[j]
-            if (element == contacts[j].initials) {
+            if (element == contacts[j].ID) {
                 container.innerHTML +=
                 /*html*/ `
                 <div class="contact-card-content">
                     <p style="background-color:${contact.color}">${contact.initials}</p> 
                     <p>${contact.name}</p>
                 </div>
-       `
+                `
             }
         }
     });
@@ -250,7 +246,6 @@ function searchTasks() {
 
 
 function loadEditTask(i) {
-    console.log(i)
     renderEditTask(i)
     renderContacts(i);
     renderCardContacts(i)
@@ -268,14 +263,37 @@ function renderEditTask(i) {
     for (let j = 0; j < tasks[i].subtasks.length; j++) {
         subtasks.innerHTML +=
         /*html*/`
-            <div class="subtasks">${tasks[i].subtasks[j]} <input onclick="updateSubtask()" id="subtask-${j}" class="checkbox" type="checkbox"></div>
+            <div class="subtasks">${tasks[i].subtasks[j]} <input onclick="updateSubtask(${j},${i})" id="subtask-${j}" class="checkbox" type="checkbox"></div>
         `
+    }
+    checkForCompletedSubtasks(i)
+    renderProgressBar(i)
+}
+
+
+function renderProgressBar(i) {
+    
+}
+
+
+function checkForCompletedSubtasks(i) {
+    for (let j = 0; j < tasks[i].sTStatus.length; j++) {
+        if (tasks[i].sTStatus[j] == true) {
+            document.getElementById(`subtask-${j}`).checked = true
+        }
     }
 }
 
 
-function updateSubtask() {
-
+async function updateSubtask(j,i) {
+    let checked = document.getElementById(`subtask-${j}`).checked
+    if (checked) {
+        tasks[i].sTStatus[j] = true;
+        await backend.setItem(`tasks`, JSON.stringify(tasks));
+    } else {
+        tasks[i].sTStatus[j] = false;
+        await backend.setItem(`tasks`, JSON.stringify(tasks));
+    }
 }
 
 
@@ -427,11 +445,8 @@ async function renderContacts(i) {
             let j = contacts.length
             content.innerHTML += `<label for="cb-subtask-${j}"> <div class="contacts">Intive new contact <input onclick="inviteNewContact(${i})" id="cb-subtask-${j}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
         }
-
     }
 }
-
-
 
 
 function inviteNewContact(i) {
@@ -465,11 +480,12 @@ function inviteNewContact(i) {
 }
 
 
-function checkForSelectedContacts() {
+function checkForSelectedContacts(i) {
     for (let j = 0; j < contacts.length; j++) {
-        let i = document.getElementById(`cb-contacts-${j}`).id.slice(-1)
-        let contact = contacts[j];
-        if (tasks[i].contactSelection.includes(contact.initials)) {
+      let container = document.getElementById('contact-card-container')
+      let i = container.className.slice(0,1)
+      let contact = contacts[j];
+        if (tasks[i].contactSelection.includes(contact.ID)) {
             document.getElementById(`cb-contacts-${j}`).checked = true
         }
     }
@@ -519,10 +535,10 @@ function editEndHeight(content) {
 
 async function addContactToList(j, i) {
     if (document.getElementById(`cb-contacts-${j}`).checked) {
-        tasks[i].contactSelection.push(contacts[j].initials)
+        tasks[i].contactSelection.push(contacts[j].ID)
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     } else {
-        let index = tasks[i].contactSelection.indexOf(contacts[j].initial)
+        let index = tasks[i].contactSelection.indexOf(contacts[j].ID)
         tasks[i].contactSelection.splice(index, 1)
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     }
