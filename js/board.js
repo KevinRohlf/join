@@ -6,7 +6,11 @@ let currentContact;
 let inAnimation = false;
 let currentDraggedElement;
 
-
+/**
+ * This function is used to load the content from the backend
+ * 
+ * 
+ */
 async function loadBackend() {
     setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
@@ -16,11 +20,15 @@ async function loadBackend() {
     loadTasks()
 }
 
-
+/**
+ * 
+ * This function is used to get the containers which will be filled with the content from the backend
+ * 
+ */
 function loadTasks() {
-   // console.log(tasks)
-  //  console.log(categorys)
-  //  console.log(contacts)
+    // console.log(tasks)
+    //  console.log(categorys)
+    //  console.log(contacts)
     document.getElementById('to-do-container').innerHTML = ''
     document.getElementById('in-progress-container').innerHTML = ''
     document.getElementById('awaiting-feedback-container').innerHTML = ''
@@ -28,7 +36,11 @@ function loadTasks() {
     filterTasks()
 }
 
-
+/**
+ * 
+ * This function is used to so sort the content from the backend
+ * 
+ */
 function filterTasks() {
     for (let i = 0; i < tasks.length; i++) {
         let currentTask = tasks[i]
@@ -49,14 +61,27 @@ function filterTasks() {
 }
 
 
+/**
+ * 
+ * This function is used to render the backend content
+ * 
+ * @param {object} currentTask 
+ * @param {html container} content 
+ * @param {number} i 
+ */
 function forwardTaskContent(currentTask, content, i) {
     renderAllTasks(currentTask, content, i)
     renderContactSelection(currentTask, i)
     renderProgressBar(currentTask, i)
 }
 
-
-function renderProgressBar(currentTask, i) {
+/**
+ * 
+ * This function is used to render the progress bar
+ * 
+ * @param {number} i 
+ */
+function renderProgressBar(i) {
     if (tasks[i].subtasks.length > 0) {
         let totalSubtasks = tasks[i].subtasks.length
         let completedSubtasks = 0
@@ -74,14 +99,27 @@ function renderProgressBar(currentTask, i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to render all tasks
+ * 
+ * @param {object} currentTask 
+ * @param {html container} content 
+ * @param {number} i 
+ */
 function renderAllTasks(currentTask, content, i) {
     content.innerHTML += htmlRenderAllTasks(currentTask, i)
     getPrioImage(currentTask, i)
     getTaskCategoryColor(i)
 }
 
-
+/**
+ * 
+ * This function is used to render the priority image 
+ * 
+ * @param {object} currentTask 
+ * @param {number} i 
+ */
 function getPrioImage(currentTask, i) {
     let content = document.getElementById(`${currentTask.prio}_${i}`)
     if (content.id == `low_${i}`) {
@@ -99,7 +137,12 @@ function getPrioImage(currentTask, i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to get the corret color for every category
+ * 
+ * @param {number} i 
+ */
 function getTaskCategoryColor(i) {
     for (let j = 0; j < categorys.length; j++) {
         if (categorys[j].name == tasks[i].category) {
@@ -111,7 +154,13 @@ function getTaskCategoryColor(i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to render the contact selection
+ * 
+ * @param {object} currentTask 
+ * @param {number} i 
+ */
 function renderContactSelection(currentTask, i) {
     for (let k = 0; k < currentTask.contactSelection.length; k++) {
         for (let j = 0; j < contacts.length; j++) {
@@ -129,7 +178,15 @@ function renderContactSelection(currentTask, i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to render all contacts for every task
+ * 
+ * @param {object} currentTask 
+ * @param {number} i 
+ * @param {object} currentContact 
+ * @param {number} j 
+ */
 function showAllContacts(currentTask, i, currentContact, j) {
     document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
     /*html*/ `
@@ -137,7 +194,15 @@ function showAllContacts(currentTask, i, currentContact, j) {
     `
 }
 
-
+/**
+ * 
+ * This function is used to render the first two contacts for every task, and get a counter for the remaining contacts
+ * 
+ * @param {number} k 
+ * @param {object} currentTask 
+ * @param {number} i 
+ * @param {object} currentContact 
+ */
 function showFirstTwoContacts(k, currentTask, i, currentContact) {
     if (k < 2) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
@@ -152,7 +217,14 @@ function showFirstTwoContacts(k, currentTask, i, currentContact) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to render the color for every contact
+ * 
+ * @param {number} i 
+ * @param {number} k 
+ * @param {number} j 
+ */
 function getContactColor(i, k, j) {
     for (let l = 0; l < contacts.length; l++) {
         if (k < 3) {
@@ -166,7 +238,12 @@ function getContactColor(i, k, j) {
 }
 
 
-
+/**
+ * 
+ * This function is used to render the detailed view of the clicked task
+ * 
+ * @param {number} i 
+ */
 function loadCard(i) {
     cardOpened = true
     if (window.innerWidth < 1000) {
@@ -181,18 +258,34 @@ function loadCard(i) {
     getTaskCategoryColor(i)
 }
 
-
+/**
+ * 
+ * This function is used to render the detailed view of the clicked task
+ * 
+ * @param {number} i 
+ * @param {html container} overlay 
+ */
 function renderCard(i, overlay) {
     overlay.innerHTML = htmlRenderCard(i)
     document.getElementById('card-container').classList.remove('d-none')
 }
 
-
+/**
+ * 
+ * This funciton is used to stop the overlay onclick function when pressing buttons on the card
+ * 
+ * @param {string} event 
+ */
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
-
+/**
+ * 
+ * This function is used to render the contacts on the card
+ * 
+ * @param {number} i 
+ */
 function renderCardContacts(i) {
     let container = document.getElementById('contact-card-container')
     tasks[i].contactSelection.forEach(element => {
@@ -211,7 +304,12 @@ function renderCardContacts(i) {
     });
 }
 
-
+/**
+ * 
+ * This function is used to render the correct prio image on the card
+ * 
+ * @param {number} i 
+ */
 function getCardPrioImg(i) {
     let content = document.getElementById(`card-${tasks[i].prio}`)
     if (content.id == `card-low`) {
@@ -229,7 +327,11 @@ function getCardPrioImg(i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to search all tasks
+ * 
+ */
 function searchTasks() {
     let input = document.getElementById('find-task-input')
     for (let i = 0; i < tasks.length; i++) {
@@ -244,7 +346,12 @@ function searchTasks() {
     }
 }
 
-
+/**
+ * 
+ * This function is used to render the edit task section
+ * 
+ * @param {number} i 
+ */
 function loadEditTask(i) {
     renderEditTask(i)
     renderContacts(i);
@@ -252,7 +359,12 @@ function loadEditTask(i) {
     highlightPrio(i)
 }
 
-
+/**
+ * 
+ * This function is used to render the edit task section
+ * 
+ * @param {number} i 
+ */
 function renderEditTask(i) {
     let content = document.getElementById('card-container')
     content.innerHTML = htmlRenderEditTask(i)
@@ -269,7 +381,12 @@ function renderEditTask(i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to check if the subtasks are completed or not and render the status
+ * 
+ * @param {number} i 
+ */
 function checkForCompletedSubtasks(i) {
     for (let j = 0; j < tasks[i].sTStatus.length; j++) {
         if (tasks[i].sTStatus[j] == true) {
@@ -278,7 +395,13 @@ function checkForCompletedSubtasks(i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to update the subtask status in backend
+ * 
+ * @param {number} j 
+ * @param {number} i 
+ */
 async function updateSubtask(j, i) {
     let checked = document.getElementById(`subtask-${j}`).checked
     if (checked) {
@@ -290,21 +413,36 @@ async function updateSubtask(j, i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to the change the prio of a task when clicked and update the backend
+ * 
+ * @param {number} i 
+ * @param {string} prio 
+ */
 async function changePrio(i, prio) {
     tasks[i].prio = `${prio}`
     await backend.setItem(`tasks`, JSON.stringify(tasks));
     highlightPrio(i)
 }
 
-
+/**
+ * 
+ * This function is used to close the detailed view and load the updates on the tasks
+ * 
+ * @param {number} i 
+ */
 function closeForm(i) {
     updateInput(i)
     closeCard()
     loadTasks()
 }
 
-
+/**
+ * 
+ * This function is used to close the detailed view of the tasks
+ * 
+ */
 function closeCard() {
     cardOpened = false;
     body.classList.remove('overflow-hidden')
@@ -315,7 +453,12 @@ function closeCard() {
     }
 }
 
-
+/**
+ * 
+ * This function is used to update title, descritpion and date of every task
+ * 
+ * @param {number} i 
+ */
 async function updateInput(i) {
     let inputTitle = document.getElementById('edit-task-title')
     let inputDescription = document.getElementById('edit-task-description')
@@ -329,7 +472,12 @@ async function updateInput(i) {
     await backend.setItem(`tasks`, JSON.stringify(tasks));
 }
 
-
+/**
+ * 
+ * This function is used to show the correct prio image
+ * 
+ * @param {number} i 
+ */
 function highlightPrio(i) {
     if (tasks[i].prio == 'low')
         taskPrioLow()
@@ -345,7 +493,11 @@ function highlightPrio(i) {
         taskPrioNotUrgent()
 }
 
-
+/**
+ * 
+ * This function is used to show the correct prio image
+ * 
+ */
 function taskPrioLow() {
     let content = document.getElementById('prio-area-low')
     content.style = 'background-color:#7AE229'
@@ -357,7 +509,11 @@ function taskPrioLow() {
     svgPath2.style.fill = '#FFFFFF'
 }
 
-
+/**
+ * 
+ * This function is used to show the correct prio image
+ * 
+ */
 function taskPrioNotLow() {
     let content = document.getElementById('prio-area-low')
     content.style = 'background-color:#FFFFFF'
@@ -369,7 +525,11 @@ function taskPrioNotLow() {
     svgPath2.style.fill = '#7AE229'
 }
 
-
+/**
+ * 
+ * This function is used to show the correct prio image
+ * 
+ */
 function taskPrioMedium() {
     let content = document.getElementById('prio-area-medium')
     content.style = 'background-color:#FFA800'
@@ -381,7 +541,11 @@ function taskPrioMedium() {
     svgPath2.style.fill = '#FFFFFF'
 }
 
-
+/**
+ * 
+ * This function is used to show the correct prio image
+ * 
+ */
 function taskPrioNotMedium() {
     let content = document.getElementById('prio-area-medium')
     content.style = 'background-color:#FFFFFF'
@@ -393,7 +557,11 @@ function taskPrioNotMedium() {
     svgPath2.style.fill = '#FFA800'
 }
 
-
+/**
+ * 
+ * This function is used to show the correct prio image
+ * 
+ */
 function taskPrioUrgent() {
     let content = document.getElementById('prio-area-urgent')
     content.style = 'background-color:#FF3D00'
@@ -405,7 +573,11 @@ function taskPrioUrgent() {
     svgPath2.style.fill = '#FFFFFF'
 }
 
-
+/**
+ * 
+ * This function is used to show the correct prio image
+ * 
+ */
 function taskPrioNotUrgent() {
     let content = document.getElementById('prio-area-urgent')
     content.style = 'background-color:#FFFFFF'
@@ -420,6 +592,12 @@ function taskPrioNotUrgent() {
 
 /*********Edit Task Dropdown Menu************/
 
+/**
+ * 
+ * This function is used to render the contacts in the drop down menu
+ * 
+ * @param {number} i 
+ */
 async function renderContacts(i) {
     let content = document.getElementById('contact');
     await downloadFromServer();
@@ -435,7 +613,12 @@ async function renderContacts(i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to invite a new contact to the task
+ * 
+ * @param {number} i 
+ */
 function inviteNewContact(i) {
     let area = 'contact'
     dropup(area)
@@ -443,8 +626,13 @@ function inviteNewContact(i) {
     content.innerHTML = renderInviteNewContactArea(i)
 }
 
-
-function checkForSelectedContacts(i) {
+/**
+ * 
+ * This function is used to check if contacts are already part of task
+ * 
+ * @param {number} i 
+ */
+function checkForSelectedContacts() {
     for (let j = 0; j < contacts.length; j++) {
         let container = document.getElementById('contact-card-container')
         let i = container.className.slice(0, 1)
@@ -455,12 +643,23 @@ function checkForSelectedContacts(i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to show all contacts in drop down menu
+ * 
+ * @param {number} i 
+ */
 function showDropDown(i) {
     loadEditTask(i)
 }
 
-
+/**
+ * 
+ * This function is used to open the drop down menu
+ * 
+ * @param {string} area 
+ * @param {number} i 
+ */
 function dropdown(area, i) {
     if (!inAnimation) {
         let content = document.getElementById(area);
@@ -474,7 +673,12 @@ function dropdown(area, i) {
     }
 }
 
-
+/**
+ * 
+ * This function is used to close the drop down menu
+ * 
+ * @param {string} area 
+ */
 function dropup(area) {
     let content = document.getElementById(area);
     let areaShow = document.getElementById(area + 'Show')
@@ -491,12 +695,23 @@ function dropup(area) {
     }, 500);
 }
 
-
+/**
+ * 
+ * This function is used to 
+ * 
+ * @param {string} content 
+ */
 function editEndHeight(content) {
     document.documentElement.style.setProperty('--end-height', content.clientHeight + 'px')
 }
 
-
+/**
+ * 
+ * This function is used to add contacts to the task
+ * 
+ * @param {number} j 
+ * @param {number} i 
+ */
 async function addContactToList(j, i) {
     if (document.getElementById(`cb-contacts-${j}`).checked) {
         tasks[i].contactSelection.push(contacts[j].ID)
@@ -512,23 +727,44 @@ async function addContactToList(j, i) {
 /*********Drag and Drop Function************/
 
 
+/**
+ * 
+ * This function is used to get the dragged Element in a parameter
+ * 
+ * @param {string} id 
+ */
 function dragstart_handler(id) {
     currentDraggedElement = id
 }
 
-
+/**
+ * 
+ * This function is used to stop events while dragging
+ * 
+ * @param {string} ev 
+ */
 function dragover_handler(ev) {
     ev.preventDefault();
 }
 
-
+/**
+ * 
+ * This function is used to drop tasks in a new area
+ * 
+ * @param {string} status 
+ */
 async function drop_handler(status) {
     tasks[currentDraggedElement].status = status;
     await backend.setItem(`tasks`, JSON.stringify(tasks));
     loadTasks()
 }
 
-
+/**
+ * 
+ * This function is used to highlight the areas where tasks can be dropped
+ * 
+ * @param {string} id 
+ */
 function highlightArea(id) {
     let container = document.getElementById(id)
     container.classList.remove('d-none')
@@ -539,26 +775,45 @@ function highlightArea(id) {
     console.log(toDoContainer.innerHTML.length)
 }
 
-
+/**
+ * 
+ * This function is used to remove the highlited areas
+ * 
+ * @param {string} id 
+ */
 function removeHighlightArea(id) {
     let container = document.getElementById(id)
     container.classList.add('d-none')
 }
 
-
+/**
+ * 
+ * This function is used to highlight the areas where tasks can be dropped
+ * 
+ * @param {number} id 
+ */
 function highliteDragArea(id) {
     let container = document.getElementById(id)
     container.classList.remove('d-none')
 }
 
-
+/**
+ * 
+ * This function is used to remove the highlited areas
+ * 
+ * @param {string} id 
+ */
 function removeHighlightDragArea(id) {
     let container = document.getElementById(id)
     container.classList.add('d-none')
 
 }
 
-
+/**
+ * 
+ * This function is used to hide and make visible the date icon
+ * 
+ */
 function hideIcon() {
     let content = document.getElementById('edit-task-date-icon')
     if (!content.classList.contains('d-none')) {
@@ -568,7 +823,7 @@ function hideIcon() {
     }
 }
 
-
+/*
 function removeTest(id) {
     console.log("testtest")
     let element = document.getElementById(id)
@@ -577,3 +832,4 @@ function removeTest(id) {
         targetContainer[i].lastElementChild.classList.add('d-none')
     }
 }
+*/
