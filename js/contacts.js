@@ -1,6 +1,6 @@
 let contacts = [];
 let alphabet = [];
-let currentOpenContact;
+let mobile = false;
 
 async function init() {
 	setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
@@ -175,18 +175,14 @@ let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
 const widths = [0, 1400];
 
-/*
-window.addEventListener('resize', function () {
-	renderSingleContact(currentOpenContact);
-});
-*/
 
 function renderSingleContact(i) {
 	currentOpenContact = i;
 	if (window.innerWidth>widths[1]) {
-		renderSingleContactDesktop(i);
+			renderSingleContactDesktop(i);
 		} else {
-		renderSingleContactMobile(i);
+			mobile = true;
+			renderSingleContactMobile(i);
 		}
 }
 
@@ -198,8 +194,22 @@ function renderSingleContactDesktop(i) {
 	contactContent.innerHTML += htmlTemplateRenderSingleContact(contacts[i], i);
 }
 
-
 function renderSingleContactMobile(i) {
+	renderSingleContactDetails(i);
+	window.addEventListener('resize', function () {
+		if (window.innerWidth>widths[1]) {
+			document.getElementById('contacts-field').style.display = 'flex';
+			document.getElementById('contacts-details').style.display = 'flex';
+		} else {
+			document.getElementById('contacts-details').style.display = 'none';
+			if (mobile) {
+				renderSingleContactDetails(i);
+			}
+		}
+	});
+}
+
+function renderSingleContactDetails(i) {
 	document.getElementById('contacts-field').style.display = 'none';
 	singleContactOverlay.style.display = 'flex';
 	contactContent.style = 'animation:none;';
@@ -220,6 +230,7 @@ function closeSingleContactDesktop() {
 
 
 function closeSingleContactMobile() {
+	mobile = false;
 	document.getElementById('contacts-field').style.display = 'flex';
 	singleContactOverlay.style.display = 'none';
 	document.getElementById('contacts-details').style.display = 'none';
