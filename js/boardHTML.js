@@ -28,7 +28,7 @@ function htmlRenderCard(i) {
                 <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
             </svg>
             <div>   
-                <svg id="arrow-svg" class="d-none" width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg id="arrow-svg" class="d-none" width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
                 <path d="M6.06825 9.95833H23.2917C24.1432 9.95833 24.8334 10.6486 24.8334 11.5C24.8334 12.3514 24.1432 13.0417 23.2917 13.0417H6.06825L13.2478 20.2212C13.8498 20.8232 13.8498 21.7992 13.2478 22.4011C12.6458 23.0031 11.6698 23.0031 11.0679 22.4011L1.58096 12.9142C0.799914 12.1332 0.799913 10.8668 1.58096 10.0858L11.0679 0.59887C11.6698 -0.00309756 12.6458 -0.00309813 13.2478 0.598869C13.8498 1.20084 13.8498 2.17682 13.2478 2.77879L6.06825 9.95833Z" fill="black"/>
                 </svg>
             </div>
@@ -150,6 +150,33 @@ function htmlRenderEditTask(i) {
             </button>
             </div>
         </form>
+    </div>
+    `
+}
+
+
+function renderInviteNewContactArea(i) {
+    return /*html*/ `
+    <div class="invite-contact-container">
+        <input class="invite-contact-input" type="email" placeholder="Contact email">
+        <div>
+            <div>
+                <svg width="26" height="26" viewBox="2 2 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
+                    <path d="M22.9614 7.65381L7.65367 22.9616" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div>
+                <svg width="2" height="31" viewBox="0 0 2 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 0V31" stroke="#D1D1D1"/>
+                </svg>
+            </div>
+            <div onclick="showDropDown(${i})">
+                <svg width="18" height="18" viewBox="0 -2 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7.5L7 13.5L17 1.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
     </div>
     `
 }

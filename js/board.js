@@ -1,18 +1,10 @@
-
-
 let tasks = []
 let categorys = []
 let contacts = []
 let cardOpened = false;
-let currentContact
+let currentContact;
 let inAnimation = false;
 let currentDraggedElement;
-
-/*
-let currentTasks = []
-let p = 0
-*/
-
 
 
 async function loadBackend() {
@@ -26,9 +18,9 @@ async function loadBackend() {
 
 
 function loadTasks() {
-    console.log(tasks)
-    console.log(categorys)
-    console.log(contacts)
+   // console.log(tasks)
+  //  console.log(categorys)
+  //  console.log(contacts)
     document.getElementById('to-do-container').innerHTML = ''
     document.getElementById('in-progress-container').innerHTML = ''
     document.getElementById('awaiting-feedback-container').innerHTML = ''
@@ -121,7 +113,6 @@ function getTaskCategoryColor(i) {
 
 
 function renderContactSelection(currentTask, i) {
-    //let currentContact
     for (let k = 0; k < currentTask.contactSelection.length; k++) {
         for (let j = 0; j < contacts.length; j++) {
             if (currentTask.contactSelection[k] == contacts[j].ID) {
@@ -268,16 +259,13 @@ function renderEditTask(i) {
     let subtasks = document.getElementById('edit-task-subtasks-container')
     if (tasks[i].subtasks.length > 0) {
         subtasks.innerHTML = `<p>Subtasks</p>`
-    }
-    for (let j = 0; j < tasks[i].subtasks.length; j++) {
-        subtasks.innerHTML +=
-        /*html*/`
-            <div class="subtasks">${tasks[i].subtasks[j]} <input onclick="updateSubtask(${j},${i})" id="subtask-${j}" class="checkbox" type="checkbox"></div>
-        `
-    }
-    if (tasks[i].subtasks.length > 0) {
+        for (let j = 0; j < tasks[i].subtasks.length; j++) {
+            subtasks.innerHTML +=
+            /*html*/`
+                <div class="subtasks">${tasks[i].subtasks[j]} <input onclick="updateSubtask(${j},${i})" id="subtask-${j}" class="checkbox" type="checkbox"></div>
+            `
+        }
         checkForCompletedSubtasks(i)
-
     }
 }
 
@@ -332,36 +320,29 @@ async function updateInput(i) {
     let inputTitle = document.getElementById('edit-task-title')
     let inputDescription = document.getElementById('edit-task-description')
     let inputDate = document.getElementById('edit-task-date')
-    if (!inputTitle.value == '') {
+    if (!inputTitle.value == '')
         tasks[i].title = inputTitle.value
-    }
-    if (!inputDescription.value == '') {
+    if (!inputDescription.value == '')
         tasks[i].description = inputDescription.value
-    }
-
-    if (!inputDate.value == '') {
+    if (!inputDate.value == '')
         tasks[i].date = inputDate.value
-    }
     await backend.setItem(`tasks`, JSON.stringify(tasks));
 }
 
 
 function highlightPrio(i) {
-    if (tasks[i].prio == 'low') {
+    if (tasks[i].prio == 'low')
         taskPrioLow()
-    } else {
+    else
         taskPrioNotLow()
-    }
-    if (tasks[i].prio == 'medium') {
+    if (tasks[i].prio == 'medium')
         taskPrioMedium()
-    } else {
+    else
         taskPrioNotMedium()
-    }
-    if (tasks[i].prio == 'urgent') {
+    if (tasks[i].prio == 'urgent')
         taskPrioUrgent()
-    } else {
+    else
         taskPrioNotUrgent()
-    }
 }
 
 
@@ -459,30 +440,7 @@ function inviteNewContact(i) {
     let area = 'contact'
     dropup(area)
     let content = document.getElementById('contactShow')
-    content.innerHTML =
-    /*html*/ `
-    <div class="invite-contact-container">
-        <input class="invite-contact-input" type="email" placeholder="Contact email">
-        <div>
-            <div>
-                <svg width="26" height="26" viewBox="2 2 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="closeCard()">
-                    <path d="M22.9614 7.65381L7.65367 22.9616" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M22.8169 23.106L7.50914 7.7982" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div>
-                <svg width="2" height="31" viewBox="0 0 2 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 0V31" stroke="#D1D1D1"/>
-                </svg>
-            </div>
-            <div onclick="showDropDown(${i})">
-                <svg width="18" height="18" viewBox="0 -2 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 7.5L7 13.5L17 1.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-    `
+    content.innerHTML = renderInviteNewContactArea(i)
 }
 
 
@@ -548,42 +506,10 @@ async function addContactToList(j, i) {
         tasks[i].contactSelection.splice(index, 1)
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     }
-
-    /*
-    let contact = document.getElementById(`cb-contacts-${number}`);
-    selectedContacts.push(contacts[number]['initials']);
-    contact.setAttribute('onclick', `removeContactFromList(${number})`);
-    renderSelectedContacts();*/
 }
-
-/*
-function removeContactFromList(number) {
-    let contact = document.getElementById(`cb-contacts-${number}`);
-    contact.setAttribute('onclick', `addContactToList(${number})`);
-    let index = selectedContacts.indexOf(contacts[number]['initials']);
-    selectedContacts.splice(index, 1)
-    renderSelectedContacts();
-}
-
-
-function renderSelectedContacts() {
-    let content = document.getElementById('selectContact');
-    content.innerHTML = '';
-    if (selectedContacts.length > 0) {
-        for (let i = 0; i < selectedContacts.length; i++) {
-            content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${selectedContacts[i]}</div>`
-        }
-    } else {
-        content.innerHTML = 'Select contacts to assign';
-    }
-}
-*/
-
 
 
 /*********Drag and Drop Function************/
-
-
 
 
 function dragstart_handler(id) {
@@ -611,13 +537,6 @@ function highlightArea(id) {
         toDoContainer.classList.remove('min-height')
     }
     console.log(toDoContainer.innerHTML.length)
-    /* let originContainer = container.parentElement.parentElement.children[1].lastElementChild.id
-     console.log(id)
-     console.log(originContainer)
-     if (!originContainer == id) {
-         container.classList.remove('d-none')
-     }
- */
 }
 
 
@@ -640,25 +559,21 @@ function removeHighlightDragArea(id) {
 }
 
 
-function removeTest(id) {
-    let element = document.getElementById(id)
-    //console.log(element.parentElement.parentElement.parentElement.children/*[0].lastElementChild*/)
-
-    let targetContainer = element.parentElement.parentElement.parentElement.children
-    for (let i = 0; i < targetContainer.length; i++) {
-        // console.log(targetContainer[i].lastElementChild)
-        targetContainer[i].lastElementChild.classList.add('d-none')
-    }
-
-
-    // .currentNode.nextElementSibling
-}
-
 function hideIcon() {
     let content = document.getElementById('edit-task-date-icon')
     if (!content.classList.contains('d-none')) {
         content.classList.add('d-none')
     } else if (content.classList.contains('d-none')) {
         content.classList.remove('d-none')
-    } 
+    }
+}
+
+
+function removeTest(id) {
+    console.log("testtest")
+    let element = document.getElementById(id)
+    let targetContainer = element.parentElement.parentElement.parentElement.children
+    for (let i = 0; i < targetContainer.length; i++) {
+        targetContainer[i].lastElementChild.classList.add('d-none')
+    }
 }
