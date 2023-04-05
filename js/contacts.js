@@ -3,6 +3,12 @@ let alphabet = [];
 let categorys = [];
 let mobile = false;
 
+
+/**
+ * This function is used to load the content from the backend
+ * 
+ * 
+ */
 async function init() {
 	setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
@@ -12,6 +18,11 @@ async function init() {
 }
 
 
+/**
+ * This function is used to call other functions
+ * 
+ * 
+ */
 function renderContacts() {
 	sortAllContacts();
 	createAlphabet();
@@ -20,7 +31,11 @@ function renderContacts() {
 }
 
 
-// sort all contacts
+/**
+ * This function is used to sort all contact names alphabetically
+ * 
+ * 
+ */
 function sortAllContacts() {
 	contacts.sort((a, b) => {
 		return a.name.localeCompare(b.name);
@@ -28,7 +43,11 @@ function sortAllContacts() {
 }
 
 
-// create all letters of existing contacts
+/**
+ * This function is used to push all not existing first letters of all contact names in an array
+ * 
+ * 
+ */
 function createAlphabet() {
 	alphabet = [];
 	contacts.forEach(function(contact) {
@@ -39,12 +58,21 @@ function createAlphabet() {
 	}
 
 
+/**
+ * This function is used to return the first letter of a contact name
+ * 
+ * 
+ */
 function getFirstLetter(contact) {
 	return contact["name"].charAt(0);
 }
-  
 
-// render all letters of existing contacts
+
+/**
+ * This function is used to render first letters of all contacts
+ * 
+ * 
+ */
 function renderAlphabet() {
 	let contactlist = document.getElementById("contacts-field");
 	contactlist.innerHTML = "";
@@ -54,7 +82,11 @@ function renderAlphabet() {
 }
 
 
-// render all contacts in letter structure
+/**
+ * This function is used to render all contacts in letter structure
+ * 
+ * 
+ */
 function renderAllContacts() {
 	for (let i = 0; i < contacts.length; i++) {
 		let firstLetter = getFirstLetter(contacts[i]);
@@ -69,7 +101,11 @@ function renderAllContacts() {
 }
 
 
-// read new contact vaules
+/**
+ * This function is used to read new contact values
+ * 
+ * 
+ */
 function addToContact() {
 	let name = document.getElementById('name').value;
 	let email = document.getElementById('email').value;
@@ -79,7 +115,13 @@ function addToContact() {
 }
 
 
-// create new contact
+/**
+ * This function is used to create a new contact
+ * 
+ * @param {string} name - name of new contact
+ * @param {string} email - email of new contact
+ * @param {string} phone - phone number of new contact
+ */
 async function newContact(name, email, phone) {
 	let initials = getInitials(name);
 	let initialColor = getColor();
@@ -290,6 +332,12 @@ function editContactClose() {
 }
 
 
+/**
+ * This funciton is used to stop the overlay onclick function when pressing buttons on the card
+ * 
+ * @param {string} event
+ * 
+ */
 function doNotClose(event) {
     event.stopPropagation();
 }

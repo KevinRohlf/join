@@ -26,7 +26,7 @@ async function init() {
 
 
 /**
- * This function is used call other functions to greet the user and to calculate und display the amount of all tasks
+ * This function is used to call other functions
  * 
  * 
  */
