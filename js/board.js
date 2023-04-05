@@ -26,9 +26,6 @@ async function loadBackend() {
  * 
  */
 function loadTasks() {
-    // console.log(tasks)
-    //  console.log(categorys)
-    //  console.log(contacts)
     document.getElementById('to-do-container').innerHTML = ''
     document.getElementById('in-progress-container').innerHTML = ''
     document.getElementById('awaiting-feedback-container').innerHTML = ''
@@ -72,7 +69,7 @@ function filterTasks() {
 function forwardTaskContent(currentTask, content, i) {
     renderAllTasks(currentTask, content, i)
     renderContactSelection(currentTask, i)
-    renderProgressBar(currentTask, i)
+    renderProgressBar(i)
 }
 
 /**
@@ -203,16 +200,16 @@ function showAllContacts(currentTask, i, currentContact, j) {
  * @param {number} i 
  * @param {object} currentContact 
  */
-function showFirstTwoContacts(k, currentTask, i, currentContact) {
+function showFirstTwoContacts(k, currentTask, i, currentContact,j) {
     if (k < 2) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div id="${contacts[j].ID}_${i}">${currentContact}</div>
+        <div class="circle" id="${contacts[j].ID}_${i}">${currentContact}</div>
         `
     } else if (k == 3) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
+        <div class="circle" id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
         `
     }
 }
@@ -227,12 +224,12 @@ function showFirstTwoContacts(k, currentTask, i, currentContact) {
  */
 function getContactColor(i, k, j) {
     for (let l = 0; l < contacts.length; l++) {
-        if (k < 3) {
+        if (k < 2) {
             if (contacts[l].ID == tasks[i].contactSelection[k]) {
                 document.getElementById(`${contacts[j].ID}_${i}`).style = `background-color: ${contacts[l].color}`
             }
         } else if (k == 3) {
-            document.getElementById(`remaining-contacts-number-${i}`).style = `background-color: ${contacts[l].color}`
+            document.getElementById(`remaining-contacts-number-${i}`).style = `background-color: #2A3647; color: #FFFFFF`
         }
     }
 }

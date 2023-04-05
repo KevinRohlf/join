@@ -290,7 +290,12 @@ a {
 }
 
 #card-container>div {
-    margin-bottom: 16px;
+    max-height: 690px;
+    overflow-y: auto;
+}
+
+#card-container>div::-webkit-scrollbar {
+    display: none;
 }
 
 .contact-card-content {
