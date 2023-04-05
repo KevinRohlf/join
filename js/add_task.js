@@ -279,3 +279,8 @@ function editCreateBtnOnMobile() {
     }, 500);
 
 }
+
+function openAddTask(id){
+    document.getElementById(`cb-contacts-${id}`).checked = true;
+    selectedContacts.push(id);
+}
