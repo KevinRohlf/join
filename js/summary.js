@@ -9,6 +9,11 @@ let taskUrgent = [];
 let urgentDate = [];
 
 
+/**
+ * This function is used to load the content from the backend
+ * 
+ * 
+ */
 async function init() {
     setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
@@ -20,6 +25,11 @@ async function init() {
 }
 
 
+/**
+ * This function is used call other functions to greet the user and to calculate und display the amount of all tasks
+ * 
+ * 
+ */
 function summary() {
     greeting();
     mobileGreeting();
@@ -30,11 +40,21 @@ function summary() {
 }
 
 
+/**
+ * This function is used to calculate und display the amount of all tasks in board
+ * 
+ * 
+ */
 function tasksInBoard() {
     document.getElementById('tasksInBoard').innerHTML = tasks.length;
 }
 
 
+/**
+ * This function is used to separate the amount of tasks in progress, 
+ * tasks awaiting feedback, tasks to-do and tasks done
+ * 
+ */
 function countTasks() {
     for (let i = 0; i < tasks.length; i++) { 
         const task = tasks[i];
@@ -53,6 +73,11 @@ function countTasks() {
 }
 
 
+/**
+ * This function is used to find the due dates of the urgent tasks
+ * 
+ * 
+ */
 function countUrgentTasks() {
     for (let i = 0; i < tasks.length; i++) { 
         const task = tasks[i];
@@ -67,6 +92,11 @@ function countUrgentTasks() {
 }
 
 
+/**
+ * This function is used to find and display the nearest date of the urgent tasks
+ * 
+ * 
+ */
 function date() {
     const datesArray = urgentDate.map((element) => new Date(element));
     const minDate = new Date(Math.min(...datesArray));
@@ -75,6 +105,11 @@ function date() {
 }
 
 
+/**
+ * This function is used to display the amount of tasks in progress, 
+ * tasks awaiting feedback, tasks to-do, tasks done and tasks 
+ * 
+ */
 function displayNumbers() {
     document.getElementById('tasksInProgress').innerHTML = taskInProgress.length;
     document.getElementById('awaitingFeedback').innerHTML = taskAwaitingFeedback.length;
@@ -84,6 +119,11 @@ function displayNumbers() {
 }
 
 
+/**
+ * This function is used to greet the desktop user
+ * 
+ * 
+ */
 function greeting() {
     let greet;
     let myDate = new Date();
@@ -100,6 +140,11 @@ function greeting() {
 }
 
 
+/**
+ * This function is used to greet the mobile user
+ * 
+ * 
+ */
 function mobileGreeting() {
     if (window.innerWidth <= 1500) {
         setTimeout(mobileGreetingDisappears, 2000);
@@ -107,8 +152,13 @@ function mobileGreeting() {
         document.getElementById('greeting-container').classList.remove('d-none');
     }
 }
-  
 
+
+/**
+ * This function is used to hide the mobile greeting container after greeting
+ * 
+ * 
+ */
 function mobileGreetingDisappears() {
     document.getElementById('greeting-container').classList.add('d-none');
 }
