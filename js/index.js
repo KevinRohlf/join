@@ -26,7 +26,7 @@ function login() {
   let user = users.find(
     u => u.email == email.value && u.password == password.value
   );
-  window.document.location.href = "https://gruppenarbeit-479-join.developerakademie.net/summary.html";
+  window.document.location.href = "./summary.html";
   if (user) {
     console.log(user);
   }
