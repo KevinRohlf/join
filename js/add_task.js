@@ -9,6 +9,7 @@ let sTStatus = [];
 
 async function initAddTask() {
     setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    await loadSelectedContacts()
     renderCategorys();
     renderContacts();
     editCreateBtnOnMobile();
@@ -60,7 +61,7 @@ function setprio(i) {
     prio = i;
 }
 
-function clearForm() {
+async function clearForm() {
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('date').value = '';
@@ -70,6 +71,7 @@ function clearForm() {
     selectedCategory = [];
     selectedContacts = [];
     sTStatus = []; 
+    await backend.setItem('selectedContacts', JSON.stringify(selectedContacts));
     renderSelectedContacts();
     renderContacts();
     selectCategory('reload');
@@ -280,7 +282,16 @@ function editCreateBtnOnMobile() {
 
 }
 
-function openAddTask(id){
+async function openAddTask(id){
     document.getElementById(`cb-contacts-${id}`).checked = true;
     selectedContacts.push(id);
+    await backend.setItem('selectedContacts', JSON.stringify(selectedContacts));
+}
+
+async function loadSelectedContacts(){
+    await downloadFromServer();
+    let result = JSON.parse(backend.getItem('selectedContacts')) || [];
+    if(result){
+        selectedContacts = result;
+    } 
 }
