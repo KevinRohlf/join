@@ -82,11 +82,11 @@ function renderProgressBar(i) {
     if (tasks[i].subtasks.length > 0) {
         let totalSubtasks = tasks[i].subtasks.length
         let completedSubtasks = 0
-        /*  for (let k = 0; k < tasks[i].sTStatus.length; k++) {
-              if (tasks[i].sTStatus == true) {
-                  completedSubtasks++
-              }
-          } */
+        for (let k = 0; k < tasks[i].sTStatus.length; k++) {
+            if (tasks[i].sTStatus == true) {
+                completedSubtasks++
+            }
+        }
         let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
         progressBar.innerHTML =
     /*html*/`
@@ -200,7 +200,7 @@ function showAllContacts(currentTask, i, currentContact, j) {
  * @param {number} i 
  * @param {object} currentContact 
  */
-function showFirstTwoContacts(k, currentTask, i, currentContact,j) {
+function showFirstTwoContacts(k, currentTask, i, currentContact, j) {
     if (k < 2) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
