@@ -31,7 +31,7 @@ function htmlTemplateRenderSingleContact(contact, i) {
             </div>
             <div class="single-contact-task">
                 <p>${contact['name']}</p>
-                <a href="#"><img src="./assets/img/plus-blue-icon.svg">Add Task</a>
+                <a href="add_task.html"><img src="./assets/img/plus-blue-icon.svg">Add Task</a>
             </div> 
         </div>
         <div class="single-contact-edit">
