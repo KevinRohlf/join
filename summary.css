@@ -45,6 +45,9 @@ body {
 .todo-container {
     display: flex;
     gap: 35px;
+}
+
+.task-container {
     margin-bottom: 35px;
 }
 
@@ -73,6 +76,10 @@ body {
     font-weight: 600;
     font-size: 64px;
     margin: 20px 0 0 0;
+}
+
+.urgent-date h2 {
+    margin-bottom: 10px;
 }
 
 .task p,

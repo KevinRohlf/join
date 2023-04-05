@@ -1,13 +1,86 @@
+let tasks = [];
+let categorys = [];
+let contacts = [];
+let taskInProgress = [];
+let taskAwaitingFeedback = [];
+let taskToDo = [];
+let taskDone = [];
+let taskUrgent = [];
+let urgentDate = [];
+
+
+async function init() {
+    setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    await downloadFromServer();
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    categorys = JSON.parse(backend.getItem('categorys')) || [];
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+
+    summary();
+}
+
+
 function summary() {
-    date();
     greeting();
     mobileGreeting();
+    tasksInBoard();
+    countTasks();
+    countUrgentTasks();
+    date();
+}
+
+
+function tasksInBoard() {
+    document.getElementById('tasksInBoard').innerHTML = tasks.length;
+}
+
+
+function countTasks() {
+    for (let i = 0; i < tasks.length; i++) { 
+        const task = tasks[i];
+        let status = task.status;
+        if (status === 'inProgress') { 
+            taskInProgress.push(status);
+        } else if (status === 'awaitingFeedback') {
+            taskAwaitingFeedback.push(status);
+        } else if (status === 'toDo') {
+            taskToDo.push(status);
+        } else if (status === 'done') {
+            taskDone.push(status);
+        }
+    }
+    displayNumbers();
+}
+
+
+function countUrgentTasks() {
+    for (let i = 0; i < tasks.length; i++) { 
+        const task = tasks[i];
+        let prio = task.prio;
+        let date = task.date;
+        if (prio === 'urgent') { 
+            taskUrgent.push(prio);
+            urgentDate.push(date);
+        }
+    }
+    displayNumbers();
 }
 
 
 function date() {
-    newDate = new Date().toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'});
-    document.getElementById('newDate').innerHTML = newDate;
+    const datesArray = urgentDate.map((element) => new Date(element));
+    const minDate = new Date(Math.min(...datesArray));
+    newDate = minDate.toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'});
+    document.getElementById('date').innerHTML = newDate;
+}
+
+
+function displayNumbers() {
+    document.getElementById('tasksInProgress').innerHTML = taskInProgress.length;
+    document.getElementById('awaitingFeedback').innerHTML = taskAwaitingFeedback.length;
+    document.getElementById('toDo').innerHTML = taskToDo.length;
+    document.getElementById('done').innerHTML = taskDone.length;
+    document.getElementById('urgent').innerHTML = taskUrgent.length;
 }
 
 
@@ -39,4 +112,3 @@ function mobileGreeting() {
 function mobileGreetingDisappears() {
     document.getElementById('greeting-container').classList.add('d-none');
 }
-  

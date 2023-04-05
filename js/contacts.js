@@ -1,5 +1,6 @@
 let contacts = [];
 let alphabet = [];
+let categorys = [];
 let mobile = false;
 
 async function init() {
@@ -194,6 +195,7 @@ function renderSingleContactDesktop(i) {
 	contactContent.innerHTML += htmlTemplateRenderSingleContact(contacts[i], i);
 }
 
+
 function renderSingleContactMobile(i) {
 	renderSingleContactDetails(i);
 	window.addEventListener('resize', function () {
@@ -208,6 +210,7 @@ function renderSingleContactMobile(i) {
 		}
 	});
 }
+
 
 function renderSingleContactDetails(i) {
 	document.getElementById('contacts-field').style.display = 'none';
