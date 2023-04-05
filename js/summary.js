@@ -98,11 +98,17 @@ function countUrgentTasks() {
  * 
  */
 function date() {
-    const datesArray = urgentDate.map((element) => new Date(element));
-    const minDate = new Date(Math.min(...datesArray));
-    newDate = minDate.toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'});
-    document.getElementById('date').innerHTML = newDate;
-}
+    if (urgentDate.length === 0) {
+        newDate = 'No Deadline';
+        document.getElementById('date').innerHTML = newDate;
+    } else {
+        const datesArray = urgentDate.map((element) => new Date(element));
+        const minDate = new Date(Math.min(...datesArray));
+        newDate = minDate.toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'});
+        document.getElementById('date').innerHTML = newDate;
+    }
+    }
+    
 
 
 /**
