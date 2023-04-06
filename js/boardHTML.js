@@ -33,18 +33,18 @@ function htmlRenderCard(i) {
                 </svg>
             </div>
         </div>
-        <div class="task-category ${tasks[i].category}" style="font-size: 27px;">${tasks[i].category}</div>
-        <div class="card-title">${tasks[i].title}</div>
-        <div class="card-description">${tasks[i].description}</div>
-        <div class="card-date-container">
+        <div class="card-units task-category ${tasks[i].category}" style="font-size: 27px;">${tasks[i].category}</div>
+        <div class="card-units card-title">${tasks[i].title}</div>
+        <div class="card-units card-description">${tasks[i].description}</div>
+        <div class="card-units card-date-container">
             <p>Due date:</p>
             <p>${tasks[i].date}</p>
         </div>
-        <div class="card-prio-container">
+        <div class="card-units card-prio-container">
             <p>Priority:</p>
             <p class="card-prio" id="card-${tasks[i].prio}">${tasks[i].prio}</p>
         </div>
-        <div>
+        <div class="card-units">
             <p style="font-weight: 700; font-size: 21px">Assigned to:</p>
             <div id="contact-card-container"></div>
         </div>
@@ -63,7 +63,7 @@ function htmlRenderCard(i) {
 
 function htmlRenderEditTask(i) {
     return /*html*/ `
-    <div>
+    <div class="edit-task-card">
         <div></div>
         <form class="edit-task-form"; onsubmit="return false;">
             <div>

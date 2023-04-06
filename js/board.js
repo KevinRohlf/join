@@ -95,7 +95,7 @@ function renderProgressBar(i) {
         let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
         progressBar.innerHTML =
     /*html*/`
-    <progress id="file" value="${completedSubtasks}" max="${totalSubtasks}"> 32% </progress>
+    <progress style="margin-right:8px" id="file" value="${completedSubtasks}" max="${totalSubtasks}"> 32% </progress>
     <label for="file" id="progress-count-${i}">${completedSubtasks}/${totalSubtasks}</label>
     `
     }
@@ -168,7 +168,7 @@ function renderContactSelection(currentTask, i) {
         for (let j = 0; j < contacts.length; j++) {
             if (currentTask.contactSelection[k] == contacts[j].ID) {
                 currentContact = contacts[j].initials
-                if (currentTask.contactSelection.length <= 3) {
+                if (currentTask.contactSelection.length < 3) {
                     showAllContacts(currentTask, i, currentContact, j)
                     getContactColor(i, k, j)
                 } else {
@@ -207,14 +207,16 @@ function showAllContacts(currentTask, i, currentContact, j) {
  */
 function showFirstTwoContacts(k, currentTask, i, currentContact, j) {
     if (k < 2) {
+        console.log(k)
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
         <div class="circle" id="${contacts[j].ID}_${i}">${currentContact}</div>
         `
-    } else if (k == 3) {
+    } else if (k == 2) {
+        console.log(k)
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div class="circle" id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
+        <div style="background-color:#2A3647;" class="circle" id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
         `
     }
 }
@@ -306,6 +308,31 @@ function renderCardContacts(i) {
     });
 }
 
+
+/**
+ * 
+ * This function is used to render the contacts on the card
+ * 
+ * @param {number} i 
+ */
+function renderCardContactsEdit(i) {
+    let container = document.getElementById('contact-card-container')
+    container.style ="display:flex"
+    tasks[i].contactSelection.forEach(element => {
+        for (let j = 0; j < contacts.length; j++) {
+            let contact = contacts[j]
+            if (element == contacts[j].ID) {
+                container.innerHTML +=
+                /*html*/ `
+                <div class="contact-card-content">
+                    <p class="circle" style="background-color:${contact.color}">${contact.initials}</p> 
+                </div>
+                `
+            }
+        }
+    });
+}
+
 /**
  * 
  * This function is used to render the correct prio image on the card
@@ -357,7 +384,7 @@ function searchTasks() {
 function loadEditTask(i) {
     renderEditTask(i)
     renderContacts(i);
-    renderCardContacts(i)
+    renderCardContactsEdit(i)
     highlightPrio(i)
 }
 
@@ -771,9 +798,9 @@ function highlightArea(id) {
     let container = document.getElementById(id)
     container.classList.remove('d-none')
     let toDoContainer = document.getElementById('to-do-container')
-    if (toDoContainer.innerHTML.length == 0) {
-        toDoContainer.classList.remove('min-height')
-    }
+  //  if (toDoContainer.innerHTML.length == 0) {
+  //      toDoContainer.classList.remove('min-height')
+  //  }
     console.log(toDoContainer.innerHTML.length)
 }
 
@@ -825,13 +852,11 @@ function hideIcon() {
     }
 }
 
-/*
+
 function removeTest(id) {
-    console.log("testtest")
     let element = document.getElementById(id)
     let targetContainer = element.parentElement.parentElement.parentElement.children
     for (let i = 0; i < targetContainer.length; i++) {
         targetContainer[i].lastElementChild.classList.add('d-none')
     }
 }
-*/
