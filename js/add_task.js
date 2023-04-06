@@ -13,10 +13,11 @@ async function initAddTask() {
     renderCategorys();
     renderContacts();
     editCreateBtnOnMobile();
-
 }
 
-
+/**
+ * this function read the inputfields
+ */
 function readForm() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
@@ -24,6 +25,14 @@ function readForm() {
     addTask(title, description, date);
 }
 
+
+/**
+ * this function create the task and send it to the backend
+ * 
+ * @param {*} title - title input
+ * @param {*} description - description input
+ * @param {*} date - date input
+ */
 async function addTask(title, description, date) {
 
     let newTask = {
@@ -45,9 +54,15 @@ async function addTask(title, description, date) {
     showTaskAdded();
 }
 
+
+/**
+ * the function added the css class btn-on-focus to the selected button
+ * 
+ * @param {string} i - name of the button 
+ */
 function setprio(i) {
-    let btns = ['urgent', 'medium', 'low']
-    let btnColor = ['#FF3D00', '#FFA800', '#7AE229']
+    let btns = ['urgent', 'medium', 'low'];
+    let btnColor = ['#FF3D00', '#FFA800', '#7AE229'];
     if (i) {
         let selectedBtn = btns.indexOf(i)
         btns.splice(selectedBtn, 1)
@@ -61,6 +76,9 @@ function setprio(i) {
     prio = i;
 }
 
+/**
+ * this fuction clear the Inputfields & all the selections
+ */
 async function clearForm() {
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
@@ -78,6 +96,10 @@ async function clearForm() {
     setprio();
 }
 
+
+/**
+ * this function added the subtasks
+ */
 function addSubtask() {
     let subTask = document.getElementById('subtask');
     let content = document.getElementById('subtasks');
@@ -92,6 +114,10 @@ function addSubtask() {
     renderSubTasks();
 }
 
+
+/**
+ * this function show the inputfield to create a new category & hide the dropdown menu 
+ */
 function showNewCategoryInput() {
     let content = document.getElementById('categoryShow');
     document.getElementById('newCategoryInput').classList.remove('d-none');
@@ -99,23 +125,33 @@ function showNewCategoryInput() {
     renderCategoryColors();
 }
 
+/**
+ * this function add a new Category & push it to the backend
+ */
 async function addNewCategory() {
     let content = document.getElementById('newCategory').value;
     let newCategory = {
         'name': content,
         'color': selectedColor
     };
+    content.value = '';
     categorys.push(newCategory);
     await backend.setItem('categorys', JSON.stringify(categorys));
     closeNewCategoryInput();
     renderCategorys();
 }
 
+/**
+ * this function hide the inputfield & show the dropdown menu
+ */
 function closeNewCategoryInput() {
     document.getElementById('newCategoryInput').classList.add('d-none');
     document.getElementById('categoryShow').classList.remove('d-none');
 }
 
+/**
+ * this function render the subtasks
+ */
 function renderSubTasks() {
     let content = document.getElementById('subtasks');
     for (let i = 0; i < subtasks.length; i++) {
@@ -124,6 +160,9 @@ function renderSubTasks() {
     }
 }
 
+/**
+ * this function render the categorys
+ */
 async function renderCategorys() {
     let content = document.getElementById('category');
     content.innerHTML = '';
@@ -137,6 +176,9 @@ async function renderCategorys() {
     }
 }
 
+/**
+ * this function render the color buttons to select the color for a new category
+ */
 function renderCategoryColors() {
     let colors = ['#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
     let content = document.getElementById('categoryColors');
@@ -146,10 +188,18 @@ function renderCategoryColors() {
     }
 }
 
+/**
+ * this function is for the color select buttons 
+ * @param {string} color - color hexcode
+ */
 function selectColor(color) {
     selectedColor = color;
 }
 
+/**
+ * this function select the category
+ * @param {*} i - the category number
+ */
 function selectCategory(i) {
     if (i == 'reload') {
         document.getElementById('selectCategory').innerHTML = 'Select task category';
@@ -161,6 +211,9 @@ function selectCategory(i) {
     dropup('category');
 }
 
+/**
+ * this function render the contacts to dropdown menu
+ */
 async function renderContacts() {
     let content = document.getElementById('contact');
     await downloadFromServer();
@@ -172,6 +225,10 @@ async function renderContacts() {
     }
 }
 
+/**
+ * this function open the dropdown
+ * @param {string} area - contact or category to open the right dropdown
+ */
 function dropdown(area) {
     if (!inAnimation) {
         let content = document.getElementById(area);
@@ -184,6 +241,10 @@ function dropdown(area) {
     }
 }
 
+/**
+ * this function close the dropdown
+ * @param {string} area - contact or category to close the right dropdown
+ */
 function dropup(area) {
     let content = document.getElementById(area);
     let areaShow = document.getElementById(area + 'Show')
@@ -200,6 +261,10 @@ function dropup(area) {
     }, 500);
 }
 
+/**
+ * this function add the contact ID to selectedContacts variable
+ * @param {int} id - the contact ID
+ */
 function addContactToList(id) {
     let contact = document.getElementById(`cb-contacts-${id}`);
     selectedContacts.push(id);
@@ -207,20 +272,25 @@ function addContactToList(id) {
     renderSelectedContacts();
 }
 
+/**
+ * this function remove the contact ID from selectedContacts variable
+ * @param {int} id - the contact ID
+ */
 function removeContactFromList(id) {
     let contact = document.getElementById(`cb-contacts-${id}`);
     contact.setAttribute('onclick', `addContactToList(${id})`);
     for (let i = 0; i < contacts.length; i++) {
         let index = selectedContacts.indexOf(id);
         if (index != -1) {
-            selectedContacts.splice(index, 1)
+            selectedContacts.splice(index, 1);
         }
-    }
-
-
+    };
     renderSelectedContacts();
 }
 
+/**
+ * this function render the selectedcontacts
+ */
 function renderSelectedContacts() {
     let content = document.getElementById('selectContact');
     content.innerHTML = '';
@@ -232,17 +302,15 @@ function renderSelectedContacts() {
                     content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${contacts[i]['initials']}</div>`
                 }
             }
-
         }
-
-        //    for (let i = 0; i < selectedContacts.length; i++) {
-        //        content.innerHTML += `<div class="circle" style="background-color: ${contacts[i]['color']};": >${selectedContacts[i]}</div>`
-        //    }
     } else {
         content.innerHTML = 'Select contacts to assign';
     }
 }
 
+/**
+ * this function shows the task added div if the task created and hide it with animation
+ */
 function showTaskAdded() {
     let taskAdded = document.getElementById('taskAdded');
     taskAdded.classList.remove('d-none');
@@ -255,10 +323,17 @@ function showTaskAdded() {
     }, 2500);
 }
 
+/**
+ * this function edit the css variable --end-height to the height from the div
+ * @param {string} content - div id
+ */
 function editEndHeight(content) {
     document.documentElement.style.setProperty('--end-height', content.clientHeight + 'px')
 }
 
+/**
+ * this function edit the create button if the max display width is < 1000px
+ */
 function editCreateBtnOnMobile() {
     setInterval(() => {
         let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -282,6 +357,10 @@ function editCreateBtnOnMobile() {
 
 }
 
+/**
+ * 
+ * @param {int} id - contact ID
+ */
 async function openAddTask(id){
     document.getElementById(`cb-contacts-${id}`).checked = true;
     selectedContacts.push(id);
