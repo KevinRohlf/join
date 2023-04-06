@@ -5,7 +5,7 @@ let mobile = false;
 
 
 /**
- * This function is used to load the content from the backend
+ * This function is used to load content from backend server
  * 
  * 
  */
@@ -32,7 +32,7 @@ function renderContacts() {
 
 
 /**
- * This function is used to sort all contact names alphabetically
+ * This function is used to sort all contact first names alphabetically
  * 
  * 
  */
@@ -44,7 +44,7 @@ function sortAllContacts() {
 
 
 /**
- * This function is used to push all not existing first letters of all contact names in an array
+ * This function is used to push all not yet existing first letters of all contact names in an array
  * 
  * 
  */
@@ -69,7 +69,7 @@ function getFirstLetter(contact) {
 
 
 /**
- * This function is used to render first letters of all contacts
+ * This function is used to render all letters from array
  * 
  * 
  */
@@ -118,7 +118,7 @@ function addToContact() {
 /**
  * This function is used to create a new contact
  * 
- * @param {string} name - name of new contact
+ * @param {string} name - full name of new contact
  * @param {string} email - email of new contact
  * @param {string} phone - phone number of new contact
  */
@@ -145,7 +145,11 @@ async function newContact(name, email, phone) {
 }
 
 
-// seperate initials of all names
+/**
+ * This function is used to seperate initials of all names
+ * 
+ * @param {string} fullName - full name of new contact
+ */
 function getInitials(fullName) {
 	let names = fullName.toString().split(' ');
 	if (names.length === 1) {
@@ -159,11 +163,21 @@ function getInitials(fullName) {
 }
 
 
+/**
+ * This function is used to return a random color
+ * 
+ * 
+ */
 function getColor() {
 	return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
 }
 
 
+/**
+ * This function is used to clear input fields
+ * 
+ * 
+ */
 function clearInput() {
 	document.getElementById('name').value = '';
 	document.getElementById('email').value = '';
@@ -171,7 +185,11 @@ function clearInput() {
 }
 
 
-// save contact
+/**
+ * This function is used to save a new contact on the backend server
+ * 
+ * @param {number} i 
+ */
 async function saveActiveContact(i) {
 	let newName = document.getElementById('edit-name').value;
 	let newEmail = document.getElementById('edit-email').value;
@@ -189,6 +207,11 @@ async function saveActiveContact(i) {
 }
 
 
+/**
+ * This function is used to display conformation "Contact succesfully created"
+ * 
+ * 
+ */
 function displayConfirm() {
     let contact = document.getElementById('confirm');
 
@@ -196,6 +219,11 @@ function displayConfirm() {
 }
 
 
+/**
+ * This function is used to display conformation "Contact succesfully updated"
+ * 
+ * 
+ */
 function displayConfirmUpdate() {
     let contact = document.getElementById('confirmUpdate');
 
@@ -203,6 +231,11 @@ function displayConfirmUpdate() {
 }
 
 
+/**
+ * This function is used to display conformation only for a few seconds
+ * 
+ * @param {string} contact - conformation text
+ */
 function displayConformation(contact) {
     setTimeout(() => {
         contact.classList.remove('d-none');
@@ -213,11 +246,14 @@ function displayConformation(contact) {
 }
 
 
-// show single contact
+/**
+ * The next function is used to call another function with desktop or mobile features
+ * 
+ *	@param {number} i 
+ */
 let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
 const widths = [0, 1400];
-
 
 function renderSingleContact(i) {
 	currentOpenContact = i;
@@ -230,6 +266,11 @@ function renderSingleContact(i) {
 }
 
 
+/**
+ * This function is used to render single contacts with desktop features
+ * 
+ *	@param {number} i 
+ */
 function renderSingleContactDesktop(i) {
 	singleContactOverlay.style.display = 'flex';
 	contactContent.style = 'animation:slide-in .5s ease;';
@@ -238,6 +279,11 @@ function renderSingleContactDesktop(i) {
 }
 
 
+/**
+ * This function is used to render single contacts with mobile features
+ * 
+ *	@param {number} i 
+ */
 function renderSingleContactMobile(i) {
 	renderSingleContactDetails(i);
 	window.addEventListener('resize', function () {
@@ -254,6 +300,11 @@ function renderSingleContactMobile(i) {
 }
 
 
+/**
+ * This function is used to render single contacts with mobile features
+ * 
+ *	@param {number} i 
+ */
 function renderSingleContactDetails(i) {
 	document.getElementById('contacts-field').style.display = 'none';
 	singleContactOverlay.style.display = 'flex';
@@ -266,6 +317,11 @@ function renderSingleContactDetails(i) {
 }
 
 
+/**
+ * This function is used to close single contacts with desktop features
+ * 
+ * 
+ */
 function closeSingleContactDesktop() {
 	contactContent.style = 'animation:slide-out .5s ease;';
 	setTimeout(() => {
@@ -274,6 +330,11 @@ function closeSingleContactDesktop() {
 }
 
 
+/**
+ * This function is used to close single contacts with mobile features
+ * 
+ * 
+ */
 function closeSingleContactMobile() {
 	mobile = false;
 	document.getElementById('contacts-field').style.display = 'flex';
@@ -282,7 +343,12 @@ function closeSingleContactMobile() {
 	document.getElementById('contact-btn').style.display = 'flex';
 }
 
-
+	
+/**
+ * This function is used to open single contact form to edit contact
+ * 
+ *	@param {number} i 
+ */
 function editSingleContact(i) {
 	let formContent = document.getElementById('contact-field-content');
 	formContent.innerHTML = '';
@@ -290,7 +356,11 @@ function editSingleContact(i) {
 }
 
 
-// show & hide contact box
+/**
+ * The next function is used to open a contact form to create new contacts
+ * 
+ * 
+ */
 const btn = document.getElementById("contact-btn");
 const addContactOverlay = document.getElementById('add-contact-overlay');
 const editContactOverlay = document.getElementById('edit-contact-overlay');
@@ -306,6 +376,11 @@ function addContactOpen() {
 }
 
 
+/**
+ * This function is used to close contact form without saving
+ * 
+ *	
+ */
 function addContactClose() {
 	addContact.style = 'animation:slide-out .5s ease;';
 	setTimeout(() => {
@@ -315,6 +390,11 @@ function addContactClose() {
 }
 
 
+/**
+ * This function is used to open a contact form to edit contact
+ * 
+ *	@param {number} i 
+ */
 function editContactOpen(i) {
 	editContactOverlay.style.display = 'flex';
 	editContact.style = 'animation:slide-in .5s ease;';
@@ -323,6 +403,11 @@ function editContactOpen(i) {
 }
 
 
+/**
+ * This function is used to close contact form without saving
+ * 
+ *	
+ */
 function editContactClose() {
 	editContact.style = 'animation:slide-out .5s ease;';
 	setTimeout(() => {
@@ -333,7 +418,7 @@ function editContactClose() {
 
 
 /**
- * This funciton is used to stop the overlay onclick function when pressing buttons on the card
+ * This function is used to stop the overlay onclick function when pressing buttons on the card
  * 
  * @param {string} event
  * 
