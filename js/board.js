@@ -26,9 +26,9 @@ async function loadBackend() {
  * 
  */
 function loadTasks() {
-    console.log(tasks)
-    console.log(contacts)
-    console.log(categorys)
+  //  console.log(tasks)
+ //   console.log(contacts)
+  //  console.log(categorys)
     document.getElementById('to-do-container').innerHTML = ''
     document.getElementById('in-progress-container').innerHTML = ''
     document.getElementById('awaiting-feedback-container').innerHTML = ''
@@ -207,13 +207,11 @@ function showAllContacts(currentTask, i, currentContact, j) {
  */
 function showFirstTwoContacts(k, currentTask, i, currentContact, j) {
     if (k < 2) {
-        console.log(k)
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
         <div class="circle" id="${contacts[j].ID}_${i}">${currentContact}</div>
         `
     } else if (k == 2) {
-        console.log(k)
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
         <div style="background-color:#2A3647;" class="circle" id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
@@ -797,11 +795,62 @@ async function drop_handler(status) {
 function highlightArea(id) {
     let container = document.getElementById(id)
     container.classList.remove('d-none')
-    let toDoContainer = document.getElementById('to-do-container')
-  //  if (toDoContainer.innerHTML.length == 0) {
-  //      toDoContainer.classList.remove('min-height')
-  //  }
-    console.log(toDoContainer.innerHTML.length)
+    editToDoArea()
+    editInProgress()
+    editAwaitFeed()
+    editDone()
+}
+
+/**
+ * 
+ * This funciton is used to highlight the hovered area, when it has no content
+ * 
+ */
+function editToDoArea() {
+    let toDo = document.getElementById('to-do-container')
+    let toDoDragArea = document.getElementById('to-do-container-drag-area')
+    if (toDo.innerHTML.length == 0) {
+        toDoDragArea.classList.add('margin-top')
+    }
+}
+
+/**
+ * 
+ * This funciton is used to highlight the hovered area, when it has no content
+ * 
+ */
+function editInProgress() {
+    let inProgress = document.getElementById('in-progress-container')
+    let inProgressDragArea = document.getElementById('in-progress-container-drag-area')
+    if (inProgress.innerHTML.length == 0) {
+        inProgressDragArea.classList.add('margin-top')
+    }
+}
+
+/**
+ * 
+ * This funciton is used to highlight the hovered area, when it has no content
+ * 
+ */
+function editAwaitFeed() {
+    let awaitFeed = document.getElementById('awaiting-feedback-container')
+    let awaitFeedDragArea = document.getElementById('awaiting-feedback-container-drag-area')
+    if (awaitFeed.innerHTML.length == 0) {
+        awaitFeedDragArea.classList.add('margin-top')
+    }
+}
+
+/**
+ * 
+ * This funciton is used to highlight the hovered area, when it has no content
+ * 
+ */
+function editDone() {
+    let done = document.getElementById('done-container')
+    let doneDragArea = document.getElementById('done-container-drag-area')
+    if (done.innerHTML.length == 0) {
+        doneDragArea.classList.add('margin-top')
+    }
 }
 
 /**
@@ -813,6 +862,7 @@ function highlightArea(id) {
 function removeHighlightArea(id) {
     let container = document.getElementById(id)
     container.classList.add('d-none')
+  
 }
 
 /**
@@ -835,7 +885,7 @@ function highliteDragArea(id) {
 function removeHighlightDragArea(id) {
     let container = document.getElementById(id)
     container.classList.add('d-none')
-
+    container.classList.remove('margin-top')
 }
 
 /**
