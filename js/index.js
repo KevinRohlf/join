@@ -1,4 +1,6 @@
 // BACKEND //
+let users = []
+let emailAlreadyInUse = false;
 
 async function initRegistration() {
   setURL(
@@ -6,21 +8,60 @@ async function initRegistration() {
   );
   await downloadFromServer();
   users = JSON.parse(backend.getItem("users")) || [];
+  console.log(users)
 }
 
 async function addUsers() {
   let name = document.getElementById("name");
   let email = document.getElementById("signUpEmail");
   let password = document.getElementById("signUpPassword");
-  users.push({
-    name: name.value,
-    email: email.value,
-    password: password.value,
-  });
-  await backend.setItem("users", JSON.stringify(users));
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].email.includes(email.value)) {
+      console.log("email already exists")
+      emailAlreadyInUse = true;
+      name.value = ''
+      email.value = ''
+      password.value = ''
+    }
+  }
+  if (!emailAlreadyInUse) {
+    console.log("user successfull created")
+    users.push({
+      name: name.value,
+      email: email.value,
+      password: password.value,
+    });
+    await backend.setItem("users", JSON.stringify(users));
+    renderLogIn()
+  }
 }
 
+
 function login() {
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].email.includes(email.value) && users[i].password.includes(password.value)) {
+      window.document.location.href = "./summary.html";
+    } else {
+      console.log("Wrong Password or Email")
+    }
+    email.value = ''
+    password.value = ''
+  }
+  /* let user = users.find(
+     u => u.email == email.value && u.password == password.value
+   );
+   console.log(user)
+   window.document.location.href = "./summary.html";
+   if (user) {
+     console.log(user);
+   }
+   */
+}
+
+
+function guestlogin() {
   let email = document.getElementById("email");
   let password = document.getElementById("password");
   let user = users.find(
