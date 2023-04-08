@@ -188,7 +188,7 @@ function clearInput() {
 /**
  * This function is used to save a new contact on the backend server
  * 
- * @param {number} i 
+ * @param {number} i - the index of contact
  */
 async function saveActiveContact(i) {
 	let newName = document.getElementById('edit-name').value;
@@ -203,6 +203,25 @@ async function saveActiveContact(i) {
 	closeSingleContactMobile();
 	editContactClose();
 	displayConfirmUpdate();
+	init();
+}
+
+
+/**
+ * This function is used to delete a contact on the backend server
+ * 
+ * @param {number} j - the index of contact
+ */
+async function delateActiveContact(j) {
+	contacts.splice(j, 1);
+	for (let i = 0; i < contacts.length; i++) {
+		contacts[i].j = i;
+	}
+	await backend.setItem('contacts', JSON.stringify(contacts));
+	closeSingleContactDesktop();
+	closeSingleContactMobile();
+	editContactClose();
+	displayConfirmDelete();
 	init();
 }
 
@@ -232,6 +251,18 @@ function displayConfirmUpdate() {
 
 
 /**
+ * This function is used to display conformation "Contact succesfully deleted"
+ * 
+ * 
+ */
+function displayConfirmDelete() {
+    let contact = document.getElementById('confirmDelete');
+
+	displayConformation(contact);
+}
+
+
+/**
  * This function is used to display conformation only for a few seconds
  * 
  * @param {string} contact - conformation text
@@ -249,7 +280,7 @@ function displayConformation(contact) {
 /**
  * The next function is used to call another function with desktop or mobile features
  * 
- *	@param {number} i 
+ *	@param {number} i - the index of contact
  */
 let singleContactOverlay = document.getElementById('single-contact-overlay');
 let contactContent = document.getElementById('show-contact');
@@ -269,7 +300,7 @@ function renderSingleContact(i) {
 /**
  * This function is used to render single contacts with desktop features
  * 
- *	@param {number} i 
+ *	@param {number} i - the index of contact
  */
 function renderSingleContactDesktop(i) {
 	singleContactOverlay.style.display = 'flex';
@@ -282,7 +313,7 @@ function renderSingleContactDesktop(i) {
 /**
  * This function is used to render single contacts with mobile features
  * 
- *	@param {number} i 
+ *	@param {number} i - the index of contact
  */
 function renderSingleContactMobile(i) {
 	renderSingleContactDetails(i);
@@ -303,7 +334,7 @@ function renderSingleContactMobile(i) {
 /**
  * This function is used to render single contacts with mobile features
  * 
- *	@param {number} i 
+ *	@param {number} i - the index of contact
  */
 function renderSingleContactDetails(i) {
 	document.getElementById('contacts-field').style.display = 'none';
@@ -347,7 +378,7 @@ function closeSingleContactMobile() {
 /**
  * This function is used to open single contact form to edit contact
  * 
- *	@param {number} i 
+ *	@param {number} i - the index of contact
  */
 function editSingleContact(i) {
 	let formContent = document.getElementById('contact-field-content');
@@ -393,7 +424,7 @@ function addContactClose() {
 /**
  * This function is used to open a contact form to edit contact
  * 
- *	@param {number} i 
+ *	@param {number} i - the index of contact
  */
 function editContactOpen(i) {
 	editContactOverlay.style.display = 'flex';

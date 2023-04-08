@@ -282,7 +282,8 @@ body {
     cursor: pointer;
  }
 
-.cancel {
+.cancel, 
+.delete {
     width: 110px;
     border: 1px solid #2A3647;
     color: #2A3647;
@@ -290,12 +291,14 @@ body {
     margin-right: 20px;
 }
 
-.cancel:hover {
+.cancel:hover,
+.delete:hover {
     border: 1px solid #29ABE2;
     color: #29ABE2;
 }
 
-.cancel:hover svg path{
+.cancel:hover svg path,
+.delete:hover svg path {
     border: 1px solid #29ABE2;
     stroke: #29ABE2;
 }
