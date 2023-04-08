@@ -41,11 +41,13 @@ textarea:focus, input:focus{
     border-right: 1px solid #D1D1D1;
     padding-right: 40px;
     width: 25vw;
+    min-width: 280px;
 }
 
 .right-side {
     padding-left: 40px;
     width: 25vw;
+    min-width: 280px;
 }
 
 .border-radius-10 {
@@ -363,6 +365,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .circle:first-child {
     margin-left: unset !important;
 }
+
+
 
 @keyframes comeIn {
     0% {
