@@ -902,7 +902,11 @@ function hideIcon() {
     }
 }
 
-
+/**
+ * 
+ * This function is used to hide and make visible the date icon
+ * 
+ */
 function removeTest(id) {
     let element = document.getElementById(id)
     let targetContainer = element.parentElement.parentElement.parentElement.children

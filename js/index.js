@@ -11,6 +11,11 @@ async function initRegistration() {
   console.log(users)
 }
 
+/**
+ * 
+ * This function is used to add a new User if email is not already in use
+ * 
+ */
 async function addUsers() {
   let name = document.getElementById("name");
   let email = document.getElementById("signUpEmail");
@@ -36,7 +41,11 @@ async function addUsers() {
   }
 }
 
-
+/**
+ * 
+ * This function is used to log in with account information
+ * 
+ */
 function login() {
   let email = document.getElementById("email");
   let password = document.getElementById("password");
@@ -49,18 +58,13 @@ function login() {
     email.value = ''
     password.value = ''
   }
-  /* let user = users.find(
-     u => u.email == email.value && u.password == password.value
-   );
-   console.log(user)
-   window.document.location.href = "./summary.html";
-   if (user) {
-     console.log(user);
-   }
-   */
 }
 
-
+/**
+ * 
+ * This function is used to log in with guest account
+ * 
+ */
 function guestlogin() {
   let email = document.getElementById("email");
   let password = document.getElementById("password");
@@ -73,6 +77,11 @@ function guestlogin() {
   }
 }
 
+/**
+ * 
+ * This function is used to animte the logo translation
+ * 
+ */
 function initial() {
   document.getElementById("capaOne").classList.add("animation");
   document.getElementById("capaOneWhite").classList.add("animation");
@@ -90,6 +99,11 @@ function initial() {
 
 let inputPW = false;
 
+/**
+ * 
+ * This function is used to change the pw symbole
+ * 
+ */
 async function changePWSymbol() {
   let pwInputField = document.getElementById("password");
   let pwSymbol = document.getElementById("pwSymbol");
@@ -109,6 +123,12 @@ async function changePWSymbol() {
   }
 }
 
+
+/**
+ * 
+ * This function is used to show the password
+ * 
+ */
 async function visibilityPW() {
   let pw = document.getElementById("password");
   let pwSymbol = document.getElementById("pwSymbol");
@@ -123,6 +143,12 @@ async function visibilityPW() {
   }
 }
 
+
+/**
+ * 
+ * This function is used to change the password symbole
+ * 
+ */
 async function changeSignUpPWSymbol() {
   let pwInputField = document.getElementById("signUpPassword");
   let pwSymbol = document.getElementById("pwSymbol");
@@ -142,6 +168,12 @@ async function changeSignUpPWSymbol() {
   }
 }
 
+
+/**
+ * 
+ * This function is used to show the password
+ * 
+ */
 async function visibilitySignUpPW() {
   let pw = document.getElementById("signUpPassword");
   let pwSymbol = document.getElementById("pwSymbol");
@@ -156,6 +188,12 @@ async function visibilitySignUpPW() {
   }
 }
 
+
+/**
+ * 
+ * This function is used to render the sign up screen
+ * 
+ */
 function renderSignUp() {
   document.getElementById("forgottenPWContainer").style.display = "none";
   document.getElementById("loginContainer").style.display = "none";
@@ -164,6 +202,11 @@ function renderSignUp() {
   document.getElementById("signUpContainer").style.display = "flex";
 }
 
+/**
+ * 
+ * This function is used to render the log in screen
+ * 
+ */
 function renderLogIn() {
   document.getElementById("forgottenPWContainer").style.display = "none";
   document.getElementById("signUpContainer").style.display = "none";
@@ -172,6 +215,12 @@ function renderLogIn() {
   document.getElementById("notAJoinUser").style.display = "flex";
 }
 
+
+/**
+ * 
+ * This function is used to render the forgotten pw screen
+ * 
+ */
 function renderForgottenPW() {
   document.getElementById("loginContainer").style.display = "none";
   document.getElementById("notAJoinUser").style.display = "none";
@@ -180,6 +229,12 @@ function renderForgottenPW() {
   document.getElementById("forgottenPWContainer").style.display = "flex";
 }
 
+
+/**
+ * 
+ * This function is used to render the reset pw screen
+ * 
+ */
 function renderResetPW() {
   document.getElementById("loginContainer").style.display = "none";
   document.getElementById("notAJoinUser").style.display = "none";
