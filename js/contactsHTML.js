@@ -68,7 +68,7 @@ function htmlTemplateEditSingleContact(contact, i) {
                         stroke-linecap="round" />
                 </svg>
             </a>
-            <form onsubmit="saveActiveContact(${i}); return false;">
+            <form onsubmit="return false;">
                 <div class="contact-form">
                     <div class="input-container">
                         <img src="./assets/img/name-icon.svg">
@@ -85,7 +85,15 @@ function htmlTemplateEditSingleContact(contact, i) {
                     </div>
                 </div>
                 <div class="submit-container">
-                    <button type="submit"  class="submit-btn save">Save</button>
+                    <button onclick="delateActiveContact(${i})" class="submit-btn delete">Delete
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none">
+                            <path
+                                d="M12.501 12.5L17.744 17.743M7.258 17.743L12.501 12.5L7.258 17.743ZM17.744 7.25696L12.5 12.5L17.744 7.25696ZM12.5 12.5L7.258 7.25696L12.5 12.5Z"
+                                stroke="#2A3647" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button onclick="saveActiveContact(${i})" type="submit" class="submit-btn save">Save</button>
                 </div>
             </form>
         </div>
