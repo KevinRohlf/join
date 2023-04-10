@@ -317,6 +317,10 @@ input::placeholder {
     align-items: center;
 }
 
+.contact-card-content>p {
+    font-size: 16px;
+}
+
 #contact-card-container {
     margin-top: 16px;
 }
