@@ -915,3 +915,15 @@ function removeTest(id) {
         targetContainer[i].lastElementChild.classList.add('d-none')
     }
 }
+
+
+function checkMousePosition(e) {
+    console.log(e.clientY)
+    console.log(e.screenY)
+    console.log(e.pageY)
+    console.log(window.innerWidth)
+    console.log(window.innerHeight)
+   /* if (e.clientY > 600 * (window.innerWidth / window.innerHeight)) {
+            window.scrollBy(0, 5);
+    }*/
+}
