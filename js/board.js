@@ -762,6 +762,7 @@ async function addContactToList(j, i) {
  */
 function dragstart_handler(id) {
     currentDraggedElement = id
+    console.log(id)
 }
 
 /**
