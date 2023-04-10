@@ -31,7 +31,7 @@
     <div class="loginContainer" id="loginContainer">
       <div class="loginHeadline">Log in</div>
       <img class="line" src="assets/img/line.svg" />
-      <form class="emailPassword">
+      <form class="emailPassword" onsubmit="login(); return false;">
         <div class="inputBox">
           <input type="email" class="email" id="email" placeholder="Email" required minlength="0" />
           <img src="assets/img/postcard.svg" />
@@ -49,7 +49,7 @@
           <a href="#" onclick="renderForgottenPW()">Forgot my password</a>
         </div>
         <div class="MemberOrGuest">
-          <button class="memberLogin" onclick="login(); return false;">Log in</button>
+          <button class="memberLogin" >Log in</button>
           <button class="guestLogin" onclick="guestlogin(); return false;">Guest Log in</button>
         </div>
       </form>
