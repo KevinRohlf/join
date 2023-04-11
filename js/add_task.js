@@ -4,6 +4,7 @@ let selectedCategory;
 let selectedContacts = [];
 let inAnimation = false;
 let sTStatus = [];
+let savedTaskStatus;
 
 
 
@@ -13,6 +14,7 @@ async function initAddTask() {
     renderContacts();
     editCreateBtnOnMobile();
     setToday();
+    getSavedTaskStatus()
 }
 
 /**
@@ -26,6 +28,12 @@ function readForm() {
 }
 
 
+function getSavedTaskStatus() {
+    savedTaskStatus = JSON.parse(localStorage.getItem('savedTaskStatus')) || [];
+    console.log(savedTaskStatus)
+}
+
+
 /**
  * this function create the task and send it to the backend
  * 
@@ -35,23 +43,52 @@ function readForm() {
  */
 async function addTask(title, description, date) {
 
-    let newTask = {
-        'status': 'toDo',
-        'title': title.value,
-        'description': description.value,
-        'category': selectedCategory,
-        'contactSelection': selectedContacts,
-        'date': date.value,
-        'prio': prio,
-        'subtasks': subtasks,
-        'sTStatus': sTStatus
-    };
-    await downloadFromServer();
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
-    tasks.push(newTask);
-    await backend.setItem('tasks', JSON.stringify(tasks));
-    clearForm();
-    showTaskAdded();
+    if (savedTaskStatus.length > 0) {
+        let newTask = {
+            'status': savedTaskStatus,
+            'title': title.value,
+            'description': description.value,
+            'category': selectedCategory,
+            'contactSelection': selectedContacts,
+            'date': date.value,
+            'prio': prio,
+            'subtasks': subtasks,
+            'sTStatus': sTStatus
+        };
+        await downloadFromServer();
+        tasks = JSON.parse(backend.getItem('tasks')) || [];
+        tasks.push(newTask);
+        await backend.setItem('tasks', JSON.stringify(tasks));
+        clearSavedTaskStatus()
+        clearForm();
+        showTaskAdded();
+    } else {
+        let newTask = {
+            'status': 'toDo',
+            'title': title.value,
+            'description': description.value,
+            'category': selectedCategory,
+            'contactSelection': selectedContacts,
+            'date': date.value,
+            'prio': prio,
+            'subtasks': subtasks,
+            'sTStatus': sTStatus
+        };
+        await downloadFromServer();
+        tasks = JSON.parse(backend.getItem('tasks')) || [];
+        tasks.push(newTask);
+        await backend.setItem('tasks', JSON.stringify(tasks));
+        clearForm();
+        showTaskAdded();
+    }
+}
+
+
+
+function clearSavedTaskStatus() {
+    console.log("test")
+    savedTaskStatus = ''
+    localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
 }
 
 
