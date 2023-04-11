@@ -9,7 +9,6 @@ async function initRegistration() {
   );
   await downloadFromServer();
   users = JSON.parse(backend.getItem("users")) || [];
-  console.log(users)
 }
 
 /**
