@@ -143,6 +143,18 @@ function greeting() {
         greet = 'Good Evening';
 
     document.getElementById('greeting').innerHTML = greet;
+    document.getElementById('greetingName').innerHTML = getNameLogin();
+}
+
+
+/**
+ * This function is used to return the name of user
+ * 
+ * 
+ */
+function getNameLogin() {
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    return user;
 }
 
 
