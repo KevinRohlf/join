@@ -54,7 +54,6 @@ function login() {
     if (users[i].email.includes(email.value) && users[i].password.includes(password.value)) {
       currentUser = users[i]['name'];
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      console.log(currentUser)
       window.document.location.href = "./summary.html";
       
     } else {
@@ -76,6 +75,8 @@ function guestlogin() {
   let user = users.find(
     u => u.email == email.value && u.password == password.value
   );
+  currentUser = 'Guest';
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
   window.document.location.href = "./summary.html";
   if (user) {
     console.log(user);
