@@ -9,7 +9,6 @@ let sTStatus = [];
 
 async function initAddTask() {
     setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
-    await loadSelectedContacts()
     renderCategorys();
     renderContacts();
     editCreateBtnOnMobile();
@@ -157,8 +156,26 @@ function renderSubTasks() {
     let content = document.getElementById('subtasks');
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        content.innerHTML += `<li><input id="cb-subtask-${i}" class="checkbox" type="checkbox" control-id="ControlID-12"> ${subtask}</li>`;
+        content.innerHTML += `<li><input onclick="checkSubTask(${i})" id="cb-subtask-${i}" class="checkbox" type="checkbox" control-id="ControlID-12"> ${subtask}</li>`;
     }
+}
+
+/**
+ * this function set the array on the position from the subtask to true
+ * @param {int} id number in the array
+ */
+function checkSubTask(id) {
+    sTStatus[id] = 'true';
+    document.getElementById('cb-subtask-' + id).setAttribute('onclick', `uncheckSubTask(${id})`);
+}
+
+/**
+ * this function set the array on the position from the subtask to false
+ * @param {int} id number in the array
+ */
+function uncheckSubTask(id) {
+    sTStatus[id] = 'false';
+    document.getElementById('cb-subtask-' + id).setAttribute('onclick', `checkSubTask(${id})`);
 }
 
 /**
@@ -375,22 +392,4 @@ function setToday() {
     }
     today = yyyy + '-' + mm + '-' + dd;
     document.getElementById('date').setAttribute('min', today)
-}
-
-/**
- * 
- * @param {int} id - contact ID
- */
-async function openAddTask(id){
-    document.getElementById(`cb-contacts-${id}`).checked = true;
-    selectedContacts.push(id);
-    await backend.setItem('selectedContacts', JSON.stringify(selectedContacts));
-}
-
-async function loadSelectedContacts(){
-    await downloadFromServer();
-    let result = JSON.parse(backend.getItem('selectedContacts')) || [];
-    if(result){
-        selectedContacts = result;
-    } 
 }
