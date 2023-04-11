@@ -693,11 +693,6 @@ input:focus {
     font-weight: bold;
 }
 
-.move-to-container>div:hover {
-    cursor: pointer;
-    background-color: rgba(0, 94, 255, 0.6);
-}
-
 .opacity {
     opacity: 0.1;
 }

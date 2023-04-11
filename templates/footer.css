@@ -34,6 +34,16 @@
     white-space: nowrap;
 }
 
+.footer-main-menu>div>img {
+    justify-self: center;
+    align-self: center;
+}
+
+.footer-main-menu>div>p {
+    justify-self: center;
+    white-space: nowrap;
+}
+
 .background-color {
     background-color: #091931;
     color: white !important;
@@ -114,6 +124,19 @@
     .footer-main-menu>a>p {
         justify-self: start;
         align-self: center;
+    }
+
+    .footer-main-menu>div>img {
+        justify-self: center;
+    }
+
+    .footer-main-menu>div>p {
+        justify-self: start;
+        align-self: center;
+    }
+
+    .footer-main-menu>div:hover {
+        cursor: pointer;
     }
 
 

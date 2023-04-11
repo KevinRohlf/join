@@ -1,10 +1,19 @@
 let tasks = []
 let categorys = []
 let contacts = []
+
+
+
+let savedTaskStatus = [];
+
+
+
+
 let cardOpened = false;
 let currentContact;
-let inAnimation = false;
+let inAnim = false;
 let currentDraggedElement;
+
 
 /**
  * This function is used to load the content from the backend
@@ -17,8 +26,27 @@ async function loadBackend() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
     contacts = JSON.parse(backend.getItem('contacts')) || [];
+    savedTaskStatus = JSON.parse(localStorage.getItem('savedTaskStatus')) || [];
     loadTasks()
 }
+
+
+
+
+
+function saveTaskStatusFromBoard(savedTaskStatus) {
+    savedTaskStatus[0] = savedTaskStatus
+    localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
+    window.document.location.href = "./add_task.html";
+}
+
+
+
+
+
+
+
+
 
 /**
  * 
@@ -26,9 +54,10 @@ async function loadBackend() {
  * 
  */
 function loadTasks() {
-  //  console.log(tasks)
- //   console.log(contacts)
-  //  console.log(categorys)
+    console.log(tasks)
+    console.log(contacts)
+    console.log(categorys)
+    console.log(savedTaskStatus)
     document.getElementById('to-do-container').innerHTML = ''
     document.getElementById('in-progress-container').innerHTML = ''
     document.getElementById('awaiting-feedback-container').innerHTML = ''
@@ -315,7 +344,7 @@ function renderCardContacts(i) {
  */
 function renderCardContactsEdit(i) {
     let container = document.getElementById('contact-card-container')
-    container.style ="display:flex"
+    container.style = "display:flex"
     tasks[i].contactSelection.forEach(element => {
         for (let j = 0; j < contacts.length; j++) {
             let contact = contacts[j]
@@ -688,7 +717,7 @@ function showDropDown(i) {
  * @param {number} i 
  */
 function dropdown(area, i) {
-    if (!inAnimation) {
+    if (!inAnim) {
         let content = document.getElementById(area);
         let bigArea = area[0].toUpperCase() + area.slice(1);
         content.classList.remove('d-none')
@@ -709,7 +738,7 @@ function dropdown(area, i) {
 function dropup(area) {
     let content = document.getElementById(area);
     let areaShow = document.getElementById(area + 'Show')
-    inAnimation = true;
+    inAnim = true;
     let bigArea = area[0].toUpperCase() + area.slice(1);
     editEndHeight(areaShow);
     document.getElementById('select' + bigArea).setAttribute('onclick', `dropdown('${area}')`);
@@ -718,7 +747,7 @@ function dropup(area) {
     document.getElementById('arrow' + bigArea).style = 'animation: arrowDown 350ms ease;';
     setTimeout(() => {
         content.classList.add('d-none');
-        inAnimation = false;
+        inAnim = false;
     }, 500);
 }
 
@@ -863,7 +892,7 @@ function editDone() {
 function removeHighlightArea(id) {
     let container = document.getElementById(id)
     container.classList.add('d-none')
-  
+
 }
 
 /**
@@ -922,34 +951,34 @@ let timer = false;
 let duration = 500;
 
 
-function touchStart(id){
-  if (!timer) {
-    timer = setTimeout(() => {
-        container = document.getElementById(id)
-        console.log(container.getAttribute('status'))
-        if(container.getAttribute('status') == 'closed') {
-            onlongtouch(id)
-            container.setAttribute('status', 'opened')
-        }
-    }, duration );
-  }
+function touchStart(id) {
+    if (!timer) {
+        timer = setTimeout(() => {
+            container = document.getElementById(id)
+            console.log(container.getAttribute('status'))
+            if (container.getAttribute('status') == 'closed') {
+                onlongtouch(id)
+                container.setAttribute('status', 'opened')
+            }
+        }, duration);
+    }
 }
 
 
-function touchEnd(id){
-  if (timer) {
-    clearTimeout(timer)
-    timer = false;
-  }
+function touchEnd(id) {
+    if (timer) {
+        clearTimeout(timer)
+        timer = false;
+    }
 }
 
 
 function onlongtouch(id) {
-  let container = document.getElementById(id)
-  for (let j = 0; j < 5; j++) {
-    container.children[j].classList.add('opacity')
-  }
-  container.innerHTML += 
+    let container = document.getElementById(id)
+    for (let j = 0; j < 5; j++) {
+        container.children[j].classList.add('opacity')
+    }
+    container.innerHTML +=
   /*html*/ `
   <div class="move-to-container" onclick="event.stopImmediatePropagation()">
     <div onclick="moveTo(${id}, 'toDo')"><p>To Do</p></div>
@@ -966,3 +995,8 @@ async function moveTo(id, newStatus) {
     await backend.setItem(`tasks`, JSON.stringify(tasks));
     loadTasks()
 }
+/*
+window.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  }, false);
+*/

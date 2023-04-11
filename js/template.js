@@ -189,3 +189,12 @@ window.onresize = function() {
     }
   }
 }
+
+
+
+function clearSavedTaskStatus() {
+  console.log("test")
+  savedTaskStatus = ''
+  localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
+  window.document.location.href = "./add_task.html";
+}

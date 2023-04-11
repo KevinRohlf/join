@@ -57,7 +57,7 @@
         </div>
         <div class="board-container">
             <div>
-                <a href="./add_task.html" class="board-headlines">
+                <div href="./add_task.html" class="board-headlines" onclick="saveTaskStatusFromBoard('toDo')">
                     <p>To do</p>
                     <div>
                         <svg width="18" height="3" viewBox="0 0 18 3" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@
                             <path d="M1 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
-                </a>
+                </div>
                 <div class="min-height" id="to-do-container"
                     ondragover="dragover_handler(event); highlightArea('to-do-container-drag-area')"
                     ondrop="drop_handler('toDo')">
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div>
-                <a href="./add_task.html" class="board-headlines">
+                <div href="./add_task.html" class="board-headlines" onclick="saveTaskStatusFromBoard('inProgress')">
                     <p>In progress</p>
                     <div>
                         <svg width="18" height="3" viewBox="0 0 18 3" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@
                             <path d="M1 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
-                </a>
+                </div>
                 <div class="min-height" id="in-progress-container"
                     ondragover="dragover_handler(event); highlightArea('in-progress-container-drag-area')"
                     ondrop="drop_handler('inProgress')">
@@ -102,7 +102,7 @@
                     ondragover="dragover_handler(event); highlightArea('in-progress-container-drag-area')"></div>
             </div>
             <div>
-                <a href="./add_task.html" class="board-headlines">
+                <div href="./add_task.html" class="board-headlines" onclick="saveTaskStatusFromBoard('awaitingFeedback')">
                     <p>Awaiting Feedback</p>
                     <div>
                         <svg width="18" height="3" viewBox="0 0 18 3" xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +113,7 @@
                             <path d="M1 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
-                </a>
+                </div>
                 <div class="min-height" id="awaiting-feedback-container"
                     ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container-drag-area')"
                     ondrop="drop_handler('awaitingFeedback')">
@@ -124,7 +124,7 @@
                     ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container-drag-area')"></div>
             </div>
             <div>
-                <a href="./add_task.html" class="board-headlines">
+                <div href="./add_task.html" class="board-headlines" onclick="saveTaskStatusFromBoard('done')">
                     <p>Done</p>
                     <div>
                         <svg width="18" height="3" viewBox="0 0 18 3" xmlns="http://www.w3.org/2000/svg">
@@ -135,7 +135,7 @@
                             <path d="M1 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
-                </a>
+                </div>
                 <div class="min-height" id="done-container"
                     ondragover="dragover_handler(event); highlightArea('done-container-drag-area')"
                     ondrop="drop_handler('done')">
