@@ -1,3 +1,5 @@
+let savedTaskStatus;
+
 /**
  * 
  * This function is used to initialize the website
