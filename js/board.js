@@ -25,21 +25,17 @@ async function loadBackend() {
 }
 
 
-
-
-
+/**
+ * 
+ * This function is used to save the current task status in local storage
+ * 
+ * @param {string} savedTaskStatus 
+ */
 function saveTaskStatusFromBoard(savedTaskStatus) {
     savedTaskStatus[0] = savedTaskStatus
     localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
     window.document.location.href = "./add_task.html";
 }
-
-
-
-
-
-
-
 
 
 /**
