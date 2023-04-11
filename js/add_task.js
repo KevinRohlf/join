@@ -4,7 +4,6 @@ let selectedCategory;
 let selectedContacts = [];
 let inAnimation = false;
 let sTStatus = [];
-let savedTaskStatus;
 let taskStatus;
 
 
