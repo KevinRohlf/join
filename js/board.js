@@ -109,10 +109,10 @@ function renderProgressBar(i) {
         let totalSubtasks = tasks[i].subtasks.length
         let completedSubtasks = 0
         for (let k = 0; k < tasks[i].sTStatus.length; k++) {
-            if (tasks[i].sTStatus[k] == true) {
+            if (tasks[i].sTStatus[k] == 'true') {
                 completedSubtasks++
             }
-            if (tasks[i].sTStatus[k] == false) {
+            if (tasks[i].sTStatus[k] == 'false') {
             }
         }
         let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
