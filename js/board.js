@@ -48,10 +48,6 @@ function saveTaskStatusFromBoard(savedTaskStatus) {
  * 
  */
 function loadTasks() {
-    console.log(tasks)
-    console.log(contacts)
-    console.log(categorys)
-    console.log(savedTaskStatus)
     document.getElementById('to-do-container').innerHTML = ''
     document.getElementById('in-progress-container').innerHTML = ''
     document.getElementById('awaiting-feedback-container').innerHTML = ''
@@ -109,10 +105,10 @@ function renderProgressBar(i) {
         let totalSubtasks = tasks[i].subtasks.length
         let completedSubtasks = 0
         for (let k = 0; k < tasks[i].sTStatus.length; k++) {
-            if (tasks[i].sTStatus[k] == 'true') {
+            if (tasks[i].sTStatus[k] == true) {
                 completedSubtasks++
             }
-            if (tasks[i].sTStatus[k] == 'false') {
+            if (tasks[i].sTStatus[k] == false) {
             }
         }
         let progressBar = document.getElementById(`subtask-progress-bar-${i}`)
@@ -439,7 +435,7 @@ function renderEditTask(i) {
  */
 function checkForCompletedSubtasks(i) {
     for (let j = 0; j < tasks[i].sTStatus.length; j++) {
-        if (tasks[i].sTStatus[j] == 'true') {
+        if (tasks[i].sTStatus[j] == true) {
             document.getElementById(`subtask-${j}`).checked = 'true'
         }
     }
@@ -455,10 +451,10 @@ function checkForCompletedSubtasks(i) {
 async function updateSubtask(j, i) {
     let checked = document.getElementById(`subtask-${j}`).checked
     if (checked) {
-        tasks[i].sTStatus[j] = 'true';
+        tasks[i].sTStatus[j] = true;
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     } else {
-        tasks[i].sTStatus[j] = 'false';
+        tasks[i].sTStatus[j] = false;
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     }
 }

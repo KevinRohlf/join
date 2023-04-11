@@ -35,7 +35,6 @@ function getSavedTaskStatus() {
     } else {
         taskStatus = 'toDo';
     }
-    console.log(savedTaskStatus)
 }
 
 
