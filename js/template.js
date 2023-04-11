@@ -194,9 +194,9 @@ window.onresize = function() {
 
 
 
-function clearSavedTaskStatus() {
-  console.log("test")
+function clearSavedTaskStatusTemplate() {
   savedTaskStatus = ''
   localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
+  console.log("test")
   window.document.location.href = "./add_task.html";
 }
