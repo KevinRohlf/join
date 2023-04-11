@@ -1,6 +1,7 @@
 // BACKEND //
 let users = []
 let emailAlreadyInUse = false;
+let currentUser;
 
 async function initRegistration() {
   setURL(
@@ -51,7 +52,11 @@ function login() {
   let password = document.getElementById("password");
   for (let i = 0; i < users.length; i++) {
     if (users[i].email.includes(email.value) && users[i].password.includes(password.value)) {
+      currentUser = users[i]['name'];
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      console.log(currentUser)
       window.document.location.href = "./summary.html";
+      
     } else {
       console.log("Wrong Password or Email")
     }
