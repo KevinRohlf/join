@@ -917,13 +917,52 @@ function removeTest(id) {
 }
 
 
-function checkMousePosition(e) {
-    console.log(e.clientY)
-    console.log(e.screenY)
-    console.log(e.pageY)
-    console.log(window.innerWidth)
-    console.log(window.innerHeight)
-   /* if (e.clientY > 600 * (window.innerWidth / window.innerHeight)) {
-            window.scrollBy(0, 5);
-    }*/
+
+let timer = false;
+let duration = 500;
+
+
+function touchStart(id){
+  if (!timer) {
+    timer = setTimeout(() => {
+        container = document.getElementById(id)
+        console.log(container.getAttribute('status'))
+        if(container.getAttribute('status') == 'closed') {
+            onlongtouch(id)
+            container.setAttribute('status', 'opened')
+        }
+    }, duration );
+  }
+}
+
+
+function touchEnd(id){
+  if (timer) {
+    clearTimeout(timer)
+    timer = false;
+  }
+}
+
+
+function onlongtouch(id) {
+  let container = document.getElementById(id)
+  for (let j = 0; j < 5; j++) {
+    container.children[j].classList.add('opacity')
+  }
+  container.innerHTML += 
+  /*html*/ `
+  <div class="move-to-container" onclick="event.stopImmediatePropagation()">
+    <div onclick="moveTo(${id}, 'toDo')"><p>To Do</p></div>
+    <div onclick="moveTo(${id}, 'inProgress')"><p>In Progress</p></div>
+    <div onclick="moveTo(${id}, 'awaitingFeedback')"><p>Awaiting Feedback</p></div>
+    <div onclick="moveTo(${id}, 'done')"><p>Done</p></div>
+  </div>
+  `
+}
+
+
+async function moveTo(id, newStatus) {
+    tasks[id].status = newStatus
+    await backend.setItem(`tasks`, JSON.stringify(tasks));
+    loadTasks()
 }

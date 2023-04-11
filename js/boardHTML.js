@@ -2,7 +2,7 @@
 
 function htmlRenderAllTasks(currentTask, i) {
     return /*html*/ `
-        <div id="${i}" class="board-content" draggable="true" onclick="loadCard(${i})" ondragstart="dragstart_handler(${i})"  ondragend="removeTest(${i})">
+        <div status="closed" id="${i}" class="board-content" draggable="true" onclick="loadCard(${i})" ondragstart="dragstart_handler(${i})"  ondragend="removeTest(${i})" ontouchstart="touchStart(${i})" ontouchend="touchEnd(${i})">
             <div class="task-category ${currentTask.category}">${currentTask.category}</div>
             <div class="task-title">${currentTask.title}</div>
             <div class="task-description">${currentTask.description}</div>
