@@ -5,6 +5,8 @@ let cardOpened = false;
 let currentContact;
 let inAnim = false;
 let currentDraggedElement;
+let timer = false;
+let duration = 500;
 
 
 /**
@@ -939,10 +941,14 @@ function removeTest(id) {
 
 
 
-let timer = false;
-let duration = 500;
 
 
+/**
+ * 
+ * This function is used for mobile change task
+ * 
+ * @param {string} id 
+ */
 function touchStart(id) {
     if (!timer) {
         timer = setTimeout(() => {
@@ -956,7 +962,12 @@ function touchStart(id) {
     }
 }
 
-
+/**
+ * 
+ * This function is used for mobile change task
+ * 
+ * @param {string} id 
+ */
 function touchEnd(id) {
     if (timer) {
         clearTimeout(timer)
@@ -964,7 +975,12 @@ function touchEnd(id) {
     }
 }
 
-
+/**
+ * 
+ * This function is used for mobile change task
+ * 
+ * @param {string} id 
+ */
 function onlongtouch(id) {
     let container = document.getElementById(id)
     for (let j = 0; j < 5; j++) {
@@ -981,7 +997,13 @@ function onlongtouch(id) {
   `
 }
 
-
+/**
+ * 
+ * This function is used for mobile change task
+ * 
+ * @param {string} id 
+ * @param {string} newStatus 
+ */
 async function moveTo(id, newStatus) {
     tasks[id].status = newStatus
     await backend.setItem(`tasks`, JSON.stringify(tasks));

@@ -193,7 +193,11 @@ window.onresize = function() {
 }
 
 
-
+/**
+ * 
+ * This function is used to clear local storage status
+ * 
+ */
 function clearSavedTaskStatusTemplate() {
   savedTaskStatus = ''
   localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
