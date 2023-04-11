@@ -1,14 +1,6 @@
 let tasks = []
 let categorys = []
 let contacts = []
-
-
-
-let savedTaskStatus = [];
-
-
-
-
 let cardOpened = false;
 let currentContact;
 let inAnim = false;
