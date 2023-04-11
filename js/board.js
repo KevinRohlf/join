@@ -439,8 +439,8 @@ function renderEditTask(i) {
  */
 function checkForCompletedSubtasks(i) {
     for (let j = 0; j < tasks[i].sTStatus.length; j++) {
-        if (tasks[i].sTStatus[j] == true) {
-            document.getElementById(`subtask-${j}`).checked = true
+        if (tasks[i].sTStatus[j] == 'true') {
+            document.getElementById(`subtask-${j}`).checked = 'true'
         }
     }
 }
@@ -455,10 +455,10 @@ function checkForCompletedSubtasks(i) {
 async function updateSubtask(j, i) {
     let checked = document.getElementById(`subtask-${j}`).checked
     if (checked) {
-        tasks[i].sTStatus[j] = true;
+        tasks[i].sTStatus[j] = 'true';
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     } else {
-        tasks[i].sTStatus[j] = false;
+        tasks[i].sTStatus[j] = 'false';
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     }
 }
