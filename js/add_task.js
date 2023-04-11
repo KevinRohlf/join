@@ -69,8 +69,8 @@ async function addTask(title, description, date) {
 
 
 function clearSavedTaskStatus() {
-    console.log("test")
-    savedTaskStatus = ''
+    console.log("test");
+    savedTaskStatus = '';
     localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
 }
 
@@ -128,7 +128,7 @@ function addSubtask() {
         content.innerHTML += `<div style="color: red;">length to small</div>`;
     } else {
         subtasks.push(subTask.value);
-        sTStatus.push('false');
+        sTStatus.push(false);
         subTask.value = '';
     };
     renderSubTasks();
@@ -185,7 +185,7 @@ function renderSubTasks() {
  * @param {int} id number in the array
  */
 function checkSubTask(id) {
-    sTStatus[id] = 'true';
+    sTStatus[id] = true;
     document.getElementById('cb-subtask-' + id).setAttribute('onclick', `uncheckSubTask(${id})`);
 }
 
@@ -194,7 +194,7 @@ function checkSubTask(id) {
  * @param {int} id number in the array
  */
 function uncheckSubTask(id) {
-    sTStatus[id] = 'false';
+    sTStatus[id] = false;
     document.getElementById('cb-subtask-' + id).setAttribute('onclick', `checkSubTask(${id})`);
 }
 
