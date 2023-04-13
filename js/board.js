@@ -15,6 +15,7 @@ let duration = 500;
  * 
  */
 async function loadBackend() {
+
     setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
     tasks = JSON.parse(backend.getItem('tasks')) || [];
