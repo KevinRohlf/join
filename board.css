@@ -190,7 +190,7 @@ a {
     display: flex;
 }
 
-.circle {
+.circleB {
     margin: 8px -5px;
     color: white;
     padding: 20px;
@@ -446,7 +446,7 @@ form>div>p {
 .edit-task-container>div:hover {
     cursor: pointer;
     background-color: #29ABE2;
-   
+
 }
 
 #edit-task-btn:hover {
@@ -482,7 +482,7 @@ input:focus {
 }
 
 
-.dropdown {
+.dropdownB {
     position: relative;
     background-color: white;
     border: 1px solid #D1D1D1;
@@ -579,7 +579,7 @@ input:focus {
 }
 
 
-@keyframes dropdown {
+@keyframes dropdownB {
     0% {
         max-height: 42px;
     }
@@ -589,7 +589,7 @@ input:focus {
     }
 }
 
-@keyframes dropup {
+@keyframes dropupB {
     0% {
         max-height: var(--end-height);
     }
@@ -599,7 +599,7 @@ input:focus {
     }
 }
 
-@keyframes arrowUp {
+@keyframes arrowUpB {
     0% {
         transform: rotate(0deg);
     }
@@ -609,7 +609,7 @@ input:focus {
     }
 }
 
-@keyframes arrowDown {
+@keyframes arrowDownB {
     0% {
         transform: rotate(180deg);
     }
@@ -655,12 +655,12 @@ input:focus {
     cursor: pointer;
 }
 
-.subtasks {
+.subtasksB {
     display: flex;
     justify-content: space-between;
     margin: 6px 0;
     padding: 6px 12px;
-    background-color:#F5F5F5;
+    background-color: #F5F5F5;
     border-radius: 10px;
 }
 
@@ -697,7 +697,20 @@ input:focus {
     opacity: 0.1;
 }
 
+.add-task-byboard-container {
+    background-color: white;
+    border-radius: 32px;
+    padding: 42px;
+    z-index: 999;
+}
 
+.overlay-bg {
+    background-color: rgba(5, 5, 5, 0.3);
+}
+
+.card-close-icon-container-edit-task {
+    display: none;
+}
 
 @media only screen and (min-width: 1000px) {
     .board-create-new-task-btn {
@@ -765,6 +778,36 @@ input:focus {
     form>div {
         margin-bottom: 8px;
     }
+
+
+
+    .add-task-byboard-container {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        top: 90px;
+        border-radius: 0;
+    }
+
+    .overlay-bg-white {
+        background-color: rgba(0, 0, 0, 0)
+    }
+
+    .container-color-grey {
+        background-color: #F5F5F5;
+    }
+
+    .card-close-icon-container-edit-task {
+        overflow-y: auto;
+        margin: 0 0 -16px 0 !important;
+        display: flex !important;
+        justify-content: flex-end;
+    }
+
+    .card-close-icon-container-edit-task:hover {
+        cursor: pointer;
+    }
+   
 }
 
 @media only screen and (max-width: 727px) {

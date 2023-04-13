@@ -5,7 +5,7 @@ let currentUser;
 
 async function initRegistration() {
   setURL(
-    "https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever"
+    "https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever"
   );
   await downloadFromServer();
   users = JSON.parse(backend.getItem("users")) || [];
@@ -22,7 +22,6 @@ async function addUsers() {
   let password = document.getElementById("signUpPassword");
   for (let i = 0; i < users.length; i++) {
     if (users[i].email.includes(email.value)) {
-      console.log("email already exists")
       emailAlreadyInUse = true;
       name.value = ''
       email.value = ''
@@ -30,7 +29,6 @@ async function addUsers() {
     }
   }
   if (!emailAlreadyInUse) {
-    console.log("user successfull created")
     users.push({
       name: name.value,
       email: email.value,
@@ -91,9 +89,6 @@ function initial() {
   document.getElementById("capaOne").classList.add("animation");
   document.getElementById("capaOneWhite").classList.add("animation");
   document.getElementById("capaOneContainer").classList.add("ausblenden");
-  if (window.matchMedia("(max-width: 600px)").matches) {
-    document.getElementById("capaOneWhite").classList.add("ausblenden");
-  }
   setTimeout(() => {
     let capaOneContainer = document.getElementById("capaOneContainer");
     capaOneContainer.style.zIndex = "0";

@@ -81,15 +81,41 @@ function toggleLogoutBtn() {
 function removeOverlay() {
   setTimeout(() => {
     document.getElementById('header-extended-menu-container').classList.add('d-none')
-  }, 200);
-  document.getElementById('overlay').classList.add('d-none')
+    document.getElementById('overlay').classList.add('d-none')
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }, 100);
   document.getElementById('body').classList.remove('overflow-hidden')
+  document.getElementById('header-menu-container').classList.remove('d-none')
+  whenInnerWidth()
+  whenAddTask()
+}
+
+
+/**
+ * 
+ * This funciton is used to remove the overlay
+ * 
+ */
+function whenInnerWidth() {
   if (window.innerWidth < 1000) {
     document.getElementById('slide-container').classList.add('slide-out')
     main.classList.remove('d-none')
   }
 }
 
+/**
+ * 
+ * This funciton is used to remove the overlay
+ * 
+ */
+function whenAddTask() {
+  if (document.getElementById('add-task-byboard-container')) {
+    setTimeout(() => {
+      document.getElementById('add-task-byboard-container').classList.add('d-none')
+    }, 200);
+    document.getElementById('add-task-byboard-container').classList.add('slide-outA')
+  }
+}
 
 /**
  * 
@@ -141,7 +167,7 @@ function manipulateBoardColor(board) {
  * This function is used to get the background color for the current page
  * 
  */
-function  manipulateAddtaskColor(addTask) {
+function manipulateAddtaskColor(addTask) {
   if (window.location.href.includes('add_task')) {
     addTask.classList.add('background-color')
   } else {
@@ -181,13 +207,15 @@ function manipulateLegalnoticeColor(legalnotice) {
  * This function is used to control appearance of the card container
  * 
  */
-window.onresize = function() {
-  if (document.getElementById('overlay').firstElementChild) {
-    if (window.innerWidth > 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
-      main.classList.remove('d-none')
-    }
-    if (window.innerWidth < 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
-      main.classList.add('d-none')
+window.onresize = function () {
+  if (!document.getElementById('add-task-byboard-container')) {
+    if (document.getElementById('overlay').firstElementChild) {
+      if (window.innerWidth > 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
+        main.classList.remove('d-none')
+      }
+      if (window.innerWidth < 1000 && !document.getElementById('card-container').classList.contains('d-none')) {
+        main.classList.add('d-none')
+      }
     }
   }
 }

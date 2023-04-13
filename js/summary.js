@@ -15,7 +15,7 @@ let urgentDate = [];
  * 
  */
 async function init() {
-    setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    setURL('https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever');
     await downloadFromServer();
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];

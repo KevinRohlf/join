@@ -15,8 +15,7 @@ let duration = 500;
  * 
  */
 async function loadBackend() {
-
-    setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    setURL('https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever');
     await downloadFromServer();
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
@@ -35,7 +34,33 @@ async function loadBackend() {
 function saveTaskStatusFromBoard(savedTaskStatus) {
     savedTaskStatus[0] = savedTaskStatus
     localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
-    window.document.location.href = "./add_task.html";
+    let overlay = document.getElementById('overlay')
+    body.classList.add('overflow-hidden')
+    setInterval(() => {
+        if (document.getElementById('add-task-byboard-container')) {
+            let headerMenu = document.getElementById('header-menu-container')
+            if (window.innerWidth <= 1000) {
+                headerMenu.classList.add('d-none')
+            } else {
+                headerMenu.classList.remove('d-none')
+            }
+        }
+    }, 600);
+    overlay.classList.remove('d-none')
+    overlay.classList.add('overlay-bg')
+    overlay.classList.add('overlay-bg-white')
+    overlay.innerHTML = renderAddTaskFromBoard()
+    initAddTask()
+}
+
+function closeEditTaskOnBoard() {
+    body.classList.remove('overflow-hidden')
+    let overlay = document.getElementById('overlay')
+    overlay.classList.add('d-none')
+    overlay.classList.remove('overlay-bg')
+    overlay.classList.remove('overlay-bg-white')
+    document.getElementById('header-menu-container').classList.remove('d-none')
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 
@@ -45,9 +70,9 @@ function saveTaskStatusFromBoard(savedTaskStatus) {
  * 
  */
 function loadTasks() {
-    document.getElementById('to-do-container').innerHTML = ''
-    document.getElementById('in-progress-container').innerHTML = ''
-    document.getElementById('awaiting-feedback-container').innerHTML = ''
+    document.getElementById('toDo-container').innerHTML = ''
+    document.getElementById('inProgress-container').innerHTML = ''
+    document.getElementById('awaitingFeedback-container').innerHTML = ''
     document.getElementById('done-container').innerHTML = ''
     filterTasks()
 }
@@ -60,19 +85,8 @@ function loadTasks() {
 function filterTasks() {
     for (let i = 0; i < tasks.length; i++) {
         let currentTask = tasks[i]
-        if (currentTask.status == 'toDo') {
-            let content = document.getElementById('to-do-container')
-            forwardTaskContent(currentTask, content, i)
-        } else if (currentTask.status == 'inProgress') {
-            let content = document.getElementById('in-progress-container')
-            forwardTaskContent(currentTask, content, i)
-        } else if (currentTask.status == 'awaitingFeedback') {
-            let content = document.getElementById('awaiting-feedback-container')
-            forwardTaskContent(currentTask, content, i)
-        } else if (currentTask.status == 'done') {
-            let content = document.getElementById('done-container')
-            forwardTaskContent(currentTask, content, i)
-        }
+        let content = document.getElementById(`${currentTask.status}-container`)
+        forwardTaskContent(currentTask, content, i)
     }
 }
 
@@ -208,7 +222,7 @@ function renderContactSelection(currentTask, i) {
 function showAllContacts(currentTask, i, currentContact, j) {
     document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
     /*html*/ `
-    <div class="circle" id="${contacts[j].ID}_${i}">${currentContact}</div>
+    <div class="circleB" id="${contacts[j].ID}_${i}">${currentContact}</div>
     `
 }
 
@@ -225,12 +239,12 @@ function showFirstTwoContacts(k, currentTask, i, currentContact, j) {
     if (k < 2) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div class="circle" id="${contacts[j].ID}_${i}">${currentContact}</div>
+        <div class="circleB" id="${contacts[j].ID}_${i}">${currentContact}</div>
         `
     } else if (k == 2) {
         document.getElementById(`contact-selection-${currentTask.status}_${i}`).innerHTML +=
         /*html*/ `
-        <div style="background-color:#2A3647;" class="circle" id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
+        <div style="background-color:#2A3647;" class="circleB" id="remaining-contacts-number-${i}">${'+' + (currentTask.contactSelection.length - 2)}</div>
         `
     }
 }
@@ -313,7 +327,7 @@ function renderCardContacts(i) {
                 container.innerHTML +=
                 /*html*/ `
                 <div class="contact-card-content">
-                    <p class="circle" style="background-color:${contact.color}">${contact.initials}</p> 
+                    <p class="circleB" style="background-color:${contact.color}">${contact.initials}</p> 
                     <p>${contact.name}</p>
                 </div>
                 `
@@ -339,7 +353,7 @@ function renderCardContactsEdit(i) {
                 container.innerHTML +=
                 /*html*/ `
                 <div class="contact-card-content">
-                    <p class="circle" style="background-color:${contact.color}">${contact.initials}</p> 
+                    <p class="circleB" style="background-color:${contact.color}">${contact.initials}</p> 
                 </div>
                 `
             }
@@ -355,19 +369,9 @@ function renderCardContactsEdit(i) {
  */
 function getCardPrioImg(i) {
     let content = document.getElementById(`card-${tasks[i].prio}`)
-    if (content.id == `card-low`) {
-        let img = document.createElement('img')
-        img.src = 'assets/img/prio-low copy.svg'
-        content.appendChild(img)
-    } else if (content.id == `card-medium`) {
-        let img = document.createElement('img')
-        img.src = 'assets/img/prio-medium copy.svg'
-        content.appendChild(img)
-    } else if (content.id == `card-urgent`) {
-        let img = document.createElement('img')
-        img.src = 'assets/img/prio-urgent copy.svg'
-        content.appendChild(img)
-    }
+    let img = document.createElement('img')
+    img.src = `assets/img/${content.id}.svg`
+    content.appendChild(img)
 }
 
 /**
@@ -417,7 +421,7 @@ function renderEditTask(i) {
         for (let j = 0; j < tasks[i].subtasks.length; j++) {
             subtasks.innerHTML +=
             /*html*/`
-                <div class="subtasks">${tasks[i].subtasks[j]} <input onclick="updateSubtask(${j},${i})" id="subtask-${j}" class="checkbox" type="checkbox"></div>
+                <div class="subtasksB">${tasks[i].subtasks[j]} <input onclick="updateSubtask(${j},${i})" id="subtask-${j}" class="checkbox" type="checkbox"></div>
             `
         }
         checkForCompletedSubtasks(i)
@@ -663,8 +667,8 @@ async function renderContacts(i) {
  * @param {number} i 
  */
 function inviteNewContact(i) {
-    let area = 'contact'
-    dropup(area)
+    let areaB = 'contact'
+    dropup(areaB)
     let content = document.getElementById('contactShow')
     content.innerHTML = renderInviteNewContactArea(i)
 }
@@ -681,7 +685,7 @@ function checkForSelectedContacts() {
         let i = container.className.slice(0, 1)
         let contact = contacts[j];
         if (tasks[i].contactSelection.includes(contact.ID)) {
-            document.getElementById(`cb-contacts-${j}`).checked = true
+            document.getElementById(`cb-contacts-${contact.ID}`).checked = true
         }
     }
 }
@@ -692,7 +696,7 @@ function checkForSelectedContacts() {
  * 
  * @param {number} i 
  */
-function showDropDown(i) {
+function showDropDownB(i) {
     loadEditTask(i)
 }
 
@@ -700,18 +704,18 @@ function showDropDown(i) {
  * 
  * This function is used to open the drop down menu
  * 
- * @param {string} area 
+ * @param {string} areaB 
  * @param {number} i 
  */
-function dropdown(area, i) {
+function dropdownB(areaB, i) {
     if (!inAnim) {
-        let content = document.getElementById(area);
-        let bigArea = area[0].toUpperCase() + area.slice(1);
+        let content = document.getElementById(areaB);
+        let bigArea = areaB[0].toUpperCase() + areaB.slice(1);
         content.classList.remove('d-none')
-        document.getElementById(area + 'Show').style = 'animation: dropdown 2s ease;'
+        document.getElementById(areaB + 'Show').style = 'animation: dropdown 2s ease;'
         document.getElementById(`arrow${bigArea}`).style = 'animation: arrowUp 350ms ease; transform: rotate(180deg);'
-        document.getElementById(`select${bigArea}`).setAttribute('onclick', `dropup('${area}')`);
-        document.getElementById(`arrow${bigArea}`).setAttribute('onclick', `dropup('${area}')`);
+        document.getElementById(`select${bigArea}`).setAttribute('onclick', `dropup('${areaB}')`);
+        document.getElementById(`arrow${bigArea}`).setAttribute('onclick', `dropup('${areaB}')`);
         checkForSelectedContacts(i)
     }
 }
@@ -720,16 +724,16 @@ function dropdown(area, i) {
  * 
  * This function is used to close the drop down menu
  * 
- * @param {string} area 
+ * @param {string} areaB 
  */
-function dropup(area) {
-    let content = document.getElementById(area);
-    let areaShow = document.getElementById(area + 'Show')
+function dropupB(areaB) {
+    let content = document.getElementById(areaB);
+    let areaShow = document.getElementById(areaB + 'Show')
     inAnim = true;
-    let bigArea = area[0].toUpperCase() + area.slice(1);
+    let bigArea = areaB[0].toUpperCase() + areaB.slice(1);
     editEndHeight(areaShow);
-    document.getElementById('select' + bigArea).setAttribute('onclick', `dropdown('${area}')`);
-    document.getElementById('arrow' + bigArea).setAttribute('onclick', `dropdown('${area}')`);
+    document.getElementById('select' + bigArea).setAttribute('onclick', `dropdown('${areaB}')`);
+    document.getElementById('arrow' + bigArea).setAttribute('onclick', `dropdown('${areaB}')`);
     areaShow.style = 'animation: dropup 500ms ease;';
     document.getElementById('arrow' + bigArea).style = 'animation: arrowDown 350ms ease;';
     setTimeout(() => {
@@ -778,7 +782,6 @@ async function addContactToList(j, i) {
  */
 function dragstart_handler(id) {
     currentDraggedElement = id
-    console.log(id)
 }
 
 /**
@@ -824,7 +827,7 @@ function highlightArea(id) {
  * 
  */
 function editToDoArea() {
-    let toDo = document.getElementById('to-do-container')
+    let toDo = document.getElementById('toDo-container')
     let toDoDragArea = document.getElementById('to-do-container-drag-area')
     if (toDo.innerHTML.length == 0) {
         toDoDragArea.classList.add('margin-top')
@@ -837,7 +840,7 @@ function editToDoArea() {
  * 
  */
 function editInProgress() {
-    let inProgress = document.getElementById('in-progress-container')
+    let inProgress = document.getElementById('inProgress-container')
     let inProgressDragArea = document.getElementById('in-progress-container-drag-area')
     if (inProgress.innerHTML.length == 0) {
         inProgressDragArea.classList.add('margin-top')
@@ -850,7 +853,7 @@ function editInProgress() {
  * 
  */
 function editAwaitFeed() {
-    let awaitFeed = document.getElementById('awaiting-feedback-container')
+    let awaitFeed = document.getElementById('awaitingFeedback-container')
     let awaitFeedDragArea = document.getElementById('awaiting-feedback-container-drag-area')
     if (awaitFeed.innerHTML.length == 0) {
         awaitFeedDragArea.classList.add('margin-top')

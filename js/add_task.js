@@ -5,11 +5,12 @@ let selectedContacts = [];
 let inAnimation = false;
 let sTStatus = [];
 let taskStatus;
+let subtasks = [];
 
 
 
 async function initAddTask() {
-    setURL('https://gruppenarbeit-479-join.developerakademie.net/smallest_backend_ever');
+    setURL('https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever');
     renderCategorys();
     renderContacts();
     editCreateBtnOnMobile();
@@ -46,30 +47,52 @@ function getSavedTaskStatus() {
  * @param {*} date - date input
  */
 async function addTask(title, description, date) {
-    let newTask = {
-        'status': taskStatus,
-        'title': title.value,
-        'description': description.value,
-        'category': selectedCategory,
-        'contactSelection': selectedContacts,
-        'date': date.value,
-        'prio': prio,
-        'subtasks': subtasks,
-        'sTStatus': sTStatus
-    };
-    await downloadFromServer();
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
-    tasks.push(newTask);
-    await backend.setItem('tasks', JSON.stringify(tasks));
-    clearSavedTaskStatus()
-    clearForm();
-    showTaskAdded();
+    if (prio == undefined || selectedCategory == undefined) {
+        prompt("select category and or priority")
+    } else {
+        let newTask = {
+            'status': taskStatus,
+            'title': title.value,
+            'description': description.value,
+            'category': selectedCategory,
+            'contactSelection': selectedContacts,
+            'date': date.value,
+            'prio': prio,
+            'subtasks': subtasks,
+            'sTStatus': sTStatus
+        };
+        await downloadFromServer();
+        tasks = JSON.parse(backend.getItem('tasks')) || [];
+        tasks.push(newTask);
+        await backend.setItem('tasks', JSON.stringify(tasks));
+        clearSavedTaskStatus()
+        clearForm();
+        showTaskAdded();
+        intervalsAndNextPage();
+    }
+}
+
+/**
+ * 
+ * This function is used to stop all intervals and go to board
+ * 
+ */
+function intervalsAndNextPage() {
+    if (document.getElementById('add-task-byboard-container')) {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    }
+    setTimeout(() => {
+        window.document.location.href = "./board.html";
+    }, 1000);
 }
 
 
-
+/**
+ * 
+ * This function is used to clear the status from local storage
+ * 
+ */
 function clearSavedTaskStatus() {
-    console.log("test");
     savedTaskStatus = '';
     localStorage.setItem(`savedTaskStatus`, JSON.stringify(savedTaskStatus));
 }
@@ -121,6 +144,7 @@ async function clearForm() {
  * this function added the subtasks
  */
 function addSubtask() {
+
     let subTask = document.getElementById('subtask');
     let content = document.getElementById('subtasks');
     content.innerHTML = '';

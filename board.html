@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="./template.css">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="board.css">
+    <link rel="stylesheet" href="add_task.css">
     <script src="./mini_backend.js"></script>
     <script src="./js/template.js"></script>
     <script src="./js/board.js"></script>
     <script src="./js/boardHTML.js"></script>
+    <script src="./js/add_task.js"></script>
 </head>
 
 <body id="body" onload="init(), loadBackend()">
@@ -69,7 +71,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="min-height" id="to-do-container"
+                <div class="min-height" id="toDo-container"
                     ondragover="dragover_handler(event); highlightArea('to-do-container-drag-area')"
                     ondrop="drop_handler('toDo')">
                 </div>
@@ -92,7 +94,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="min-height" id="in-progress-container"
+                <div class="min-height" id="inProgress-container"
                     ondragover="dragover_handler(event); highlightArea('in-progress-container-drag-area')"
                     ondrop="drop_handler('inProgress')">
                 </div>
@@ -114,7 +116,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="min-height" id="awaiting-feedback-container"
+                <div class="min-height" id="awaitingFeedback-container"
                     ondragover="dragover_handler(event); highlightArea('awaiting-feedback-container-drag-area')"
                     ondrop="drop_handler('awaitingFeedback')">
                 </div>
