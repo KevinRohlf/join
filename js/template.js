@@ -1,9 +1,7 @@
 let savedTaskStatus;
 
 /**
- * 
- * This function is used to initialize the website
- * 
+ * is used to initialize the website
  */
 function init() {
   includeHTML()
@@ -11,11 +9,8 @@ function init() {
 }
 
 /**
- * 
- * This function is used to include the html pages
+ * is used to include the html pages
  * @returns 
- * 
- * 
  */
 function includeHTML() {
   var z, i, elmnt, file, xhttp;
@@ -32,7 +27,7 @@ function includeHTML() {
         if (this.readyState == 4) {
           if (this.status == 200) { elmnt.innerHTML = this.responseText; }
           if (this.status == 404) { elmnt.innerHTML = "Page not found."; }
-          /* Remove the attribute, and call this function once more: */
+          /* Remove the attribute, and call once more: */
           elmnt.removeAttribute("w3-include-html");
           includeHTML();
         }
@@ -47,16 +42,17 @@ function includeHTML() {
 }
 
 /**
- * 
- * 
- * This function is used to show /hide the logout button
- * 
+ * is used to show /hide the logout button
  */
 function toggleLogoutBtn() {
-  let body = document.getElementById('body')
-  let btn = document.getElementById('header-extended-menu-container')
-  let slideContainer = document.getElementById('slide-container')
-  let overlay = document.getElementById('overlay')
+  let body = document.getElementById('body');
+  let btn = document.getElementById('header-extended-menu-container');
+  let slideContainer = document.getElementById('slide-container');
+  let overlay = document.getElementById('overlay');
+  toggleLogoutBtnScreen(body, btn, slideContainer, overlay);
+}
+
+function toggleLogoutBtnScreen(body, btn, slideContainer, overlay){
   if (btn.classList.contains('d-none')) {
     setTimeout(() => {
       btn.classList.remove('d-none')
@@ -74,9 +70,7 @@ function toggleLogoutBtn() {
 }
 
 /**
- * 
  * This funciton is used to remove the overlay
- * 
  */
 function removeOverlay() {
   setTimeout(() => {
@@ -92,9 +86,7 @@ function removeOverlay() {
 
 
 /**
- * 
  * This funciton is used to remove the overlay
- * 
  */
 function whenInnerWidth() {
   if (window.innerWidth < 1000) {
@@ -104,9 +96,7 @@ function whenInnerWidth() {
 }
 
 /**
- * 
  * This funciton is used to remove the overlay
- * 
  */
 function whenAddTask() {
   if (document.getElementById('add-task-byboard-container')) {
@@ -118,94 +108,34 @@ function whenAddTask() {
 }
 
 /**
- * 
- * This function is used to get the background color for the current page
- * 
+ * is used to get the background color for the current page
  */
 function manipulateFooterColor() {
-  let summary = document.getElementById('summary-btn')
-  let board = document.getElementById('board-btn')
-  let addTask = document.getElementById('add-task-btn')
-  let contacts = document.getElementById('contacts-btn')
-  let legalnotice = document.getElementById('legalnotice')
-  manipulateSummaryColor(summary)
-  manipulateBoardColor(board)
-  manipulateAddtaskColor(addTask)
-  manipulateContactsColor(contacts)
-  manipulateLegalnoticeColor(legalnotice)
+  let summary = document.getElementById('summary-btn');
+  let board = document.getElementById('board-btn');
+  let addTask = document.getElementById('add-task-btn');
+  let contacts = document.getElementById('contacts-btn');
+  let legalnotice = document.getElementById('legalnotice');
+  manipulateColor(summary, 'summary')
+  manipulateColor(board, 'board')
+  manipulateColor(addTask, 'add_task')
+  manipulateColor(contacts, 'contacts')
+  manipulateColor(legalnotice, 'legalnotice')
 }
 
-
 /**
- * 
- * This function is used to get the background color for the current page
- * 
+ * is used to get the background color for the current page
  */
-function manipulateSummaryColor(summary) {
-  if (window.location.href.includes('summary')) {
-    summary.classList.add('background-color')
+function manipulateColor(id, div) {
+  if (window.location.href.includes(div)) {
+    id.classList.add('background-color')
   } else {
-    summary.classList.remove('background-color')
+    id.classList.remove('background-color')
   }
 }
 
 /**
- * 
- * This function is used to get the background color for the current page
- * 
- */
-function manipulateBoardColor(board) {
-  if (window.location.href.includes('board')) {
-    board.classList.add('background-color')
-  } else {
-    board.classList.remove('background-color')
-  }
-}
-
-/**
- * 
- * This function is used to get the background color for the current page
- * 
- */
-function manipulateAddtaskColor(addTask) {
-  if (window.location.href.includes('add_task')) {
-    addTask.classList.add('background-color')
-  } else {
-    addTask.classList.remove('background-color')
-  }
-}
-
-/**
- * 
- * This function is used to get the background color for the current page
- * 
- */
-function manipulateContactsColor(contacts) {
-  if (window.location.href.includes('contacts')) {
-    contacts.classList.add('background-color')
-  } else {
-    contacts.classList.remove('background-color')
-  }
-}
-
-/**
- * 
- * This function is used to get the background color for the current page
- * 
- */
-function manipulateLegalnoticeColor(legalnotice) {
-  if (window.location.href.includes('legalnotice')) {
-    legalnotice.classList.add('background-color')
-  } else {
-    legalnotice.classList.remove('background-color')
-  }
-}
-
-
-/**
- * 
- * This function is used to control appearance of the card container
- * 
+ * is used to control appearance of the card container
  */
 window.onresize = function () {
   if (!document.getElementById('add-task-byboard-container')) {
@@ -222,9 +152,7 @@ window.onresize = function () {
 
 
 /**
- * 
- * This function is used to clear local storage status
- * 
+ * is used to clear local storage status
  */
 function clearSavedTaskStatusTemplate() {
   savedTaskStatus = ''

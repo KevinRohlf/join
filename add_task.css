@@ -8,8 +8,18 @@ html {
     background-color: #F5F5F5;
 }
 
+footer {
+    z-index: 2;
+}
+
 body {
     margin: 0;
+}
+
+input,
+textarea,
+button {
+    z-index: 1;
 }
 
 textarea:focus, input:focus{
@@ -35,6 +45,18 @@ textarea:focus, input:focus{
 
 .gap-10 {
     gap: 10px;
+}
+
+#errorTask {
+    padding-bottom: 20px;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }
 
 .left-side {
@@ -171,8 +193,7 @@ textarea:focus, input:focus{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    
+    position: relative;
 }
 
 .content-add-task span {
@@ -195,6 +216,10 @@ textarea:focus, input:focus{
     padding-top: 10px;
     height: 10vh;
     resize: vertical;
+}
+
+.newGap0 {
+    gap: 10px !important;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -254,7 +279,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: fixed;
     bottom: 200px;
     left: calc(300px + 40% - 127.5px );
-    
+    z-index: 9;
 }
 
 #taskAdded div{
@@ -275,6 +300,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     top: 15px;
     right: 10px;
+    z-index: 2;
 }
 
 .confirmAndCancel img {
@@ -479,7 +505,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         padding: 10px;
     }
 
-    .user-icon {
+    .user-iconB {
         display: none;
     }
 

@@ -4,67 +4,97 @@ let emailAlreadyInUse = false;
 let currentUser;
 
 async function initRegistration() {
-  setURL(
-    "https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever"
-  );
+  setURL('https://kevin.rohlf.io/join/smallest_backend_ever');
   await downloadFromServer();
   users = JSON.parse(backend.getItem("users")) || [];
 }
 
 /**
- * 
- * This function is used to add a new User if email is not already in use
- * 
+ * is used to add a new User if email is not already in use
  */
 async function addUsers() {
   let name = document.getElementById("name");
   let email = document.getElementById("signUpEmail");
   let password = document.getElementById("signUpPassword");
+  emailAlreadyInUse = false;
   for (let i = 0; i < users.length; i++) {
     if (users[i].email.includes(email.value)) {
-      emailAlreadyInUse = true;
-      name.value = ''
-      email.value = ''
-      password.value = ''
+      checkEmailisAlreadyTaken(name, email, password);
     }
   }
   if (!emailAlreadyInUse) {
-    users.push({
-      name: name.value,
-      email: email.value,
-      password: password.value,
-    });
-    await backend.setItem("users", JSON.stringify(users));
-    renderLogIn()
+    await emailNotInUse(name, email, password)
   }
 }
 
+function checkEmailisAlreadyTaken(name, email, password) {
+  showMessage('errorSignUp', 'email already exists', 'fail')
+  emailAlreadyInUse = true;
+  name.value = ''
+  email.value = ''
+  password.value = ''
+}
+
+
+async function emailNotInUse(name, email, password) {
+
+  showMessage('errorLogin', 'user successfull created', 'right')
+  users.push({
+    name: name.value,
+    email: email.value,
+    password: password.value,
+  });
+  await backend.setItem("users", JSON.stringify(users));
+  render('none', 'flex', 'flex', 'none', 'none');
+}
+
 /**
- * 
- * This function is used to log in with account information
- * 
+ * is used to log in with account information
  */
 function login() {
   let email = document.getElementById("email");
   let password = document.getElementById("password");
+  let f = 0;
   for (let i = 0; i < users.length; i++) {
-    if (users[i].email.includes(email.value) && users[i].password.includes(password.value)) {
-      currentUser = users[i]['name'];
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      window.document.location.href = "./summary.html";
-      
+    if (users[i]['email'] == email.value && users[i]['password'] == password.value) {
+      loginSuccess(i);
     } else {
-      console.log("Wrong Password or Email")
+      f++
     }
-    email.value = ''
-    password.value = ''
   }
+  if (f >= users.length) {
+    showMessage('errorLogin', 'Wrong Password or Email', 'fail')
+  }
+  email.value = ''
+  password.value = ''
+}
+
+function loginSuccess(i) {
+  currentUser = users[i]['name'];
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  window.document.location.href = "./summary.html";
 }
 
 /**
- * 
- * This function is used to log in with guest account
- * 
+ * @param {string} div 
+ * @param {string} message 
+ * @param {string} fail 
+ */
+function showMessage(div, message, fail) {
+  let error = document.getElementById(div);
+  error.innerHTML = message;
+  if (fail == 'fail') {
+    error.style = 'color: red;';
+  } else {
+    error.style = 'color: green;';
+  }
+  setTimeout(() => {
+    error.style = 'display: none;'
+  }, 3000);
+}
+
+/**
+ * is used to log in with guest account
  */
 function guestlogin() {
   let email = document.getElementById("email");
@@ -75,15 +105,10 @@ function guestlogin() {
   currentUser = 'Guest';
   localStorage.setItem('currentUser', JSON.stringify(currentUser));
   window.document.location.href = "./summary.html";
-  if (user) {
-    console.log(user);
-  }
 }
 
 /**
- * 
- * This function is used to animte the logo translation
- * 
+ * is used to animte the logo translation
  */
 function initial() {
   document.getElementById("capaOne").classList.add("animation");
@@ -93,6 +118,7 @@ function initial() {
     let capaOneContainer = document.getElementById("capaOneContainer");
     capaOneContainer.style.zIndex = "0";
   }, 1000);
+  render('none', 'flex', 'flex', 'none', 'none');
 }
 
 /*Password-Inputfield*/
@@ -100,13 +126,11 @@ function initial() {
 let inputPW = false;
 
 /**
- * 
- * This function is used to change the pw symbole
- * 
+ * is used to change the pw symbole
  */
-async function changePWSymbol() {
-  let pwInputField = document.getElementById("password");
-  let pwSymbol = document.getElementById("pwSymbol");
+async function changePWSymbol(inputfield , pwSymbols) {
+  let pwInputField = document.getElementById(inputfield);
+  let pwSymbol = document.getElementById(pwSymbols);
   if (pwInputField.value == "") {
     pwSymbol.src = "assets/img/lock.svg";
     pwSymbol.classList.remove("cursorPointer");
@@ -125,9 +149,7 @@ async function changePWSymbol() {
 
 
 /**
- * 
- * This function is used to show the password
- * 
+ * is used to show the password
  */
 async function visibilityPW() {
   let pw = document.getElementById("password");
@@ -143,36 +165,8 @@ async function visibilityPW() {
   }
 }
 
-
 /**
- * 
- * This function is used to change the password symbole
- * 
- */
-async function changeSignUpPWSymbol() {
-  let pwInputField = document.getElementById("signUpPassword");
-  let pwSymbol = document.getElementById("pwSymbol");
-  if (pwInputField.value == "") {
-    pwSymbol.src = "assets/img/lock.svg";
-    pwSymbol.classList.remove("cursorPointer");
-    pwInputField.type = "password";
-    inputPW = false;
-  } else if ((pwInputField.type = "password")) {
-    pwSymbol.src = "assets/img/crossedEye.svg";
-    pwSymbol.classList.add("cursorPointer");
-    inputPW = true;
-  } else {
-    pwSymbol.src = "assets/img/eye.svg";
-    pwSymbol.classList.add("cursorPointer");
-    inputPW = true;
-  }
-}
-
-
-/**
- * 
- * This function is used to show the password
- * 
+ * is used to show the password
  */
 async function visibilitySignUpPW() {
   let pw = document.getElementById("signUpPassword");
@@ -188,57 +182,36 @@ async function visibilitySignUpPW() {
   }
 }
 
-
 /**
- * 
- * This function is used to render the sign up screen
- * 
+ * is used to render the screen
+ * @param {string} fPWC forgottenPWContainer
+ * @param {string} lC loginContainer
+ * @param {string} nAJU notAJoinUser
+ * @param {string} rPWC resetPWContainer
+ * @param {string} sUC signUpContainer
  */
-function renderSignUp() {
-  document.getElementById("forgottenPWContainer").style.display = "none";
-  document.getElementById("loginContainer").style.display = "none";
-  document.getElementById("notAJoinUser").style.display = "none";
-  document.getElementById("resetPWContainer").style.display = "none";
-  document.getElementById("signUpContainer").style.display = "flex";
+function render(fPWC, lC, nAJU, rPWC, sUC) {
+  document.getElementById("forgottenPWContainer").style.display = fPWC;
+  document.getElementById("loginContainer").style.display = lC;
+  document.getElementById("notAJoinUser").style.display = nAJU;
+  document.getElementById("resetPWContainer").style.display = rPWC;
+  document.getElementById("signUpContainer").style.display = sUC;
+  loginC = lC;
 }
 
-/**
- * 
- * This function is used to render the log in screen
- * 
- */
-function renderLogIn() {
-  document.getElementById("forgottenPWContainer").style.display = "none";
-  document.getElementById("signUpContainer").style.display = "none";
-  document.getElementById("resetPWContainer").style.display = "none";
-  document.getElementById("loginContainer").style.display = "flex";
-  document.getElementById("notAJoinUser").style.display = "flex";
-}
-
-
-/**
- * 
- * This function is used to render the forgotten pw screen
- * 
- */
-function renderForgottenPW() {
-  document.getElementById("loginContainer").style.display = "none";
-  document.getElementById("notAJoinUser").style.display = "none";
-  document.getElementById("signUpContainer").style.display = "none";
-  document.getElementById("resetPWContainer").style.display = "none";
-  document.getElementById("forgottenPWContainer").style.display = "flex";
-}
-
-
-/**
- * 
- * This function is used to render the reset pw screen
- * 
- */
-function renderResetPW() {
-  document.getElementById("loginContainer").style.display = "none";
-  document.getElementById("notAJoinUser").style.display = "none";
-  document.getElementById("signUpContainer").style.display = "none";
-  document.getElementById("forgottenPWContainer").style.display = "none";
-  document.getElementById("resetPWContainer").style.display = "flex";
+let loginC;
+function checkIndexForCheapPhones() {
+  let firstTime = true;
+  let logo = document.getElementById('capaOne');
+  setInterval(() => {
+    if (window.screen.height < 700 && loginC != 'flex') {
+      logo.style = 'top: 10px; left: 24px; height: 78px; width: 64px;';
+      logo.classList.remove('animation');
+      firstTime = false;
+    } else if (window.screen.height < 700 && loginC == 'flex' && !firstTime) {
+      logo.style = 'top: 42px; left: 32px; height: 78px; width: 64px;';
+    } else {
+      logo.classList.add('animation')
+    }
+  }, 200);
 }

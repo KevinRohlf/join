@@ -5,24 +5,20 @@ let mobile = false;
 
 
 /**
- * This function is used to load content from backend server
- * 
- * 
+ * is used to load content from backend server
  */
 async function init() {
-	setURL('https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever');
+	setURL('https://kevin.rohlf.io/join/smallest_backend_ever');
     await downloadFromServer();
 	contacts = JSON.parse(backend.getItem('contacts')) || [];
-	renderContacts();
+	renderContacts2();
 }
 
 
 /**
- * This function is used to call other functions
- * 
- * 
+ * is used to call other functions
  */
-function renderContacts() {
+function renderContacts2() {
 	sortAllContacts();
 	createAlphabet();
 	renderAlphabet();
@@ -31,9 +27,7 @@ function renderContacts() {
 
 
 /**
- * This function is used to sort all contact first names alphabetically
- * 
- * 
+ * is used to sort all contact first names alphabetically
  */
 function sortAllContacts() {
 	contacts.sort((a, b) => {
@@ -43,9 +37,7 @@ function sortAllContacts() {
 
 
 /**
- * This function is used to push all not yet existing first letters of all contact names in an array
- * 
- * 
+ * is used to push all not yet existing first letters of all contact names in an array
  */
 function createAlphabet() {
 	alphabet = [];
@@ -58,9 +50,7 @@ function createAlphabet() {
 
 
 /**
- * This function is used to return the first letter of a contact name
- * 
- * 
+ * is used to return the first letter of a contact name
  */
 function getFirstLetter(contact) {
 	return contact["name"].charAt(0).toUpperCase();
@@ -68,9 +58,7 @@ function getFirstLetter(contact) {
 
 
 /**
- * This function is used to render all letters from array
- * 
- * 
+ * is used to render all letters from array
  */
 function renderAlphabet() {
 	let contactlist = document.getElementById("contacts-field");
@@ -82,9 +70,7 @@ function renderAlphabet() {
 
 
 /**
- * This function is used to render all contacts in letter structure
- * 
- * 
+ * is used to render all contacts in letter structure
  */
 function renderAllContacts() {
 	for (let i = 0; i < contacts.length; i++) {
@@ -101,9 +87,7 @@ function renderAllContacts() {
 
 
 /**
- * This function is used to read new contact values
- * 
- * 
+ * is used to read new contact values
  */
 function addToContact() {
 	let name = document.getElementById('name').value;
@@ -115,8 +99,7 @@ function addToContact() {
 
 
 /**
- * This function is used to create a new contact
- * 
+ * is used to create a new contact
  * @param {string} name - full name of new contact
  * @param {string} email - email of new contact
  * @param {string} phone - phone number of new contact
@@ -125,7 +108,14 @@ async function newContact(name, email, phone) {
 	let initials = getInitials(name);
 	let initialColor = getColor();
 	let id = Date.now();
+	await setNewContact(name, email, phone, initials ,initialColor, id);
+	addContactClose();
+	clearInput();
+	displayConfirm();
+	init();
+}
 
+async function setNewContact(name, email, phone, initials ,initialColor, id) {
 	let newContact = {
         'name': name,
         'email': email,
@@ -133,20 +123,14 @@ async function newContact(name, email, phone) {
 		'initials': initials,
 		'color': initialColor,
 		'ID': id
-    }
+    };
     contacts.push(newContact);
     await backend.setItem('contacts', JSON.stringify(contacts));
-
-	addContactClose();
-	clearInput();
-	displayConfirm();
-	init();
 }
 
 
 /**
- * This function is used to seperate initials of all names
- * 
+ * is used to seperate initials of all names
  * @param {string} fullName - full name of new contact
  */
 function getInitials(fullName) {
@@ -163,9 +147,7 @@ function getInitials(fullName) {
 
 
 /**
- * This function is used to return a random color
- * 
- * 
+ * is used to return a random color
  */
 function getColor() {
 	return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
@@ -173,9 +155,7 @@ function getColor() {
 
 
 /**
- * This function is used to clear input fields
- * 
- * 
+ * is used to clear input fields
  */
 function clearInput() {
 	document.getElementById('name').value = '';
@@ -185,8 +165,7 @@ function clearInput() {
 
 
 /**
- * This function is used to save a new contact on the backend server
- * 
+ * is used to save a new contact on the backend server
  * @param {number} i - the index of contact
  */
 async function saveActiveContact(i) {
@@ -207,8 +186,7 @@ async function saveActiveContact(i) {
 
 
 /**
- * This function is used to delete a contact on the backend server
- * 
+ * is used to delete a contact on the backend server
  * @param {number} j - the index of contact
  */
 async function delateActiveContact(j) {
@@ -226,9 +204,7 @@ async function delateActiveContact(j) {
 
 
 /**
- * This function is used to display conformation "Contact succesfully created"
- * 
- * 
+ * is used to display conformation "Contact succesfully created"
  */
 function displayConfirm() {
     let contact = document.getElementById('confirm');
@@ -238,9 +214,7 @@ function displayConfirm() {
 
 
 /**
- * This function is used to display conformation "Contact succesfully updated"
- * 
- * 
+ * is used to display conformation "Contact succesfully updated"
  */
 function displayConfirmUpdate() {
     let contact = document.getElementById('confirmUpdate');
@@ -250,9 +224,7 @@ function displayConfirmUpdate() {
 
 
 /**
- * This function is used to display conformation "Contact succesfully deleted"
- * 
- * 
+ * is used to display conformation "Contact succesfully deleted"
  */
 function displayConfirmDelete() {
     let contact = document.getElementById('confirmDelete');
@@ -262,8 +234,7 @@ function displayConfirmDelete() {
 
 
 /**
- * This function is used to display conformation only for a few seconds
- * 
+ * is used to display conformation only for a few seconds
  * @param {string} contact - conformation text
  */
 function displayConformation(contact) {
@@ -278,7 +249,6 @@ function displayConformation(contact) {
 
 /**
  * The next function is used to call another function with desktop or mobile features
- * 
  *	@param {number} i - the index of contact
  */
 let singleContactOverlay = document.getElementById('single-contact-overlay');
@@ -297,8 +267,7 @@ function renderSingleContact(i) {
 
 
 /**
- * This function is used to render single contacts with desktop features
- * 
+ * is used to render single contacts with desktop features
  *	@param {number} i - the index of contact
  */
 function renderSingleContactDesktop(i) {
@@ -310,8 +279,7 @@ function renderSingleContactDesktop(i) {
 
 
 /**
- * This function is used to render single contacts with mobile features
- * 
+ * is used to render single contacts with mobile features
  *	@param {number} i - the index of contact
  */
 function renderSingleContactMobile(i) {
@@ -331,8 +299,7 @@ function renderSingleContactMobile(i) {
 
 
 /**
- * This function is used to render single contacts with mobile features
- * 
+ * is used to render single contacts with mobile features
  *	@param {number} i - the index of contact
  */
 function renderSingleContactDetails(i) {
@@ -348,9 +315,7 @@ function renderSingleContactDetails(i) {
 
 
 /**
- * This function is used to close single contacts with desktop features
- * 
- * 
+ * is used to close single contacts with desktop features
  */
 function closeSingleContactDesktop() {
 	contactContent.style = 'animation:slide-out .5s ease;';
@@ -361,9 +326,7 @@ function closeSingleContactDesktop() {
 
 
 /**
- * This function is used to close single contacts with mobile features
- * 
- * 
+ * is used to close single contacts with mobile features
  */
 function closeSingleContactMobile() {
 	mobile = false;
@@ -375,8 +338,7 @@ function closeSingleContactMobile() {
 
 	
 /**
- * This function is used to open single contact form to edit contact
- * 
+ * is used to open single contact form to edit contact
  *	@param {number} i - the index of contact
  */
 function editSingleContact(i) {
@@ -388,8 +350,6 @@ function editSingleContact(i) {
 
 /**
  * The next function is used to open a contact form to create new contacts
- * 
- * 
  */
 const btn = document.getElementById("contact-btn");
 const addContactOverlay = document.getElementById('add-contact-overlay');
@@ -407,9 +367,7 @@ function addContactOpen() {
 
 
 /**
- * This function is used to close contact form without saving
- * 
- *	
+ * is used to close contact form without saving
  */
 function addContactClose() {
 	addContact.style = 'animation:slide-out .5s ease;';
@@ -421,8 +379,7 @@ function addContactClose() {
 
 
 /**
- * This function is used to open a contact form to edit contact
- * 
+ * is used to open a contact form to edit contact
  *	@param {number} i - the index of contact
  */
 function editContactOpen(i) {
@@ -434,9 +391,7 @@ function editContactOpen(i) {
 
 
 /**
- * This function is used to close contact form without saving
- * 
- *	
+ * is used to close contact form without saving
  */
 function editContactClose() {
 	editContact.style = 'animation:slide-out .5s ease;';
@@ -448,11 +403,45 @@ function editContactClose() {
 
 
 /**
- * This function is used to stop the overlay onclick function when pressing buttons on the card
- * 
+ * is used to stop the overlay onclick function when pressing buttons on the card
  * @param {string} event
- * 
  */
 function doNotClose(event) {
     event.stopPropagation();
 }
+
+
+
+
+async function openAddTask(id) {
+    let overlay = document.getElementById('overlay')
+    overlay.style.display = 'flex';
+	document.getElementById('addTask').style = '';
+	document.getElementById('addTaskOverlay').style.display = 'flex';
+    document.getElementById('addTask').innerHTML = renderAddTaskFromBoard();
+    await initAddTask();
+	selectedContacts = [];
+	selectedContacts.push(id);
+	renderSelectedContacts();
+	let div = document.getElementById(`cb-contacts-${id}`);
+	div.checked = true;
+	div.setAttribute('onclick', `removeContactFromList(${id})`);
+	openAddTaskMobile();
+}
+
+function openAddTaskMobile() {
+	if (window.screen.width < 1000) {
+		document.getElementById('userIcon').style = 'display: none !important;';
+	}
+}
+
+
+function addTaskClose() {
+	document.getElementById('addTask').style = 'animation:slide-out .5s ease;';
+	setTimeout(() => {
+		document.getElementById('addTaskOverlay').style.display = "none";
+		overlay.style.display = 'none';	
+	}, 300);
+}
+
+

@@ -3,6 +3,27 @@
     font-size: 61px;
 }
 
+#delete {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    transition: all ease-in-out 175ms;
+}
+
+#delete:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    background-color: #f1f1f1;
+    transition: all ease-in-out 175ms;
+}
+
+
 .board-header {
     display: flex;
     align-items: center;
@@ -106,6 +127,7 @@
 
 .board-container>div>div {
     padding: 4px;
+    
 }
 
 a {
@@ -155,12 +177,11 @@ a {
 }
 
 .board-content {
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     background-color: #FFFFFF;
     padding: 16px;
     margin-bottom: 16px;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
-
     position: relative;
 }
 
@@ -201,6 +222,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .prio-and-contact-container {
@@ -719,6 +741,10 @@ input:focus {
 }
 
 @media only screen and (max-width: 1000px) {
+    .user-iconB {
+        display: unset !important;
+    }
+
     .board-header {
         flex-direction: column;
         align-items: flex-start;
@@ -736,6 +762,8 @@ input:focus {
     .board-container {
         margin-top: 16px;
         justify-content: space-around;
+        flex-wrap: wrap;
+        overflow: unset;
     }
 
     .board-container::-webkit-scrollbar {
@@ -765,6 +793,7 @@ input:focus {
         background-color: #F5F5F5;
         box-shadow: none;
         min-width: auto;
+        overflow-y: scroll;
     }
 
     #cross-svg {
@@ -787,6 +816,7 @@ input:focus {
         bottom: 0;
         top: 90px;
         border-radius: 0;
+        overflow-y: scroll;
     }
 
     .overlay-bg-white {
@@ -807,6 +837,16 @@ input:focus {
     .card-close-icon-container-edit-task:hover {
         cursor: pointer;
     }
+
+    .edit-task-prio-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .edit-task-prio-container div {
+        width: 100%;
+    }
    
 }
 
@@ -824,4 +864,5 @@ input:focus {
     .content-container {
         margin: 16px;
     }
+    
 }

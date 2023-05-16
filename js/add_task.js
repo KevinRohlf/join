@@ -10,16 +10,16 @@ let subtasks = [];
 
 
 async function initAddTask() {
-    setURL('https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever');
+    setURL('https://kevin.rohlf.io/join/smallest_backend_ever');
     renderCategorys();
-    renderContacts();
+    await renderContacts();
     editCreateBtnOnMobile();
     setToday();
     getSavedTaskStatus()
 }
 
 /**
- * this function read the inputfields
+ * read the inputfields
  */
 function readForm() {
     let title = document.getElementById('title');
@@ -38,33 +38,29 @@ function getSavedTaskStatus() {
     }
 }
 
+function scriptDetection(text) {
+    let newText = text
+    for (let i = 0; i < newText.length; i++) {
+        if (newText.includes('<'))
+            newText = newText.replace('<', '&lt');
+        if (newText.includes('>'))
+            newText = newText.replace('>', '&gt');
+        
+    }
+    return newText
+}
 
 /**
- * this function create the task and send it to the backend
- * 
+ * create the task and send it to the backend
  * @param {*} title - title input
  * @param {*} description - description input
  * @param {*} date - date input
  */
 async function addTask(title, description, date) {
     if (prio == undefined || selectedCategory == undefined) {
-        prompt("select category and or priority")
+        errorMassage('errorTask', "select category and priority")
     } else {
-        let newTask = {
-            'status': taskStatus,
-            'title': title.value,
-            'description': description.value,
-            'category': selectedCategory,
-            'contactSelection': selectedContacts,
-            'date': date.value,
-            'prio': prio,
-            'subtasks': subtasks,
-            'sTStatus': sTStatus
-        };
-        await downloadFromServer();
-        tasks = JSON.parse(backend.getItem('tasks')) || [];
-        tasks.push(newTask);
-        await backend.setItem('tasks', JSON.stringify(tasks));
+        await setNewTask(title, description, date)
         clearSavedTaskStatus()
         clearForm();
         showTaskAdded();
@@ -73,9 +69,45 @@ async function addTask(title, description, date) {
 }
 
 /**
- * 
- * This function is used to stop all intervals and go to board
- * 
+ * set the new task and push to the backend
+ * @param {*} title 
+ * @param {*} description 
+ * @param {*} date 
+ */
+async function setNewTask(title, description, date) {
+    let newTask = {
+        'status': taskStatus,
+        'title': scriptDetection(title.value),
+        'description': scriptDetection(description.value),
+        'category': selectedCategory,
+        'contactSelection': selectedContacts,
+        'date': date.value,
+        'prio': prio,
+        'subtasks': subtasks,
+        'sTStatus': sTStatus
+    };
+    await downloadFromServer();
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    tasks.push(newTask);
+    await backend.setItem('tasks', JSON.stringify(tasks));
+}
+
+/**
+ * set the error message
+ * @param {*} div 
+ * @param {*} message 
+ */
+function errorMassage(div, message) {
+    let content = document.getElementById(div);
+    content.style = 'color: red;';
+    content.innerHTML = message;
+    setTimeout(() => {
+        content.style = 'display: none;'
+    }, 3000);
+}
+
+/**
+ * is used to stop all intervals and go to board
  */
 function intervalsAndNextPage() {
     if (document.getElementById('add-task-byboard-container')) {
@@ -88,9 +120,7 @@ function intervalsAndNextPage() {
 
 
 /**
- * 
- * This function is used to clear the status from local storage
- * 
+ * is used to clear the status from local storage
  */
 function clearSavedTaskStatus() {
     savedTaskStatus = '';
@@ -100,7 +130,6 @@ function clearSavedTaskStatus() {
 
 /**
  * the function added the css class btn-on-focus to the selected button
- * 
  * @param {string} i - name of the button 
  */
 function setprio(i) {
@@ -141,7 +170,7 @@ async function clearForm() {
 
 
 /**
- * this function added the subtasks
+ * added the subtasks
  */
 function addSubtask() {
 
@@ -150,8 +179,10 @@ function addSubtask() {
     content.innerHTML = '';
     if (subTask.value.length < 2) {
         content.innerHTML += `<div style="color: red;">length to small</div>`;
-    } else {
-        subtasks.push(subTask.value);
+    }
+    else {
+        let newSubTask = scriptDetection(subTask.value)
+        subtasks.push(newSubTask);
         sTStatus.push(false);
         subTask.value = '';
     };
@@ -160,7 +191,7 @@ function addSubtask() {
 
 
 /**
- * this function show the inputfield to create a new category & hide the dropdown menu 
+ * show the inputfield to create a new category & hide the dropdown menu 
  */
 function showNewCategoryInput() {
     let content = document.getElementById('categoryShow');
@@ -170,7 +201,7 @@ function showNewCategoryInput() {
 }
 
 /**
- * this function add a new Category & push it to the backend
+ * add a new Category & push it to the backend
  */
 async function addNewCategory() {
     let content = document.getElementById('newCategory').value;
@@ -186,7 +217,7 @@ async function addNewCategory() {
 }
 
 /**
- * this function hide the inputfield & show the dropdown menu
+ * hide the inputfield & show the dropdown menu
  */
 function closeNewCategoryInput() {
     document.getElementById('newCategoryInput').classList.add('d-none');
@@ -194,7 +225,7 @@ function closeNewCategoryInput() {
 }
 
 /**
- * this function render the subtasks
+ * render the subtasks
  */
 function renderSubTasks() {
     let content = document.getElementById('subtasks');
@@ -205,7 +236,7 @@ function renderSubTasks() {
 }
 
 /**
- * this function set the array on the position from the subtask to true
+ * set the array on the position from the subtask to true
  * @param {int} id number in the array
  */
 function checkSubTask(id) {
@@ -214,7 +245,7 @@ function checkSubTask(id) {
 }
 
 /**
- * this function set the array on the position from the subtask to false
+ * set the array on the position from the subtask to false
  * @param {int} id number in the array
  */
 function uncheckSubTask(id) {
@@ -223,7 +254,7 @@ function uncheckSubTask(id) {
 }
 
 /**
- * this function render the categorys
+ * render the categorys
  */
 async function renderCategorys() {
     let content = document.getElementById('category');
@@ -239,7 +270,7 @@ async function renderCategorys() {
 }
 
 /**
- * this function render the color buttons to select the color for a new category
+ * render the color buttons to select the color for a new category
  */
 function renderCategoryColors() {
     let colors = ['#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
@@ -251,7 +282,7 @@ function renderCategoryColors() {
 }
 
 /**
- * this function is for the color select buttons 
+ * is for the color select buttons 
  * @param {string} color - color hexcode
  */
 function selectColor(color) {
@@ -259,7 +290,7 @@ function selectColor(color) {
 }
 
 /**
- * this function select the category
+ * select the category
  * @param {*} i - the category number
  */
 function selectCategory(i) {
@@ -274,7 +305,7 @@ function selectCategory(i) {
 }
 
 /**
- * this function render the contacts to dropdown menu
+ * render the contacts to dropdown menu
  */
 async function renderContacts() {
     let content = document.getElementById('contact');
@@ -288,7 +319,7 @@ async function renderContacts() {
 }
 
 /**
- * this function open the dropdown
+ * open the dropdown
  * @param {string} area - contact or category to open the right dropdown
  */
 function dropdown(area) {
@@ -304,7 +335,7 @@ function dropdown(area) {
 }
 
 /**
- * this function close the dropdown
+ * close the dropdown
  * @param {string} area - contact or category to close the right dropdown
  */
 function dropup(area) {
@@ -324,7 +355,7 @@ function dropup(area) {
 }
 
 /**
- * this function add the contact ID to selectedContacts variable
+ * add the contact ID to selectedContacts variable
  * @param {int} id - the contact ID
  */
 function addContactToList(id) {
@@ -335,7 +366,7 @@ function addContactToList(id) {
 }
 
 /**
- * this function remove the contact ID from selectedContacts variable
+ * remove the contact ID from selectedContacts variable
  * @param {int} id - the contact ID
  */
 function removeContactFromList(id) {
@@ -351,7 +382,7 @@ function removeContactFromList(id) {
 }
 
 /**
- * this function render the selectedcontacts
+ * render the selectedcontacts
  */
 function renderSelectedContacts() {
     let content = document.getElementById('selectContact');
@@ -371,7 +402,7 @@ function renderSelectedContacts() {
 }
 
 /**
- * this function shows the task added div if the task created and hide it with animation
+ * shows the task added div if the task created and hide it with animation
  */
 function showTaskAdded() {
     let taskAdded = document.getElementById('taskAdded');
@@ -386,7 +417,7 @@ function showTaskAdded() {
 }
 
 /**
- * this function edit the css variable --end-height to the height from the div
+ * edit the css variable --end-height to the height from the div
  * @param {string} content - div id
  */
 function editEndHeight(content) {
@@ -394,7 +425,7 @@ function editEndHeight(content) {
 }
 
 /**
- * this function edit the create button if the max display width is < 1000px
+ * edit the create button if the max display width is < 1000px
  */
 function editCreateBtnOnMobile() {
     setInterval(() => {

@@ -1,6 +1,6 @@
 /*Responsivemode*/
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   .pageOneContainer {
     display: flex;
     flex-direction: column;
@@ -50,8 +50,8 @@
     100% {
       width: 64px;
       height: 78px;
-      left: 64px;
-      top: 30px;
+      left: 32px;
+      top: 42px;
     }
   }
 
@@ -64,8 +64,7 @@
   }
 
   .loginContainer {
-    width: 330px;
-    height: 510px;
+    width: 90%;
     order: 0;
   }
 
@@ -89,6 +88,7 @@
   }
 
   .inputBox {
+    position: relative;
     padding: 13px 21px;
     gap: 10px;
     width: 300px;
@@ -168,8 +168,10 @@
 
   .signUpContainer {
     flex-direction: column;
-    width: 372px;
-    height: 450px;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 60%;
   }
 
   .signUpHeadlineContainer {
@@ -177,7 +179,7 @@
     flex-direction: row;
     align-items: start;
     justify-content: center;
-    width: 652px;
+    width: 100%;
     order: 0;
   }
 
@@ -214,9 +216,12 @@
   .signUpInput {
     padding: 0px;
     gap: 30px;
-    width: 327px;
-    height: 200px;
+    width: 80%;
+    height: 240px;
     order: 1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 
   .name {
@@ -227,11 +232,18 @@
   }
 
   .signUpButtonContainer {
+    display: flex;
+    justify-content: center;
     padding: 4px 0px;
     gap: 10px;
-    width: 180px;
+    width: 100%;
     height: 51px;
     order: 2;
+  }
+  
+  .figur {
+    position: absolute;
+    right: 2%;
   }
 
   .signUp {
@@ -243,43 +255,50 @@
   /*Forgotten Password*/
 
   .forgottenPWContainer {
+    position: relative;
     padding: 56px 0px;
-    width: 372px;
-    height: 502px;
+    width: 90%;
+    height: unset;
   }
 
   .forgottenPWHeadlineContainer {
-    width: 315px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     height: 96px;
   }
 
   .forgottenPWHeadline {
     font-size: 40px;
+    right: unset;
     line-height: 120%;
   }
 
   .backforgottenPWArrowContainer {
-    right: 0px;
-    top: -20px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
     width: 16px;
     height: 16px;
   }
 
   .forgottenPWContent {
-    width: 322px;
-    height: 75px;
+    width: 80%;
+    margin-bottom: 10%;
   }
 
   .forgottenPWInput {
     padding: 13px 21px;
     gap: 10px;
-    width: 327px;
+    width: 90%;
     height: 41px;
   }
 
   .sendEmailContainer {
-    width: 180px;
+    width: 100%;
     height: 51px;
+    display: flex;
+
   }
 
   .sendEmail {

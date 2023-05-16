@@ -2,7 +2,7 @@
 
 function htmlRenderAllTasks(currentTask, i) {
     return /*html*/ `
-        <div status="closed" id="${i}" class="board-content" draggable="true" onclick="loadCard(${i})" ondragstart="dragstart_handler(${i})"  ondragend="removeTest(${i})" ontouchstart="touchStart(${i})" ontouchend="touchEnd(${i})">
+            <div status="closed" id="${i}" class="board-content" onclick="loadCard(${i})" draggable="true" ondragstart="dragstart_handler(${i})" ondragend="removeTest(${i})" ontouchstart="touchStart(${i})" ontouchend="touchEnd(${i})">
             <div class="task-category ${currentTask.category}">${currentTask.category}</div>
             <div class="task-title">${currentTask.title}</div>
             <div class="task-description">${currentTask.description}</div>
@@ -14,7 +14,8 @@ function htmlRenderAllTasks(currentTask, i) {
                 <div class="contact-selection" id="contact-selection-${currentTask.status}_${i}"></div>
                 <div id="${currentTask.prio}_${i}"></div>
             </div>
-        </div>
+                <img id="delete" onclick="stopPropagation(event);deleteTask(${i})" src="./assets/img/delete.svg" alt="delete"></div>
+            </div>        
         `
 }
 
@@ -191,12 +192,15 @@ function renderAddTaskFromBoard() {
         </div>
         </div>
         <div class="content-add-task">
+        <div class="background" onclick="dropup('category'); dropup('contact')">
+            </div>
             <div>
                 <div>
                     <h1>Add Task</h1>
+                    <div id="errorTask"></div>
                 </div>
                 <form class="flex-column newGap0" onsubmit="readForm(); return false;">
-                    <div class="flex mobile-flex-column span-margin">
+                    <div class="flex mobile-flex-column span-margin newGap0">
                         <div class="flex-column left-side newWidth">
                             <span>Title</span>
                             <input required placeholder="Enter a title" id="title" type="text">

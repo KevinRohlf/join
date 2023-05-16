@@ -10,12 +10,10 @@ let urgentDate = [];
 
 
 /**
- * This function is used to load the content from the backend
- * 
- * 
+ * is used to load the content from the backend
  */
 async function init() {
-    setURL('https://wilhelm-teicke.developerakademie.net/Join/smallest_backend_ever');
+    setURL('https://kevin.rohlf.io/join/smallest_backend_ever');
     await downloadFromServer();
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
@@ -26,9 +24,7 @@ async function init() {
 
 
 /**
- * This function is used to call other functions
- * 
- * 
+ * is used to call other functions
  */
 function summary() {
     greeting();
@@ -41,9 +37,7 @@ function summary() {
 
 
 /**
- * This function is used to calculate und display the amount of all tasks in board
- * 
- * 
+ * is used to calculate und display the amount of all tasks in board
  */
 function tasksInBoard() {
     document.getElementById('tasksInBoard').innerHTML = tasks.length;
@@ -51,9 +45,8 @@ function tasksInBoard() {
 
 
 /**
- * This function is used to separate the amount of tasks in progress, 
+ * is used to separate the amount of tasks in progress, 
  * tasks awaiting feedback, tasks to-do and tasks done
- * 
  */
 function countTasks() {
     for (let i = 0; i < tasks.length; i++) { 
@@ -74,9 +67,7 @@ function countTasks() {
 
 
 /**
- * This function is used to find the due dates of the urgent tasks
- * 
- * 
+ * is used to find the due dates of the urgent tasks
  */
 function countUrgentTasks() {
     for (let i = 0; i < tasks.length; i++) { 
@@ -93,9 +84,7 @@ function countUrgentTasks() {
 
 
 /**
- * This function is used to find and display the nearest date of the urgent tasks
- * 
- * 
+ * is used to find and display the nearest date of the urgent tasks
  */
 function date() {
     if (urgentDate.length === 0) {
@@ -112,9 +101,8 @@ function date() {
 
 
 /**
- * This function is used to display the amount of tasks in progress, 
+ * is used to display the amount of tasks in progress, 
  * tasks awaiting feedback, tasks to-do, tasks done and tasks 
- * 
  */
 function displayNumbers() {
     document.getElementById('tasksInProgress').innerHTML = taskInProgress.length;
@@ -126,9 +114,7 @@ function displayNumbers() {
 
 
 /**
- * This function is used to greet the desktop user
- * 
- * 
+ * is used to greet the desktop user
  */
 function greeting() {
     let greet;
@@ -148,9 +134,7 @@ function greeting() {
 
 
 /**
- * This function is used to return the name of user
- * 
- * 
+ * is used to return the name of user
  */
 function getNameLogin() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
@@ -159,9 +143,7 @@ function getNameLogin() {
 
 
 /**
- * This function is used to greet the mobile user
- * 
- * 
+ * is used to greet the mobile user
  */
 function mobileGreeting() {
     if (window.innerWidth <= 1500) {
@@ -173,9 +155,7 @@ function mobileGreeting() {
 
 
 /**
- * This function is used to hide the mobile greeting container after greeting
- * 
- * 
+ * is used to hide the mobile greeting container after greeting
  */
 function mobileGreetingDisappears() {
     document.getElementById('greeting-container').classList.add('d-none');

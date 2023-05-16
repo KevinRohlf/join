@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add Task</title>
+    <title>Add Task</title>
     <link rel="shortcut icon" href="./assets/img/CapaOne.svg" type="image/x-icon">
     <script src="./mini_backend.js"></script>
     <script src="./js/template.js"></script>
@@ -26,9 +26,12 @@
             <p id="headline-mobile">Kanban Project Management Tool</p>
         </div>
         <div class="content-add-task">
+            <div class="background" onclick="dropup('category'); dropup('contact')">
+            </div>
             <div>
                 <div>
-                    <h1>Add Task</h1>
+                    <h1>Add Task</h1> <br>
+                    <div id="errorTask"></div>
                 </div>
                 <form class="flex-column gap-20" onsubmit="readForm(); return false;">
                     <div class="flex mobile-flex-column">

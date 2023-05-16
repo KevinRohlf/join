@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="./templates/footer.css">
     <link rel="stylesheet" href="./templates/header.css">
     <link rel="stylesheet" href="./template.css">
+    <link rel="stylesheet" href="add_task.css">
+    <link rel="stylesheet" href="board.css">
     <script src="./mini_backend.js"></script>
     <script src="./js/template.js"></script>
-    <script src="./js/contactsHTML.js"></script>
     <script src="./js/add_task.js"></script>
-
+    <script src="./js/contactsHTML.js"></script>
     <title>Join-Contacts</title>
 </head>
 
@@ -51,6 +52,9 @@
                 <div id="confirmDelete" class="confirmation d-none">
                     Contact succesfully deleted
                 </div>
+            </section>
+            <section onclick="addTaskClose()" id="addTaskOverlay" class="contact-overlay">
+                <div id="addTask" onclick="doNotClose(event)"></div>
             </section>
             <section onclick="addContactClose()" id="add-contact-overlay" class="contact-overlay">
                 <div onclick="doNotClose(event)" id="add-contact" class="contact-container">

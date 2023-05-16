@@ -16,6 +16,8 @@
     <script src="./mini_backend.js"></script>
     <script src="./js/template.js"></script>
     <script src="./js/board.js"></script>
+    <script src="./js/boardTask.js"></script>
+    <script src="./js/boardDragAndDrop.js"></script>
     <script src="./js/boardHTML.js"></script>
     <script src="./js/add_task.js"></script>
 </head>
@@ -31,7 +33,7 @@
         <div class="board-header">
             <div class="board-header-alignment">
                 <p class="board-headline">Board</p>
-                <a href="./add_task.html" class="board-create-new-task-btn">
+                <a class="board-create-new-task-btn" onclick="saveTaskStatusFromBoard('toDo')">
                     <img class="board-create-img" src="./assets/img/Vector13(2).svg">
                     <img class="board-create-img" src="./assets/img/Vector14(2).svg">
                 </a>
@@ -44,7 +46,7 @@
                     <img class="find-task-img1" src="./assets/img/find-task-input-vertical-bar.svg">
                     <img class="find-task-img2" src="./assets/img/input-search-icon.svg">
                 </div>
-                <a href="./add_task.html" class="board-add-task-btn">
+                <a onclick="saveTaskStatusFromBoard('toDo')" class="board-add-task-btn" >
                     <p>Add task</p>
                     <div>
                         <svg width="17" height="3" viewBox="0 0 17 3" fill="none" xmlns="http://www.w3.org/2000/svg">

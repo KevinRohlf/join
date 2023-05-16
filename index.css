@@ -509,6 +509,7 @@ body {
 
 .forgottenPWContainer {
   display: none;
+  position: relative;
   flex-direction: column;
   align-items: center;
   padding: 35px 0px;
@@ -530,7 +531,6 @@ body {
 
 .forgottenPWHeadline {
   position: relative;
-  right: 18px;
   font-family: "Inter";
   font-size: 61px;
   font-weight: 700;
@@ -543,8 +543,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  right: 50px;
+  position: absolute;
+  left: 20px;
   width: 37px;
   height: 37px;
 }
