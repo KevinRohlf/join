@@ -4,7 +4,7 @@
  */
 function loadEditTask(i) {
     renderEditTask(i)
-    renderContacts(i);
+    renderEditContacts(i);
     renderCardContactsEdit(i)
     highlightPrio(i)
 }
@@ -105,7 +105,6 @@ async function updateInput(i) {
         tasks[i].description = inputDescription.value
     if (!inputDate.value == '')
         tasks[i].date = inputDate.value
-    selece
     await backend.setItem(`tasks`, JSON.stringify(tasks));
 }
 

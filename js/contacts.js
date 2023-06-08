@@ -175,6 +175,8 @@ async function saveActiveContact(i) {
 	contacts[i].name = newName;
 	contacts[i].email = newEmail;
 	contacts[i].phone = newPhone;
+	contacts[i].initials = getInitials(newName);
+
 	await backend.setItem('contacts', JSON.stringify(contacts));
 
 	closeSingleContactDesktop();

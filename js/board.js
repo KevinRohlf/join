@@ -325,6 +325,7 @@ function renderCardContacts(i) {
  */
 function renderCardContactsEdit(i) {
     let container = document.getElementById('contact-card-container')
+    container.innerHTML = '';
     container.style = "display:flex"
     tasks[i].contactSelection.forEach(element => {
         for (let j = 0; j < contacts.length; j++) {

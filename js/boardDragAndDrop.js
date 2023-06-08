@@ -4,14 +4,14 @@
  * is used to render the contacts in the drop down menu
  * @param {number} i 
  */
-async function renderContacts(i) {
+async function renderEditContacts(i) {
     let content = document.getElementById('contact');
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     content.innerHTML = '';
     for (let j = 0; j < contacts.length; j++) {
         let contact = contacts[j];
-        content.innerHTML += `<label for="cb-contacts-${j}"> <div class="contacts">${contact['name']} <input onclick="addContactToList(${j},${i})" id="cb-contacts-${j}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
+        content.innerHTML += `<label for="cb-contacts-${contact['ID']}"> <div class="contacts">${contact['name']} <input onclick="addEditContactToList(${contact['ID']},${i})" id="cb-contacts-${contact['ID']}" class="checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
         if (j == contacts.length - 1) {
             let j = contacts.length
             content.innerHTML += `<label for="cb-subtask-${j}"> <div class="contacts">Intive new contact <input onclick="inviteNewContact(${i})" id="cb-subtask-${j}" class="subtask-checkbox" type="checkbox" control-id="ControlID-12"></div></label>`
@@ -104,15 +104,16 @@ function editEndHeight(content) {
  * @param {number} j 
  * @param {number} i 
  */
-async function addContactToList(j, i) {
+async function addEditContactToList(j, i) {
     if (document.getElementById(`cb-contacts-${j}`).checked) {
-        tasks[i].contactSelection.push(contacts[j].ID)
+        tasks[i].contactSelection.push(j)
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     } else {
-        let index = tasks[i].contactSelection.indexOf(contacts[j].ID)
+        let index = tasks[i].contactSelection.indexOf(j)
         tasks[i].contactSelection.splice(index, 1)
         await backend.setItem(`tasks`, JSON.stringify(tasks));
     }
+    renderCardContactsEdit(i);
 }
 
 
